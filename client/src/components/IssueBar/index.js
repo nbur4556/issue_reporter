@@ -2,7 +2,7 @@ import React from 'react';
 
 const IssueBar = props => {
     return (
-        <div>
+        <div onClick={props.onClick}>
             <ul>
                 <li>{props.title}</li>
                 <li>{props.category}</li>

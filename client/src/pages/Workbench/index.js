@@ -12,16 +12,22 @@ const Workbench = () => {
         <article>
             <h1>Workbench Page</h1>
 
-            <button>Creat Issue</button>
-
-            {/* Issue Details Section */}
+            {/* Issue Section */}
             <section>
-                {selectIssueId}
+                {/* Toolbar Section */}
+                <section>
+                    <input name="sort" type="text" />
+                    <input name="filter" type="text" />
+                    <button>Creat Issue</button>
+                </section>
+                <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." />
+                <IssueBar onClick={handleSelectIssue} issueId="1" title="Issue2" category="test issue" />
             </section>
 
-            {/* Issue List */}
-            <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." />
-            <IssueBar onClick={handleSelectIssue} issueId="1" title="Issue2" category="test issue" />
+            {/* Issue Details Section */}
+            <aside>
+                {selectIssueId}
+            </aside>
         </article>
     );
 }

@@ -109,3 +109,8 @@ dist
 
 # VS Code project settings file
 /.vscode
+
+# Design files
+/design_work
+.psd
+

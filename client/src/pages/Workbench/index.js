@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './style.css';
 
 // Components
 import IssueBar from '../../components/IssueBar';
@@ -6,12 +7,10 @@ import IssueBar from '../../components/IssueBar';
 const Workbench = () => {
     const [selectIssueId, setSelectIssueId] = useState();
 
-    const handleSelectIssue = issueId => setSelectIssueId(issueId);
+    const handleSelectIssue = issueId => (selectIssueId === issueId) ? setSelectIssueId(null) : setSelectIssueId(issueId);
 
     return (
         <article>
-            <h1>Workbench Page</h1>
-
             {/* Issue Section */}
             <section>
                 {/* Toolbar Section */}

@@ -1,8 +1,9 @@
 import React from 'react';
+import './style.css';
 
 const IssueBar = props => {
     return (
-        <div onClick={() => props.onClick(props.issueId)}>
+        <div className="issue-bar" onClick={() => props.onClick(props.issueId)}>
             <ul>
                 <li>{props.title}</li>
                 <li>{props.category}</li>

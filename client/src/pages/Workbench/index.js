@@ -12,6 +12,8 @@ const Workbench = () => {
         <article>
             <h1>Workbench Page</h1>
 
+            <button>Creat Issue</button>
+
             {/* Issue Details Section */}
             <section>
                 {selectIssueId}

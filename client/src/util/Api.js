@@ -2,10 +2,12 @@ class Api {
     constructor(url) {
         this.url = url;
     }
+
+    get() {
+        fetch(this.url)
+            .then(response => response.json())
+            .then(data => console.log(data));
+    }
 }
 
-// Testing
-
-const newApi = new Api('https://www.google.com');
-
-console.log(newApi.url);
+export default Api;

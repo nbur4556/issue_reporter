@@ -4,12 +4,6 @@ import './style.css';
 // Components
 import IssueBar from '../../components/IssueBar';
 
-// Testing API
-import Api from '../../util/Api.js';
-const api = new Api('google.com');
-console.log(api.url);
-//
-
 const Workbench = () => {
     const [selectIssueId, setSelectIssueId] = useState();
 

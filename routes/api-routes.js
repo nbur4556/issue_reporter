@@ -1,3 +1,5 @@
-export default function apiRoutes() {
-    console.log("Hello API Routes");
+module.exports = function (app) {
+    app.get('/api/test', (req, res) => {
+        res.send('connected');
+    });
 }

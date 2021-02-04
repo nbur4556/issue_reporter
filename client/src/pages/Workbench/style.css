@@ -1,0 +1,11 @@
+article {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+}
+
+aside {
+  background-color: cyan;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,12 @@
+import React from 'react';
+
+// Pages
+import Workbench from './pages/Workbench';
+
 function App() {
-  return (<p>Hello Issue Reporter</p>);
+  return (
+    <Workbench />
+  );
 }
 
 export default App;

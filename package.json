@@ -23,8 +23,10 @@
     "url": "https://github.com/nbur4556/issue_reporter/issues"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "mongoose": "^5.11.15"
   },
   "devDependencies": {
     "concurrently": "^5.3.0"

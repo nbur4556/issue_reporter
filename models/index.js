@@ -1,3 +1,3 @@
 module.exports = {
-    Issue: require('./this.Issues.js')
+    Issue: require('./Issue.js')
 }

@@ -20,7 +20,9 @@ module.exports = function (app) {
         });
     });
 
-    app.delete('/api/issue', (req, res) => {
-
+    app.delete('/api/issue/:searchId', (req, res) => {
+        controllers.issueController.deleteById(req.params.searchId, (result) => {
+            res.json(result);
+        });
     });
 }

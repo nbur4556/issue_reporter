@@ -10,13 +10,13 @@ module.exports = {
     },
 
     // Create Issue
-    create: function (issueParams) {
+    create: function (issueParams, cb) {
         db.Issue.create({
             name: issueParams.name,
             body: issueParams.body
         }, (err, result) => {
-            if (err) { console.log(err); }
-            if (result) { console.log(result); }
+            if (err) { cb(err); }
+            cb(result);
         });
     },
 

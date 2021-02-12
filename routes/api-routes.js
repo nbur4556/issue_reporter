@@ -9,7 +9,9 @@ module.exports = function (app) {
     });
 
     app.post('/api/issue', (req, res) => {
-
+        controllers.issueController.create(req.body, (result) => {
+            res.json(result);
+        });
     });
 
     app.put('/api/issue', (req, res) => {

@@ -1,17 +1,22 @@
+const controllers = require('../controllers');
+
 module.exports = function (app) {
-    app.get('/api/test', (req, res) => {
-        res.send('GET test');
+    // Issue Routes
+    app.get('/api/issue/:searchId', (req, res) => {
+        controllers.issueController.findById(req.params.searchId, (result) => {
+            res.json(result);
+        });
     });
 
-    app.post('/api/test', (req, res) => {
-        res.send('POST test')
+    app.post('/api/issue', (req, res) => {
+
     });
 
-    app.put('/api/test', (req, res) => {
-        res.send('PUT test');
+    app.put('/api/issue', (req, res) => {
+
     });
 
-    app.delete('/api/test', (req, res) => {
-        res.send('DELETE test');
-    })
+    app.delete('/api/issue', (req, res) => {
+
+    });
 }

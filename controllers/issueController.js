@@ -2,10 +2,10 @@ const db = require('../models');
 
 module.exports = {
     // Read Issue
-    findById: function (searchId) {
+    findById: function (searchId, cb) {
         db.Issue.findOne({ _id: searchId }, (err, result) => {
-            if (err) { console.log(err); }
-            if (result) { console.log(result); }
+            if (err) { cb(err); }
+            cb(result);
         });
     },
 

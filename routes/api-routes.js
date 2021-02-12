@@ -14,8 +14,10 @@ module.exports = function (app) {
         });
     });
 
-    app.put('/api/issue', (req, res) => {
-
+    app.put('/api/issue/:searchId', (req, res) => {
+        controllers.issueController.updateById(req.params.searchId, req.body, (result) => {
+            res.json(result);
+        });
     });
 
     app.delete('/api/issue', (req, res) => {

@@ -5,20 +5,31 @@ class ApiConnection {
         this.url = url;
     }
 
-    get() {
-        return axios.get('/api/test');
+    buildQuery(options = {}) {
+        return {
+            url: (options.url || this.url) + options?.urlParams,
+            body: options.body
+        }
     }
 
-    post() {
-        return axios.post('/api/test');
+    getQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.get(query.url);
     }
 
-    put() {
-        return axios.put('/api/test');
+    postQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.post(query.url);
     }
 
-    delete() {
-        return axios.delete('/api/test');
+    putQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.put(query.url);
+    }
+
+    deleteQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.delete(query.url);
     }
 }
 

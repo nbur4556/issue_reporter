@@ -19,8 +19,8 @@ module.exports = {
     // Update Issue
     updateById: function (searchId, issueParams, cb) {
         db.Issue.findOne({ _id: searchId },
-            (err, resultIssue) => {
-                if (err) { cb(err) }
+            (resultErr, resultIssue) => {
+                if (resultErr) { cb(resultErr) }
 
                 db.Issue.updateOne({ _id: searchId },
                     {

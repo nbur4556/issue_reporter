@@ -6,19 +6,21 @@ import IssueBar from '../../components/IssueBar';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
+const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
-    const issueConnection = new ApiConnection('/api/issue');
-
+    const [issueList, setIssueList] = useState([]);
     const [selectIssueId, setSelectIssueId] = useState();
 
-    const handleSelectIssue = issueId => (selectIssueId === issueId) ? setSelectIssueId(null) : setSelectIssueId(issueId);
-
+    // Get Issues from API
     useEffect(() => {
         issueConnection.getQuery({ urlExtension: "" }).then(result => {
-            console.log(result);
+            setIssueList(result.data);
         });
-    });
+    }, []);
+
+    // Set state of selected issue
+    const handleSelectIssue = issueId => (selectIssueId === issueId) ? setSelectIssueId(null) : setSelectIssueId(issueId);
 
     return (
         <article>
@@ -30,8 +32,16 @@ const Workbench = () => {
                     <input name="filter" type="text" />
                     <button>Creat Issue</button>
                 </section>
-                <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." />
-                <IssueBar onClick={handleSelectIssue} issueId="1" title="Issue2" category="test issue" />
+                {
+                    issueList.map(issue => {
+                        return (
+                            <IssueBar onClick={handleSelectIssue} key={issue._id} issueId={issue._id} title={issue.name} />
+                        )
+                    })
+                }
+
+                {/* Sample Original Issue */}
+                {/* <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." /> */}
             </section>
 
             {/* Issue Details Section */}

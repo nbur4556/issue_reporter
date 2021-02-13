@@ -24,27 +24,36 @@ const Workbench = () => {
 
     return (
         <article>
+
             {/* Issue Section */}
+
             <section>
+
                 {/* Toolbar Section */}
+
                 <section>
                     <input name="sort" type="text" />
                     <input name="filter" type="text" />
                     <button>Creat Issue</button>
                 </section>
-                {
-                    issueList.map(issue => {
+
+                {/* Issue List Section */}
+
+                <section>
+                    {issueList.map(issue => {
                         return (
                             <IssueBar onClick={handleSelectIssue} key={issue._id} issueId={issue._id} title={issue.name} />
                         )
-                    })
-                }
+                    })}
+                </section>
 
-                {/* Sample Original Issue */}
+                {/* Original Issue Sample */}
                 {/* <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." /> */}
+
             </section>
 
             {/* Issue Details Section */}
+
             <aside>
                 {selectIssueId}
             </aside>

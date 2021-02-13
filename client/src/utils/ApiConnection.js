@@ -5,9 +5,10 @@ class ApiConnection {
         this.url = url;
     }
 
+    // Create query sent to backend API
     buildQuery(options = {}) {
         return {
-            url: (options.url || this.url) + options?.urlParams,
+            url: (options.urlExtension) ? (options.url || this.url) + options.urlExtension : (options.url || this.url),
             body: options.body
         }
     }
@@ -19,12 +20,15 @@ class ApiConnection {
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.post(query.url);
+
+        console.log(query);
+
+        return axios.post(query.url, query.body);
     }
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.put(query.url);
+        return axios.put(query.url, query.body);
     }
 
     deleteQuery(options = {}) {

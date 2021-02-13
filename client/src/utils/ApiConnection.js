@@ -5,6 +5,8 @@ class ApiConnection {
         this.url = url;
     }
 
+    setUrl(url) { this.url = url; }
+
     // Create query sent to backend API
     buildQuery(options = {}) {
         return {
@@ -13,6 +15,7 @@ class ApiConnection {
         }
     }
 
+    // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
         return axios.get(query.url);
@@ -20,9 +23,6 @@ class ApiConnection {
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-
-        console.log(query);
-
         return axios.post(query.url, query.body);
     }
 

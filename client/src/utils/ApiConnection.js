@@ -5,20 +5,35 @@ class ApiConnection {
         this.url = url;
     }
 
-    get() {
-        return axios.get('/api/test');
+    setUrl(url) { this.url = url; }
+
+    // Create query sent to backend API
+    buildQuery(options = {}) {
+        return {
+            url: (options.urlExtension) ? (options.url || this.url) + options.urlExtension : (options.url || this.url),
+            body: options.body
+        }
     }
 
-    post() {
-        return axios.post('/api/test');
+    // API Calls
+    getQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.get(query.url);
     }
 
-    put() {
-        return axios.put('/api/test');
+    postQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.post(query.url, query.body);
     }
 
-    delete() {
-        return axios.delete('/api/test');
+    putQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.put(query.url, query.body);
+    }
+
+    deleteQuery(options = {}) {
+        let query = this.buildQuery(options);
+        return axios.delete(query.url);
     }
 }
 

@@ -12,9 +12,9 @@ const Workbench = () => {
     const [issueList, setIssueList] = useState([]);
     const [selectIssueId, setSelectIssueId] = useState();
 
-    // Get Issues from API
+    // Get All Issues from API
     useEffect(() => {
-        issueConnection.getQuery({ urlExtension: "" }).then(result => {
+        issueConnection.getQuery().then(result => {
             setIssueList(result.data);
         });
     }, []);

@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 // Components
 import IssueBar from '../../components/IssueBar';
 
+// Utilities
+import ApiConnection from '../../utils/ApiConnection.js';
+
 const Workbench = () => {
+    const issueConnection = new ApiConnection('/api/issue');
+
     const [selectIssueId, setSelectIssueId] = useState();
 
     const handleSelectIssue = issueId => (selectIssueId === issueId) ? setSelectIssueId(null) : setSelectIssueId(issueId);
+
+    useEffect(() => {
+        issueConnection.getQuery({ urlExtension: "" }).then(result => {
+            console.log(result);
+        });
+    });
 
     return (
         <article>

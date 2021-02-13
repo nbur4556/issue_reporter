@@ -2,6 +2,11 @@ const db = require('../models');
 
 module.exports = {
     // Read Issue
+    find: function (cb) {
+        db.Issue.find(
+            (err, result) => (err) ? cb(err) : cb(result));
+    },
+
     findById: function (searchId, cb) {
         db.Issue.findOne({ _id: searchId },
             (err, result) => (err) ? cb(err) : cb(result));

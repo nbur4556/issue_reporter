@@ -54,7 +54,15 @@ const Workbench = () => {
             </section>
 
             {/* Issue Details Section */}
-            <IssueDetails />
+            <IssueDetails
+                name="Nick"
+                body="Go Nick!"
+                category="Person"
+                assigned="Rachel"
+                dueDate="02/15/2021"
+                comments="Congrats Nick!"
+                status="Closed"
+            />
         </article>
     );
 }

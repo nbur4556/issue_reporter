@@ -11,7 +11,7 @@ const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
     const [issueList, setIssueList] = useState([]);
-    const [selectedIssueIndex, setSelectedIssueIndex] = useState();
+    const [selectIssue, setSelectIssue] = useState();
 
     // Get All Issues from API
     useEffect(() => {
@@ -21,7 +21,10 @@ const Workbench = () => {
     }, []);
 
     // Set state of selected issue
-    const handleSelectIssue = e => setSelectedIssueIndex(e.currentTarget.getAttribute('data-index'));
+    const handleSelectIssue = e => {
+        const selectIndex = e.currentTarget.getAttribute('data-index');
+        (selectIndex === selectIssue) ? setSelectIssue(null) : setSelectIssue(selectIndex);
+    }
 
     return (
         <article>
@@ -53,13 +56,13 @@ const Workbench = () => {
             {/* Issue Details Section */}
 
             <IssueDetails
-                name={issueList[selectedIssueIndex]?.name}
-                body={issueList[selectedIssueIndex]?.body}
-                category={issueList[selectedIssueIndex]?.category}
-                assigned={issueList[selectedIssueIndex]?.assigned}
-                dueDate={issueList[selectedIssueIndex]?.dueDate}
-                comments={issueList[selectedIssueIndex]?.comments}
-                status={issueList[selectedIssueIndex]?.status}
+                name={issueList[selectIssue]?.name}
+                body={issueList[selectIssue]?.body}
+                category={issueList[selectIssue]?.category}
+                assigned={issueList[selectIssue]?.assigned}
+                dueDate={issueList[selectIssue]?.dueDate}
+                comments={issueList[selectIssue]?.comments}
+                status={issueList[selectIssue]?.status}
             />
 
         </article>

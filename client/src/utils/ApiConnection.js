@@ -7,7 +7,7 @@ class ApiConnection {
 
     setUrl(url) { this.url = url; }
 
-    // Create query sent to backend API
+    // Create query to send to backend API
     buildQuery(options = {}) {
         return {
             url: (options.urlExtension) ? (options.url || this.url) + options.urlExtension : (options.url || this.url),

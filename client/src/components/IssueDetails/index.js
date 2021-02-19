@@ -5,15 +5,21 @@ import './style.css';
 const IssueDetails = props => {
     return (
         <aside>
+
             <ul>
-                <li>{`Name: ${props.name}`}</li>
-                <li>{`Body: ${props.body}`}</li>
-                <li>{`Category: ${props.category}`}</li>
-                <li>{`Assigned: ${props.assigned}`}</li>
-                <li>{`Due Date: ${props.dueDate}`}</li>
-                <li>{`Comments: ${props.comments}`}</li>
-                <li>{`Status: ${props.status}`}</li>
+
+                {/* Display details if details are available */}
+
+                {(props.name) ? <li>{`Name: ${props.name}`}</li> : null}
+                {(props.body) ? <li>{`Body: ${props.body}`}</li> : null}
+                {(props.category) ? <li>{`Category: ${props.category}`}</li> : null}
+                {(props.assigned) ? <li>{`Assigned: ${props.assigned}`}</li> : null}
+                {(props.dueDate) ? <li>{`Due Date: ${props.dueDate}`}</li> : null}
+                {(props.comments) ? <li>{`Comments: ${props.comments}`}</li> : null}
+                {(props.status) ? <li>{`Status: ${props.status}`}</li> : null}
+
             </ul>
+
         </aside>
     );
 }

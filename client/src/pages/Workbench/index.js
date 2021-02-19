@@ -11,7 +11,7 @@ const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
     const [issueList, setIssueList] = useState([]);
-    const [selectIssueId, setSelectIssueId] = useState();
+    const [selectedIssueIndex, setSelectedIssueIndex] = useState();
 
     // Get All Issues from API
     useEffect(() => {
@@ -21,7 +21,7 @@ const Workbench = () => {
     }, []);
 
     // Set state of selected issue
-    const handleSelectIssue = issueId => (selectIssueId === issueId) ? setSelectIssueId(null) : setSelectIssueId(issueId);
+    const handleSelectIssue = e => setSelectedIssueIndex(e.currentTarget.getAttribute('data-index'));
 
     return (
         <article>
@@ -41,28 +41,27 @@ const Workbench = () => {
                 {/* Issue List Section */}
 
                 <section>
-                    {issueList.map(issue => {
+                    {issueList.map((issue, index) => {
                         return (
-                            <IssueBar onClick={handleSelectIssue} key={issue._id} issueId={issue._id} title={issue.name} />
+                            <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />
                         )
                     })}
                 </section>
 
-                {/* Original Issue Sample */}
-                {/* <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." /> */}
-
             </section>
 
             {/* Issue Details Section */}
+
             <IssueDetails
-                name="Nick"
-                body="Go Nick!"
-                category="Person"
-                assigned="Rachel"
-                dueDate="02/15/2021"
-                comments="Congrats Nick!"
-                status="Closed"
+                name={issueList[selectedIssueIndex]?.name}
+                body={issueList[selectedIssueIndex]?.body}
+                category={issueList[selectedIssueIndex]?.category}
+                assigned={issueList[selectedIssueIndex]?.assigned}
+                dueDate={issueList[selectedIssueIndex]?.dueDate}
+                comments={issueList[selectedIssueIndex]?.comments}
+                status={issueList[selectedIssueIndex]?.status}
             />
+
         </article>
     );
 }

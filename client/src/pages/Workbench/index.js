@@ -62,7 +62,7 @@ const Workbench = () => {
                 assigned={issueList[selectIssue]?.assigned}
                 dueDate={issueList[selectIssue]?.dueDate}
                 comments={issueList[selectIssue]?.comments}
-                status={issueList[selectIssue]?.status}
+                status={issueList[selectIssue]?.isOpen}
             />
 
         </article>

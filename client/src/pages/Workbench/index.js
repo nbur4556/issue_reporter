@@ -3,6 +3,7 @@ import './style.css';
 
 // Components
 import IssueBar from '../../components/IssueBar';
+import IssueDetails from '../../components/IssueDetails';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -53,10 +54,7 @@ const Workbench = () => {
             </section>
 
             {/* Issue Details Section */}
-
-            <aside>
-                {selectIssueId}
-            </aside>
+            <IssueDetails />
         </article>
     );
 }

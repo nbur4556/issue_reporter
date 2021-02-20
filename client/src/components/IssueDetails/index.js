@@ -16,7 +16,9 @@ const IssueDetails = props => {
                 {(props.assigned) ? <li>{`Assigned: ${props.assigned}`}</li> : null}
                 {(props.dueDate) ? <li>{`Due Date: ${props.dueDate}`}</li> : null}
                 {(props.comments) ? <li>{`Comments: ${props.comments}`}</li> : null}
-                {(props.status) ? <li>{`Status: ${props.status}`}</li> : null}
+                {(props.status !== undefined) ? <li>{`Status: ${props.status}`}</li> : null}
+
+                {(props.status !== undefined) ? <button onClick={props.onClickToggleStatus}>Toggle Status</button> : null}
 
             </ul>
 

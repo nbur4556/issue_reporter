@@ -53,7 +53,7 @@ const Workbench = () => {
                 <section>
                     <input name="sort" type="text" />
                     <input name="filter" type="text" />
-                    <button onClick={handleSetIssueStatus}>Creat Issue</button>
+                    <button>Creat Issue</button>
                 </section>
 
                 {/* Issue List Section */}
@@ -78,6 +78,8 @@ const Workbench = () => {
                 dueDate={issueList[selectIssue]?.dueDate}
                 comments={issueList[selectIssue]?.comments}
                 status={issueList[selectIssue]?.isOpen}
+
+                onClickToggleStatus={handleSetIssueStatus}
             />
 
         </article>

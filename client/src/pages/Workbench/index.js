@@ -26,6 +26,22 @@ const Workbench = () => {
         (selectIndex === selectIssue) ? setSelectIssue(null) : setSelectIssue(selectIndex);
     }
 
+    // Set status of selected issue
+    const handleSetIssueStatus = () => {
+        if (issueList[selectIssue].isOpen === true) {
+            issueConnection.putQuery({
+                urlExtension: `/${issueList[selectIssue]._id}`,
+                body: { isOpen: 'false' }
+            });
+        }
+        else {
+            issueConnection.putQuery({
+                urlExtension: `/${issueList[selectIssue]._id}`,
+                body: { isOpen: 'true' }
+            });
+        }
+    }
+
     return (
         <article>
 
@@ -38,7 +54,7 @@ const Workbench = () => {
                 <section>
                     <input name="sort" type="text" />
                     <input name="filter" type="text" />
-                    <button>Creat Issue</button>
+                    <button onClick={handleSetIssueStatus}>Creat Issue</button>
                 </section>
 
                 {/* Issue List Section */}

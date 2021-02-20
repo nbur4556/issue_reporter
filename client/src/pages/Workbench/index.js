@@ -3,6 +3,7 @@ import './style.css';
 
 // Components
 import IssueBar from '../../components/IssueBar';
+import IssueDetails from '../../components/IssueDetails';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -10,17 +11,35 @@ const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
     const [issueList, setIssueList] = useState([]);
-    const [selectIssueId, setSelectIssueId] = useState();
+    const [selectIssue, setSelectIssue] = useState();
 
-    // Get All Issues from API
     useEffect(() => {
-        issueConnection.getQuery().then(result => {
-            setIssueList(result.data);
-        });
+        loadIssues();
     }, []);
 
     // Set state of selected issue
-    const handleSelectIssue = issueId => (selectIssueId === issueId) ? setSelectIssueId(null) : setSelectIssueId(issueId);
+    const handleSelectIssue = e => {
+        const selectIndex = e.currentTarget.getAttribute('data-index');
+        (selectIndex === selectIssue) ? setSelectIssue(null) : setSelectIssue(selectIndex);
+    }
+
+    // Set status of selected issue
+    const handleSetIssueStatus = () => {
+        const setStatus = (issueList[selectIssue].isOpen === true) ? 'false' : 'true';
+
+        // Send put request to change issue status, and reload issues
+        issueConnection.putQuery({
+            urlExtension: `/${issueList[selectIssue]._id}`,
+            body: { isOpen: setStatus }
+        }).then(() => { loadIssues() });
+    }
+
+    // Get All Issues from API
+    const loadIssues = () => {
+        issueConnection.getQuery().then(result => {
+            setIssueList(result.data);
+        });
+    }
 
     return (
         <article>
@@ -40,23 +59,29 @@ const Workbench = () => {
                 {/* Issue List Section */}
 
                 <section>
-                    {issueList.map(issue => {
+                    {issueList.map((issue, index) => {
                         return (
-                            <IssueBar onClick={handleSelectIssue} key={issue._id} issueId={issue._id} title={issue.name} />
+                            <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />
                         )
                     })}
                 </section>
-
-                {/* Original Issue Sample */}
-                {/* <IssueBar onClick={handleSelectIssue} issueId="0" title="Issue1" category="test issue" assigned="Nick B." /> */}
 
             </section>
 
             {/* Issue Details Section */}
 
-            <aside>
-                {selectIssueId}
-            </aside>
+            <IssueDetails
+                name={issueList[selectIssue]?.name}
+                body={issueList[selectIssue]?.body}
+                category={issueList[selectIssue]?.category}
+                assigned={issueList[selectIssue]?.assigned}
+                dueDate={issueList[selectIssue]?.dueDate}
+                comments={issueList[selectIssue]?.comments}
+                status={issueList[selectIssue]?.isOpen}
+
+                onClickToggleStatus={handleSetIssueStatus}
+            />
+
         </article>
     );
 }

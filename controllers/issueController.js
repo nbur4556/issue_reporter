@@ -16,7 +16,12 @@ module.exports = {
     create: function (issueParams, cb) {
         db.Issue.create({
             name: issueParams.name,
-            body: issueParams.body
+            body: issueParams.body,
+            category: issueParams.category,
+            assigned: issueParams.assigned,
+            dueDate: issueParams.dueDate,
+            comments: issueParams.comments,
+            isOpen: issueParams.isOpen
         },
             (err, result) => (err) ? cb(err) : cb(result));
     },
@@ -31,7 +36,12 @@ module.exports = {
                     {
                         $set: {
                             name: issueParams.name || resultIssue.name,
-                            body: issueParams.body || resultIssue.body
+                            body: issueParams.body || resultIssue.body,
+                            category: issueParams.category || resultIssue.category,
+                            assigned: issueParams.assigned || resultIssue.assigned,
+                            dueDate: issueParams.dueDate || resultIssue.dueDate,
+                            comments: issueParams.comments || resultIssue.comments,
+                            isOpen: issueParams.isOpen || resultIssue.isOpen
                         }
                     },
                     (err, result) => (err) ? cb(err) : cb(result));

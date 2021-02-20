@@ -3,7 +3,7 @@ import './style.css';
 
 const IssueBar = props => {
     return (
-        <div className="issue-bar" onClick={() => props.onClick(props.issueId)}>
+        <div className="issue-bar" onClick={props.onClick} data-index={props.index}>
             <ul>
                 <li>{props.title}</li>
                 <li>{props.category}</li>

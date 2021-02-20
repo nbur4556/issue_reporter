@@ -13,7 +13,6 @@ const Workbench = () => {
     const [issueList, setIssueList] = useState([]);
     const [selectIssue, setSelectIssue] = useState();
 
-    // Get All Issues from API
     useEffect(() => {
         loadIssues();
     }, []);
@@ -26,24 +25,16 @@ const Workbench = () => {
 
     // Set status of selected issue
     const handleSetIssueStatus = () => {
-        if (issueList[selectIssue].isOpen === true) {
-            issueConnection.putQuery({
-                urlExtension: `/${issueList[selectIssue]._id}`,
-                body: { isOpen: 'false' }
-            }).then(() => {
-                loadIssues()
-            });
-        }
-        else {
-            issueConnection.putQuery({
-                urlExtension: `/${issueList[selectIssue]._id}`,
-                body: { isOpen: 'true' }
-            }).then(() => {
-                loadIssues()
-            });
-        }
+        const setStatus = (issueList[selectIssue].isOpen === true) ? 'false' : 'true';
+
+        // Send put request to change issue status, and reload issues
+        issueConnection.putQuery({
+            urlExtension: `/${issueList[selectIssue]._id}`,
+            body: { isOpen: setStatus }
+        }).then(() => { loadIssues() });
     }
 
+    // Get All Issues from API
     const loadIssues = () => {
         issueConnection.getQuery().then(result => {
             setIssueList(result.data);

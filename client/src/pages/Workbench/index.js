@@ -15,9 +15,7 @@ const Workbench = () => {
 
     // Get All Issues from API
     useEffect(() => {
-        issueConnection.getQuery().then(result => {
-            setIssueList(result.data);
-        });
+        loadIssues();
     }, []);
 
     // Set state of selected issue
@@ -32,14 +30,24 @@ const Workbench = () => {
             issueConnection.putQuery({
                 urlExtension: `/${issueList[selectIssue]._id}`,
                 body: { isOpen: 'false' }
+            }).then(() => {
+                loadIssues()
             });
         }
         else {
             issueConnection.putQuery({
                 urlExtension: `/${issueList[selectIssue]._id}`,
                 body: { isOpen: 'true' }
+            }).then(() => {
+                loadIssues()
             });
         }
+    }
+
+    const loadIssues = () => {
+        issueConnection.getQuery().then(result => {
+            setIssueList(result.data);
+        });
     }
 
     return (

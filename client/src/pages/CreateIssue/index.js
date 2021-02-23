@@ -7,6 +7,7 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
 const CreateIssue = () => {
+    const [successMessage, setSuccessMessage] = useState(false);
     const [issueData, setIssueData] = useState({
         name: '',
         body: '',
@@ -20,13 +21,16 @@ const CreateIssue = () => {
     const handleSetIssueData = e => {
         const input = e.currentTarget;
         setIssueData({ ...issueData, [input.name]: input.value });
+        setSuccessMessage('');
     }
 
     // Create an issue on submit
     const handleCreateIssue = e => {
         e.preventDefault();
         issueConnection.postQuery({ body: issueData }).then(result => {
-            console.log(result);
+            (result.status === 200)
+                ? setSuccessMessage(`Success! Issue "${issueData.name}" created.`)
+                : setSuccessMessage('');
         });
     }
 
@@ -77,6 +81,10 @@ const CreateIssue = () => {
                 <button onClick={handleCreateIssue}>Submit</button>
 
             </form>
+
+            <br />
+
+            {(successMessage) ? <p>{successMessage}</p> : null}
 
         </article>
     );

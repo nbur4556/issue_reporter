@@ -5,7 +5,7 @@ const IssueSchema = mongoose.Schema({
     body: String,
     category: String,
     assigned: String,
-    dueDate: String,
+    dueDate: Date,
     comments: String,
     isOpen: { type: Boolean, default: true }
 });

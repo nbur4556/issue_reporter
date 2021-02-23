@@ -63,7 +63,7 @@ const CreateIssue = () => {
 
                 <label htmlFor="dueDate">
                     Due Date:
-                    <input id="dueDate" name="dueDate" type="text" onChange={handleSetIssueData} />
+                    <input id="dueDate" name="dueDate" type="date" onChange={handleSetIssueData} />
                 </label>
 
                 <label htmlFor="comments">

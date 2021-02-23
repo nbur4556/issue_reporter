@@ -2,26 +2,44 @@ import React from 'react';
 import './style.css';
 
 const CreateIssue = () => {
+
+    const handleCreateIssue = e => {
+        e.preventDefault();
+        const createIssueForm = e.currentTarget.parentElement;
+
+        console.log(createIssueForm);
+    }
+
     return (
         <article>
 
             {/* Input Form */}
 
             <form>
-                <label>Name</label>
-                <input type="text" />
-                <label>Body</label>
-                <input type="text" />
-                <label>Category</label>
-                <input type="text" />
-                <label>Assigned</label>
-                <input type="text" />
-                <label>Due Date</label>
-                <input type="text" />
-                <label>Comments</label>
-                <input type="text" />
-                <label>Status</label>
-                <input type="text" />
+
+                <label htmlFor="name">Name</label>
+                <input id="name" name="name" type="text" />
+
+                <label htmlFor="body">Body</label>
+                <input id="body" name="body" type="text" />
+
+                <label htmlFor="category">Category</label>
+                <input id="category" name="category" type="text" />
+
+                <label htmlFor="assigned">Assigned</label>
+                <input id="assigned" name="assigned" type="text" />
+
+                <label htmlFor="dueDate">Due Date</label>
+                <input id="dueDate" name="dueDate" type="text" />
+
+                <label htmlFor="comments">Comments</label>
+                <input id="comments" name="comments" type="text" />
+
+                <label htmlFor="status">Status</label>
+                <input id="status" name="status" type="text" />
+
+                <button onClick={handleCreateIssue}>Submit</button>
+
             </form>
 
         </article>

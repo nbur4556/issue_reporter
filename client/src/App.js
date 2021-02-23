@@ -1,11 +1,24 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 // Pages
 import Workbench from './pages/Workbench';
+import CreateIssue from './pages/CreateIssue';
 
 function App() {
   return (
-    <Workbench />
+    <BrowserRouter>
+
+      {/* Routes */}
+
+      <Route exact path="/">
+        <Workbench />
+      </Route>
+      <Route exact path="/create-issue">
+        <CreateIssue />
+      </Route>
+
+    </BrowserRouter>
   );
 }
 

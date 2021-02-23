@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const IssueSchema = mongoose.Schema({
-    name: String,
+    name: { type: String, required: true },
     body: String,
     category: String,
     assigned: String,
-    dueDate: String,
+    dueDate: Date,
     comments: String,
-    isOpen: Boolean
+    isOpen: { type: Boolean, default: true }
 });
 
 const Issue = mongoose.model('Issue', IssueSchema);

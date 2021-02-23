@@ -20,8 +20,7 @@ module.exports = {
             category: issueParams.category,
             assigned: issueParams.assigned,
             dueDate: issueParams.dueDate,
-            comments: issueParams.comments,
-            isOpen: issueParams.isOpen
+            comments: issueParams.comments
         },
             (err, result) => (err) ? cb(err) : cb(result));
     },

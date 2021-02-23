@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
+
+// Utilities
+import ApiConnection from '../../utils/ApiConnection.js';
+const issueConnection = new ApiConnection('/api/issue');
 
 const CreateIssue = () => {
     const [issueData, setIssueData] = useState({
@@ -9,7 +14,7 @@ const CreateIssue = () => {
         assigned: '',
         dueDate: '',
         comments: '',
-        status: ''
+        isOpen: 'true'
     });
 
     // Set issue data state for form inputs
@@ -21,12 +26,17 @@ const CreateIssue = () => {
     // Create an issue on submit
     const handleCreateIssue = e => {
         e.preventDefault();
-
-        console.log(issueData);
+        issueConnection.postQuery({ body: issueData }).then(result => {
+            console.log(result);
+        });
     }
 
     return (
         <article>
+
+            <Link to="/">Back To Workbench</Link>
+
+            <br />
 
             {/* Input Form */}
 
@@ -60,11 +70,6 @@ const CreateIssue = () => {
                 <label htmlFor="comments">
                     Comments:
                     <input id="comments" name="comments" type="text" onChange={handleSetIssueData} />
-                </label>
-
-                <label htmlFor="status">
-                    Status:
-                    <input id="status" name="status" type="text" onChange={handleSetIssueData} />
                 </label>
 
                 <button onClick={handleCreateIssue}>Submit</button>

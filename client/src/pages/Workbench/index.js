@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 // Components
@@ -53,7 +54,7 @@ const Workbench = () => {
                 <section>
                     <input name="sort" type="text" />
                     <input name="filter" type="text" />
-                    <button>Creat Issue</button>
+                    <Link to="/create-issue">Creat Issue</Link>
                 </section>
 
                 {/* Issue List Section */}

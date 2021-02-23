@@ -48,7 +48,7 @@ const CreateIssue = () => {
 
                 <label htmlFor="body">
                     Body:
-                    <input id="body" name="body" type="text" onChange={handleSetIssueData} />
+                    <textarea id="body" name="body" type="text" onChange={handleSetIssueData} />
                 </label>
 
                 <label htmlFor="category">

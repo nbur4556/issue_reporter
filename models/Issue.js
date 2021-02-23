@@ -7,7 +7,7 @@ const IssueSchema = mongoose.Schema({
     assigned: String,
     dueDate: String,
     comments: String,
-    isOpen: Boolean
+    isOpen: { type: Boolean, default: true }
 });
 
 const Issue = mongoose.model('Issue', IssueSchema);

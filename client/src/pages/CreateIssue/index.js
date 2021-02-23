@@ -13,8 +13,7 @@ const CreateIssue = () => {
         category: '',
         assigned: '',
         dueDate: '',
-        comments: '',
-        isOpen: 'true'
+        comments: ''
     });
 
     // Set issue data state for form inputs

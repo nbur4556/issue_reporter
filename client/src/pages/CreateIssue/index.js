@@ -53,7 +53,10 @@ const CreateIssue = () => {
 
                 <label htmlFor="category">
                     Category:
-                    <input id="category" name="category" type="text" onChange={handleSetIssueData} />
+                    <select id="category" name="category" onChange={handleSetIssueData}>
+                        <option value="Feature">Feature</option>
+                        <option value="Bug">Bug</option>
+                    </select>
                 </label>
 
                 <label htmlFor="assigned">

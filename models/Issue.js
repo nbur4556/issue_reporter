@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const IssueSchema = mongoose.Schema({
+const IssueSchema = Schema({
     name: { type: String, required: true },
     body: String,
     category: String,
-    assigned: String,
+    assigned: { type: Schema.Types.ObjectId, ref: 'User' },
     dueDate: Date,
-    comments: String,
+    project: { type: Schema.Types.ObjectId, ref: 'Project' },
+    comments: [{
+        author: { type: Schema.Types.ObjectId, ref: 'User' },
+        message: String
+    }],
     isOpen: { type: Boolean, default: true }
 });
 

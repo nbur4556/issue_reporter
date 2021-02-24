@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const ProjectSchema = mongoose.Schema({
+const ProjectSchema = Schema({
     projectName: { type: String, required: true },
     team: [{
-        user: String,
+        user: { type: Schema.Types.ObjectId, ref: 'User' },
         role: String
     }],
     categories: [],
-    issues: []
+    issues: [{ type: Schema.Types.ObjectId, ref: 'Issue' }]
 });
 
 const Project = mongoose.model('Project', ProjectSchema);

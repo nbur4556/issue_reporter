@@ -20,7 +20,10 @@ const IssueDetails = props => {
                 {(props.status === true) ? <li>Open</li> : null}
                 {(props.status === false) ? <li>Closed</li> : null}
 
-                {(props.status !== undefined) ? <button onClick={props.onClickToggleStatus}>Toggle Status</button> : null}
+                {/* Buttons */}
+
+                {(props.status !== undefined) ? <button onClick={props.toggleStatus}>Toggle Status</button> : null}
+                {(props.name) ? <button onClick={props.deleteIssue}>Delete Issue</button> : null}
 
             </ul>
 

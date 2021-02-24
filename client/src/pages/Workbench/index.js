@@ -42,6 +42,11 @@ const Workbench = () => {
         });
     }
 
+    // Remove Issue from API
+    const deleteIssue = () => {
+        console.log('delete issue');
+    }
+
     return (
         <article>
 
@@ -80,7 +85,8 @@ const Workbench = () => {
                 comments={issueList[selectIssue]?.comments}
                 status={issueList[selectIssue]?.isOpen}
 
-                onClickToggleStatus={handleSetIssueStatus}
+                toggleStatus={handleSetIssueStatus}
+                deleteIssue={deleteIssue}
             />
 
         </article>

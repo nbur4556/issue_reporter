@@ -11,12 +11,17 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
+    const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
+
     const [issueList, setIssueList] = useState([]);
     const [selectIssue, setSelectIssue] = useState();
 
     useEffect(() => {
         loadIssues();
     }, []);
+
+    // Toggle if closed issues are displayed
+    const handleDisplayClosedIssue = () => { (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true); }
 
     // Set state of selected issue
     const handleSelectIssue = e => {
@@ -60,8 +65,10 @@ const Workbench = () => {
                 {/* Toolbar Section */}
 
                 <section>
-                    <input name="sort" type="text" />
-                    <input name="filter" type="text" />
+                    <label htmlFor="toggleClosedIssues">
+                        Show Closed Issues:
+                        <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleDisplayClosedIssue} />
+                    </label>
                     <Link to="/create-issue">Creat Issue</Link>
                 </section>
 

@@ -76,9 +76,11 @@ const Workbench = () => {
 
                 <section>
                     {issueList.map((issue, index) => {
-                        return (
-                            <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />
-                        )
+                        console.log(issue.isOpen)
+
+                        return (issue.isOpen === false && displayClosedIssue === false)
+                            ? null
+                            : <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />;
                     })}
                 </section>
 

@@ -41,4 +41,13 @@ module.exports = function (app) {
                 : res.status(200).json(result);
         });
     });
+
+    // User Routes
+    app.post('/api/user', (req, res) => {
+        controllers.userController.create(req.body, (result) => {
+            (result.errors)
+                ? res.status(400).json(result.errors)
+                : res.status(200).json(result);
+        });
+    });
 }

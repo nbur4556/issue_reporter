@@ -11,12 +11,17 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
+    const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
+
     const [issueList, setIssueList] = useState([]);
     const [selectIssue, setSelectIssue] = useState();
 
     useEffect(() => {
         loadIssues();
     }, []);
+
+    // Toggle if closed issues are displayed
+    const handleDisplayClosedIssue = () => { (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true); }
 
     // Set state of selected issue
     const handleSelectIssue = e => {
@@ -42,6 +47,14 @@ const Workbench = () => {
         });
     }
 
+    // Remove Issue from API
+    const deleteIssue = e => {
+        issueConnection.deleteQuery({ urlExtension: `/${issueList[selectIssue]._id}` }).then(() => {
+            setSelectIssue(null);
+            loadIssues();
+        });
+    }
+
     return (
         <article>
 
@@ -52,8 +65,10 @@ const Workbench = () => {
                 {/* Toolbar Section */}
 
                 <section>
-                    <input name="sort" type="text" />
-                    <input name="filter" type="text" />
+                    <label htmlFor="toggleClosedIssues">
+                        Show Closed Issues:
+                        <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleDisplayClosedIssue} />
+                    </label>
                     <Link to="/create-issue">Creat Issue</Link>
                 </section>
 
@@ -61,9 +76,11 @@ const Workbench = () => {
 
                 <section>
                     {issueList.map((issue, index) => {
-                        return (
-                            <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />
-                        )
+                        console.log(issue.isOpen)
+
+                        return (issue.isOpen === false && displayClosedIssue === false)
+                            ? null
+                            : <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />;
                     })}
                 </section>
 
@@ -80,7 +97,8 @@ const Workbench = () => {
                 comments={issueList[selectIssue]?.comments}
                 status={issueList[selectIssue]?.isOpen}
 
-                onClickToggleStatus={handleSetIssueStatus}
+                toggleStatus={handleSetIssueStatus}
+                deleteIssue={deleteIssue}
             />
 
         </article>

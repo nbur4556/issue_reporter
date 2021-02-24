@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './style.css';
 
 const IssueDetails = props => {
+
+    const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
+
+    useEffect(() => {
+        setDisplayDeleteMsg(false);
+    }, [props.name]);
+
     return (
         <aside>
 
@@ -20,7 +27,20 @@ const IssueDetails = props => {
                 {(props.status === true) ? <li>Open</li> : null}
                 {(props.status === false) ? <li>Closed</li> : null}
 
-                {(props.status !== undefined) ? <button onClick={props.onClickToggleStatus}>Toggle Status</button> : null}
+                {/* Buttons */}
+
+                {(props.status !== undefined) ? <button onClick={props.toggleStatus}>Toggle Status</button> : null}
+                {(props.name) ? <button onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button> : null}
+
+                {/* Delete Confirmation */}
+
+                {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
+                {(displayDeleteMsg)
+                    ? <div>
+                        <button onClick={props.deleteIssue}>Yes</button>
+                        <button onClick={() => setDisplayDeleteMsg(false)}>No</button>
+                    </div>
+                    : null}
 
             </ul>
 

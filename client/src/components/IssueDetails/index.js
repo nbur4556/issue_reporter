@@ -37,8 +37,8 @@ const IssueDetails = props => {
                 {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
                 {(displayDeleteMsg)
                     ? <div>
-                        <a href="#" onClick={props.deleteIssue}>Yes</a>
-                        <a href="#" onClick={() => setDisplayDeleteMsg(false)}>No</a>
+                        <button onClick={props.deleteIssue}>Yes</button>
+                        <button onClick={() => setDisplayDeleteMsg(false)}>No</button>
                     </div>
                     : null}
 

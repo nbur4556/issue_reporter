@@ -27,11 +27,30 @@ const CreateIssue = () => {
     // Create an issue on submit
     const handleCreateIssue = e => {
         e.preventDefault();
+
+        clearFormData(e.currentTarget.parentElement);
+
         issueConnection.postQuery({ body: issueData }).then(result => {
             (result.status === 200)
                 ? setSuccessMessage(`Success! Issue "${issueData.name}" created.`)
                 : setSuccessMessage('');
         });
+    }
+
+    // Set all form input values and issue data to null
+    const clearFormData = form => {
+        setIssueData({
+            name: '',
+            body: '',
+            category: '',
+            assigned: '',
+            dueDate: '',
+            comments: ''
+        });
+
+        for (let formChild of form.children) {
+            if (formChild.nodeName === 'LABEL') { formChild.children[0].value = null }
+        }
     }
 
     return (
@@ -58,6 +77,7 @@ const CreateIssue = () => {
                 <label htmlFor="category">
                     Category:
                     <select id="category" name="category" onChange={handleSetIssueData}>
+                        <option></option>
                         <option value="Feature">Feature</option>
                         <option value="Bug">Bug</option>
                     </select>

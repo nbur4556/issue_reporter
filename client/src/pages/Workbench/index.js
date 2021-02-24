@@ -45,6 +45,7 @@ const Workbench = () => {
     // Remove Issue from API
     const deleteIssue = e => {
         issueConnection.deleteQuery({ urlExtension: `/${issueList[selectIssue]._id}` }).then(() => {
+            setSelectIssue(null);
             loadIssues();
         });
     }

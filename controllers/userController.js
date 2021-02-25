@@ -11,9 +11,13 @@ module.exports = {
     create: function (userParams, cb) {
         db.User.create({ username: userParams.username },
             (err, result) => (err) ? cb(err) : cb(result));
-    }
+    },
 
     // Update User
 
     // Delete User
+    deleteById: function (searchId, cb) {
+        db.User.deleteOne({ _id: searchId },
+            (err, result) => (err) ? cb(err) : cb(result));
+    }
 }

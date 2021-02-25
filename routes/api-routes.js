@@ -37,10 +37,19 @@ module.exports = function (app) {
     // Project Routes
     app.get('/api/project/:searchId', (req, res) => {
         controllers.projectController.findById(req.params.searchId,
-            (result) => (result.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result));
+            (result) =>
+                (result.errors)
+                    ? res.status(400).json(result.errors)
+                    : res.status(200).json(result));
     });
+
+    app.delete('/api/project/:searchId', (req, res) => {
+        controllers.projectController.deleteById(req.params.searchId,
+            (result) =>
+                (result.errors)
+                    ? res.status(400).json(result.errors)
+                    : res.status(200).json(result));
+    })
 
     // Issue Routes
     app.get('/api/issue', (req, res) => {

@@ -18,7 +18,8 @@ module.exports = {
     },
 
     // Delete Project
-    deleteById: function () {
-        console.log('placeholder')
+    deleteById: function (searchId, cb) {
+        db.Project.deleteOne({ _id: searchId },
+            (err, result) => (err) ? cb(err) : cb(result));
     }
 }

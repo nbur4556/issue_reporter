@@ -15,14 +15,8 @@ module.exports = {
 
     // Update User
     updateById: function (searchId, userParams, cb) {
-        db.User.findOne({ _id: searchId },
-            (resultErr, resultUser) => {
-                if (resultErr) { cb(resultErr) }
-
-                db.User.updateOne({ _id: searchId }, {
-                    $set: { username: userParams.username || resultUser.username }
-                }, (err, result) => (err) ? cb(err) : cb(result));
-            });
+        db.User.updateOne({ _id: searchId }, { $set: { ...userParams } },
+            (err, result) => (err) ? cb(err) : cb(result));
     },
 
     // Delete User

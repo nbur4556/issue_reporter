@@ -8,8 +8,12 @@ module.exports = {
     },
 
     // Create Project
-    create: function () {
-        console.log('placeholder')
+    create: function (projectParams, cb) {
+        db.Project.create({
+            projectName: projectParams.projectName,
+            team: projectParams.team
+        },
+            (err, result) => (err) ? cb(err) : cb(result));
     },
 
     // Update Project

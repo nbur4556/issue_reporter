@@ -12,9 +12,8 @@ const CreateIssue = () => {
         name: '',
         body: '',
         category: '',
-        assigned: '',
-        dueDate: '',
-        comments: ''
+        // assigned: '',
+        dueDate: ''
     });
 
     // Set issue data state for form inputs
@@ -43,9 +42,8 @@ const CreateIssue = () => {
             name: '',
             body: '',
             category: '',
-            assigned: '',
+            // assigned: '',
             dueDate: '',
-            comments: ''
         });
 
         for (let formChild of form.children) {
@@ -83,19 +81,14 @@ const CreateIssue = () => {
                     </select>
                 </label>
 
-                <label htmlFor="assigned">
+                {/* <label htmlFor="assigned">
                     Assigned:
                     <input id="assigned" name="assigned" type="text" onChange={handleSetIssueData} />
-                </label>
+                </label> */}
 
                 <label htmlFor="dueDate">
                     Due Date:
                     <input id="dueDate" name="dueDate" type="date" onChange={handleSetIssueData} />
-                </label>
-
-                <label htmlFor="comments">
-                    Comments:
-                    <input id="comments" name="comments" type="text" onChange={handleSetIssueData} />
                 </label>
 
                 <button onClick={handleCreateIssue}>Submit</button>

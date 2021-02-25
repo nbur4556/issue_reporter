@@ -59,6 +59,14 @@ module.exports = function (app) {
         });
     });
 
+    app.put('/api/user/:searchId', (req, res) => {
+        controllers.userController.updateById(req.params.searchId, req.body, result => {
+            (result.errors)
+                ? res.status(400).json(result.errors)
+                : res.status(200).json(result);
+        });
+    });
+
     app.delete('/api/user/:searchId', (req, res) => {
         controllers.userController.deleteById(req.params.searchId, (result) => {
             (result.errors)

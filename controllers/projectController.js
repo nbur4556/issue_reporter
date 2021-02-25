@@ -17,8 +17,20 @@ module.exports = {
     },
 
     // Update Project
-    updateById: function () {
-        console.log('placeholder')
+    updateById: function (searchId, projectParams, cb) {
+        db.Project.findOne({ _id: searchId },
+            (resultErr, resultProject) => {
+                if (resultErr) { cb(resultErr) }
+
+                db.Project.updateOne({ _id: searchId }, {
+                    $set: {
+                        projectName: projectParams.projectName || resultProject.projectName,
+                        team: projectParams.team || resultProject.team,
+                        categories: projectParams.categories || resultProject.categories,
+                        issues: projectParams.issues || resultProject.issues
+                    }
+                }, (err, result) => (err) ? cb(err) : cb(result));
+            });
     },
 
     // Delete Project

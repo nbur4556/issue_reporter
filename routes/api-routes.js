@@ -43,6 +43,14 @@ module.exports = function (app) {
     });
 
     // User Routes
+    app.get('/api/user/:searchId', (req, res) => {
+        controllers.userController.findById(req.params.searchId, (result) => {
+            (result?.errors)
+                ? res.status(400).json(result.errors)
+                : res.status(200).json(result);
+        });
+    });
+
     app.post('/api/user', (req, res) => {
         controllers.userController.create(req.body, (result) => {
             (result.errors)

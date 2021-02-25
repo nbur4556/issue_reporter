@@ -2,6 +2,10 @@ const db = require('../models');
 
 module.exports = {
     // Read User
+    findById: function (searchId, cb) {
+        db.User.findOne({ _id: searchId },
+            (err, result) => (err) ? cb(err) : cb(result));
+    },
 
     // Create User
     create: function (userParams, cb) {

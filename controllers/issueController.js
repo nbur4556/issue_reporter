@@ -14,37 +14,14 @@ module.exports = {
 
     // Create Issue
     create: function (issueParams, cb) {
-        db.Issue.create({
-            name: issueParams.name,
-            body: issueParams.body,
-            category: issueParams.category,
-            assigned: issueParams.assigned,
-            dueDate: issueParams.dueDate,
-            comments: issueParams.comments
-        },
+        db.Issue.create({ ...issueParams },
             (err, result) => (err) ? cb(err) : cb(result));
     },
 
     // Update Issue
     updateById: function (searchId, issueParams, cb) {
-        db.Issue.findOne({ _id: searchId },
-            (resultErr, resultIssue) => {
-                if (resultErr) { cb(resultErr) }
-
-                db.Issue.updateOne({ _id: searchId },
-                    {
-                        $set: {
-                            name: issueParams.name || resultIssue.name,
-                            body: issueParams.body || resultIssue.body,
-                            category: issueParams.category || resultIssue.category,
-                            assigned: issueParams.assigned || resultIssue.assigned,
-                            dueDate: issueParams.dueDate || resultIssue.dueDate,
-                            comments: issueParams.comments || resultIssue.comments,
-                            isOpen: issueParams.isOpen || resultIssue.isOpen
-                        }
-                    },
-                    (err, result) => (err) ? cb(err) : cb(result));
-            });
+        db.Issue.updateOne({ _id: searchId }, { $set: { ...issueParams } },
+            (err, result) => (err) ? cb(err) : cb(result));
     },
 
     // Delete Issue

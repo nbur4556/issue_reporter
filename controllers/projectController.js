@@ -9,10 +9,7 @@ module.exports = {
 
     // Create Project
     create: function (projectParams, cb) {
-        db.Project.create({
-            projectName: projectParams.projectName,
-            team: projectParams.team
-        },
+        db.Project.create({ ...projectParams },
             (err, result) => (err) ? cb(err) : cb(result));
     },
 

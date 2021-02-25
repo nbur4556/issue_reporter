@@ -14,14 +14,7 @@ module.exports = {
 
     // Create Issue
     create: function (issueParams, cb) {
-        db.Issue.create({
-            name: issueParams.name,
-            body: issueParams.body,
-            category: issueParams.category,
-            assigned: issueParams.assigned,
-            dueDate: issueParams.dueDate,
-            comments: issueParams.comments
-        },
+        db.Issue.create({ ...issueParams },
             (err, result) => (err) ? cb(err) : cb(result));
     },
 

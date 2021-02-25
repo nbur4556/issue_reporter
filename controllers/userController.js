@@ -9,7 +9,7 @@ module.exports = {
 
     // Create User
     create: function (userParams, cb) {
-        db.User.create({ username: userParams.username },
+        db.User.create({ ...userParams },
             (err, result) => (err) ? cb(err) : cb(result));
     },
 

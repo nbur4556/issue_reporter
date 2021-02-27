@@ -69,7 +69,7 @@ const Workbench = () => {
                         Show Closed Issues:
                         <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleDisplayClosedIssue} />
                     </label>
-                    <Link to="/create-issue">Creat Issue</Link>
+                    <Link to="/create-issue">Create Issue</Link>
                 </section>
 
                 {/* Issue List Section */}

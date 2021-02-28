@@ -117,3 +117,8 @@ dist
 /misc
 seed.js
 
+# Cypress files
+/cypress/downloads
+/cypress/screenshots
+/cypress/videos
+/cypress/integration/examples

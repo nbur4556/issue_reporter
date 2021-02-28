@@ -1,3 +1,4 @@
+// Create Issue Tests
 describe('Create issue', () => {
     const name = 'Issue Name';
     const description = 'Issue Description';
@@ -11,56 +12,57 @@ describe('Create issue', () => {
 
     // Check that form with all information creates success message
     it('create issue with all information', () => {
-        cy.get('form').contains('Name:').type(name);
-        cy.get('form').contains('Body:').type(description);
-        cy.get('select').select(category);
-        cy.get('form').contains('Due Date:').type(dueDate);
+        cy.get('input[name="name"]').type(name);
+        cy.get('textarea[name="body"]').type(description);
+        cy.get('select[name="category"]').select(category);
+        cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('form').contains('Submit').click();
+        cy.get('button[name="submit"]').click();
         cy.contains(successMessage).should('exist');
     });
 
     // Check that form without required information creates success message
     it('create issue without body', () => {
-        cy.get('form').contains('Name:').type(name);
-        cy.get('select').select(category);
-        cy.get('form').contains('Due Date:').type(dueDate);
+        cy.get('input[name="name"]').type(name);
+        cy.get('select[name="category"]').select(category);
+        cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('form').contains('Submit').click();
+        cy.get('button[name="submit"]').click();
         cy.contains(successMessage).should('exist');
     });
 
     it('create issue without category', () => {
-        cy.get('form').contains('Name:').type(name);
-        cy.get('form').contains('Body:').type(description);
-        cy.get('form').contains('Due Date:').type(dueDate);
+        cy.get('input[name="name"]').type(name);
+        cy.get('textarea[name="body"]').type(description);
+        cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('form').contains('Submit').click();
+        cy.get('button[name="submit"]').click();
         cy.contains(successMessage).should('exist');
     });
 
     it('create issue without due date', () => {
-        cy.get('form').contains('Name:').type(name);
-        cy.get('form').contains('Body:').type(description);
-        cy.get('select').select(category);
+        cy.get('input[name="name"]').type(name);
+        cy.get('textarea[name="body"]').type(description);
+        cy.get('select[name="category"]').select(category);
 
-        cy.get('form').contains('Submit').click();
+        cy.get('button[name="submit"]').click();
         cy.contains(successMessage).should('exist');
     });
 
     // Check that form without name does not create success message
     it('submit form without name does not create issue', () => {
-        cy.get('form').contains('Body:').type(description);
-        cy.get('select').select(category);
-        cy.get('form').contains('Due Date:').type(dueDate);
+        cy.get('textarea[name="body"]').type(description);
+        cy.get('select[name="category"]').select(category);
+        cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('form').contains('Submit').click();
+        cy.get('button[name="submit"]').click();
         cy.contains(successMessage).should('not.exist');
     });
 
     // Check that empty form does not create success message
     it('submit empty form does not create issue', () => {
-        cy.get('form').contains('Submit').click();
+        cy.get('button[name="submit"]').click();
         cy.contains(successMessage).should('not.exist');
     });
 });
+

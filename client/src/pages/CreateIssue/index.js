@@ -91,7 +91,7 @@ const CreateIssue = () => {
                     <input id="dueDate" name="dueDate" type="date" onChange={handleSetIssueData} />
                 </label>
 
-                <button onClick={handleCreateIssue}>Submit</button>
+                <button name="submit" onClick={handleCreateIssue}>Submit</button>
 
             </form>
 

@@ -5,17 +5,17 @@ const CredentialsForm = props => {
         <form>
             <label>
                 Username:
-                <input name="username" type="text" />
+                <input name="username" type="text" onChange={props.handleOnChange} />
             </label>
             <label>
                 Password:
-                <input name="password" type="password" />
+                <input name="password" type="password" onChange={props.handleOnChange} />
             </label>
 
             {(props.requireConfirm)
                 ? <label>
                     Confirm Password:
-                <input name="confirmPassword" type="password" />
+                <input name="confirmPassword" type="password" onChange={props.handleOnChange} />
                 </label>
                 : null}
 

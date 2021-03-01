@@ -1,4 +1,21 @@
 const db = require('../models');
+const bcrypt = require('bcrypt');
+
+const generateSalt = cb => {
+    return bcrypt.genSalt(10)
+        .then(salt => { cb(salt) })
+        .catch(err => { console.log(err) });
+}
+
+const encryption = (encryptInput, cb) => {
+    generateSalt(salt => {
+        bcrypt.hash(encryptInput, salt).then(hash => {
+            cb(hash);
+        }).catch(err => {
+            cb(err);
+        });
+    });
+}
 
 module.exports = {
     // Read User
@@ -14,8 +31,10 @@ module.exports = {
 
     // Create User
     create: function (userParams, cb) {
-        db.User.create({ ...userParams },
-            (err, result) => (err) ? cb(err) : cb(result));
+        encryption(userParams.password, resultHash => {
+            db.User.create({ ...userParams, passwordHash: resultHash },
+                (err, result) => (err) ? cb(err) : cb(result));
+        });
     },
 
     // Update User

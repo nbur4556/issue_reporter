@@ -26,6 +26,9 @@ const LoginSignup = () => {
             password: '',
             confirmPassword: ''
         });
+
+        setSignupMsg(null);
+        setLoginMsg(null);
     }, [signupActive, loginActive]);
 
     // Set which form to display
@@ -52,18 +55,10 @@ const LoginSignup = () => {
         userConnection.postQuery({
             body: credentialsInput
         }).then((result) => {
-            if (result.data._id) {
-                setLoginMsg(null);
-                setSignupMsg('Success! User created.')
-            }
-            else {
-                setLoginMsg(null);
-                setSignupMsg('Error: User not created.');
-            }
-        }).catch(err => {
-            setLoginMsg(null);
-            setSignupMsg('Error: User not created.');
-        });
+            (result.data._id)
+                ? setSignupMsg('Success! User created.')
+                : setSignupMsg('Error: User not created.');
+        }).catch(err => setSignupMsg('Error: User not created.'));
     }
 
     // Log in as existing user
@@ -73,9 +68,11 @@ const LoginSignup = () => {
         userConnection.postQuery({
             urlExtension: `/${credentialsInput.username}`,
             body: credentialsInput
-        }).then(result => {
-            console.log(result);
-        });
+        }).then((result) => {
+            (result.data._id)
+                ? setLoginMsg('Success! Login successful.')
+                : setLoginMsg('Error: Login not successful.');
+        }).catch(err => setLoginMsg('Error: Login not successful.'));
     }
 
     return (

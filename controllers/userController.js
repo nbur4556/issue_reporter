@@ -49,7 +49,7 @@ module.exports = {
                 if (err) { cb(err) }
 
                 // Compare input with encrypted password hash
-                compareEncryption(userParams.password, data.passwordHash, response => {
+                compareEncryption(userParams.password, data?.passwordHash, response => {
                     (response === true) ? cb(data) : cb({ msg: 'failed' });
                 });
             });

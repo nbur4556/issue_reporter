@@ -1,0 +1,9 @@
+{
+    "username": "testUser",
+    "password": "Password123",
+    "shortPassword": "Pass",
+    "passwordNoCaps": "password123",
+    "passwordNoLower": "PASSWORD123",
+    "passwordNoNum": "Password",
+    "passwordMisspelled": "Passsword123"
+}

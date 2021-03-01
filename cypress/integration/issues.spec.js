@@ -120,7 +120,7 @@ describe('Delete Issue', () => {
     let testId;
 
     beforeEach(() => {
-        cy.visit('/');
+        cy.visit('/workbench');
 
         cy.request('POST', '/api/issue', { name: issueName }).then(({ body }) => {
             testId = body._id;

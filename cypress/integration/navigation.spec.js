@@ -1,8 +1,8 @@
 describe('Url Navigation', () => {
     // Should equal root url
-    it('visit root url', () => {
-        cy.visit('/')
-        cy.url().should('eq', Cypress.config().baseUrl + '/');
+    it('visit workbench url', () => {
+        cy.visit('/workbench')
+        cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
     });
 
     // Should equal create issue page url
@@ -14,16 +14,16 @@ describe('Url Navigation', () => {
 
 describe('Link Navigation', () => {
     // Should equal create issue page url
-    it('dashboard to create issue page', () => {
-        cy.visit('/');
+    it('dashboard to create issue link', () => {
+        cy.visit('/workbench');
         cy.contains('Create Issue').click();
         cy.url().should('eq', Cypress.config().baseUrl + '/create-issue');
     });
 
     // Should equal root url
-    it('create issue to dashboard page', () => {
+    it('create issue to dashboard link', () => {
         cy.visit('/create-issue');
         cy.contains('Back To Workbench').click();
-        cy.url().should('eq', Cypress.config().baseUrl + '/');
+        cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
     })
 });

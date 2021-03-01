@@ -10,6 +10,8 @@ const userConnection = new ApiConnection('/api/user');
 const LoginSignup = () => {
     const [signupActive, setSignupActive] = useState(false);
     const [loginActive, setLoginActive] = useState(false);
+    const [signupMsg, setSignupMsg] = useState();
+    const [loginMsg, setLoginMsg] = useState();
 
     const [credentialsInput, setCredentialsInput] = useState({
         username: '',
@@ -50,7 +52,14 @@ const LoginSignup = () => {
         userConnection.postQuery({
             body: credentialsInput
         }).then(result => {
-            console.log(result);
+            if (result.data) {
+                setLoginMsg(null);
+                setSignupMsg('Success! User created.')
+            }
+            else {
+                setLoginMsg(null);
+                setSignupMsg('Error: User not created.');
+            }
         });
     }
 
@@ -75,6 +84,9 @@ const LoginSignup = () => {
 
             {(loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
             {(signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+
+            {(signupMsg) ? <p>{signupMsg}</p> : null}
+            {(loginMsg) ? <p>{loginMsg}</p> : null}
         </main>
     );
 }

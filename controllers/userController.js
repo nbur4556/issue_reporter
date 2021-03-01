@@ -23,6 +23,19 @@ const compareEncryption = (input, hash, cb) => {
     });
 }
 
+const checkMinimumRequirements = (password, confirmPassword) => {
+    const minChar = 8;
+    const numMatched = password.match(/\d+/g);
+    console.log(numMatched)
+
+    if (password !== confirmPassword) { return false }
+    else if (password.length < minChar) { return false }
+    else if (password.toLowerCase() === password) { return false }
+    else if (password.toUpperCase() === password) { return false }
+    else if (numMatched === null) { return false }
+    else { return true }
+}
+
 module.exports = {
     // Read User
     findById: function (searchId, cb) {
@@ -44,10 +57,15 @@ module.exports = {
 
     // Create User
     create: function (userParams, cb) {
-        encryption(userParams.password, resultHash => {
-            db.User.create({ ...userParams, passwordHash: resultHash },
-                (err, result) => (err) ? cb(err) : cb(result));
-        });
+        if (!checkMinimumRequirements(userParams.password, userParams.confirmPassword)) {
+            cb({ msg: 'failed' });
+        }
+        else {
+            encryption(userParams.password, resultHash => {
+                db.User.create({ ...userParams, passwordHash: resultHash },
+                    (err, result) => (err) ? cb(err) : cb(result));
+            });
+        }
     },
 
     // Update User

@@ -51,8 +51,8 @@ const LoginSignup = () => {
 
         userConnection.postQuery({
             body: credentialsInput
-        }).then(result => {
-            if (result.data) {
+        }).then((result) => {
+            if (result.data._id) {
                 setLoginMsg(null);
                 setSignupMsg('Success! User created.')
             }
@@ -60,6 +60,9 @@ const LoginSignup = () => {
                 setLoginMsg(null);
                 setSignupMsg('Error: User not created.');
             }
+        }).catch(err => {
+            setLoginMsg(null);
+            setSignupMsg('Error: User not created.');
         });
     }
 

@@ -44,15 +44,26 @@ const LoginSignup = () => {
     }
 
     // Create a new user
-    const handleSignup = () => {
+    const handleSignup = e => {
+        e.preventDefault();
+
         userConnection.postQuery({
             body: credentialsInput
+        }).then(result => {
+            console.log(result);
         });
     }
 
     // Log in as existing user
-    const handleLogin = () => {
+    const handleLogin = e => {
+        e.preventDefault();
 
+        userConnection.postQuery({
+            urlExtension: `/${credentialsInput.username}`,
+            body: credentialsInput
+        }).then(result => {
+            console.log(result);
+        });
     }
 
     return (

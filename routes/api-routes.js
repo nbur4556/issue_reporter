@@ -11,9 +11,15 @@ module.exports = function (app) {
     });
 
     app.post('/api/user', (req, res) => {
-        console.log(req);
-
         controllers.userController.create(req.body, (result) => {
+            (result.errors)
+                ? res.status(400).json(result.errors)
+                : res.status(200).json(result);
+        });
+    });
+
+    app.post('/api/user/:searchUsername', (req, res) => {
+        controllers.userController.login(req.params.searchUsername, (result) => {
             (result.errors)
                 ? res.status(400).json(result.errors)
                 : res.status(200).json(result);

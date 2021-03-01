@@ -7,6 +7,11 @@ module.exports = {
             (err, result) => (err) ? cb(err) : cb(result));
     },
 
+    login: function (searchUsername, cb) {
+        db.User.findOne({ username: searchUsername },
+            (err, result) => (err) ? cb(err) : cb(result));
+    },
+
     // Create User
     create: function (userParams, cb) {
         db.User.create({ ...userParams },

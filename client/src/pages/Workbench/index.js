@@ -74,7 +74,7 @@ const Workbench = () => {
 
                 {/* Issue List Section */}
 
-                <section>
+                <section className="issueListSection">
                     {issueList.map((issue, index) => {
                         return (issue.isOpen === false && displayClosedIssue === false)
                             ? null

@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 // Components
 import CredentialsForm from '../../components/CredentialsForm';
 
+// Utilities
+import ApiConnection from '../../utils/ApiConnection.js';
+const userConnection = new ApiConnection('/api/user');
+
 const LoginSignup = () => {
     const [signupActive, setSignupActive] = useState(false);
     const [loginActive, setLoginActive] = useState(false);
@@ -36,10 +40,19 @@ const LoginSignup = () => {
 
     // Get input from form
     const handleCredentialsInput = e => {
-        console.log(e.currentTarget.name);
-        console.log(e.currentTarget.value);
-
         setCredentialsInput({ ...credentialsInput, [e.currentTarget.name]: e.currentTarget.value })
+    }
+
+    // Create a new user
+    const handleSignup = () => {
+        userConnection.postQuery({
+            body: credentialsInput
+        });
+    }
+
+    // Log in as existing user
+    const handleLogin = () => {
+
     }
 
     return (
@@ -49,8 +62,8 @@ const LoginSignup = () => {
                 <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
             </section>
 
-            {(loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} /> : null}
-            {(signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} /> : null}
+            {(loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
+            {(signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
         </main>
     );
 }

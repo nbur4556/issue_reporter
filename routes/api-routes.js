@@ -11,6 +11,8 @@ module.exports = function (app) {
     });
 
     app.post('/api/user', (req, res) => {
+        console.log(req);
+
         controllers.userController.create(req.body, (result) => {
             (result.errors)
                 ? res.status(400).json(result.errors)

@@ -19,7 +19,7 @@ const CredentialsForm = props => {
                 </label>
                 : null}
 
-            <button name="submit">Submit</button>
+            <button name="submit" onClick={props.handleSubmit}>Submit</button>
         </form>
     );
 }

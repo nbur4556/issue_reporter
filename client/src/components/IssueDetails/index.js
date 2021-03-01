@@ -29,16 +29,16 @@ const IssueDetails = props => {
 
                 {/* Buttons */}
 
-                {(props.status !== undefined) ? <button onClick={props.toggleStatus}>Toggle Status</button> : null}
-                {(props.name) ? <button onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button> : null}
+                {(props.status !== undefined) ? <button name="toggleStatus" onClick={props.toggleStatus}>Toggle Status</button> : null}
+                {(props.name) ? <button name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button> : null}
 
                 {/* Delete Confirmation */}
 
                 {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
                 {(displayDeleteMsg)
                     ? <div>
-                        <button onClick={props.deleteIssue}>Yes</button>
-                        <button onClick={() => setDisplayDeleteMsg(false)}>No</button>
+                        <button name="confirmDelete" onClick={props.deleteIssue}>Yes</button>
+                        <button name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
                     </div>
                     : null}
 

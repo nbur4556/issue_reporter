@@ -31,7 +31,7 @@ describe('Register User', () => {
     });
 
     // Password requirements not met
-    it('register new user with short password', () => {
+    it('attempt register with short password', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.shortPassword);
@@ -47,7 +47,7 @@ describe('Register User', () => {
         });
     })
 
-    it('register new user with no caps', () => {
+    it('attempt register with no caps', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordNoCaps);
@@ -63,7 +63,7 @@ describe('Register User', () => {
         });
     })
 
-    it('register new user with no lower case letter', () => {
+    it('attempt register with no lower case letter', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordNoLower);
@@ -79,7 +79,7 @@ describe('Register User', () => {
         });
     })
 
-    it('register new user with no number', () => {
+    it('attempt register with no number', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordNoNum);
@@ -144,7 +144,7 @@ describe('Register User', () => {
     });
 
     // Password and confirm password do not match
-    it('register new user with non matching password and confirm password', () => {
+    it('attempt register with non matching password and confirm password', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordMisspelled);
@@ -162,7 +162,75 @@ describe('Register User', () => {
 });
 
 describe('Authenticate User', () => {
+    const successMsg = 'Success! Login successful.';
+    const errorMsg = 'Error: Login not successful.';
+    let userId;
+
+    beforeEach(() => {
+        cy.visit('/');
+        cy.fixture('userData.json').then((data) => {
+            cy.request('POST', '/api/user', {
+                username: data.username,
+                password: data.password,
+                confirmPassword: data.password
+            }).then(result => {
+                userId = result.body._id;
+            });
+        });
+        cy.get('button[name="loginActive"]').click();
+    });
+
+    afterEach(() => {
+        cy.request('DELETE', `api/user/${userId}`);
+    });
+
     // Login Successful
+    it('login with correct credentials', () => {
+        cy.fixture('userData.json').then((data) => {
+            cy.get('input[name="username"]').type(data.username);
+            cy.get('input[name="password"]').type(data.password);
+            cy.get('button[name="submit"]').click();
+
+            cy.contains(successMsg).should('exist');
+        });
+    });
 
     // Login Failed
+    it('attempt login with incorrect password', () => {
+        cy.fixture('userData.json').then((data) => {
+            cy.get('input[name="username"]').type(data.username);
+            cy.get('input[name="password"]').type(data.passwordMisspelled);
+            cy.get('button[name="submit"]').click();
+
+            cy.contains(errorMsg).should('exist');
+        });
+    });
+
+    it('attempt login with incorrect username', () => {
+        cy.fixture('userData.json').then((data) => {
+            cy.get('input[name="username"]').type(data.usernameMisspelled);
+            cy.get('input[name="password"]').type(data.password);
+            cy.get('button[name="submit"]').click();
+
+            cy.contains(errorMsg).should('exist');
+        });
+    });
+
+    it('attempt login without a username', () => {
+        cy.fixture('userData.json').then((data) => {
+            cy.get('input[name="username"]').type(data.username);
+            cy.get('button[name="submit"]').click();
+
+            cy.contains(errorMsg).should('exist');
+        });
+    });
+
+    it('attempt login without a password', () => {
+        cy.fixture('userData.json').then((data) => {
+            cy.get('input[name="password"]').type(data.password);
+            cy.get('button[name="submit"]').click();
+
+            cy.contains(errorMsg).should('exist');
+        });
+    });
 });

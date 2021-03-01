@@ -1,5 +1,6 @@
 {
     "username": "testUser",
+    "usernameMisspelled": "testsUser",
     "password": "Password123",
     "shortPassword": "Pass",
     "passwordNoCaps": "password123",

@@ -9,12 +9,16 @@ const CredentialsForm = props => {
             </label>
             <label>
                 Password:
-                <input name="password" type="text" />
+                <input name="password" type="password" />
             </label>
-            <label>
-                Confirm Password:
-                <input name="confirmPassword" type="text" />
-            </label>
+
+            {(props.requireConfirm)
+                ? <label>
+                    Confirm Password:
+                <input name="confirmPassword" type="password" />
+                </label>
+                : null}
+
             <button name="submit">Submit</button>
         </form>
     );

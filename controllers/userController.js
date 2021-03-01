@@ -2,18 +2,24 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 
 const generateSalt = cb => {
-    return bcrypt.genSalt(10)
+    bcrypt.genSalt(10)
         .then(salt => { cb(salt) })
-        .catch(err => { console.log(err) });
+        .catch(err => { cb(err) });
 }
 
 const encryption = (encryptInput, cb) => {
     generateSalt(salt => {
-        bcrypt.hash(encryptInput, salt).then(hash => {
-            cb(hash);
-        }).catch(err => {
-            cb(err);
-        });
+        bcrypt.hash(encryptInput, salt)
+            .then(hash => { cb(hash) })
+            .catch(err => { cb(err) });
+    });
+}
+
+const compareEncryption = (input, hash, cb) => {
+    bcrypt.compare(input, hash).then(result => {
+        cb(result);
+    }).catch(err => {
+        cb(err);
     });
 }
 
@@ -24,9 +30,16 @@ module.exports = {
             (err, result) => (err) ? cb(err) : cb(result));
     },
 
-    login: function (searchUsername, cb) {
+    login: function (searchUsername, userParams, cb) {
         db.User.findOne({ username: searchUsername },
-            (err, result) => (err) ? cb(err) : cb(result));
+            (err, data) => {
+                if (err) { cb(err) }
+
+                // Compare input with encrypted password hash
+                compareEncryption(userParams.password, data.passwordHash, response => {
+                    (response === true) ? cb(data) : cb({ msg: 'failed' });
+                });
+            });
     },
 
     // Create User

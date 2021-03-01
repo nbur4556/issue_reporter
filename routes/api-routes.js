@@ -19,7 +19,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/user/:searchUsername', (req, res) => {
-        controllers.userController.login(req.params.searchUsername, (result) => {
+        controllers.userController.login(req.params.searchUsername, req.body, (result) => {
             (result.errors)
                 ? res.status(400).json(result.errors)
                 : res.status(200).json(result);

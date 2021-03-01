@@ -54,7 +54,7 @@ const CreateIssue = () => {
     return (
         <article>
 
-            <Link to="/">Back To Workbench</Link>
+            <Link to="/workbench">Back To Workbench</Link>
 
             <br />
 

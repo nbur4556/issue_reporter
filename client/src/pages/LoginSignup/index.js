@@ -69,10 +69,18 @@ const LoginSignup = () => {
             urlExtension: `/${credentialsInput.username}`,
             body: credentialsInput
         }).then((result) => {
-            (result.data._id)
-                ? setLoginMsg('Success! Login successful.')
-                : setLoginMsg('Error: Login not successful.');
-        }).catch(err => setLoginMsg('Error: Login not successful.'));
+            if (result.data.authToken) {
+                setLoginMsg('Success! Login successful.')
+                localStorage.setItem('authToken', result.data.authToken);
+            }
+            else {
+                setLoginMsg('Error: Login not successful.');
+                localStorage.removeItem('authToken');
+            }
+        }).catch(err => {
+            setLoginMsg('Error: Login not successful.');
+            localStorage.removeItem('authToken');
+        });
     }
 
     return (

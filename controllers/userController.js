@@ -63,7 +63,7 @@ module.exports = {
                 compareEncryption(userParams.password, data?.passwordHash, response => {
                     if (response === true) {
                         const authToken = generateAuthToken({ id: data._id, username: data.username });
-                        cb(data);
+                        cb({ authToken: authToken });
                     }
                     else {
                         cb({ msg: 'failed' });

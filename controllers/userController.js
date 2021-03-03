@@ -1,12 +1,15 @@
 const db = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
+// Get salt used for bcrypt encryption
 const generateSalt = cb => {
     bcrypt.genSalt(10)
         .then(salt => { cb(salt) })
         .catch(err => { cb(err) });
 }
 
+// Return encryption of input
 const encryption = (encryptInput, cb) => {
     generateSalt(salt => {
         bcrypt.hash(encryptInput, salt)
@@ -15,6 +18,7 @@ const encryption = (encryptInput, cb) => {
     });
 }
 
+// Compare input with encryption
 const compareEncryption = (input, hash, cb) => {
     bcrypt.compare(input, hash).then(result => {
         cb(result);
@@ -23,6 +27,12 @@ const compareEncryption = (input, hash, cb) => {
     });
 }
 
+// Return JWT token
+const generateAuthToken = ({ ...tokenData }) => {
+    return jwt.sign(tokenData, process.env.JWT_SECRET);
+}
+
+// Check if password requirements are met
 const checkMinimumRequirements = (password, confirmPassword) => {
     const minChar = 8;
     const numMatched = password.match(/\d+/g);
@@ -36,6 +46,7 @@ const checkMinimumRequirements = (password, confirmPassword) => {
     else { return true }
 }
 
+// Returned controller methods
 module.exports = {
     // Read User
     findById: function (searchId, cb) {
@@ -50,7 +61,13 @@ module.exports = {
 
                 // Compare input with encrypted password hash
                 compareEncryption(userParams.password, data?.passwordHash, response => {
-                    (response === true) ? cb(data) : cb({ msg: 'failed' });
+                    if (response === true) {
+                        const authToken = generateAuthToken({ id: data._id, username: data.username });
+                        cb(data);
+                    }
+                    else {
+                        cb({ msg: 'failed' });
+                    }
                 });
             });
     },

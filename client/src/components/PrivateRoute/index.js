@@ -1,4 +1,3 @@
-import { PromiseProvider } from 'mongoose';
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 

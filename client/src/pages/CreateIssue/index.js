@@ -52,7 +52,7 @@ const CreateIssue = () => {
     }
 
     return (
-        <article>
+        <main>
 
             <Link to="/workbench">Back To Workbench</Link>
 
@@ -99,7 +99,7 @@ const CreateIssue = () => {
 
             {(successMessage) ? <p>{successMessage}</p> : null}
 
-        </article>
+        </main>
     );
 }
 

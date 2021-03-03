@@ -6,33 +6,31 @@ import ApiConnection from '../../utils/ApiConnection';
 const authConnection = new ApiConnection('/api/authenticate');
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+    const [auth, setAuth] = useState({
+        isAuthenticated: false,
+        redirectToReferer: false
+    });
 
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
-
+    // Check for authentication on load
     useEffect(() => {
-        authenticate();
-    })
-
-    // Check if user is authenticated
-    const authenticate = function () {
         const authToken = localStorage.getItem('authToken');
 
-        console.log(authToken);
+        if (!authToken) {
+            setAuth({ isAuthenticated: false, redirectToReferer: true });
+        }
 
-        authConnection.getQuery({ urlExtension: `/${authToken}` }).then(data => {
-            console.log(data._id);
+        authConnection.getQuery({ urlExtension: `/${authToken}` }).then(({ data }) => {
+            (data._id)
+                ? setAuth({ isAuthenticated: true, redirectToReferer: false })
+                : setAuth({ isAuthenticated: false, redirectToReferer: true });
 
-            if (data._id) {
-                setIsAuthenticated(true);
-            } else {
-                setIsAuthenticated(false);
-            }
         });
-    }
+    }, []);
 
     return (
         <Route {...rest}>
-            {(isAuthenticated) ? <Component /> : <Redirect to='/' />}
+            {(auth.redirectToReferer) ? <Redirect to='/' /> : null}
+            {(auth.isAuthenticated) ? <Component /> : null}
         </Route>
     );
 }

@@ -15,7 +15,6 @@ describe('Url Navigation Authorized', () => {
                 }).then(({ body }) => {
                     localStorage.setItem('authToken', body.authToken);
                 });
-
             });
         });
     });
@@ -79,7 +78,6 @@ describe('Link Navigation', () => {
                 }).then(({ body }) => {
                     localStorage.setItem('authToken', body.authToken);
                 });
-
             });
         });
     });

@@ -44,6 +44,24 @@ describe('Url Navigation Authorized', () => {
     });
 });
 
+describe('Url Navigation Unauthorized', () => {
+    beforeEach(() => {
+        localStorage.removeItem('authToken');
+    });
+
+    // Should equal workbench url
+    it('attempt visit workbench url', () => {
+        cy.visit('/workbench');
+        cy.url().should('eq', Cypress.config().baseUrl + '/');
+    });
+
+    // Should equal create issue page url
+    it('attempt visit create issue url', () => {
+        cy.visit('/create-issue');
+        cy.url().should('eq', Cypress.config().baseUrl + '/');
+    });
+});
+
 describe('Link Navigation', () => {
     let userId;
 

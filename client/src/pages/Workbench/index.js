@@ -56,7 +56,7 @@ const Workbench = () => {
     }
 
     return (
-        <article>
+        <main>
 
             {/* Issue Section */}
 
@@ -99,7 +99,7 @@ const Workbench = () => {
                 deleteIssue={deleteIssue}
             />
 
-        </article>
+        </main>
     );
 }
 

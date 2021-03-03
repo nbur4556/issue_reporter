@@ -32,11 +32,21 @@ const generateAuthToken = ({ ...tokenData }) => {
     return jwt.sign(tokenData, process.env.JWT_SECRET);
 }
 
+// Return decrypted JWT token
+const authenticateAuthToken = (authToken) => {
+    try {
+        const tokenData = jwt.verify(authToken, process.env.JWT_SECRET);
+        return tokenData;
+    }
+    catch {
+        return null;
+    }
+}
+
 // Check if password requirements are met
 const checkMinimumRequirements = (password, confirmPassword) => {
     const minChar = 8;
     const numMatched = password.match(/\d+/g);
-    console.log(numMatched)
 
     if (password !== confirmPassword) { return false }
     else if (password.length < minChar) { return false }
@@ -49,27 +59,31 @@ const checkMinimumRequirements = (password, confirmPassword) => {
 // Returned controller methods
 module.exports = {
     // Read User
-    findById: function (searchId, cb) {
-        db.User.findOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+    login: function (searchUsername, userParams, cb) {
+        db.User.findOne({ username: searchUsername }, (err, data) => {
+            if (err) { cb(err) }
+
+            // Compare input with encrypted password hash
+            compareEncryption(userParams.password, data?.passwordHash, response => {
+                if (response === true) {
+                    const authToken = generateAuthToken({ id: data._id, username: data.username });
+                    cb({ authToken: authToken });
+                }
+                else {
+                    cb({ msg: 'failed' });
+                }
+            });
+        });
     },
 
-    login: function (searchUsername, userParams, cb) {
-        db.User.findOne({ username: searchUsername },
-            (err, data) => {
-                if (err) { cb(err) }
+    authenticate: function (authToken, cb) {
+        const tokenData = authenticateAuthToken(authToken);
 
-                // Compare input with encrypted password hash
-                compareEncryption(userParams.password, data?.passwordHash, response => {
-                    if (response === true) {
-                        const authToken = generateAuthToken({ id: data._id, username: data.username });
-                        cb({ authToken: authToken });
-                    }
-                    else {
-                        cb({ msg: 'failed' });
-                    }
-                });
+        if (tokenData !== null) {
+            db.User.findOne({ _id: tokenData.id }, (err, result) => {
+                (err) ? cb(err) : cb(result);
             });
+        }
     },
 
     // Create User

@@ -1,6 +1,14 @@
 const controllers = require('../controllers');
 
 module.exports = function (app) {
+    app.get('/api/authenticate/:authToken', (req, res) => {
+        controllers.userController.authenticate(req.params.authToken, (result => {
+            (result?.errors)
+                ? res.status(400).json(result.errors)
+                : res.status(200).json(result);
+        }));
+    });
+
     // User Routes
     app.get('/api/user/:searchId', (req, res) => {
         controllers.userController.findById(req.params.searchId, (result) => {

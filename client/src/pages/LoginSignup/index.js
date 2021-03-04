@@ -16,8 +16,10 @@ const LoginSignup = () => {
         msg: ''
     });
 
-    const [signupActive, setSignupActive] = useState(false);
-    const [signupMsg, setSignupMsg] = useState();
+    const [signupState, setSignupState] = useState({
+        isActive: false,
+        msg: ''
+    });
 
     const [credentialsInput, setCredentialsInput] = useState({
         username: '',
@@ -33,19 +35,20 @@ const LoginSignup = () => {
             confirmPassword: ''
         });
 
-        setSignupMsg(null);
+        setSignupState({ ...signupState, msg: null });
         setLoginState({ ...loginState, msg: null });
-    }, [signupActive]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [signupState.isActive, loginState.isActive]);
 
     // Set which form to display
     const handleSetActive = e => {
         if (e.currentTarget.name === 'loginActive') {
-            setSignupActive(false);
+            setSignupState({ ...signupState, isActive: false });
             setLoginState({ ...loginState, isActive: true });
         }
         else if (e.currentTarget.name === 'signupActive') {
             setLoginState({ ...loginState, isActive: false });
-            setSignupActive(true);
+            setSignupState({ ...signupState, isActive: true });
         }
     }
 
@@ -62,9 +65,9 @@ const LoginSignup = () => {
             body: credentialsInput
         }).then((result) => {
             (result.data._id)
-                ? setSignupMsg('Success! User created.')
-                : setSignupMsg('Error: User not created.');
-        }).catch(err => setSignupMsg('Error: User not created.'));
+                ? setSignupState({ ...signupState, msg: 'Success! User created.' })
+                : setSignupState({ ...signupState, msg: 'Error: User not created.' });
+        }).catch(err => setSignupState({ ...signupState, msg: 'Error: User not created.' }));
     }
 
     // Log in as existing user
@@ -96,12 +99,15 @@ const LoginSignup = () => {
                 <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
             </section>
 
+            {/* Input Forms */}
             {(loginState.isActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
-            {(signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            {(signupState.isActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
 
-            {(signupMsg) ? <p>{signupMsg}</p> : null}
+            {/* Messages */}
+            {(signupState.msg) ? <p>{signupState.msg}</p> : null}
             {(loginState.msg) ? <p>{loginState.msg}</p> : null}
 
+            {/* Redirects */}
             {(loginState.isSuccess) ? <Redirect to='/workbench' /> : null}
         </main>
     );

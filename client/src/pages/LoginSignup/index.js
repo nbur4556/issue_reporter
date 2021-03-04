@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
 // Components
 import CredentialsForm from '../../components/CredentialsForm';
@@ -8,10 +9,15 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const userConnection = new ApiConnection('/api/user');
 
 const LoginSignup = () => {
+
+    const [loginState, setLoginState] = useState({
+        isActive: false,
+        isSuccess: false,
+        msg: ''
+    });
+
     const [signupActive, setSignupActive] = useState(false);
-    const [loginActive, setLoginActive] = useState(false);
     const [signupMsg, setSignupMsg] = useState();
-    const [loginMsg, setLoginMsg] = useState();
 
     const [credentialsInput, setCredentialsInput] = useState({
         username: '',
@@ -28,17 +34,17 @@ const LoginSignup = () => {
         });
 
         setSignupMsg(null);
-        setLoginMsg(null);
-    }, [signupActive, loginActive]);
+        setLoginState({ ...loginState, msg: null });
+    }, [signupActive]);
 
     // Set which form to display
     const handleSetActive = e => {
         if (e.currentTarget.name === 'loginActive') {
             setSignupActive(false);
-            setLoginActive(true);
+            setLoginState({ ...loginState, isActive: true });
         }
         else if (e.currentTarget.name === 'signupActive') {
-            setLoginActive(false);
+            setLoginState({ ...loginState, isActive: false });
             setSignupActive(true);
         }
     }
@@ -70,16 +76,16 @@ const LoginSignup = () => {
             body: credentialsInput
         }).then((result) => {
             if (result.data.authToken) {
-                setLoginMsg('Success! Login successful.')
                 localStorage.setItem('authToken', result.data.authToken);
+                setLoginState({ ...loginState, isSuccess: true, msg: 'Success! Login successful.' });
             }
             else {
-                setLoginMsg('Error: Login not successful.');
                 localStorage.removeItem('authToken');
+                setLoginState({ ...loginState, isSuccess: false, msg: 'Error: Login not successful.' });
             }
         }).catch(err => {
-            setLoginMsg('Error: Login not successful.');
             localStorage.removeItem('authToken');
+            setLoginState({ ...loginState, isSuccess: false, msg: 'Error: Login not successful.' });
         });
     }
 
@@ -90,11 +96,13 @@ const LoginSignup = () => {
                 <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
             </section>
 
-            {(loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
+            {(loginState.isActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
             {(signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
 
             {(signupMsg) ? <p>{signupMsg}</p> : null}
-            {(loginMsg) ? <p>{loginMsg}</p> : null}
+            {(loginState.msg) ? <p>{loginState.msg}</p> : null}
+
+            {(loginState.isSuccess) ? <Redirect to='/workbench' /> : null}
         </main>
     );
 }

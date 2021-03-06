@@ -6,8 +6,8 @@ function Node(value) {
 
 function BinaryTree(rootNode, sortParam) {
     this.rootNode = rootNode;
-    this.sortedArray = [];
     this.sortParam = sortParam
+    this.sortedArray = [];
 
     // Smaller values added to the left, larger values added to the right
     this.addTo = (node, parentNode = this.rootNode) => {
@@ -43,10 +43,12 @@ function BinaryTree(rootNode, sortParam) {
     }
 }
 
+// Generate tree and return sorted array
 function treeSortObjects(data, sortParam) {
     const rootNode = new Node(data[0]);
     const tree = new BinaryTree(rootNode, sortParam);
 
+    // Loop through each item and add to tree
     for (let i = 1; i < data.length; i++) {
         const node = new Node(data[i]);
         tree.addTo(node);
@@ -54,3 +56,5 @@ function treeSortObjects(data, sortParam) {
 
     return tree.getSortedArray();
 }
+
+export default treeSortObjects;

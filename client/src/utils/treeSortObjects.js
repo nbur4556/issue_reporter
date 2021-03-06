@@ -6,6 +6,7 @@ function Node(value) {
 
 function BinaryTree(rootNode) {
     this.rootNode = rootNode;
+    this.sortedArray = [];
 
     // Smaller values added to the left, larger values added to the right
     this.addTo = (node, parentNode = this.rootNode) => {
@@ -19,6 +20,25 @@ function BinaryTree(rootNode) {
                 ? parentNode.rightNode = node
                 : this.addTo(node, parentNode.rightNode);
         }
+    }
+
+    // Generate sorted array from current tree
+    this.generateSortedArray = (currentNode = this.rootNode) => {
+        if (currentNode.leftNode !== null) {
+            this.generateSortedArray(currentNode.leftNode);
+        }
+
+        this.sortedArray.push(currentNode.value);
+
+        if (currentNode.rightNode !== null) {
+            this.generateSortedArray(currentNode.rightNode)
+        }
+    }
+
+    // Return sorted array
+    this.getSortedArray = () => {
+        this.generateSortedArray();
+        return this.sortedArray;
     }
 }
 
@@ -34,10 +54,13 @@ function treeSortObjects(data, sortParam) {
         tree.addTo(node);
     }
 
-    console.log(tree);
+    return tree.getSortedArray();
 }
 
-treeSortObjects(
-    [9, 14, 17, 18, 19, 5, 8, 12, 19, 20, 4, 6, 12, 16, 20, 1, 9, 11, 15, 19, 3, 4, 10, 12, 15, 5, 7, 8, 10, 12, 5, 12, 13, 15, 16, 11, 13, 15, 18, 19, 3, 6, 9, 11, 20, 1, 4, 6, 14, 16],
+// Testing
+const sortedArray = treeSortObjects(
+    [4366, 4960, 1166, 6071, 3329, 1441, 4823, 7343, 2995, 5188, 4603, 5144, 8030, 4235, 7458, 3343, 5298, 3880, 1452, 8549, 2546, 9062, 5488, 5467, 5053, 1918, 7929, 3383, 9851, 1416, 2564, 5035, 8555, 3127,],
     'sortParam'
 );
+
+console.log(sortedArray);

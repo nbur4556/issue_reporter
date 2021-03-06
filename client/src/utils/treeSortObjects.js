@@ -7,6 +7,7 @@ function Node(value) {
 function BinaryTree(rootNode) {
     this.rootNode = rootNode;
 
+    // Smaller values added to the left, larger values added to the right
     this.addTo = (node, parentNode = this.rootNode) => {
         if (node.value <= parentNode.value) {
             (parentNode.leftNode === null)
@@ -21,27 +22,22 @@ function BinaryTree(rootNode) {
     }
 }
 
-function treeSort(data, sortParam) {
+function treeSortObjects(data, sortParam) {
 
     // Build binary tree
 
     const rootNode = new Node(data[0]);
     const tree = new BinaryTree(rootNode);
 
-    const rightNode = new Node(data[1]);
-    tree.addTo(rightNode);
-
-    const leftNode = new Node(data[2]);
-    tree.addTo(leftNode);
-
-    const largestNode = new Node(data[3]);
-    tree.addTo(largestNode);
-
-    const smallestNode = new Node(data[4]);
-    tree.addTo(smallestNode);
-
+    for (let i = 1; i < data.length; i++) {
+        const node = new Node(data[i]);
+        tree.addTo(node);
+    }
 
     console.log(tree);
 }
 
-treeSort([5, 5, 4, 321, 1, 564, 651, 35, 574, 684, 351, 74, 684, 351, 1], 'sortParam');
+treeSortObjects(
+    [9, 14, 17, 18, 19, 5, 8, 12, 19, 20, 4, 6, 12, 16, 20, 1, 9, 11, 15, 19, 3, 4, 10, 12, 15, 5, 7, 8, 10, 12, 5, 12, 13, 15, 16, 11, 13, 15, 18, 19, 3, 6, 9, 11, 20, 1, 4, 6, 14, 16],
+    'sortParam'
+);

@@ -93,8 +93,13 @@ module.exports = {
         }
         else {
             encryption(userParams.password, resultHash => {
-                db.User.create({ ...userParams, passwordHash: resultHash },
-                    (err, result) => (err) ? cb(err) : cb(result));
+                db.User.create({ ...userParams, passwordHash: resultHash }, (err, data) => {
+                    (err)
+                        ? cb(err)
+                        : cb({
+                            authToken: generateAuthToken({ id: data._id, username: data.username })
+                        });
+                });
             });
         }
     },

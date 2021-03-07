@@ -64,7 +64,7 @@ const LoginSignup = () => {
         userConnection.postQuery({
             body: credentialsInput
         }).then((result) => {
-            (result.data._id)
+            (result.data.authToken)
                 ? setSignupState({ ...signupState, msg: 'Success! User created.' })
                 : setSignupState({ ...signupState, msg: 'Error: User not created.' });
         }).catch(err => setSignupState({ ...signupState, msg: 'Error: User not created.' }));

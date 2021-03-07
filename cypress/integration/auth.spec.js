@@ -1,5 +1,4 @@
 describe('Register User', () => {
-    const successMsg = 'Success! User created.';
     const errorMsg = 'Error: User not created.';
     let userId;
 
@@ -10,6 +9,7 @@ describe('Register User', () => {
     });
 
     afterEach(() => {
+        console.log(userId);
         cy.request('DELETE', `api/user/${userId}`);
     });
 
@@ -23,10 +23,14 @@ describe('Register User', () => {
                 .click()
                 .wait('@userData')
                 .then((xhr) => {
-                    userId = xhr.response.body._id;
+                    const authToken = xhr.response.body.authToken;
+
+                    cy.request('GET', `/api/authenticate/${authToken}`).then(response => {
+                        userId = response.body._id;
+                    });
                 });
 
-            cy.contains(successMsg).should('exist');
+            cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
         });
     });
 
@@ -36,12 +40,7 @@ describe('Register User', () => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.shortPassword);
             cy.get('input[name="confirmPassword"]').type(data.shortPassword);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -52,12 +51,7 @@ describe('Register User', () => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordNoCaps);
             cy.get('input[name="confirmPassword"]').type(data.passwordNoCaps);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -68,12 +62,7 @@ describe('Register User', () => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordNoLower);
             cy.get('input[name="confirmPassword"]').type(data.passwordNoLower);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -84,12 +73,7 @@ describe('Register User', () => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordNoNum);
             cy.get('input[name="confirmPassword"]').type(data.passwordNoNum);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -100,12 +84,7 @@ describe('Register User', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="password"]').type(data.password);
             cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -116,12 +95,7 @@ describe('Register User', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -132,12 +106,7 @@ describe('Register User', () => {
         cy.fixture('userData.json').then((data) => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.password);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -149,12 +118,7 @@ describe('Register User', () => {
             cy.get('input[name="username"]').type(data.username);
             cy.get('input[name="password"]').type(data.passwordMisspelled);
             cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]')
-                .click()
-                .wait('@userData')
-                .then((xhr) => {
-                    userId = xhr.response.body._id;
-                });
+            cy.get('button[name="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -162,7 +126,6 @@ describe('Register User', () => {
 });
 
 describe('Authenticate User', () => {
-    const successMsg = 'Success! Login successful.';
     const errorMsg = 'Error: Login not successful.';
     let userId;
 
@@ -173,8 +136,12 @@ describe('Authenticate User', () => {
                 username: data.username,
                 password: data.password,
                 confirmPassword: data.password
-            }).then(result => {
-                userId = result.body._id;
+            }).then((xhr) => {
+                const authToken = xhr.body.authToken;
+
+                cy.request('GET', `/api/authenticate/${authToken}`).then(response => {
+                    userId = response.body._id;
+                });
             });
         });
         cy.get('button[name="loginActive"]').click();
@@ -191,7 +158,7 @@ describe('Authenticate User', () => {
             cy.get('input[name="password"]').type(data.password);
             cy.get('button[name="submit"]').click();
 
-            cy.contains(successMsg).should('exist');
+            cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
         });
     });
 

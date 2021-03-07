@@ -10,13 +10,9 @@ const userConnection = new ApiConnection('/api/user');
 
 const LoginSignup = (props) => {
 
-    const [loginState, setLoginState] = useState({
-        isActive: false,
-        msg: ''
-    });
-
-    const [signupState, setSignupState] = useState({
-        isActive: false,
+    const [signinState, setSigninState] = useState({
+        loginActive: false,
+        signupActive: false,
         msg: ''
     });
 
@@ -36,21 +32,15 @@ const LoginSignup = (props) => {
             confirmPassword: ''
         });
 
-        setSignupState({ ...signupState, msg: null });
-        setLoginState({ ...loginState, msg: null });
+        setSigninState({ ...signinState, msg: null });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [signupState.isActive, loginState.isActive]);
+    }, [signinState.loginActive, signinState.signupActive]);
 
     // Set which form to display
     const handleSetActive = e => {
-        if (e.currentTarget.name === 'loginActive') {
-            setSignupState({ ...signupState, isActive: false });
-            setLoginState({ ...loginState, isActive: true });
-        }
-        else if (e.currentTarget.name === 'signupActive') {
-            setLoginState({ ...loginState, isActive: false });
-            setSignupState({ ...signupState, isActive: true });
-        }
+        (e.currentTarget.name === 'loginActive')
+            ? setSigninState({ ...signinState, loginActive: true, signupActive: false })
+            : setSigninState({ ...signinState, loginActive: false, signupActive: true })
     }
 
     // Get input from form
@@ -65,13 +55,10 @@ const LoginSignup = (props) => {
         userConnection.postQuery({
             body: credentialsInput
         }).then((result) => {
-            if (result.data.authToken) {
-                signinSuccessful(result.data.authToken);
-            }
-            else {
-                signupFailed();
-            }
-        }).catch(err => signupFailed());
+            (result.data.authToken)
+                ? signinSuccessful(result.data.authToken)
+                : signinFailed('Error: User not created.');
+        }).catch(err => signinFailed('Error: User not created.'));
     }
 
     // Log in as existing user
@@ -82,13 +69,10 @@ const LoginSignup = (props) => {
             urlExtension: `/${credentialsInput.username}`,
             body: credentialsInput
         }).then((result) => {
-            if (result.data.authToken) {
-                signinSuccessful(result.data.authToken);
-            }
-            else {
-                loginFailed();
-            }
-        }).catch(err => loginFailed());
+            (result.data.authToken)
+                ? signinSuccessful(result.data.authToken)
+                : signinFailed('Error: Login not successful.');
+        }).catch(err => signinFailed('Error: Login not successful.'));
     }
 
     const signinSuccessful = (authToken) => {
@@ -97,15 +81,10 @@ const LoginSignup = (props) => {
         setRedirect(true);
     }
 
-    const loginFailed = () => {
+    const signinFailed = message => {
         localStorage.removeItem('authToken');
-        setLoginState({ ...loginState, msg: 'Error: Login not successful.' });
-        setRedirect(false);
-    }
-
-    const signupFailed = () => {
-        localStorage.removeItem('authToken');
-        setSignupState({ ...signupState, msg: 'Error: User not created.' });
+        props.updateAuthToken();
+        setSigninState({ ...signinState, msg: message });
         setRedirect(false);
     }
 
@@ -117,12 +96,11 @@ const LoginSignup = (props) => {
             </section>
 
             {/* Input Forms */}
-            {(loginState.isActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
-            {(signupState.isActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            {(signinState.loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
+            {(signinState.signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
 
             {/* Messages */}
-            {(signupState.msg) ? <p>{signupState.msg}</p> : null}
-            {(loginState.msg) ? <p>{loginState.msg}</p> : null}
+            {(signinState.msg) ? <p>{signinState.msg}</p> : null}
 
             {/* Redirects */}
             {(redirect) ? <Redirect to='/workbench' /> : null}

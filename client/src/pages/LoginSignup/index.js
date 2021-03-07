@@ -69,13 +69,9 @@ const LoginSignup = (props) => {
                 signinSuccessful(result.data.authToken);
             }
             else {
-                localStorage.removeItem('authToken');
-                setSignupState({ ...signupState, msg: 'Error: User not created.' });
+                signupFailed();
             }
-        }).catch(err => {
-            localStorage.removeItem('authToken');
-            setSignupState({ ...signupState, msg: 'Error: User not created.' });
-        });
+        }).catch(err => signupFailed());
     }
 
     // Log in as existing user
@@ -90,19 +86,27 @@ const LoginSignup = (props) => {
                 signinSuccessful(result.data.authToken);
             }
             else {
-                localStorage.removeItem('authToken');
-                setLoginState({ ...loginState, msg: 'Error: Login not successful.' });
+                loginFailed();
             }
-        }).catch(err => {
-            localStorage.removeItem('authToken');
-            setLoginState({ ...loginState, msg: 'Error: Login not successful.' });
-        });
+        }).catch(err => loginFailed());
     }
 
     const signinSuccessful = (authToken) => {
         localStorage.setItem('authToken', authToken);
         props.updateAuthToken();
         setRedirect(true);
+    }
+
+    const loginFailed = () => {
+        localStorage.removeItem('authToken');
+        setLoginState({ ...loginState, msg: 'Error: Login not successful.' });
+        setRedirect(false);
+    }
+
+    const signupFailed = () => {
+        localStorage.removeItem('authToken');
+        setSignupState({ ...signupState, msg: 'Error: User not created.' });
+        setRedirect(false);
     }
 
     return (

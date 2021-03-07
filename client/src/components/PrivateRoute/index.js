@@ -20,7 +20,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         }
 
         authConnection.getQuery({ urlExtension: `/${authToken}` }).then(({ data }) => {
-            (data._id)
+            (data?._id)
                 ? setAuth({ isAuthenticated: true, redirectToReferer: false })
                 : setAuth({ isAuthenticated: false, redirectToReferer: true });
 

@@ -8,7 +8,7 @@ import CredentialsForm from '../../components/CredentialsForm';
 import ApiConnection from '../../utils/ApiConnection.js';
 const userConnection = new ApiConnection('/api/user');
 
-const LoginSignup = () => {
+const LoginSignup = (props) => {
 
     const [loginState, setLoginState] = useState({
         isActive: false,
@@ -91,6 +91,7 @@ const LoginSignup = () => {
         }).then((result) => {
             if (result.data.authToken) {
                 localStorage.setItem('authToken', result.data.authToken);
+                props.updateAuthToken();
                 setLoginState({ ...loginState, isSuccess: true, msg: 'Success! Login successful.' });
             }
             else {

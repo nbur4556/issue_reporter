@@ -12,7 +12,6 @@ const LoginSignup = (props) => {
 
     const [loginState, setLoginState] = useState({
         isActive: false,
-        isSuccess: false,
         msg: ''
     });
 
@@ -26,6 +25,8 @@ const LoginSignup = (props) => {
         password: '',
         confirmPassword: ''
     });
+
+    const [redirect, setRedirect] = useState(false);
 
     // Clear credentials input state
     useEffect(() => {
@@ -65,19 +66,15 @@ const LoginSignup = (props) => {
             body: credentialsInput
         }).then((result) => {
             if (result.data.authToken) {
-                localStorage.setItem('authToken', result.data.authToken);
-                setSignupState({ ...signupState, msg: 'Success! User created.' })
-                setLoginState({ ...loginState, isSuccess: true })
+                signinSuccessful(result.data.authToken);
             }
             else {
                 localStorage.removeItem('authToken');
                 setSignupState({ ...signupState, msg: 'Error: User not created.' });
-                setLoginState({ ...loginState, isSuccess: false })
             }
         }).catch(err => {
             localStorage.removeItem('authToken');
             setSignupState({ ...signupState, msg: 'Error: User not created.' });
-            setLoginState({ ...loginState, isSuccess: false })
         });
     }
 
@@ -90,18 +87,22 @@ const LoginSignup = (props) => {
             body: credentialsInput
         }).then((result) => {
             if (result.data.authToken) {
-                localStorage.setItem('authToken', result.data.authToken);
-                props.updateAuthToken();
-                setLoginState({ ...loginState, isSuccess: true, msg: 'Success! Login successful.' });
+                signinSuccessful(result.data.authToken);
             }
             else {
                 localStorage.removeItem('authToken');
-                setLoginState({ ...loginState, isSuccess: false, msg: 'Error: Login not successful.' });
+                setLoginState({ ...loginState, msg: 'Error: Login not successful.' });
             }
         }).catch(err => {
             localStorage.removeItem('authToken');
-            setLoginState({ ...loginState, isSuccess: false, msg: 'Error: Login not successful.' });
+            setLoginState({ ...loginState, msg: 'Error: Login not successful.' });
         });
+    }
+
+    const signinSuccessful = (authToken) => {
+        localStorage.setItem('authToken', authToken);
+        props.updateAuthToken();
+        setRedirect(true);
     }
 
     return (
@@ -120,7 +121,7 @@ const LoginSignup = (props) => {
             {(loginState.msg) ? <p>{loginState.msg}</p> : null}
 
             {/* Redirects */}
-            {(loginState.isSuccess) ? <Redirect to='/workbench' /> : null}
+            {(redirect) ? <Redirect to='/workbench' /> : null}
         </main>
     );
 }

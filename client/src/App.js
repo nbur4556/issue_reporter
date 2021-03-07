@@ -16,13 +16,12 @@ function App() {
   return (
     <BrowserRouter>
 
-      {/* Routes */}
-
-      {/* <Route exact path="/" component={LoginSignup} /> */}
-      <Route>
+      {/* Public Routes */}
+      <Route exact path="/">
         <LoginSignup updateAuthToken={handleUpdateAuthToken} />
       </Route>
 
+      {/* Private Routes */}
       <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} />
       <PrivateRoute path="/create-issue" component={CreateIssue} authToken={authToken} />
 

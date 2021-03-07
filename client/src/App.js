@@ -11,19 +11,21 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
-  const handleUpdateAuthToken = () => setAuthToken(localStorage.getItem('authToken'));
+  const handleUpdateAuthToken = () => {
+    setAuthToken(localStorage.getItem('authToken'));
+  }
 
   return (
     <BrowserRouter>
+
+      {/* Private Routes */}
+      <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} />
+      <PrivateRoute path="/create-issue" component={CreateIssue} authToken={authToken} />
 
       {/* Public Routes */}
       <Route exact path="/">
         <LoginSignup updateAuthToken={handleUpdateAuthToken} />
       </Route>
-
-      {/* Private Routes */}
-      <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} />
-      <PrivateRoute path="/create-issue" component={CreateIssue} authToken={authToken} />
 
     </BrowserRouter>
   );

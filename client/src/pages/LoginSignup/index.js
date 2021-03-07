@@ -78,14 +78,23 @@ const LoginSignup = (props) => {
     const signinSuccessful = (authToken) => {
         localStorage.setItem('authToken', authToken);
         props.updateAuthToken();
-        setRedirect(true);
+
+        // Temporary race condition fix: Attempts to reroute before private routes are authorized...
+        setTimeout(() => {
+            console.log('attempt redirect');
+            setRedirect(true);
+        }, 100);
     }
 
     const signinFailed = message => {
         localStorage.removeItem('authToken');
         props.updateAuthToken();
-        setSigninState({ ...signinState, msg: message });
-        setRedirect(false);
+
+        // Temporary race condition fix: Attempts to reroute before private routes are authorized...
+        setTimeout(() => {
+            setSigninState({ ...signinState, msg: message });
+            setRedirect(false);
+        }, 100);
     }
 
     return (

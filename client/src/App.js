@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 // Pages
@@ -10,6 +10,8 @@ import CreateIssue from './pages/CreateIssue';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
+
   return (
     <BrowserRouter>
 
@@ -17,16 +19,8 @@ function App() {
 
       <Route exact path="/" component={LoginSignup} />
 
-      <PrivateRoute path="/workbench" component={Workbench} />
-      <PrivateRoute path="/create-issue" component={CreateIssue} />
-
-      {/* <Route exact path="/workbench">
-        <Workbench />
-      </Route>
-
-      <Route exact path="/create-issue">
-        <CreateIssue />
-      </Route> */}
+      <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} />
+      <PrivateRoute path="/create-issue" component={CreateIssue} authToken={authToken} />
 
     </BrowserRouter>
   );

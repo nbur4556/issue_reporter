@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import ApiConnection from '../../utils/ApiConnection';
 const authConnection = new ApiConnection('/api/authenticate');
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ authToken, component: Component, ...rest }) => {
     const [auth, setAuth] = useState({
         isAuthenticated: false,
         redirectToReferer: false
@@ -13,8 +13,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     // Check for authentication on load
     useEffect(() => {
-        const authToken = localStorage.getItem('authToken');
-
         if (!authToken) {
             setAuth({ isAuthenticated: false, redirectToReferer: true });
         }
@@ -25,7 +23,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 : setAuth({ isAuthenticated: false, redirectToReferer: true });
 
         });
-    }, []);
+    }, [authToken]);
 
     return (
         <Route {...rest}>

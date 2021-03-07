@@ -64,10 +64,21 @@ const LoginSignup = () => {
         userConnection.postQuery({
             body: credentialsInput
         }).then((result) => {
-            (result.data.authToken)
-                ? setSignupState({ ...signupState, msg: 'Success! User created.' })
-                : setSignupState({ ...signupState, msg: 'Error: User not created.' });
-        }).catch(err => setSignupState({ ...signupState, msg: 'Error: User not created.' }));
+            if (result.data.authToken) {
+                localStorage.setItem('authToken', result.data.authToken);
+                setSignupState({ ...signupState, msg: 'Success! User created.' })
+                setLoginState({ ...loginState, isSuccess: true })
+            }
+            else {
+                localStorage.removeItem('authToken');
+                setSignupState({ ...signupState, msg: 'Error: User not created.' });
+                setLoginState({ ...loginState, isSuccess: false })
+            }
+        }).catch(err => {
+            localStorage.removeItem('authToken');
+            setSignupState({ ...signupState, msg: 'Error: User not created.' });
+            setLoginState({ ...loginState, isSuccess: false })
+        });
     }
 
     // Log in as existing user

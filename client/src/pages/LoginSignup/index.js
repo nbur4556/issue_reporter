@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
 // Components
 import CredentialsForm from '../../components/CredentialsForm';
@@ -7,17 +8,21 @@ import CredentialsForm from '../../components/CredentialsForm';
 import ApiConnection from '../../utils/ApiConnection.js';
 const userConnection = new ApiConnection('/api/user');
 
-const LoginSignup = () => {
-    const [signupActive, setSignupActive] = useState(false);
-    const [loginActive, setLoginActive] = useState(false);
-    const [signupMsg, setSignupMsg] = useState();
-    const [loginMsg, setLoginMsg] = useState();
+const LoginSignup = (props) => {
+
+    const [signinState, setSigninState] = useState({
+        loginActive: false,
+        signupActive: false,
+        msg: ''
+    });
 
     const [credentialsInput, setCredentialsInput] = useState({
         username: '',
         password: '',
         confirmPassword: ''
     });
+
+    const [redirect, setRedirect] = useState(false);
 
     // Clear credentials input state
     useEffect(() => {
@@ -27,20 +32,15 @@ const LoginSignup = () => {
             confirmPassword: ''
         });
 
-        setSignupMsg(null);
-        setLoginMsg(null);
-    }, [signupActive, loginActive]);
+        setSigninState({ ...signinState, msg: null });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [signinState.loginActive, signinState.signupActive]);
 
     // Set which form to display
     const handleSetActive = e => {
-        if (e.currentTarget.name === 'loginActive') {
-            setSignupActive(false);
-            setLoginActive(true);
-        }
-        else if (e.currentTarget.name === 'signupActive') {
-            setLoginActive(false);
-            setSignupActive(true);
-        }
+        (e.currentTarget.name === 'loginActive')
+            ? setSigninState({ ...signinState, loginActive: true, signupActive: false })
+            : setSigninState({ ...signinState, loginActive: false, signupActive: true })
     }
 
     // Get input from form
@@ -55,10 +55,10 @@ const LoginSignup = () => {
         userConnection.postQuery({
             body: credentialsInput
         }).then((result) => {
-            (result.data._id)
-                ? setSignupMsg('Success! User created.')
-                : setSignupMsg('Error: User not created.');
-        }).catch(err => setSignupMsg('Error: User not created.'));
+            (result.data.authToken)
+                ? signinSuccessful(result.data.authToken)
+                : signinFailed('Error: User not created.');
+        }).catch(err => signinFailed('Error: User not created.'));
     }
 
     // Log in as existing user
@@ -69,18 +69,32 @@ const LoginSignup = () => {
             urlExtension: `/${credentialsInput.username}`,
             body: credentialsInput
         }).then((result) => {
-            if (result.data.authToken) {
-                setLoginMsg('Success! Login successful.')
-                localStorage.setItem('authToken', result.data.authToken);
-            }
-            else {
-                setLoginMsg('Error: Login not successful.');
-                localStorage.removeItem('authToken');
-            }
-        }).catch(err => {
-            setLoginMsg('Error: Login not successful.');
-            localStorage.removeItem('authToken');
-        });
+            (result.data.authToken)
+                ? signinSuccessful(result.data.authToken)
+                : signinFailed('Error: Login not successful.');
+        }).catch(err => signinFailed('Error: Login not successful.'));
+    }
+
+    const signinSuccessful = (authToken) => {
+        localStorage.setItem('authToken', authToken);
+        props.updateAuthToken();
+
+        // Temporary race condition fix: Attempts to reroute before private routes are authorized...
+        setTimeout(() => {
+            console.log('attempt redirect');
+            setRedirect(true);
+        }, 100);
+    }
+
+    const signinFailed = message => {
+        localStorage.removeItem('authToken');
+        props.updateAuthToken();
+
+        // Temporary race condition fix: Attempts to reroute before private routes are authorized...
+        setTimeout(() => {
+            setSigninState({ ...signinState, msg: message });
+            setRedirect(false);
+        }, 100);
     }
 
     return (
@@ -90,11 +104,15 @@ const LoginSignup = () => {
                 <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
             </section>
 
-            {(loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
-            {(signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            {/* Input Forms */}
+            {(signinState.loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
+            {(signinState.signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
 
-            {(signupMsg) ? <p>{signupMsg}</p> : null}
-            {(loginMsg) ? <p>{loginMsg}</p> : null}
+            {/* Messages */}
+            {(signinState.msg) ? <p>{signinState.msg}</p> : null}
+
+            {/* Redirects */}
+            {(redirect) ? <Redirect to='/workbench' /> : null}
         </main>
     );
 }

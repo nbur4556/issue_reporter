@@ -122,3 +122,4 @@ seed.js
 /cypress/screenshots
 /cypress/videos
 /cypress/integration/examples
+cypress.env.json

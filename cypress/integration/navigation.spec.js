@@ -1,27 +1,16 @@
 describe('Url Navigation Authorized', () => {
-    let userId;
-
     beforeEach(() => {
-        cy.fixture('userData.json').then((data) => {
-            cy.request('POST', '/api/user', {
-                username: data.username,
-                password: data.password,
-                confirmPassword: data.password
-            }).then(result => {
-                userId = result.body._id;
-                cy.request('POST', `/api/user/${data.username}`, {
-                    username: data.username,
-                    password: data.password
-                }).then(({ body }) => {
-                    localStorage.setItem('authToken', body.authToken);
-                });
-            });
+        // Login with cypress test credentials
+        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
+            username: Cypress.env('cyUsername'),
+            password: Cypress.env('cyPassword')
+        }).then(({ body }) => {
+            localStorage.setItem('authToken', body.authToken);
         });
     });
 
     afterEach(() => {
         localStorage.removeItem('authToken');
-        cy.request('DELETE', `/api/user/${userId}`)
     });
 
     // Should equal root url
@@ -62,29 +51,18 @@ describe('Url Navigation Unauthorized', () => {
 });
 
 describe('Link Navigation', () => {
-    let userId;
-
     beforeEach(() => {
-        cy.fixture('userData.json').then((data) => {
-            cy.request('POST', '/api/user', {
-                username: data.username,
-                password: data.password,
-                confirmPassword: data.password
-            }).then(result => {
-                userId = result.body._id;
-                cy.request('POST', `/api/user/${data.username}`, {
-                    username: data.username,
-                    password: data.password
-                }).then(({ body }) => {
-                    localStorage.setItem('authToken', body.authToken);
-                });
-            });
+        // Login with cypress test credentials
+        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
+            username: Cypress.env('cyUsername'),
+            password: Cypress.env('cyPassword')
+        }).then(({ body }) => {
+            localStorage.setItem('authToken', body.authToken);
         });
     });
 
     afterEach(() => {
         localStorage.removeItem('authToken');
-        cy.request('DELETE', `/api/user/${userId}`)
     });
 
     // Should equal create issue page url

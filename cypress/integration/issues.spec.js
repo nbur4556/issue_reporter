@@ -6,24 +6,15 @@ const dueDate = '2021-02-27';
 // Create Issue Tests
 describe('Create issue', () => {
     const successMessage = `Success! Issue "${issueName}" created.`;
-    let userId;
     let testId;
 
     beforeEach(() => {
-        cy.fixture('userData.json').then((data) => {
-            cy.request('POST', '/api/user', {
-                username: data.username,
-                password: data.password,
-                confirmPassword: data.password
-            }).then(result => {
-                userId = result.body._id;
-                cy.request('POST', `/api/user/${data.username}`, {
-                    username: data.username,
-                    password: data.password
-                }).then(({ body }) => {
-                    localStorage.setItem('authToken', body.authToken);
-                });
-            });
+        // Login with cypress test credentials
+        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
+            username: Cypress.env('cyUsername'),
+            password: Cypress.env('cyPassword')
+        }).then(({ body }) => {
+            localStorage.setItem('authToken', body.authToken);
         });
 
         cy.visit('/create-issue');
@@ -32,8 +23,9 @@ describe('Create issue', () => {
 
     afterEach(() => {
         localStorage.removeItem('authToken');
-        cy.request('DELETE', `/api/user/${userId}`)
-        cy.request('DELETE', `/api/issue/${testId}`);
+        if (testId) {
+            cy.request('DELETE', `/api/issue/${testId}`);
+        }
     });
 
     // Check that form with all information creates success message
@@ -53,7 +45,7 @@ describe('Create issue', () => {
         cy.contains(successMessage).should('exist');
     });
 
-    // Check that form without required information creates success message
+    // Check that form with required information creates success message
     it('create issue without body', () => {
         cy.get('input[name="name"]').type(issueName);
         cy.get('select[name="category"]').select(category);
@@ -137,27 +129,17 @@ describe('Create issue', () => {
 describe('Delete Issue', () => {
     const deleteConfirmationMsg = "Are you sure you want to delete this issue? This can not be undone."
     let testId;
-    let userId;
 
     beforeEach(() => {
-        cy.fixture('userData.json').then((data) => {
-            cy.request('POST', '/api/user', {
-                username: data.username,
-                password: data.password,
-                confirmPassword: data.password
-            }).then(result => {
-                userId = result.body._id;
-                cy.request('POST', `/api/user/${data.username}`, {
-                    username: data.username,
-                    password: data.password
-                }).then(({ body }) => {
-                    localStorage.setItem('authToken', body.authToken);
-                });
-            });
+        // Login with cypress test credentials
+        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
+            username: Cypress.env('cyUsername'),
+            password: Cypress.env('cyPassword')
+        }).then(({ body }) => {
+            localStorage.setItem('authToken', body.authToken);
         });
 
         cy.visit('/workbench');
-
         cy.request('POST', '/api/issue', { name: issueName }).then(({ body }) => {
             testId = body._id;
         });
@@ -168,8 +150,9 @@ describe('Delete Issue', () => {
 
     afterEach(() => {
         localStorage.removeItem('authToken');
-        cy.request('DELETE', `/api/user/${userId}`)
-        cy.request('DELETE', `/api/issue/${testId}`);
+        if (testId) {
+            cy.request('DELETE', `/api/issue/${testId}`);
+        }
     });
 
     // Check cancel delete button does not delete issue

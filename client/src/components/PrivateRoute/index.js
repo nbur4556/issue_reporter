@@ -13,8 +13,6 @@ const PrivateRoute = ({ authToken, component: Component, ...rest }) => {
 
     // Check for authentication on load
     useEffect(() => {
-        console.log(authToken);
-
         if (!authToken) {
             setAuth({ isAuthenticated: false, redirectToReferer: true });
         }

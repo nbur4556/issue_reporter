@@ -59,60 +59,58 @@ const checkMinimumRequirements = (password, confirmPassword) => {
 // Returned controller methods
 module.exports = {
     // Read User
-    login: function (searchUsername, userParams, cb) {
-        db.User.findOne({ username: searchUsername }, (err, data) => {
-            if (err) { cb(err) }
-
-            // Compare input with encrypted password hash
-            compareEncryption(userParams.password, data?.passwordHash, response => {
-                if (response === true) {
-                    const authToken = generateAuthToken({ id: data._id, username: data.username });
-                    cb({ authToken: authToken });
-                }
-                else {
-                    cb({ msg: 'failed' });
-                }
+    login: function (searchUsername, userParams) {
+        return new Promise((resolve, reject) => {
+            db.User.findOne({ username: searchUsername }).then(data => {
+                // Compare input with encrypted password hash
+                compareEncryption(userParams.password, data?.passwordHash, response => {
+                    if (response === true) {
+                        const authToken = generateAuthToken({ id: data._id, username: data.username });
+                        resolve({ authToken: authToken });
+                    }
+                    else {
+                        resolve({ msg: 'failed' });
+                    }
+                });
             });
-        });
+        })
     },
 
-    authenticate: function (authToken, cb) {
+    authenticate: function (authToken) {
         const tokenData = authenticateAuthToken(authToken);
-
-        if (tokenData !== null) {
-            db.User.findOne({ _id: tokenData.id }, (err, result) => {
-                (err) ? cb(err) : cb(result);
-            });
-        }
+        return (tokenData !== null) ? db.User.findOne({ _id: tokenData.id }) : ({ msg: 'failed' });
     },
 
     // Create User
-    create: function (userParams, cb) {
-        if (!checkMinimumRequirements(userParams.password, userParams.confirmPassword)) {
-            cb({ msg: 'failed' });
-        }
-        else {
-            encryption(userParams.password, resultHash => {
-                db.User.create({ ...userParams, passwordHash: resultHash }, (err, data) => {
-                    (err)
-                        ? cb(err)
-                        : cb({
-                            authToken: generateAuthToken({ id: data._id, username: data.username })
-                        });
+    create: function (userParams) {
+        return new Promise((resolve, reject) => {
+            if (!userParams.username) {
+                reject({ msg: 'failed' });
+            }
+            if (!checkMinimumRequirements(userParams.password, userParams.confirmPassword)) {
+                reject({ msg: 'failed' });
+            }
+            else {
+                encryption(userParams.password, resultHash => {
+                    db.User.create({ ...userParams, passwordHash: resultHash }).then(data => {
+                        resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
+                    });
                 });
-            });
-        }
+            }
+        })
     },
 
     // Update User
-    updateById: function (searchId, userParams, cb) {
-        db.User.updateOne({ _id: searchId }, { $set: { ...userParams } },
-            (err, result) => (err) ? cb(err) : cb(result));
+    updateById: function (searchId, userParams) {
+        return db.User.updateOne({ _id: searchId }, { $set: { ...userParams } });
+    },
+
+    addProjectById: function (searchId, projectId) {
+        return db.User.updateOne({ _id: searchId }, { $push: { projects: projectId } });
     },
 
     // Delete User
     deleteById: function (searchId, cb) {
-        db.User.deleteOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+        return db.User.deleteOne({ _id: searchId });
     }
 }

@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import LoginSignup from './pages/LoginSignup';
 import Workbench from './pages/Workbench';
 import CreateIssue from './pages/CreateIssue';
+import CreateProject from './pages/CreateProject';
 
 // Components
 import PrivateRoute from './components/PrivateRoute';
@@ -21,6 +22,7 @@ function App() {
       {/* Private Routes */}
       <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} />
       <PrivateRoute path="/create-issue" component={CreateIssue} authToken={authToken} />
+      <PrivateRoute path="/create-project" component={CreateProject} authToken={authToken} />
 
       {/* Public Routes */}
       <Route exact path="/">

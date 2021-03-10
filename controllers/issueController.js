@@ -2,31 +2,26 @@ const db = require('../models');
 
 module.exports = {
     // Read Issue
-    find: function (cb) {
-        db.Issue.find(
-            (err, result) => (err) ? cb(err) : cb(result));
+    find: function () {
+        return db.Issue.find();
     },
 
-    findById: function (searchId, cb) {
-        db.Issue.findOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+    findById: function (searchId) {
+        return db.Issue.findOne({ _id: searchId });
     },
 
     // Create Issue
-    create: function (issueParams, cb) {
-        db.Issue.create({ ...issueParams },
-            (err, result) => (err) ? cb(err) : cb(result));
+    create: function (issueParams) {
+        return db.Issue.create({ ...issueParams });
     },
 
     // Update Issue
-    updateById: function (searchId, issueParams, cb) {
-        db.Issue.updateOne({ _id: searchId }, { $set: { ...issueParams } },
-            (err, result) => (err) ? cb(err) : cb(result));
+    updateById: function (searchId, issueParams) {
+        return db.Issue.updateOne({ _id: searchId }, { $set: { ...issueParams } });
     },
 
     // Delete Issue
-    deleteById: function (searchId, cb) {
-        db.Issue.deleteOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+    deleteById: function (searchId) {
+        return db.Issue.deleteOne({ _id: searchId });
     }
 }

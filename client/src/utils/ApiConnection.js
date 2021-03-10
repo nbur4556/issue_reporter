@@ -11,29 +11,30 @@ class ApiConnection {
     buildQuery(options = {}) {
         return {
             url: (options.urlExtension) ? (options.url || this.url) + options.urlExtension : (options.url || this.url),
-            body: options.body
+            body: options.body,
+            headers: { Authorization: `Bearer ${options.authorization}` }
         }
     }
 
     // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.get(query.url);
+        return axios.get(query.url, {}, { headers: query.headers });
     }
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.post(query.url, query.body);
+        return axios.post(query.url, query.body, { headers: query.headers });
     }
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.put(query.url, query.body);
+        return axios.put(query.url, query.body, { headers: query.headers });
     }
 
     deleteQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.delete(query.url);
+        return axios.delete(query.url, {}, { headers: query.headers });
     }
 }
 

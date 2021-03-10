@@ -113,6 +113,14 @@ module.exports = {
             (err, result) => (err) ? cb(err) : cb(result));
     },
 
+    addProjectById: function (searchId, projectId) {
+        return new Promise((resolve, reject) => {
+            db.User.updateOne({ _id: searchId }, { $push: { projects: projectId } }, (err, result) => {
+                (err) ? reject(err) : resolve(result);
+            });
+        });
+    },
+
     // Delete User
     deleteById: function (searchId, cb) {
         db.User.deleteOne({ _id: searchId },

@@ -1,4 +1,5 @@
 const controllers = require('../controllers');
+const userController = require('../controllers/userController');
 
 const authenticateRequest = authHeader => {
     const authToken = (authHeader) ? authHeader.split(' ')[1] : null;
@@ -73,14 +74,13 @@ module.exports = function (app) {
         const authorization = await authenticateRequest(req.headers.authorization);
 
         if (authorization._id) {
-            req.body.authorizedUser = authorization._id;
-
             // Create project if authorized
-            controllers.projectController.create(req.body,
-                (result) =>
-                    (result.errors)
-                        ? res.status(400).json(result.errors)
-                        : res.status(200).json(result));
+            controllers.projectController.create(req.body, async result => {
+                const addToUser = await controllers.userController.addProjectById(authorization._id, result._id);
+
+                console.log(addToUser);
+                (result.errors) ? res.status(400).json(result.errors) : res.status(200).json(result);
+            });
         }
         else {
             res.status(400).json(authorization);

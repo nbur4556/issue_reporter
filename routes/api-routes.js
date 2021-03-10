@@ -1,29 +1,25 @@
 const controllers = require('../controllers');
-const userController = require('../controllers/userController');
 
 const authenticateRequest = authHeader => {
     const authToken = (authHeader) ? authHeader.split(' ')[1] : null;
-
-    return new Promise((resolve, reject) => {
-        controllers.userController.authenticate(authToken, result => {
-            resolve(result);
-        });
-    });
+    return controllers.userController.authenticate(authToken);
 }
 
 module.exports = function (app) {
-    app.get('/api/authenticate/:authToken', (req, res) => {
-        controllers.userController.authenticate(req.params.authToken, (result => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        }));
+    app.get('/api/authenticate/:authToken', async (req, res) => {
+        const result = await controllers.userController.authenticate(req.params.authToken);
+        res.status(200).json(result);
     });
 
     // User Routes
     app.post('/api/user', async (req, res) => {
-        const result = await controllers.userController.create(req.body);
-        res.status(200).json(result);
+        try {
+            const result = await controllers.userController.create(req.body);
+            res.status(200).json(result);
+        }
+        catch (err) {
+            res.status(200).json(err);
+        }
     });
 
     app.post('/api/user/:searchUsername', async (req, res) => {
@@ -31,20 +27,14 @@ module.exports = function (app) {
         res.status(200).json(result);
     });
 
-    app.put('/api/user/:searchId', (req, res) => {
-        controllers.userController.updateById(req.params.searchId, req.body, result => {
-            (result.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.put('/api/user/:searchId', async (req, res) => {
+        const result = await controllers.userController.updateById(req.params.searchId, req.body);
+        res.status(200).json(result);
     });
 
-    app.delete('/api/user/:searchId', (req, res) => {
-        controllers.userController.deleteById(req.params.searchId, (result) => {
-            (result.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.delete('/api/user/:searchId', async (req, res) => {
+        const result = await controllers.userController.deleteById(req.params.searchId);
+        res.status(200).json(result);
     });
 
     // Project Routes

@@ -76,53 +76,41 @@ module.exports = {
         })
     },
 
-    authenticate: function (authToken, cb) {
+    authenticate: function (authToken) {
         const tokenData = authenticateAuthToken(authToken);
-
-        if (tokenData !== null) {
-            db.User.findOne({ _id: tokenData.id }, (err, result) => {
-                (err) ? cb(err) : cb(result);
-            });
-        }
-        else {
-            cb({ msg: 'failed' });
-        }
+        return (tokenData !== null) ? db.User.findOne({ _id: tokenData.id }) : ({ msg: 'failed' });
     },
 
     // Create User
     create: function (userParams) {
         return new Promise((resolve, reject) => {
+            if (!userParams.username) {
+                reject({ msg: 'failed' });
+            }
             if (!checkMinimumRequirements(userParams.password, userParams.confirmPassword)) {
                 reject({ msg: 'failed' });
             }
             else {
                 encryption(userParams.password, resultHash => {
-                    db.User.create({ ...userParams, passwordHash: resultHash })
-                        .then(data => {
-                            resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
-                        });
+                    db.User.create({ ...userParams, passwordHash: resultHash }).then(data => {
+                        resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
+                    });
                 });
             }
         })
     },
 
     // Update User
-    updateById: function (searchId, userParams, cb) {
-        db.User.updateOne({ _id: searchId }, { $set: { ...userParams } },
-            (err, result) => (err) ? cb(err) : cb(result));
+    updateById: function (searchId, userParams) {
+        return db.User.updateOne({ _id: searchId }, { $set: { ...userParams } });
     },
 
     addProjectById: function (searchId, projectId) {
-        return new Promise((resolve, reject) => {
-            db.User.updateOne({ _id: searchId }, { $push: { projects: projectId } }, (err, result) => {
-                (err) ? reject(err) : resolve(result);
-            });
-        });
+        return db.User.updateOne({ _id: searchId }, { $push: { projects: projectId } });
     },
 
     // Delete User
     deleteById: function (searchId, cb) {
-        db.User.deleteOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+        return db.User.deleteOne({ _id: searchId });
     }
 }

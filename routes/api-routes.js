@@ -7,39 +7,46 @@ const authenticateRequest = authHeader => {
 
 module.exports = function (app) {
     app.get('/api/authenticate/:authToken', async (req, res) => {
-        const result = await controllers.userController.authenticate(req.params.authToken);
+        const result = await controllers.userController.authenticate(req.params.authToken).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
     // User Routes
     app.post('/api/user', async (req, res) => {
-        try {
-            const result = await controllers.userController.create(req.body);
-            res.status(200).json(result);
-        }
-        catch (err) {
-            res.status(200).json(err);
-        }
+        const result = await controllers.userController.create(req.body).catch(err => {
+            res.status(400).json(err);
+        });
+        res.status(200).json(result);
     });
 
     app.post('/api/user/:searchUsername', async (req, res) => {
-        const result = await controllers.userController.login(req.params.searchUsername, req.body);
+        const result = await controllers.userController.login(req.params.searchUsername, req.body).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
     app.put('/api/user/:searchId', async (req, res) => {
-        const result = await controllers.userController.updateById(req.params.searchId, req.body);
+        const result = await controllers.userController.updateById(req.params.searchId, req.body).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
     app.delete('/api/user/:searchId', async (req, res) => {
-        const result = await controllers.userController.deleteById(req.params.searchId);
+        const result = await controllers.userController.deleteById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
     // Project Routes
     app.get('/api/project/:searchId', async (req, res) => {
-        const projectResult = await controllers.projectController.findById(req.params.searchId);
+        const projectResult = await controllers.projectController.findById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(projectResult);
     });
 
@@ -48,8 +55,12 @@ module.exports = function (app) {
 
         if (authorization._id) {
             // Create project if authorized
-            const projectResult = await controllers.projectController.create(req.body);
-            controllers.userController.addProjectById(authorization._id, projectResult._id);
+            const projectResult = await controllers.projectController.create(req.body).catch(err => {
+                res.status(400).json(err);
+            });
+            controllers.userController.addProjectById(authorization._id, projectResult._id).catch(err => {
+                res.status(400).json(err);
+            });
 
             res.status(200).json(projectResult);
         }
@@ -59,23 +70,31 @@ module.exports = function (app) {
     });
 
     app.put('/api/project/:searchId', async (req, res) => {
-        const projectResult = await controllers.projectController.updateById(req.params.searchId, req.body);
+        const projectResult = await controllers.projectController.updateById(req.params.searchId, req.body).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(projectResult);
     });
 
     app.delete('/api/project/:searchId', async (req, res) => {
-        const projectResult = await controllers.projectController.deleteById(req.params.searchId);
+        const projectResult = await controllers.projectController.deleteById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(projectResult);
     });
 
     // Issue Routes
     app.get('/api/issue', async (req, res) => {
-        const result = await controllers.issueController.find();
+        const result = await controllers.issueController.find().catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
     app.get('/api/issue/:searchId', async (req, res) => {
-        const result = await controllers.issueController.findById(req.params.searchId);
+        const result = await controllers.issueController.findById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
@@ -87,12 +106,16 @@ module.exports = function (app) {
     });
 
     app.put('/api/issue/:searchId', async (req, res) => {
-        const result = await controllers.issueController.updateById(req.params.searchId, req.body);
+        const result = await controllers.issueController.updateById(req.params.searchId, req.body).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 
     app.delete('/api/issue/:searchId', async (req, res) => {
-        const result = await controllers.issueController.deleteById(req.params.searchId);
+        const result = await controllers.issueController.deleteById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 }

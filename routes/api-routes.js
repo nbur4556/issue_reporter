@@ -1,5 +1,9 @@
 const controllers = require('../controllers');
 
+// const authenticateRequest = authToken => {
+
+// }
+
 module.exports = function (app) {
     app.get('/api/authenticate/:authToken', (req, res) => {
         controllers.userController.authenticate(req.params.authToken, (result => {
@@ -60,11 +64,13 @@ module.exports = function (app) {
     });
 
     app.post('/api/project', (req, res) => {
-        controllers.projectController.create(req.body,
-            (result) =>
-                (result.errors)
-                    ? res.status(400).json(result.errors)
-                    : res.status(200).json(result));
+        console.log(req.headers.authorization);
+
+        // controllers.projectController.create(req.body,
+        //     (result) =>
+        //         (result.errors)
+        //             ? res.status(400).json(result.errors)
+        //             : res.status(200).json(result));
     });
 
     app.put('/api/project/:searchId', (req, res) => {

@@ -59,21 +59,21 @@ const checkMinimumRequirements = (password, confirmPassword) => {
 // Returned controller methods
 module.exports = {
     // Read User
-    login: function (searchUsername, userParams, cb) {
-        db.User.findOne({ username: searchUsername }, (err, data) => {
-            if (err) { cb(err) }
-
-            // Compare input with encrypted password hash
-            compareEncryption(userParams.password, data?.passwordHash, response => {
-                if (response === true) {
-                    const authToken = generateAuthToken({ id: data._id, username: data.username });
-                    cb({ authToken: authToken });
-                }
-                else {
-                    cb({ msg: 'failed' });
-                }
+    login: function (searchUsername, userParams) {
+        return new Promise((resolve, reject) => {
+            db.User.findOne({ username: searchUsername }).then(data => {
+                // Compare input with encrypted password hash
+                compareEncryption(userParams.password, data?.passwordHash, response => {
+                    if (response === true) {
+                        const authToken = generateAuthToken({ id: data._id, username: data.username });
+                        resolve({ authToken: authToken });
+                    }
+                    else {
+                        resolve({ msg: 'failed' });
+                    }
+                });
             });
-        });
+        })
     },
 
     authenticate: function (authToken, cb) {
@@ -90,21 +90,20 @@ module.exports = {
     },
 
     // Create User
-    create: function (userParams, cb) {
-        if (!checkMinimumRequirements(userParams.password, userParams.confirmPassword)) {
-            cb({ msg: 'failed' });
-        }
-        else {
-            encryption(userParams.password, resultHash => {
-                db.User.create({ ...userParams, passwordHash: resultHash }, (err, data) => {
-                    (err)
-                        ? cb(err)
-                        : cb({
-                            authToken: generateAuthToken({ id: data._id, username: data.username })
+    create: function (userParams) {
+        return new Promise((resolve, reject) => {
+            if (!checkMinimumRequirements(userParams.password, userParams.confirmPassword)) {
+                reject({ msg: 'failed' });
+            }
+            else {
+                encryption(userParams.password, resultHash => {
+                    db.User.create({ ...userParams, passwordHash: resultHash })
+                        .then(data => {
+                            resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
                         });
                 });
-            });
-        }
+            }
+        })
     },
 
     // Update User

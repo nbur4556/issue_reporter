@@ -21,28 +21,14 @@ module.exports = function (app) {
     });
 
     // User Routes
-    app.get('/api/user/:searchId', (req, res) => {
-        controllers.userController.findById(req.params.searchId, (result) => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.post('/api/user', async (req, res) => {
+        const result = await controllers.userController.create(req.body);
+        res.status(200).json(result);
     });
 
-    app.post('/api/user', (req, res) => {
-        controllers.userController.create(req.body, (result) => {
-            (result.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
-    });
-
-    app.post('/api/user/:searchUsername', (req, res) => {
-        controllers.userController.login(req.params.searchUsername, req.body, (result) => {
-            (result.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.post('/api/user/:searchUsername', async (req, res) => {
+        const result = await controllers.userController.login(req.params.searchUsername, req.body);
+        res.status(200).json(result);
     });
 
     app.put('/api/user/:searchId', (req, res) => {
@@ -73,9 +59,6 @@ module.exports = function (app) {
         if (authorization._id) {
             // Create project if authorized
             const projectResult = await controllers.projectController.create(req.body);
-
-            console.log(projectResult);
-
             controllers.userController.addProjectById(authorization._id, projectResult._id);
 
             res.status(200).json(projectResult);

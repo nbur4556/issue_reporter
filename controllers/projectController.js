@@ -2,9 +2,11 @@ const db = require('../models');
 
 module.exports = {
     // Read Project
-    findById: function (searchId, cb) {
-        db.Project.findOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+    findById: function (searchId) {
+        return new Promise((resolve, reject) => {
+            db.Project.findOne({ _id: searchId },
+                (err, result) => (err) ? reject(err) : resolve(result));
+        });
     },
 
     // Create Project
@@ -16,14 +18,18 @@ module.exports = {
     },
 
     // Update Project
-    updateById: function (searchId, projectParams, cb) {
-        db.Project.updateOne({ _id: searchId }, { $set: { ...projectParams } },
-            (err, result) => (err) ? cb(err) : cb(result));
+    updateById: function (searchId, projectParams) {
+        return new Promise((resolve, reject) => {
+            db.Project.updateOne({ _id: searchId }, { $set: { ...projectParams } },
+                (err, result) => (err) ? reject(err) : resolve(result));
+        });
     },
 
     // Delete Project
-    deleteById: function (searchId, cb) {
-        db.Project.deleteOne({ _id: searchId },
-            (err, result) => (err) ? cb(err) : cb(result));
+    deleteById: function (searchId) {
+        return new Promise((resolve, reject) => {
+            db.Project.deleteOne({ _id: searchId },
+                (err, result) => (err) ? resolve(err) : reject(result));
+        });
     }
 }

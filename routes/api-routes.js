@@ -62,12 +62,9 @@ module.exports = function (app) {
     });
 
     // Project Routes
-    app.get('/api/project/:searchId', (req, res) => {
-        controllers.projectController.findById(req.params.searchId,
-            (result) =>
-                (result.errors)
-                    ? res.status(400).json(result.errors)
-                    : res.status(200).json(result));
+    app.get('/api/project/:searchId', async (req, res) => {
+        const projectResult = controllers.projectController.findById(req.params.searchId);
+        res.status(200).json(projectResult);
     });
 
     app.post('/api/project', async (req, res) => {
@@ -85,20 +82,14 @@ module.exports = function (app) {
         }
     });
 
-    app.put('/api/project/:searchId', (req, res) => {
-        controllers.projectController.updateById(req.params.searchId, req.body,
-            (result) =>
-                (result.errors)
-                    ? res.status(400).json(result.errors)
-                    : res.status(200).json(result));
+    app.put('/api/project/:searchId', async (req, res) => {
+        const projectResult = await controllers.projectController.updateById(req.params.searchId, req.body);
+        res.status(200).json(projectResult);
     });
 
-    app.delete('/api/project/:searchId', (req, res) => {
-        controllers.projectController.deleteById(req.params.searchId,
-            (result) =>
-                (result.errors)
-                    ? res.status(400).json(result.errors)
-                    : res.status(200).json(result));
+    app.delete('/api/project/:searchId', async (req, res) => {
+        const projectResult = await controllers.projectController.deleteById(req.params.searchId);
+        res.status(200).json(projectResult);
     });
 
     // Issue Routes

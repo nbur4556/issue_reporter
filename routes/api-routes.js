@@ -73,6 +73,9 @@ module.exports = function (app) {
         if (authorization._id) {
             // Create project if authorized
             const projectResult = await controllers.projectController.create(req.body);
+
+            console.log(projectResult);
+
             controllers.userController.addProjectById(authorization._id, projectResult._id);
 
             res.status(200).json(projectResult);

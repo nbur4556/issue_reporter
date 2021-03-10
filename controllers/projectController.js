@@ -11,10 +11,7 @@ module.exports = {
 
     // Create Project
     create: function (projectParams) {
-        return new Promise((resolve, reject) => {
-            db.Project.create({ ...projectParams },
-                (err, result) => (err) ? reject(err) : resolve(result));
-        });
+        return db.Project.create({ ...projectParams });
     },
 
     // Update Project

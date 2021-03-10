@@ -84,6 +84,9 @@ module.exports = {
                 (err) ? cb(err) : cb(result);
             });
         }
+        else {
+            cb({ msg: 'failed' });
+        }
     },
 
     // Create User

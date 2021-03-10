@@ -1,8 +1,14 @@
 const controllers = require('../controllers');
 
-// const authenticateRequest = authToken => {
+const authenticateRequest = authHeader => {
+    const authToken = (authHeader) ? authHeader.split(' ')[1] : null;
 
-// }
+    return new Promise((resolve, reject) => {
+        controllers.userController.authenticate(authToken, result => {
+            resolve(result);
+        });
+    });
+}
 
 module.exports = function (app) {
     app.get('/api/authenticate/:authToken', (req, res) => {
@@ -63,14 +69,22 @@ module.exports = function (app) {
                     : res.status(200).json(result));
     });
 
-    app.post('/api/project', (req, res) => {
-        console.log(req.headers.authorization);
+    app.post('/api/project', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
 
-        // controllers.projectController.create(req.body,
-        //     (result) =>
-        //         (result.errors)
-        //             ? res.status(400).json(result.errors)
-        //             : res.status(200).json(result));
+        if (authorization._id) {
+            req.body.authorizedUser = authorization._id;
+
+            // Create project if authorized
+            controllers.projectController.create(req.body,
+                (result) =>
+                    (result.errors)
+                        ? res.status(400).json(result.errors)
+                        : res.status(200).json(result));
+        }
+        else {
+            res.status(400).json(authorization);
+        }
     });
 
     app.put('/api/project/:searchId', (req, res) => {

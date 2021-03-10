@@ -8,9 +8,11 @@ module.exports = {
     },
 
     // Create Project
-    create: function (projectParams, cb) {
-        db.Project.create({ ...projectParams },
-            (err, result) => (err) ? cb(err) : cb(result));
+    create: function (projectParams) {
+        return new Promise((resolve, reject) => {
+            db.Project.create({ ...projectParams },
+                (err, result) => (err) ? reject(err) : resolve(result));
+        });
     },
 
     // Update Project

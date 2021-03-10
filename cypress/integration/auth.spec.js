@@ -9,7 +9,6 @@ describe('Register User', () => {
     });
 
     afterEach(() => {
-        console.log(userId);
         cy.request('DELETE', `api/user/${userId}`);
     });
 

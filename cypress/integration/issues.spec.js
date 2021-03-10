@@ -23,7 +23,9 @@ describe('Create issue', () => {
 
     afterEach(() => {
         localStorage.removeItem('authToken');
-        cy.request('DELETE', `/api/issue/${testId}`);
+        if (testId) {
+            cy.request('DELETE', `/api/issue/${testId}`);
+        }
     });
 
     // Check that form with all information creates success message
@@ -43,7 +45,7 @@ describe('Create issue', () => {
         cy.contains(successMessage).should('exist');
     });
 
-    // Check that form without required information creates success message
+    // Check that form with required information creates success message
     it('create issue without body', () => {
         cy.get('input[name="name"]').type(issueName);
         cy.get('select[name="category"]').select(category);
@@ -148,7 +150,9 @@ describe('Delete Issue', () => {
 
     afterEach(() => {
         localStorage.removeItem('authToken');
-        cy.request('DELETE', `/api/issue/${testId}`);
+        if (testId) {
+            cy.request('DELETE', `/api/issue/${testId}`);
+        }
     });
 
     // Check cancel delete button does not delete issue

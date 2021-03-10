@@ -39,7 +39,7 @@ module.exports = function (app) {
 
     // Project Routes
     app.get('/api/project/:searchId', async (req, res) => {
-        const projectResult = controllers.projectController.findById(req.params.searchId);
+        const projectResult = await controllers.projectController.findById(req.params.searchId);
         res.status(200).json(projectResult);
     });
 
@@ -69,43 +69,30 @@ module.exports = function (app) {
     });
 
     // Issue Routes
-    app.get('/api/issue', (req, res) => {
-        controllers.issueController.find((result) => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.get('/api/issue', async (req, res) => {
+        const result = await controllers.issueController.find();
+        res.status(200).json(result);
     });
 
-    app.get('/api/issue/:searchId', (req, res) => {
-        controllers.issueController.findById(req.params.searchId, (result) => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.get('/api/issue/:searchId', async (req, res) => {
+        const result = await controllers.issueController.findById(req.params.searchId);
+        res.status(200).json(result);
     });
 
-    app.post('/api/issue', (req, res) => {
-        controllers.issueController.create(req.body, (result) => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
+    app.post('/api/issue', async (req, res) => {
+        const result = await controllers.issueController.create(req.body).catch(err => {
+            res.status(400).json(err);
         });
+        res.status(200).json(result);
     });
 
-    app.put('/api/issue/:searchId', (req, res) => {
-        controllers.issueController.updateById(req.params.searchId, req.body, (result) => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.put('/api/issue/:searchId', async (req, res) => {
+        const result = await controllers.issueController.updateById(req.params.searchId, req.body);
+        res.status(200).json(result);
     });
 
-    app.delete('/api/issue/:searchId', (req, res) => {
-        controllers.issueController.deleteById(req.params.searchId, (result) => {
-            (result?.errors)
-                ? res.status(400).json(result.errors)
-                : res.status(200).json(result);
-        });
+    app.delete('/api/issue/:searchId', async (req, res) => {
+        const result = await controllers.issueController.deleteById(req.params.searchId);
+        res.status(200).json(result);
     });
 }

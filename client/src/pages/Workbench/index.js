@@ -10,15 +10,28 @@ import IssueDetails from '../../components/IssueDetails';
 import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
-const Workbench = () => {
-    const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
+const Workbench = (props) => {
+    const [userData, setUserData] = useState({
+        userAuthToken: localStorage.getItem('authToken'),
+        userID: props.authId,
+        projectList: []
+    });
 
     const [issueList, setIssueList] = useState([]);
     const [selectIssue, setSelectIssue] = useState();
 
+    const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
+
     useEffect(() => {
+        loadUserData();
         loadIssues();
     }, []);
+
+    const loadUserData = () => {
+        // Get user authorization
+
+        // Load all user projects
+    }
 
     // Toggle if closed issues are displayed
     const handleDisplayClosedIssue = () => { (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true); }

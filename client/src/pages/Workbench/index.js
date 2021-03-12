@@ -5,6 +5,7 @@ import './style.css';
 // Components
 import IssueBar from '../../components/IssueBar';
 import IssueDetails from '../../components/IssueDetails';
+import TabBar from '../../components/TabBar';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -81,6 +82,8 @@ const Workbench = () => {
                     </label>
                     <Link to="/create-issue">Create Issue</Link>
                 </section>
+
+                <TabBar />
 
                 {/* Issue List Section */}
 

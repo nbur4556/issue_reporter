@@ -13,34 +13,25 @@ const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = (props) => {
     const [userData, setUserData] = useState({
-        userId: null,
-        projectList: []
+        projectList: [],
+        issueList: []
     });
 
-    const [issueList, setIssueList] = useState([]);
     const [selectIssue, setSelectIssue] = useState();
-
     const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
 
     useEffect(() => {
-        setUserData({
-            ...userData,
-            userId: props.authId
-        });
-    }, [props.authId]);
+        loadUserData();
+    }, [])
 
-    useEffect(() => {
-        if (userData.userId) {
-            loadUserData();
-        }
-    }, [userData.userId])
-
-    const loadUserData = () => {
+    const loadUserData = async () => {
         // Load all user projects
-        projectConnection.getQuery({ urlExtension: `/of-user/${userData.userId}`, authorization: localStorage.getItem('authToken') })
-            .then(result => {
-                console.log(result);
-            });
+        const [projects, issues] = await Promise.all([
+            projectConnection.getQuery({ authorization: localStorage.getItem('authToken') }),
+            issueConnection.getQuery()
+        ]);
+
+        setUserData({ ...userData, projectList: projects.data, issueList: issues.data });
     }
 
     // Toggle if closed issues are displayed
@@ -54,27 +45,20 @@ const Workbench = (props) => {
 
     // Set status of selected issue
     const handleSetIssueStatus = () => {
-        const setStatus = (issueList[selectIssue].isOpen === true) ? 'false' : 'true';
+        const setStatus = (userData.issueList[selectIssue].isOpen === true) ? 'false' : 'true';
 
         // Send put request to change issue status, and reload issues
         issueConnection.putQuery({
-            urlExtension: `/${issueList[selectIssue]._id}`,
+            urlExtension: `/${userData.issueList[selectIssue]._id}`,
             body: { isOpen: setStatus }
-        }).then(() => { loadIssues() });
-    }
-
-    // Get All Issues from API
-    const loadIssues = () => {
-        issueConnection.getQuery().then(result => {
-            setIssueList(result.data);
-        });
+        }).then(() => { loadUserData() });
     }
 
     // Remove Issue from API
     const deleteIssue = e => {
-        issueConnection.deleteQuery({ urlExtension: `/${issueList[selectIssue]._id}` }).then(() => {
+        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[selectIssue]._id}` }).then(() => {
             setSelectIssue(null);
-            loadIssues();
+            loadUserData();
         });
     }
 
@@ -98,7 +82,7 @@ const Workbench = (props) => {
                 {/* Issue List Section */}
 
                 <section className="issueListSection">
-                    {issueList.map((issue, index) => {
+                    {userData.issueList.map((issue, index) => {
                         return (issue.isOpen === false && displayClosedIssue === false)
                             ? null
                             : <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />;
@@ -110,13 +94,13 @@ const Workbench = (props) => {
             {/* Issue Details Section */}
 
             <IssueDetails
-                name={issueList[selectIssue]?.name}
-                body={issueList[selectIssue]?.body}
-                category={issueList[selectIssue]?.category}
-                assigned={issueList[selectIssue]?.assigned}
-                dueDate={issueList[selectIssue]?.dueDate}
-                comments={issueList[selectIssue]?.comments}
-                status={issueList[selectIssue]?.isOpen}
+                name={userData.issueList[selectIssue]?.name}
+                body={userData.issueList[selectIssue]?.body}
+                category={userData.issueList[selectIssue]?.category}
+                assigned={userData.issueList[selectIssue]?.assigned}
+                dueDate={userData.issueList[selectIssue]?.dueDate}
+                comments={userData.issueList[selectIssue]?.comments}
+                status={userData.issueList[selectIssue]?.isOpen}
 
                 toggleStatus={handleSetIssueStatus}
                 deleteIssue={deleteIssue}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -25,14 +26,20 @@ const CreateProject = () => {
 
     return (
         <main>
+
+            <Link to="/workbench">Back To Workbench</Link>
+
             <form>
+
                 <label htmlFor="projectName">
                     Name:
                     <input id="projectName" name="projectName" type="text" onChange={handleSetProjectData} />
                 </label>
 
                 <button name="submit" onClick={handleCreateProject}>Submit</button>
+
             </form>
+
         </main>
     );
 }

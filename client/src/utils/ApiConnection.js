@@ -19,7 +19,7 @@ class ApiConnection {
     // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.get(query.url, {}, { headers: query.headers });
+        return axios.get(query.url, { headers: query.headers });
     }
 
     postQuery(options = {}) {

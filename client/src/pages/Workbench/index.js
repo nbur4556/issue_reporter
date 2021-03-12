@@ -8,12 +8,12 @@ import IssueDetails from '../../components/IssueDetails';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
+const projectConnection = new ApiConnection('/api/project');
 const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = (props) => {
     const [userData, setUserData] = useState({
-        userAuthToken: localStorage.getItem('authToken'),
-        userID: props.authId,
+        userId: null,
         projectList: []
     });
 
@@ -23,14 +23,24 @@ const Workbench = (props) => {
     const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
 
     useEffect(() => {
-        loadUserData();
-        loadIssues();
-    }, []);
+        setUserData({
+            ...userData,
+            userId: props.authId
+        });
+    }, [props.authId]);
+
+    useEffect(() => {
+        if (userData.userId) {
+            loadUserData();
+        }
+    }, [userData.userId])
 
     const loadUserData = () => {
-        // Get user authorization
-
         // Load all user projects
+        projectConnection.getQuery({ urlExtension: `/of-user/${userData.userId}`, authorization: localStorage.getItem('authToken') })
+            .then(result => {
+                console.log(result);
+            });
     }
 
     // Toggle if closed issues are displayed

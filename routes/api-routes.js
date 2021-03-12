@@ -50,6 +50,17 @@ module.exports = function (app) {
         res.status(200).json(projectResult);
     });
 
+    app.get('/api/project/of-user/:userId', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+
+        if (authorization._id) {
+            res.status(200).json({ msg: 'authorized' });
+        }
+        else {
+            res.status(400).json(authorization);
+        }
+    });
+
     app.post('/api/project', async (req, res) => {
         const authorization = await authenticateRequest(req.headers.authorization);
 

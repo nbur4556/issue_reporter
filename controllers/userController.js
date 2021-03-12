@@ -81,6 +81,10 @@ module.exports = {
         return (tokenData !== null) ? db.User.findOne({ _id: tokenData.id }) : ({ msg: 'failed' });
     },
 
+    getByIdIncludeProjects: function (userId) {
+        return db.User.findOne({ _id: userId }).populate('projects');
+    },
+
     // Create User
     create: function (userParams) {
         return new Promise((resolve, reject) => {

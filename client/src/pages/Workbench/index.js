@@ -86,6 +86,7 @@ const Workbench = () => {
                         <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleDisplayClosedIssue} />
                     </label>
                     <Link to="/create-issue">Create Issue</Link>
+                    <Link to="/create-project">Create Project</Link>
                 </section>
 
                 <TabBar onClick={handleSelectProject}

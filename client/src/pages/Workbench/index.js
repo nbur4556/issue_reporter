@@ -22,6 +22,7 @@ const Workbench = () => {
 
     useEffect(() => {
         loadUserData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function loadUserData() {
@@ -35,7 +36,9 @@ const Workbench = () => {
     }
 
     // Toggle if closed issues are displayed
-    const handleDisplayClosedIssue = () => { (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true); }
+    const handleDisplayClosedIssue = () => {
+        (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true);
+    }
 
     // Set state of selected issue
     const handleSelectIssue = e => {

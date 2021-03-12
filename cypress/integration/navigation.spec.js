@@ -30,6 +30,12 @@ describe('Url Navigation Authorized', () => {
         cy.visit('/create-issue');
         cy.url().should('eq', Cypress.config().baseUrl + '/create-issue');
     });
+
+    // Should equal create project page url
+    it('visit create project url', () => {
+        cy.visit('/create-project');
+        cy.url().should('eq', Cypress.config().baseUrl + '/create-project');
+    });
 });
 
 describe('Url Navigation Unauthorized', () => {
@@ -37,17 +43,21 @@ describe('Url Navigation Unauthorized', () => {
         localStorage.removeItem('authToken');
     });
 
-    // Should equal workbench url
+    // All should equal base url
     it('attempt visit workbench url', () => {
         cy.visit('/workbench');
         cy.url().should('eq', Cypress.config().baseUrl + '/');
     });
 
-    // Should equal create issue page url
     it('attempt visit create issue url', () => {
         cy.visit('/create-issue');
         cy.url().should('eq', Cypress.config().baseUrl + '/');
     });
+
+    it('attempt visit create project url', () => {
+        cy.visit('create-project');
+        cy.url().should('eq', Cypress.config().baseUrl + '/');
+    })
 });
 
 describe('Link Navigation', () => {
@@ -72,9 +82,22 @@ describe('Link Navigation', () => {
         cy.url().should('eq', Cypress.config().baseUrl + '/create-issue');
     });
 
+    // Should equal create project url
+    it('dashboard to create project link', () => {
+        cy.visit('workbench');
+        cy.contains('Create Project').click();
+        cy.url().should('eq', Cypress.config().baseUrl + '/create-project');
+    });
+
     // Should equal root url
     it('create issue to dashboard link', () => {
         cy.visit('/create-issue');
+        cy.contains('Back To Workbench').click();
+        cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
+    });
+
+    it('create project to dashboard link', () => {
+        cy.visit('/create-project');
         cy.contains('Back To Workbench').click();
         cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
     });

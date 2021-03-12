@@ -1,0 +1,19 @@
+.tab-bar{
+    display: flex;
+    flex-direction: row;
+
+    background-color: blue;
+}
+
+.tab{
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+.tab-active{
+    background-color: white;
+}
+
+.tab-inactive{
+    background-color: lightblue;
+}

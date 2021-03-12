@@ -11,7 +11,7 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project');
 const issueConnection = new ApiConnection('/api/issue');
 
-const Workbench = (props) => {
+const Workbench = () => {
     const [userData, setUserData] = useState({
         projectList: [],
         issueList: []
@@ -22,9 +22,9 @@ const Workbench = (props) => {
 
     useEffect(() => {
         loadUserData();
-    }, [])
+    }, []);
 
-    const loadUserData = async () => {
+    async function loadUserData() {
         // Load all user projects
         const [projects, issues] = await Promise.all([
             projectConnection.getQuery({ authorization: localStorage.getItem('authToken') }),

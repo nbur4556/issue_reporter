@@ -8,8 +8,7 @@ const authConnection = new ApiConnection('/api/authenticate');
 const PrivateRoute = ({ authToken, component: Component, ...rest }) => {
     const [auth, setAuth] = useState({
         isAuthenticated: false,
-        redirectToReferer: false,
-        data: null
+        redirectToReferer: false
     });
 
     // Check for authentication on load
@@ -20,8 +19,8 @@ const PrivateRoute = ({ authToken, component: Component, ...rest }) => {
 
         authConnection.getQuery({ urlExtension: `/${authToken}` }).then(({ data }) => {
             (data?._id)
-                ? setAuth({ ...auth, isAuthenticated: true, redirectToReferer: false, data: data })
-                : setAuth({ ...auth, isAuthenticated: false, redirectToReferer: true });
+                ? setAuth({ isAuthenticated: true, redirectToReferer: false })
+                : setAuth({ isAuthenticated: false, redirectToReferer: true });
 
         });
     }, [authToken]);
@@ -29,7 +28,7 @@ const PrivateRoute = ({ authToken, component: Component, ...rest }) => {
     return (
         <Route {...rest}>
             {(auth.redirectToReferer) ? <Redirect to='/' /> : null}
-            {(auth.isAuthenticated) ? <Component authId={auth.data._id} /> : null}
+            {(auth.isAuthenticated) ? <Component /> : null}
         </Route>
     );
 }

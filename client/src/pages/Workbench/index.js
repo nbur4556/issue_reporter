@@ -41,6 +41,11 @@ const Workbench = () => {
         (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true);
     }
 
+    const handleSelectProject = e => {
+        const projectId = e.currentTarget.getAttribute('data-id');
+        console.log(projectId);
+    }
+
     // Set state of selected issue
     const handleSelectIssue = e => {
         const selectIndex = e.currentTarget.getAttribute('data-index');
@@ -83,7 +88,11 @@ const Workbench = () => {
                     <Link to="/create-issue">Create Issue</Link>
                 </section>
 
-                <TabBar />
+                <TabBar onClick={handleSelectProject}
+                    tabData={userData.projectList.map(project => {
+                        return { tabId: project._id, tabName: project.projectName }
+                    })}
+                />
 
                 {/* Issue List Section */}
 

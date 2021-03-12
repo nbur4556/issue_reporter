@@ -1,8 +1,15 @@
 import React from 'react';
 
-const TabBar = () => {
+// Components
+import Tab from '../Tab';
+
+const TabBar = (props) => {
     return (
-        <section>Tab Bar</section>
+        <section>
+            {props.tabData.map(tab => {
+                return <Tab key={tab.tabId} tabName={tab.tabName} tabId={tab.tabId} onClick={props.onClick} />
+            })}
+        </section>
     );
 }
 

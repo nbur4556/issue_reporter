@@ -90,12 +90,21 @@ module.exports = function (app) {
     //     res.status(200).json(projectResult);
     // });
 
-    // app.delete('/api/project/:searchId', async (req, res) => {
-    //     const projectResult = await controllers.projectController.deleteById(req.params.searchId).catch(err => {
-    //         res.status(400).json(err);
-    //     });
-    //     res.status(200).json(projectResult);
-    // });
+    app.delete('/api/project/:searchId', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+
+        if (authorization._id) {
+            // Delete project if authorized
+            const projectResult = await controllers.projectController.deleteById(req.params.searchId).catch(err => {
+                res.status(400).json(err);
+            });
+
+            res.status(200).json(projectResult);
+        }
+        else {
+            res.status(400).json(authorization);
+        }
+    });
 
     // Issue Routes
     app.get('/api/issue', async (req, res) => {

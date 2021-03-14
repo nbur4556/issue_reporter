@@ -18,10 +18,17 @@ describe("Create project", () => {
     });
 
     afterEach(() => {
-        localStorage.removeItem('authToken');
         if (testId) {
-            cy.request('DELETE', `/api/project/${testId}`);
+            cy.request({
+                method: 'DELETE',
+                url: `/api/project/${testId}`,
+                auth: {
+                    bearer: localStorage.getItem('authToken')
+                }
+            });
         }
+
+        // localStorage.removeItem('authToken');
     });
 
     // Successfully create projet with all information

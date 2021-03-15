@@ -6,6 +6,7 @@ import './style.css';
 import IssueBar from '../../components/IssueBar';
 import IssueDetails from '../../components/IssueDetails';
 import TabBar from '../../components/TabBar';
+import ProjectManager from '../../components/ProjectManager';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -20,6 +21,7 @@ const Workbench = () => {
 
     const [selectIssue, setSelectIssue] = useState();
     const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
+    const [displayProjectManager, setDisplayProjectManager] = useState(false);
 
     useEffect(() => {
         loadUserData();
@@ -39,6 +41,10 @@ const Workbench = () => {
     // Toggle if closed issues are displayed
     const handleDisplayClosedIssue = () => {
         (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true);
+    }
+
+    const handleToggleProjectManager = () => {
+        (displayProjectManager === true) ? setDisplayProjectManager(false) : setDisplayProjectManager(true);
     }
 
     const handleSelectProject = e => {
@@ -87,6 +93,8 @@ const Workbench = () => {
                     </label>
                     <Link to="/create-issue">Create Issue</Link>
                     <Link to="/create-project">Create Project</Link>
+
+                    <button onClick={handleToggleProjectManager}>Toggle Project Manager</button>
                 </section>
 
                 <TabBar onClick={handleSelectProject}
@@ -121,6 +129,8 @@ const Workbench = () => {
                 toggleStatus={handleSetIssueStatus}
                 deleteIssue={deleteIssue}
             />
+
+            {(displayProjectManager) ? <ProjectManager /> : null}
 
         </main>
     );

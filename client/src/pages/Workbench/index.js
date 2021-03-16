@@ -19,9 +19,11 @@ const Workbench = () => {
         issueList: []
     });
 
-    const [selectIssue, setSelectIssue] = useState();
-    const [displayClosedIssue, setDisplayClosedIssue] = useState(false);
-    const [displayProjectManager, setDisplayProjectManager] = useState(false);
+    const [userInterface, setUserInterface] = useState({
+        selectIssue: null,
+        displayProjectManager: false,
+        displayClosedIssue: false
+    });
 
     useEffect(() => {
         loadUserData();
@@ -40,11 +42,15 @@ const Workbench = () => {
 
     // Toggle if closed issues are displayed
     const handleDisplayClosedIssue = () => {
-        (displayClosedIssue === true) ? setDisplayClosedIssue(false) : setDisplayClosedIssue(true);
+        (userInterface.displayClosedIssue === true)
+            ? setUserInterface({ ...userInterface, displayClosedIssue: false })
+            : setUserInterface({ ...userInterface, displayClosedIssue: true });
     }
 
     const handleToggleProjectManager = () => {
-        (displayProjectManager === true) ? setDisplayProjectManager(false) : setDisplayProjectManager(true);
+        (userInterface.displayProjectManager === true)
+            ? setUserInterface({ ...userInterface, displayProjectManager: false })
+            : setUserInterface({ ...userInterface, displayProjectManager: true });
     }
 
     const handleSelectProject = e => {
@@ -55,24 +61,26 @@ const Workbench = () => {
     // Set state of selected issue
     const handleSelectIssue = e => {
         const selectIndex = e.currentTarget.getAttribute('data-index');
-        (selectIndex === selectIssue) ? setSelectIssue(null) : setSelectIssue(selectIndex);
+        (selectIndex === userInterface.selectIssue)
+            ? setUserInterface({ ...userInterface, selectIssue: null })
+            : setUserInterface({ ...userInterface, selectIssue: selectIndex });
     }
 
     // Set status of selected issue
     const handleSetIssueStatus = () => {
-        const setStatus = (userData.issueList[selectIssue].isOpen === true) ? 'false' : 'true';
+        const setStatus = (userData.issueList[userInterface.selectIssue].isOpen === true) ? 'false' : 'true';
 
         // Send put request to change issue status, and reload issues
         issueConnection.putQuery({
-            urlExtension: `/${userData.issueList[selectIssue]._id}`,
+            urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}`,
             body: { isOpen: setStatus }
         }).then(() => { loadUserData() });
     }
 
     // Remove Issue from API
     const deleteIssue = e => {
-        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[selectIssue]._id}` }).then(() => {
-            setSelectIssue(null);
+        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}` }).then(() => {
+            setUserInterface({ ...userInterface, selectIssue: null });
             loadUserData();
         });
     }
@@ -107,7 +115,7 @@ const Workbench = () => {
 
                 <section className="issueListSection">
                     {userData.issueList.map((issue, index) => {
-                        return (issue.isOpen === false && displayClosedIssue === false)
+                        return (issue.isOpen === false && userInterface.displayClosedIssue === false)
                             ? null
                             : <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />;
                     })}
@@ -118,19 +126,19 @@ const Workbench = () => {
             {/* Issue Details Section */}
 
             <IssueDetails
-                name={userData.issueList[selectIssue]?.name}
-                body={userData.issueList[selectIssue]?.body}
-                category={userData.issueList[selectIssue]?.category}
-                assigned={userData.issueList[selectIssue]?.assigned}
-                dueDate={userData.issueList[selectIssue]?.dueDate}
-                comments={userData.issueList[selectIssue]?.comments}
-                status={userData.issueList[selectIssue]?.isOpen}
+                name={userData.issueList[userInterface.selectIssue]?.name}
+                body={userData.issueList[userInterface.selectIssue]?.body}
+                category={userData.issueList[userInterface.selectIssue]?.category}
+                assigned={userData.issueList[userInterface.selectIssue]?.assigned}
+                dueDate={userData.issueList[userInterface.selectIssue]?.dueDate}
+                comments={userData.issueList[userInterface.selectIssue]?.comments}
+                status={userData.issueList[userInterface.selectIssue]?.isOpen}
 
                 toggleStatus={handleSetIssueStatus}
                 deleteIssue={deleteIssue}
             />
 
-            {(displayProjectManager) ? <ProjectManager /> : null}
+            {(userInterface.displayProjectManager) ? <ProjectManager /> : null}
 
         </main>
     );

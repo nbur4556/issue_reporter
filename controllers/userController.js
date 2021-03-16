@@ -113,6 +113,10 @@ module.exports = {
         return db.User.updateOne({ _id: searchId }, { $push: { projects: projectId } });
     },
 
+    removeProjectById: function (searchId, projectId) {
+        return db.User.updateOne({ _id: searchId }, { $pull: { projects: projectId } });
+    },
+
     // Delete User
     deleteById: function (searchId, cb) {
         return db.User.deleteOne({ _id: searchId });

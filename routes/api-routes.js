@@ -68,10 +68,12 @@ module.exports = function (app) {
         const authorization = await authenticateRequest(req.headers.authorization);
 
         if (authorization._id) {
-            // Create project if authorized
+            // Create project
             const projectResult = await controllers.projectController.create(req.body).catch(err => {
                 res.status(400).json(err);
             });
+
+            // Add project to user
             controllers.userController.addProjectById(authorization._id, projectResult._id).catch(err => {
                 res.status(400).json(err);
             });
@@ -94,7 +96,12 @@ module.exports = function (app) {
         const authorization = await authenticateRequest(req.headers.authorization);
 
         if (authorization._id) {
-            // Delete project if authorized
+            // Remove project from user
+            await controllers.userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
+                res.status(400).json(err);
+            });
+
+            // Delete project
             const projectResult = await controllers.projectController.deleteById(req.params.searchId).catch(err => {
                 res.status(400).json(err);
             });

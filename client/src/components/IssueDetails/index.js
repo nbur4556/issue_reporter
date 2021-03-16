@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from 'react';
 
-import './style.css';
-
 const IssueDetails = props => {
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     useEffect(() => {
         setDisplayDeleteMsg(false);
-    }, [props.name]);
+    }, [props.issue.name]);
 
     return (
-        <aside>
+        <ul>
 
-            <ul>
+            {/* Display details if details are available */}
 
-                {/* Display details if details are available */}
+            {(props.issue.name) ? <li>{`Name: ${props.issue.name}`}</li> : null}
+            {(props.issue.body) ? <li>{`Body: ${props.issue.body}`}</li> : null}
+            {(props.issue.category) ? <li>{`Category: ${props.issue.category}`}</li> : null}
+            {(props.issue.assigned) ? <li>{`Assigned: ${props.issue.assigned}`}</li> : null}
+            {(props.issue.dueDate) ? <li>{`Due Date: ${props.issue.dueDate}`}</li> : null}
+            {(props.issue.comments) ? <li>{`Comments: ${props.issue.comments}`}</li> : null}
 
-                {(props.name) ? <li>{`Name: ${props.name}`}</li> : null}
-                {(props.body) ? <li>{`Body: ${props.body}`}</li> : null}
-                {(props.category) ? <li>{`Category: ${props.category}`}</li> : null}
-                {(props.assigned) ? <li>{`Assigned: ${props.assigned}`}</li> : null}
-                {(props.dueDate) ? <li>{`Due Date: ${props.dueDate}`}</li> : null}
-                {(props.comments) ? <li>{`Comments: ${props.comments}`}</li> : null}
+            {(props.issue.isOpen === true) ? <li>Open</li> : null}
+            {(props.issue.isOpen === false) ? <li>Closed</li> : null}
 
-                {(props.status === true) ? <li>Open</li> : null}
-                {(props.status === false) ? <li>Closed</li> : null}
+            {/* Buttons */}
 
-                {/* Buttons */}
+            {(props.issue.isOpen !== undefined)
+                ? <button name="toggleStatus" onClick={props.toggleStatus}>Toggle Status</button>
+                : null}
 
-                {(props.status !== undefined) ? <button name="toggleStatus" onClick={props.toggleStatus}>Toggle Status</button> : null}
-                {(props.name) ? <button name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button> : null}
+            {(props.issue.name)
+                ? <button name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
+                : null}
 
-                {/* Delete Confirmation */}
+            {/* Delete Confirmation */}
 
-                {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
-                {(displayDeleteMsg)
-                    ? <div>
-                        <button name="confirmDelete" onClick={props.deleteIssue}>Yes</button>
-                        <button name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
-                    </div>
-                    : null}
+            {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
+            {(displayDeleteMsg)
+                ? <div>
+                    <button name="confirmDelete" onClick={props.deleteIssue}>Yes</button>
+                    <button name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
+                </div>
+                : null}
 
-            </ul>
-
-        </aside>
+        </ul>
     );
 }
 

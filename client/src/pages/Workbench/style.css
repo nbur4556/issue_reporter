@@ -4,4 +4,8 @@ article {
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
 }
+
+.detail-section {
+  background-color: cyan;
+}
 /*# sourceMappingURL=style.css.map */

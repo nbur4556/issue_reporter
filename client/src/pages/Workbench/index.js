@@ -132,14 +132,7 @@ const Workbench = () => {
 
             {(userInterface.selectIssue)
                 ? <WorkbenchDetailSection component={IssueDetails}
-                    name={userData.issueList[userInterface.selectIssue]?.name}
-                    body={userData.issueList[userInterface.selectIssue]?.body}
-                    category={userData.issueList[userInterface.selectIssue]?.category}
-                    assigned={userData.issueList[userInterface.selectIssue]?.assigned}
-                    dueDate={userData.issueList[userInterface.selectIssue]?.dueDate}
-                    comments={userData.issueList[userInterface.selectIssue]?.comments}
-                    status={userData.issueList[userInterface.selectIssue]?.isOpen}
-
+                    issue={userData.issueList[userInterface.selectIssue]}
                     toggleStatus={handleSetIssueStatus}
                     deleteIssue={deleteIssue} />
                 : null

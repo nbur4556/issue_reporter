@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 // Components
-import IssueBar from '../../components/IssueBar';
-import IssueDetails from '../../components/IssueDetails';
+import WorkbenchDetailSection from '../../components/WorkbenchDetailSection';
 import TabBar from '../../components/TabBar';
 import ProjectManager from '../../components/ProjectManager';
+import IssueBar from '../../components/IssueBar';
+import IssueDetails from '../../components/IssueDetails';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -123,22 +124,26 @@ const Workbench = () => {
 
             </section>
 
-            {/* Issue Details Section */}
+            {/* Workbench Details Section */}
 
-            <IssueDetails
-                name={userData.issueList[userInterface.selectIssue]?.name}
-                body={userData.issueList[userInterface.selectIssue]?.body}
-                category={userData.issueList[userInterface.selectIssue]?.category}
-                assigned={userData.issueList[userInterface.selectIssue]?.assigned}
-                dueDate={userData.issueList[userInterface.selectIssue]?.dueDate}
-                comments={userData.issueList[userInterface.selectIssue]?.comments}
-                status={userData.issueList[userInterface.selectIssue]?.isOpen}
+            {(userInterface.displayProjectManager)
+                ? <WorkbenchDetailSection component={ProjectManager} />
+                : null}
 
-                toggleStatus={handleSetIssueStatus}
-                deleteIssue={deleteIssue}
-            />
+            {(userInterface.selectIssue)
+                ? <WorkbenchDetailSection component={IssueDetails}
+                    name={userData.issueList[userInterface.selectIssue]?.name}
+                    body={userData.issueList[userInterface.selectIssue]?.body}
+                    category={userData.issueList[userInterface.selectIssue]?.category}
+                    assigned={userData.issueList[userInterface.selectIssue]?.assigned}
+                    dueDate={userData.issueList[userInterface.selectIssue]?.dueDate}
+                    comments={userData.issueList[userInterface.selectIssue]?.comments}
+                    status={userData.issueList[userInterface.selectIssue]?.isOpen}
 
-            {(userInterface.displayProjectManager) ? <ProjectManager /> : null}
+                    toggleStatus={handleSetIssueStatus}
+                    deleteIssue={deleteIssue} />
+                : null
+            }
 
         </main>
     );

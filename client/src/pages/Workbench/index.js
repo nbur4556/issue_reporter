@@ -51,7 +51,7 @@ const Workbench = () => {
     const handleToggleProjectManager = () => {
         (userInterface.displayProjectManager === true)
             ? setUserInterface({ ...userInterface, displayProjectManager: false })
-            : setUserInterface({ ...userInterface, displayProjectManager: true });
+            : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
     }
 
     const handleSelectProject = e => {
@@ -64,7 +64,7 @@ const Workbench = () => {
         const selectIndex = e.currentTarget.getAttribute('data-index');
         (selectIndex === userInterface.selectIssue)
             ? setUserInterface({ ...userInterface, selectIssue: null })
-            : setUserInterface({ ...userInterface, selectIssue: selectIndex });
+            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false });
     }
 
     // Set status of selected issue
@@ -126,11 +126,11 @@ const Workbench = () => {
 
             {/* Workbench Details Section */}
 
-            {(userInterface.displayProjectManager)
+            {(userInterface.displayProjectManager === true)
                 ? <WorkbenchDetailSection component={ProjectManager} />
                 : null}
 
-            {(userInterface.selectIssue)
+            {(userInterface.selectIssue !== null)
                 ? <WorkbenchDetailSection component={IssueDetails}
                     issue={userData.issueList[userInterface.selectIssue]}
                     toggleStatus={handleSetIssueStatus}

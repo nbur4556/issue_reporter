@@ -5,7 +5,6 @@ const IssueDetails = props => {
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     useEffect(() => {
-        console.log(props.issue.name)
         setDisplayDeleteMsg(false);
     }, [props.issue.name]);
 

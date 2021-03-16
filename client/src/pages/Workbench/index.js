@@ -41,32 +41,6 @@ const Workbench = () => {
         setUserData({ ...userData, projectList: projects.data, issueList: issues.data });
     }
 
-    // Toggle if closed issues are displayed
-    const handleDisplayClosedIssue = () => {
-        (userInterface.displayClosedIssue === true)
-            ? setUserInterface({ ...userInterface, displayClosedIssue: false })
-            : setUserInterface({ ...userInterface, displayClosedIssue: true });
-    }
-
-    const handleToggleProjectManager = () => {
-        (userInterface.displayProjectManager === true)
-            ? setUserInterface({ ...userInterface, displayProjectManager: false })
-            : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
-    }
-
-    const handleSelectProject = e => {
-        const projectId = e.currentTarget.getAttribute('data-id');
-        console.log(projectId);
-    }
-
-    // Set state of selected issue
-    const handleSelectIssue = e => {
-        const selectIndex = e.currentTarget.getAttribute('data-index');
-        (selectIndex === userInterface.selectIssue)
-            ? setUserInterface({ ...userInterface, selectIssue: null })
-            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false });
-    }
-
     // Set status of selected issue
     const handleSetIssueStatus = () => {
         const setStatus = (userData.issueList[userInterface.selectIssue].isOpen === true) ? 'false' : 'true';
@@ -84,6 +58,32 @@ const Workbench = () => {
             setUserInterface({ ...userInterface, selectIssue: null });
             loadUserData();
         });
+    }
+
+    // USER INTERFACE
+
+    const handleToggleProjectManager = () => {
+        (userInterface.displayProjectManager === true)
+            ? setUserInterface({ ...userInterface, displayProjectManager: false })
+            : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
+    }
+
+    const handleSelectProject = e => {
+        const projectId = e.currentTarget.getAttribute('data-id');
+        console.log(projectId);
+    }
+
+    const handleSelectIssue = e => {
+        const selectIndex = e.currentTarget.getAttribute('data-index');
+        (selectIndex === userInterface.selectIssue)
+            ? setUserInterface({ ...userInterface, selectIssue: null })
+            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false });
+    }
+
+    const handleDisplayClosedIssue = () => {
+        (userInterface.displayClosedIssue === true)
+            ? setUserInterface({ ...userInterface, displayClosedIssue: false })
+            : setUserInterface({ ...userInterface, displayClosedIssue: true });
     }
 
     return (

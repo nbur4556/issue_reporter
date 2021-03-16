@@ -45,6 +45,11 @@ const Workbench = () => {
     const handleSetIssueStatus = () => {
         const setStatus = (userData.issueList[userInterface.selectIssue].isOpen === true) ? 'false' : 'true';
 
+        // Deselect issue when closed and displaying closed issues is set to false
+        if (setStatus === 'false' && userInterface.displayClosedIssue === false) {
+            setUserInterface({ ...userInterface, selectIssue: null });
+        }
+
         // Send put request to change issue status, and reload issues
         issueConnection.putQuery({
             urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}`,

@@ -18,10 +18,16 @@ const TabBar = (props) => {
             {props.tabData.map((tab, index) => {
                 const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive'
 
-                return <Tab key={index} tabIndex={index} tabId={tab.tabId} tabName={tab.tabName} activeClass={activeClassName} onClick={(e) => {
-                    handleActiveTab(e);
-                    props.onClick(e);
-                }} />
+                return <Tab key={index}
+                    tabIndex={index}
+                    tabId={tab.tabId}
+                    tabName={tab.tabName}
+                    activeClass={activeClassName}
+                    selectTab={(e) => {
+                        handleActiveTab(e);
+                        props.onClick(e);
+                    }}
+                    removeTab={props.removeTab} />
             })}
         </section>
     );

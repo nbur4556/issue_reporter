@@ -2,11 +2,13 @@ import React from 'react';
 
 const Tab = (props) => {
     return (
-        <div
-            className={`tab ${props.activeClass}`}
+        <div className={`tab ${props.activeClass}`}
             data-index={props.tabIndex}
             data-id={props.tabId}
-            onClick={props.onClick}>{props.tabName}
+            onClick={props.selectTab}>
+
+            {props.tabName}
+            <button onClick={props.removeTab}>X</button>
         </div>
     )
 }

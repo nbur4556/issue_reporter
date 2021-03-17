@@ -102,7 +102,11 @@ const Workbench = () => {
     }
 
     const handleRemoveProjectTab = e => {
-        console.log(e.currentTarget.parentElement);
+        const tabIndex = e.currentTarget.parentElement.getAttribute('data-index');
+        const splicedProjectTabs = [...userInterface.projectTabs]
+
+        splicedProjectTabs.splice(tabIndex, 1);
+        setUserInterface({ ...userInterface, projectTabs: splicedProjectTabs });
     }
 
     const handleSelectProject = e => {
@@ -144,6 +148,7 @@ const Workbench = () => {
                 </section>
 
                 <TabBar onClick={handleSelectProject}
+                    removeTab={handleRemoveProjectTab}
                     tabData={userInterface.projectTabs.map(project => {
                         return { tabId: project._id, tabName: project.projectName }
                     })}

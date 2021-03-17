@@ -132,7 +132,9 @@ const Workbench = () => {
             {/* Workbench Details Section */}
 
             {(userInterface.displayProjectManager === true)
-                ? <WorkbenchDetailSection component={ProjectManager} />
+                ? <WorkbenchDetailSection component={ProjectManager}
+                    projects={userData.projectList}
+                />
                 : null}
 
             {(userInterface.selectIssue !== null)

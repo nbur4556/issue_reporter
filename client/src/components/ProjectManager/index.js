@@ -1,10 +1,16 @@
 import React from 'react';
 
-const ProjectManager = () => {
+const ProjectManager = (props) => {
     return (
-        <section>
+        <ul>
+            {props.projects.map((project, index) => {
+                return (
+                    <li key={index}>{project.projectName}</li>
+                );
+            })}
+
             <p>Project Manager</p>
-        </section>
+        </ul>
     )
 }
 

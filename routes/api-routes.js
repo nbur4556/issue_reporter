@@ -57,13 +57,6 @@ module.exports = function (app) {
         }
     });
 
-    // app.get('/api/project/:searchId', async (req, res) => {
-    //     const projectResult = await controllers.projectController.findById(req.params.searchId).catch(err => {
-    //         res.status(400).json(err);
-    //     });
-    //     res.status(200).json(projectResult);
-    // });
-
     app.post('/api/project', async (req, res) => {
         const authorization = await authenticateRequest(req.headers.authorization);
 

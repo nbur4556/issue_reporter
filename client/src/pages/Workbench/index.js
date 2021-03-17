@@ -21,6 +21,7 @@ const Workbench = () => {
     });
 
     const [userInterface, setUserInterface] = useState({
+        projectTabs: [],
         selectIssue: null,
         displayProjectManager: false,
         displayClosedIssue: false
@@ -85,6 +86,25 @@ const Workbench = () => {
             : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
     }
 
+    const handleAddProjectTab = e => {
+        const projectId = e.currentTarget.parentElement.getAttribute('data-projectid');
+
+        // Check if tab exists
+        for (const tab of userInterface.projectTabs) {
+            if (tab._id === projectId) return;
+        }
+
+        // Find project in project list
+        userData.projectList.forEach((project) => {
+            if (project._id === projectId)
+                setUserInterface({ ...userInterface, projectTabs: [...userInterface.projectTabs, project] });
+        });
+    }
+
+    const handleRemoveProjectTab = e => {
+        console.log(e.currentTarget.parentElement);
+    }
+
     const handleSelectProject = e => {
         const projectId = e.currentTarget.getAttribute('data-id');
         console.log(projectId);
@@ -124,7 +144,7 @@ const Workbench = () => {
                 </section>
 
                 <TabBar onClick={handleSelectProject}
-                    tabData={userData.projectList.map(project => {
+                    tabData={userInterface.projectTabs.map(project => {
                         return { tabId: project._id, tabName: project.projectName }
                     })}
                 />
@@ -146,6 +166,7 @@ const Workbench = () => {
             {(userInterface.displayProjectManager === true)
                 ? <WorkbenchDetailSection component={ProjectManager}
                     projects={userData.projectList}
+                    addTab={handleAddProjectTab}
                     deleteProject={deleteProject}
                 />
                 : null}

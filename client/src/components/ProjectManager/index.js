@@ -7,6 +7,7 @@ const ProjectManager = (props) => {
                 return (
                     <li key={index} data-projectid={project._id}>
                         {project.projectName}
+                        <button onClick={props.addTab}>Add Tab</button>
                         <button onClick={props.deleteProject}>Delete Project</button>
                     </li>
                 );

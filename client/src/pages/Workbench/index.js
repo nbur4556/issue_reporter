@@ -57,12 +57,24 @@ const Workbench = () => {
         }).then(() => { loadUserData() });
     }
 
+    const deleteProject = e => {
+        console.log(e.currentTarget.parentElement);
+        projectConnection.deleteQuery({
+            urlExtension: `/${e.currentTarget.parentElement.getAttribute('data-projectid')}`,
+            authorization: localStorage.getItem('authToken')
+        })
+            .then(() => {
+                loadUserData();
+            });
+    }
+
     // Remove Issue from API
-    const deleteIssue = e => {
-        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}` }).then(() => {
-            setUserInterface({ ...userInterface, selectIssue: null });
-            loadUserData();
-        });
+    const deleteIssue = () => {
+        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}` })
+            .then(() => {
+                setUserInterface({ ...userInterface, selectIssue: null });
+                loadUserData();
+            });
     }
 
     // USER INTERFACE
@@ -134,6 +146,7 @@ const Workbench = () => {
             {(userInterface.displayProjectManager === true)
                 ? <WorkbenchDetailSection component={ProjectManager}
                     projects={userData.projectList}
+                    deleteProject={deleteProject}
                 />
                 : null}
 

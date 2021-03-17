@@ -5,7 +5,10 @@ const ProjectManager = (props) => {
         <ul>
             {props.projects.map((project, index) => {
                 return (
-                    <li key={index}>{project.projectName}</li>
+                    <li key={index} data-projectid={project._id}>
+                        {project.projectName}
+                        <button onClick={props.deleteProject}>Delete Project</button>
+                    </li>
                 );
             })}
 

@@ -34,7 +34,7 @@ const Workbench = () => {
     async function loadUserData() {
         // Load all user projects
         const [projects, issues] = await Promise.all([
-            projectConnection.getQuery(),
+            projectConnection.getQuery({ authorization: localStorage.getItem('authToken') }),
             issueConnection.getQuery()
         ]);
 

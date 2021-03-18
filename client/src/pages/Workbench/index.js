@@ -21,6 +21,7 @@ const Workbench = () => {
     });
 
     const [userInterface, setUserInterface] = useState({
+        projectTabs: [],
         selectIssue: null,
         displayProjectManager: false,
         displayClosedIssue: false
@@ -57,12 +58,30 @@ const Workbench = () => {
         }).then(() => { loadUserData() });
     }
 
-    // Remove Issue from API
-    const deleteIssue = e => {
-        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}` }).then(() => {
-            setUserInterface({ ...userInterface, selectIssue: null });
+    const editProject = (e, projectId, projectData) => {
+        e.preventDefault();
+        projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData }).then(() => {
             loadUserData();
         });
+    }
+
+    const deleteProject = e => {
+        projectConnection.deleteQuery({
+            urlExtension: `/${e.currentTarget.parentElement.getAttribute('data-projectid')}`,
+            authorization: localStorage.getItem('authToken')
+        })
+            .then(() => {
+                loadUserData();
+            });
+    }
+
+    // Remove Issue from API
+    const deleteIssue = () => {
+        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}` })
+            .then(() => {
+                setUserInterface({ ...userInterface, selectIssue: null });
+                loadUserData();
+            });
     }
 
     // USER INTERFACE
@@ -71,6 +90,29 @@ const Workbench = () => {
         (userInterface.displayProjectManager === true)
             ? setUserInterface({ ...userInterface, displayProjectManager: false })
             : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
+    }
+
+    const handleAddProjectTab = e => {
+        const projectId = e.currentTarget.parentElement.getAttribute('data-projectid');
+
+        // Check if tab exists
+        for (const tab of userInterface.projectTabs) {
+            if (tab._id === projectId) return;
+        }
+
+        // Find project in project list
+        userData.projectList.forEach((project) => {
+            if (project._id === projectId)
+                setUserInterface({ ...userInterface, projectTabs: [...userInterface.projectTabs, project] });
+        });
+    }
+
+    const handleRemoveProjectTab = e => {
+        const tabIndex = e.currentTarget.parentElement.getAttribute('data-index');
+        const splicedProjectTabs = [...userInterface.projectTabs]
+
+        splicedProjectTabs.splice(tabIndex, 1);
+        setUserInterface({ ...userInterface, projectTabs: splicedProjectTabs });
     }
 
     const handleSelectProject = e => {
@@ -112,7 +154,8 @@ const Workbench = () => {
                 </section>
 
                 <TabBar onClick={handleSelectProject}
-                    tabData={userData.projectList.map(project => {
+                    removeTab={handleRemoveProjectTab}
+                    tabData={userInterface.projectTabs.map(project => {
                         return { tabId: project._id, tabName: project.projectName }
                     })}
                 />
@@ -132,7 +175,12 @@ const Workbench = () => {
             {/* Workbench Details Section */}
 
             {(userInterface.displayProjectManager === true)
-                ? <WorkbenchDetailSection component={ProjectManager} />
+                ? <WorkbenchDetailSection component={ProjectManager}
+                    projects={userData.projectList}
+                    addTab={handleAddProjectTab}
+                    editProject={editProject}
+                    deleteProject={deleteProject}
+                />
                 : null}
 
             {(userInterface.selectIssue !== null)

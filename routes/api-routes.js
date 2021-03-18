@@ -57,13 +57,6 @@ module.exports = function (app) {
         }
     });
 
-    // app.get('/api/project/:searchId', async (req, res) => {
-    //     const projectResult = await controllers.projectController.findById(req.params.searchId).catch(err => {
-    //         res.status(400).json(err);
-    //     });
-    //     res.status(200).json(projectResult);
-    // });
-
     app.post('/api/project', async (req, res) => {
         const authorization = await authenticateRequest(req.headers.authorization);
 
@@ -85,12 +78,19 @@ module.exports = function (app) {
         }
     });
 
-    // app.put('/api/project/:searchId', async (req, res) => {
-    //     const projectResult = await controllers.projectController.updateById(req.params.searchId, req.body).catch(err => {
-    //         res.status(400).json(err);
-    //     });
-    //     res.status(200).json(projectResult);
-    // });
+    app.put('/api/project/:searchId', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+
+        if (authorization._id) {
+            const projectResult = await controllers.projectController.updateById(req.params.searchId, req.body).catch(err => {
+                res.status(400).json(err);
+            });
+            res.status(200).json(projectResult);
+        }
+        else {
+            res.status(400).json(authorization);
+        }
+    });
 
     app.delete('/api/project/:searchId', async (req, res) => {
         const authorization = await authenticateRequest(req.headers.authorization);

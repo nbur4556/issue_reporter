@@ -38,6 +38,8 @@ class ApiConnection {
     }
 
     deleteQuery(options = {}) {
+        console.log(options)
+
         let query = this.buildQuery(options);
         return axios.delete(query.url, {}, { headers: this.getAuthHeader() });
     }

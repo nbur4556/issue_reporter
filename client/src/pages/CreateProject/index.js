@@ -17,9 +17,7 @@ const CreateProject = () => {
 
     const handleCreateProject = e => {
         e.preventDefault();
-        const authToken = localStorage.getItem('authToken');
-
-        projectConnection.postQuery({ body: projectData, authorization: authToken }).then(result => {
+        projectConnection.postQuery({ body: projectData }).then(result => {
             (result.status === 200) ? console.log('Create Project Success') : console.log('Create Project Failed');
         });
     }

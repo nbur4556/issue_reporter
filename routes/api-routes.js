@@ -6,12 +6,10 @@ const authenticateRequest = authHeader => {
 }
 
 module.exports = function (app) {
-    app.get('/api/authenticate', async (req, res) => {
-        const authorization = req.headers.authorization;
-        const result = await controllers.userController.authenticate(authorization)
-            .catch(err => {
-                res.status(400).json(err);
-            });
+    app.get('/api/authenticate/:authToken', async (req, res) => {
+        const result = await controllers.userController.authenticate(req.params.authToken).catch(err => {
+            res.status(400).json(err);
+        });
         res.status(200).json(result);
     });
 

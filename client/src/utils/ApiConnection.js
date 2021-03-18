@@ -7,12 +7,18 @@ class ApiConnection {
 
     setUrl(url) { this.url = url; }
 
+    // Get and apply authorization token from local storage
+    getAuthToken() {
+        const authToken = localStorage.getItem('authToken');
+        return (authToken) ? `Bearer ${authToken}` : null;
+    }
+
     // Create query to send to backend API
     buildQuery(options = {}) {
         return {
             url: (options.urlExtension) ? (options.url || this.url) + options.urlExtension : (options.url || this.url),
             body: options.body,
-            headers: { Authorization: `Bearer ${options.authorization}` }
+            headers: { Authorization: this.getAuthToken() }
         }
     }
 

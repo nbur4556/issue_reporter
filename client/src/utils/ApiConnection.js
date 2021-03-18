@@ -7,40 +7,39 @@ class ApiConnection {
 
     setUrl(url) { this.url = url; }
 
-    // Get and apply authorization token from local storage
-    getAuthToken() {
+    // Get and apply authorization token as a header from local storage
+    getAuthHeader() {
         const authToken = localStorage.getItem('authToken');
-        return (authToken) ? `Bearer ${authToken}` : null;
+        return (authToken) ? { Authorization: `Bearer ${authToken}` } : null;
     }
 
     // Create query to send to backend API
     buildQuery(options = {}) {
         return {
             url: (options.urlExtension) ? (options.url || this.url) + options.urlExtension : (options.url || this.url),
-            body: options.body,
-            headers: { Authorization: this.getAuthToken() }
+            body: options.body
         }
     }
 
     // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.get(query.url, { headers: query.headers });
+        return axios.get(query.url, { headers: this.getAuthHeader() });
     }
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.post(query.url, query.body, { headers: query.headers });
+        return axios.post(query.url, query.body, { headers: this.getAuthHeader() });
     }
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.put(query.url, query.body, { headers: query.headers });
+        return axios.put(query.url, query.body, { headers: this.getAuthHeader() });
     }
 
     deleteQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.delete(query.url, {}, { headers: query.headers });
+        return axios.delete(query.url, {}, { headers: this.getAuthHeader() });
     }
 }
 

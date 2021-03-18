@@ -33,7 +33,7 @@ const ProjectManager = (props) => {
         return projectListItems;
     }
 
-    const editProjects = (project) => {
+    const renderEditForm = () => {
         return (
             <form>
                 <label htmlFor="projectName">
@@ -42,7 +42,7 @@ const ProjectManager = (props) => {
                 </label>
                 <button name="submit" onClick={(e) => {
                     toggleEditState(e);
-                    props.editProject(e, editProjectId);
+                    props.editProject(e, editProjectId, editData);
                 }}>Submit</button>
             </form>
         );
@@ -50,7 +50,7 @@ const ProjectManager = (props) => {
 
     return (
         <ul>
-            {(editState) ? editProjects() : renderProjects(props.projects)}
+            {(editState) ? renderEditForm() : renderProjects(props.projects)}
         </ul>
     )
 }

@@ -58,13 +58,14 @@ const Workbench = () => {
         }).then(() => { loadUserData() });
     }
 
-    const editProject = (e, projectId) => {
+    const editProject = (e, projectId, projectData) => {
         e.preventDefault();
-        console.log(projectId);
+        projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData }).then(() => {
+            loadUserData();
+        });
     }
 
     const deleteProject = e => {
-        console.log(e.currentTarget.parentElement);
         projectConnection.deleteQuery({
             urlExtension: `/${e.currentTarget.parentElement.getAttribute('data-projectid')}`,
             authorization: localStorage.getItem('authToken')

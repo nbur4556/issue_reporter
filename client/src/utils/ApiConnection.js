@@ -29,7 +29,10 @@ class ApiConnection {
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.put(query.url, query.body, { headers: query.headers });
+
+        console.log(query);
+
+        // return axios.put(query.url, query.body, { headers: query.headers });
     }
 
     deleteQuery(options = {}) {

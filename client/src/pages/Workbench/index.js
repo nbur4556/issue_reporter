@@ -58,6 +58,11 @@ const Workbench = () => {
         }).then(() => { loadUserData() });
     }
 
+    const editProject = (e, projectId) => {
+        e.preventDefault();
+        console.log(projectId);
+    }
+
     const deleteProject = e => {
         console.log(e.currentTarget.parentElement);
         projectConnection.deleteQuery({
@@ -172,6 +177,7 @@ const Workbench = () => {
                 ? <WorkbenchDetailSection component={ProjectManager}
                     projects={userData.projectList}
                     addTab={handleAddProjectTab}
+                    editProject={editProject}
                     deleteProject={deleteProject}
                 />
                 : null}

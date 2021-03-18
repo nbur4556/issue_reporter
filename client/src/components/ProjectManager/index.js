@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 
 const ProjectManager = (props) => {
     const [editState, setEditState] = useState(false);
+    const [editProjectId, setEditProjectId] = useState();
     const [editData, setEditData] = useState({
         projectName: null
     });
 
-    const toggleEditState = () => {
+    const toggleEditState = (e) => {
+        const projectId = e.currentTarget.parentElement?.getAttribute('data-projectId');
+        setEditProjectId(projectId);
         (editState) ? setEditState(false) : setEditState(true);
     }
 
@@ -37,6 +40,10 @@ const ProjectManager = (props) => {
                     Name:
                     <input id="projectName" name="projectName" type="text" onChange={handleEditData} />
                 </label>
+                <button name="submit" onClick={(e) => {
+                    toggleEditState(e);
+                    props.editProject(e, editProjectId);
+                }}>Submit</button>
             </form>
         );
     }

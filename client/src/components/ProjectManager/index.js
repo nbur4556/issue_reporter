@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 
 const ProjectManager = (props) => {
     const [editState, setEditState] = useState(false);
+    const [editData, setEditData] = useState({
+        projectName: null
+    });
 
     const toggleEditState = () => {
         (editState) ? setEditState(false) : setEditState(true);
+    }
+
+    const handleEditData = (e) => {
+        const input = e.currentTarget;
+        setEditData({ ...editData, [input.name]: input.value });
     }
 
     const renderProjects = (projectsList) => {
@@ -22,8 +30,15 @@ const ProjectManager = (props) => {
         return projectListItems;
     }
 
-    const editProjects = () => {
-        return <p onClick={toggleEditState}>Edit Projects</p>
+    const editProjects = (project) => {
+        return (
+            <form>
+                <label htmlFor="projectName">
+                    Name:
+                    <input id="projectName" name="projectName" type="text" onChange={handleEditData} />
+                </label>
+            </form>
+        );
     }
 
     return (

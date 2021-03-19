@@ -1,4 +1,5 @@
 const projectName = "Project Name";
+const projectNameEdited = "Edited Name";
 
 describe("Create project", () => {
     const successMsg = `Success! Issue "${projectName}" created.`;
@@ -53,6 +54,63 @@ describe("Create project", () => {
     });
 });
 
+describe('Update Project', () => {
+    let testId;
+
+    beforeEach(() => {
+        // Login with cypress test credentials
+        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
+            username: Cypress.env('cyUsername'),
+            password: Cypress.env('cyPassword')
+        }).then(({ body }) => {
+            localStorage.setItem('authToken', body.authToken);
+
+            cy.request({
+                method: 'POST',
+                url: '/api/project',
+                headers: {
+                    Authorization: 'Bearer ' + body.authToken
+                },
+                body: {
+                    projectName: projectName
+                }
+            }).then(({ body }) => {
+                testId = body._id;
+            });
+        });
+
+        cy.visit('/workbench');
+
+        cy.get('button').contains('Toggle Project Manager').click();
+    });
+
+    afterEach(() => {
+        cy.request({
+            method: 'DELETE',
+            url: `/api/project/${testId}`,
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('authToken')
+            }
+        });
+        localStorage.removeItem('authToken');
+    });
+
+    it('edit project with all data', () => {
+        cy.get('button[data-cy="edit-project"]').click();
+        cy.get('input[data-cy="edit-field"]').type(projectNameEdited);
+        cy.get('button[data-cy="submit-edit"]').click();
+        cy.get('ul[data-cy="project-manager-list"]').contains(projectNameEdited).should('exist');
+        cy.get('ul[data-cy="project-manager-list"]').contains(projectName).should('not.exist');
+    });
+
+    it('attempt edit project without name', () => {
+        cy.get('button[data-cy="edit-project"]').click();
+        cy.get('button[data-cy="submit-edit"]').click();
+        cy.get('ul[data-cy="project-manager-list"]').contains(projectNameEdited).should('not.exist');
+        cy.get('ul[data-cy="project-manager-list"]').contains(projectName).should('exist');
+    });
+});
+
 describe('Delete Project', () => {
     let testId;
 
@@ -98,7 +156,7 @@ describe('Delete Project', () => {
 
     // Project should no longer exist
     it("successfully delete a project", () => {
-        cy.get('button[data-cy="delete-project-button"]').click();
+        cy.get('button[data-cy="delete-project"]').click();
         cy.get('ul[data-cy="project-manager-list"]').contains(projectName).should('not.exist');
     });
-})
+});

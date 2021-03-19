@@ -58,8 +58,8 @@ const Workbench = () => {
             deleteProject={
                 (e) => handleDeleteProject(e, handleLoadData)
             }
-            setIssueStatus={() => handleSetIssueStatus()}
-            deleteIssue={() => handleDeleteIssue()}
+            setIssueStatus={handleSetIssueStatus}
+            deleteIssue={handleDeleteIssue}
         />
     );
 }

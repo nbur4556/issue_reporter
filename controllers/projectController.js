@@ -13,7 +13,7 @@ module.exports = {
 
     // Update Project
     updateById: function (searchId, projectParams) {
-        // Remove empty parameters from body
+        // Remove empty parameters
         for (const key in projectParams) {
             if (!projectParams[key]) {
                 delete projectParams[key];

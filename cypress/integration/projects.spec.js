@@ -98,6 +98,7 @@ describe('Delete Project', () => {
 
     // Project should no longer exist
     it("successfully delete a project", () => {
-        console.log('delete a project');
+        cy.get('button[data-cy="delete-project-button"]').click();
+        cy.get('ul[data-cy="project-manager-list"]').contains(projectName).should('not.exist');
     });
 })

@@ -25,7 +25,7 @@ const ProjectManager = (props) => {
                     {project.projectName}
                     <button onClick={props.addTab}>Add Tab</button>
                     <button onClick={toggleEditState}>Edit Project</button>
-                    <button onClick={props.deleteProject}>Delete Project</button>
+                    <button onClick={props.deleteProject} data-cy="delete-project-button">Delete Project</button>
                 </li>
             );
         });
@@ -49,7 +49,7 @@ const ProjectManager = (props) => {
     }
 
     return (
-        <ul>
+        <ul data-cy="project-manager-list">
             {(editState) ? renderEditForm() : renderProjects(props.projects)}
         </ul>
     )

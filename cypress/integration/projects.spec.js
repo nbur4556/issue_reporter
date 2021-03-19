@@ -7,13 +7,7 @@ describe("Create project", () => {
 
     beforeEach(() => {
         // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-        });
-
+        cy.login();
         cy.visit('/create-project');
         cy.intercept('/api/project').as('projectData');
     });
@@ -29,7 +23,7 @@ describe("Create project", () => {
             });
         }
 
-        // localStorage.removeItem('authToken');
+        cy.logout();
     });
 
     // Successfully create projet with all information
@@ -59,12 +53,8 @@ describe('Update Project', () => {
 
     beforeEach(() => {
         // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-
+        cy.login().then(({ body }) => {
+            // Create project on login
             cy.request({
                 method: 'POST',
                 url: '/api/project',
@@ -80,7 +70,6 @@ describe('Update Project', () => {
         });
 
         cy.visit('/workbench');
-
         cy.get('button').contains('Toggle Project Manager').click();
     });
 
@@ -92,7 +81,7 @@ describe('Update Project', () => {
                 Authorization: 'Bearer ' + localStorage.getItem('authToken')
             }
         });
-        localStorage.removeItem('authToken');
+        cy.logout();
     });
 
     it('edit project with all data', () => {
@@ -116,12 +105,8 @@ describe('Delete Project', () => {
 
     beforeEach(() => {
         // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-
+        cy.login().then(({ body }) => {
+            // Create project on login
             cy.request({
                 method: 'POST',
                 url: '/api/project',
@@ -151,7 +136,7 @@ describe('Delete Project', () => {
                 }
             });
         }
-        localStorage.removeItem('authToken');
+        cy.logout();
     });
 
     // Project should no longer exist

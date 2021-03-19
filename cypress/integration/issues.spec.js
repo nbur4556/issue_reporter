@@ -10,22 +10,17 @@ describe('Create issue', () => {
 
     beforeEach(() => {
         // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-        });
+        cy.login();
 
         cy.visit('/create-issue');
         cy.intercept('/api/issue').as('issueData');
     });
 
     afterEach(() => {
-        localStorage.removeItem('authToken');
         if (testId) {
             cy.request('DELETE', `/api/issue/${testId}`);
         }
+        cy.logout();
     });
 
     // Check that form with all information creates success message
@@ -132,12 +127,7 @@ describe('Delete Issue', () => {
 
     beforeEach(() => {
         // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-        });
+        cy.login();
 
         cy.visit('/workbench');
         cy.request('POST', '/api/issue', { name: issueName }).then(({ body }) => {
@@ -149,10 +139,10 @@ describe('Delete Issue', () => {
     });
 
     afterEach(() => {
-        localStorage.removeItem('authToken');
         if (testId) {
             cy.request('DELETE', `/api/issue/${testId}`);
         }
+        cy.logout();
     });
 
     // Check cancel delete button does not delete issue

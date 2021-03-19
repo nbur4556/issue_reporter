@@ -1,17 +1,6 @@
 describe('Url Navigation Authorized', () => {
-    beforeEach(() => {
-        // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-        });
-    });
-
-    afterEach(() => {
-        localStorage.removeItem('authToken');
-    });
+    beforeEach(() => cy.login());
+    afterEach(() => cy.logout());
 
     // Should equal root url
     it('visit landing url', () => {
@@ -39,9 +28,7 @@ describe('Url Navigation Authorized', () => {
 });
 
 describe('Url Navigation Unauthorized', () => {
-    beforeEach(() => {
-        localStorage.removeItem('authToken');
-    });
+    beforeEach(() => cy.logout());
 
     // All should equal base url
     it('attempt visit workbench url', () => {
@@ -61,19 +48,8 @@ describe('Url Navigation Unauthorized', () => {
 });
 
 describe('Link Navigation', () => {
-    beforeEach(() => {
-        // Login with cypress test credentials
-        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
-            username: Cypress.env('cyUsername'),
-            password: Cypress.env('cyPassword')
-        }).then(({ body }) => {
-            localStorage.setItem('authToken', body.authToken);
-        });
-    });
-
-    afterEach(() => {
-        localStorage.removeItem('authToken');
-    });
+    beforeEach(() => cy.login());
+    afterEach(() => cy.logout());
 
     // Should equal create issue page url
     it('dashboard to create issue link', () => {

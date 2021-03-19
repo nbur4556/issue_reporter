@@ -14,8 +14,10 @@ const IssueInterface = () => {
         });
     }
 
-    const handleDeleteIssue = (ui, setUi, handleLoadData, issueId) => {
-        return issueConnection.deleteQuery({ urlExtension: `/${issueId}` }).then(() => {
+    const handleDeleteIssue = (userData, ui, setUi, handleLoadData) => {
+        const { _id: issueId } = userData.issueList[ui.selectIssue];
+
+        issueConnection.deleteQuery({ urlExtension: `/${issueId}` }).then(() => {
             setUi({ ...ui, selectIssue: null });
             handleLoadData();
         });

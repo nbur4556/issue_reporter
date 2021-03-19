@@ -102,7 +102,8 @@ const Workbench = () => {
                 () => handleSetIssueStatus(userData, userInterface, setUserInterface, handleLoadData)
             }
             deleteIssue={
-                () => handleDeleteIssue(userInterface, setUserInterface, handleLoadData, userData.issueList[userInterface.selectIssue]._id)
+                () => handleDeleteIssue(userData, userInterface, setUserInterface, handleLoadData)
+                // () => handleDeleteIssue(userInterface, setUserInterface, handleLoadData, userData.issueList[userInterface.selectIssue]._id)
             }
         />
     );

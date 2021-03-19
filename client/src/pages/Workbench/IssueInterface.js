@@ -2,24 +2,24 @@
 import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
-const IssueInterface = () => {
-    const handleSetIssueStatus = (userData, ui, setUi, handleLoadData) => {
-        const { isOpen, _id: issueId } = userData.issueList[ui.selectIssue];
+const IssueInterface = (props) => {
+    const handleSetIssueStatus = () => {
+        const { isOpen, _id: issueId } = props.userData.issueList[props.userInterface.selectIssue];
 
         // Deselect issue when closed and displaying closed issues is set to false
-        if (isOpen === true && ui.displayClosedIssue === false) setUi({ ...ui, selectIssue: null });
+        if (isOpen === true && props.userInterface.displayClosedIssue === false) props.setUserInterface({ ...props.userInterface, selectIssue: null });
 
         issueConnection.putQuery({ urlExtension: `/${issueId}`, body: { isOpen: !isOpen } }).then(() => {
-            handleLoadData();
+            props.handleLoadData();
         });
     }
 
-    const handleDeleteIssue = (userData, ui, setUi, handleLoadData) => {
-        const { _id: issueId } = userData.issueList[ui.selectIssue];
+    const handleDeleteIssue = () => {
+        const { _id: issueId } = props.userData.issueList[props.userInterface.selectIssue];
 
         issueConnection.deleteQuery({ urlExtension: `/${issueId}` }).then(() => {
-            setUi({ ...ui, selectIssue: null });
-            handleLoadData();
+            props.setUserInterface({ ...props.userInterface, selectIssue: null });
+            props.handleLoadData();
         });
     }
 

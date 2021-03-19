@@ -20,16 +20,9 @@ const Workbench = () => {
         displayClosedIssue: false
     });
 
-    const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface();
-    const { handleEditProject, handleDeleteProject } = ProjectInterface();
-    const {
-        handleToggleProjectManager, handleAddProjectTab,
-        handleRemoveProjectTab, handleSelectProject,
-        handleSelectIssue, handleDisplayClosedIssue
-    } = UI({ userInterface, setUserInterface, userData });
-
     useEffect(() => handleLoadData(), []);
 
+    // Get projects and issues for authorized users
     const handleLoadData = () => {
         loadData().then(([projectResponse, issueResponse]) => {
             setUserData({
@@ -38,6 +31,15 @@ const Workbench = () => {
             });
         });
     }
+
+    // Logical Component Destructuring
+    const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface({ userData, userInterface, setUserInterface, handleLoadData });
+    const { handleEditProject, handleDeleteProject } = ProjectInterface();
+    const {
+        handleToggleProjectManager, handleAddProjectTab,
+        handleRemoveProjectTab, handleSelectProject,
+        handleSelectIssue, handleDisplayClosedIssue
+    } = UI({ userInterface, setUserInterface, userData });
 
     return (
         <Render
@@ -56,12 +58,8 @@ const Workbench = () => {
             deleteProject={
                 (e) => handleDeleteProject(e, handleLoadData)
             }
-            setIssueStatus={
-                () => handleSetIssueStatus(userData, userInterface, setUserInterface, handleLoadData)
-            }
-            deleteIssue={
-                () => handleDeleteIssue(userData, userInterface, setUserInterface, handleLoadData)
-            }
+            setIssueStatus={() => handleSetIssueStatus()}
+            deleteIssue={() => handleDeleteIssue()}
         />
     );
 }

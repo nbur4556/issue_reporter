@@ -7,7 +7,7 @@ import IssueInterface from './IssueInterface.js';
 import { editProject, deleteProject } from './ProjectInterface.js';
 
 const Workbench = () => {
-    const { handleDeleteIssue, setIssueStatus } = IssueInterface();
+    const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface();
 
     const [userData, setUserData] = useState({
         projectList: [],
@@ -39,19 +39,6 @@ const Workbench = () => {
 
     const handleDeleteProject = (e) => {
         deleteProject({ projectId: e.currentTarget.parentElement.getAttribute('data-projectid') })
-            .then(() => handleLoadData());
-    }
-
-    // Set status of selected issue
-    const handleSetIssueStatus = () => {
-        const setStatus = (userData.issueList[userInterface.selectIssue].isOpen === true) ? 'false' : 'true';
-
-        // Deselect issue when closed and displaying closed issues is set to false
-        if (setStatus === 'false' && userInterface.displayClosedIssue === false) {
-            setUserInterface({ ...userInterface, selectIssue: null });
-        }
-
-        setIssueStatus({ issueId: userData.issueList[userInterface.selectIssue]._id, status: setStatus })
             .then(() => handleLoadData());
     }
 
@@ -116,7 +103,7 @@ const Workbench = () => {
             addProjectTab={handleAddProjectTab}
             editProject={handleEditProject}
             deleteProject={handleDeleteProject}
-            setIssueStatus={handleSetIssueStatus}
+            setIssueStatus={() => handleSetIssueStatus(userData, userInterface, setUserInterface, handleLoadData)}
             deleteIssue={() => handleDeleteIssue(userInterface, setUserInterface, handleLoadData, userData.issueList[userInterface.selectIssue]._id)}
         />
     );

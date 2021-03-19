@@ -2,14 +2,23 @@
 import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project');
 
-const editProject = (props) => {
-    const { projectId, projectData } = props;
-    return projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData });
+const ProjectInterface = () => {
+    const handleEditProject = (e, projectId, projectData, handleLoadData) => {
+        e.preventDefault();
+        projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData })
+            .then(() => {
+                handleLoadData();
+            });
+    }
+
+    const handleDeleteProject = (e, handleLoadData) => {
+        projectConnection.deleteQuery({ urlExtension: `/${e.currentTarget.parentElement.getAttribute('data-projectid')}` })
+            .then(() => {
+                handleLoadData();
+            });
+    }
+
+    return { handleEditProject, handleDeleteProject };
 }
 
-const deleteProject = (props) => {
-    const { projectId } = props;
-    return projectConnection.deleteQuery({ urlExtension: `/${projectId}` });
-}
-
-export { editProject, deleteProject };
+export default ProjectInterface;

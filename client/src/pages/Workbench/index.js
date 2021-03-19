@@ -4,10 +4,11 @@ import './style.css';
 import Render from './Render.js';
 import loadData from './loadData.js';
 import IssueInterface from './IssueInterface.js';
-import { editProject, deleteProject } from './ProjectInterface.js';
+import ProjectInterface from './ProjectInterface.js';
 
 const Workbench = () => {
     const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface();
+    const { handleEditProject, handleDeleteProject } = ProjectInterface();
 
     const [userData, setUserData] = useState({
         projectList: [],
@@ -30,16 +31,6 @@ const Workbench = () => {
                 issueList: issueResponse.data
             });
         });
-    }
-
-    const handleEditProject = (e, projectId, projectData) => {
-        e.preventDefault();
-        editProject({ projectId, projectData }).then(() => handleLoadData());
-    }
-
-    const handleDeleteProject = (e) => {
-        deleteProject({ projectId: e.currentTarget.parentElement.getAttribute('data-projectid') })
-            .then(() => handleLoadData());
     }
 
     // USER INTERFACE
@@ -101,10 +92,18 @@ const Workbench = () => {
             removeProjectTab={handleRemoveProjectTab}
             selectIssue={handleSelectIssue}
             addProjectTab={handleAddProjectTab}
-            editProject={handleEditProject}
-            deleteProject={handleDeleteProject}
-            setIssueStatus={() => handleSetIssueStatus(userData, userInterface, setUserInterface, handleLoadData)}
-            deleteIssue={() => handleDeleteIssue(userInterface, setUserInterface, handleLoadData, userData.issueList[userInterface.selectIssue]._id)}
+            editProject={
+                (e, projectId, projectData) => handleEditProject(e, projectId, projectData, handleLoadData)
+            }
+            deleteProject={
+                (e) => handleDeleteProject(e, handleLoadData)
+            }
+            setIssueStatus={
+                () => handleSetIssueStatus(userData, userInterface, setUserInterface, handleLoadData)
+            }
+            deleteIssue={
+                () => handleDeleteIssue(userInterface, setUserInterface, handleLoadData, userData.issueList[userInterface.selectIssue]._id)
+            }
         />
     );
 }

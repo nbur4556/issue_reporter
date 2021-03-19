@@ -3,10 +3,12 @@ import './style.css';
 
 import Render from './Render.js';
 import loadData from './loadData.js';
-import { deleteIssue, setIssueStatus } from './IssueInterface.js';
+import IssueInterface from './IssueInterface.js';
 import { editProject, deleteProject } from './ProjectInterface.js';
 
 const Workbench = () => {
+    const { handleDeleteIssue, setIssueStatus } = IssueInterface();
+
     const [userData, setUserData] = useState({
         projectList: [],
         issueList: []
@@ -51,14 +53,6 @@ const Workbench = () => {
 
         setIssueStatus({ issueId: userData.issueList[userInterface.selectIssue]._id, status: setStatus })
             .then(() => handleLoadData());
-    }
-
-    // Remove Issue from API
-    const handleDeleteIssue = () => {
-        deleteIssue({ issueId: userData.issueList[userInterface.selectIssue]._id }).then(() => {
-            setUserInterface({ ...userInterface, selectIssue: null });
-            handleLoadData();
-        })
     }
 
     // USER INTERFACE
@@ -123,7 +117,7 @@ const Workbench = () => {
             editProject={handleEditProject}
             deleteProject={handleDeleteProject}
             setIssueStatus={handleSetIssueStatus}
-            deleteIssue={handleDeleteIssue}
+            deleteIssue={() => handleDeleteIssue(userInterface, setUserInterface, handleLoadData, userData.issueList[userInterface.selectIssue]._id)}
         />
     );
 }

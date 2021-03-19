@@ -34,7 +34,7 @@ const Workbench = () => {
 
     // Logical Component Destructuring
     const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface({ userData, userInterface, setUserInterface, handleLoadData });
-    const { handleEditProject, handleDeleteProject } = ProjectInterface();
+    const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
     const {
         handleToggleProjectManager, handleAddProjectTab,
         handleRemoveProjectTab, handleSelectProject,
@@ -44,20 +44,16 @@ const Workbench = () => {
     return (
         <Render
             ui={userInterface}
-            userData={userData}
-            displayClosedIssue={handleDisplayClosedIssue}
             toggleProjectManager={handleToggleProjectManager}
-            selectProject={handleSelectProject}
-            removeProjectTab={handleRemoveProjectTab}
-            selectIssue={handleSelectIssue}
             addProjectTab={handleAddProjectTab}
+            removeProjectTab={handleRemoveProjectTab}
+            selectProject={handleSelectProject}
+            selectIssue={handleSelectIssue}
+            displayClosedIssue={handleDisplayClosedIssue}
 
-            editProject={
-                (e, projectId, projectData) => handleEditProject(e, projectId, projectData, handleLoadData)
-            }
-            deleteProject={
-                (e) => handleDeleteProject(e, handleLoadData)
-            }
+            userData={userData}
+            editProject={handleEditProject}
+            deleteProject={handleDeleteProject}
             setIssueStatus={handleSetIssueStatus}
             deleteIssue={handleDeleteIssue}
         />

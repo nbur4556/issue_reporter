@@ -7,7 +7,6 @@ import IssueList from '../../components/IssueList';
 import Toolbar from '../../components/Toolbar';
 
 const Render = (props) => {
-
     return (
         <main>
 

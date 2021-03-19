@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 
-import Render from './Render.js';
-import loadData from './loadData.js';
-import IssueInterface from './IssueInterface.js';
-import ProjectInterface from './ProjectInterface.js';
+import Render from './Render';
+import UI from './UI';
+import loadData from './loadData';
+import IssueInterface from './IssueInterface';
+import ProjectInterface from './ProjectInterface';
 
 const Workbench = () => {
     const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface();
@@ -22,6 +23,8 @@ const Workbench = () => {
         displayClosedIssue: false
     });
 
+    const { handleToggleProjectManager } = UI({ userInterface, setUserInterface });
+
     useEffect(() => handleLoadData(), []);
 
     const handleLoadData = () => {
@@ -34,12 +37,6 @@ const Workbench = () => {
     }
 
     // USER INTERFACE
-
-    const handleToggleProjectManager = () => {
-        (userInterface.displayProjectManager === true)
-            ? setUserInterface({ ...userInterface, displayProjectManager: false })
-            : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
-    }
 
     const handleAddProjectTab = e => {
         const projectId = e.currentTarget.parentElement.getAttribute('data-projectid');

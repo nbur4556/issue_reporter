@@ -132,6 +132,8 @@ describe('Authenticate User', () => {
         cy.get('button[name="loginActive"]').click();
     });
 
+    afterEach(() => cy.logout());
+
     // Login Successful
     it('login with correct credentials', () => {
         cy.get('input[name="username"]').type(Cypress.env('cyUsername'));

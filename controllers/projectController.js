@@ -13,6 +13,13 @@ module.exports = {
 
     // Update Project
     updateById: function (searchId, projectParams) {
+        // Remove empty parameters
+        for (const key in projectParams) {
+            if (!projectParams[key]) {
+                delete projectParams[key];
+            }
+        }
+
         return db.Project.updateOne({ _id: searchId }, { $set: { ...projectParams } });
     },
 

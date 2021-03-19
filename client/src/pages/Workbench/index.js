@@ -3,9 +3,10 @@ import './style.css';
 
 import Render from './Render';
 import UI from './UI';
-import loadData from './loadData';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
+
+import loadData from './loadData';
 
 const Workbench = () => {
     const [userData, setUserData] = useState({

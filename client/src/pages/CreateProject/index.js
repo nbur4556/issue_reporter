@@ -6,6 +6,7 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project')
 
 const CreateProject = () => {
+    const [successMessage, setSuccessMessage] = useState();
     const [projectData, setProjectData] = useState({
         projectName: ''
     });
@@ -18,7 +19,9 @@ const CreateProject = () => {
     const handleCreateProject = e => {
         e.preventDefault();
         projectConnection.postQuery({ body: projectData }).then(result => {
-            (result.status === 200) ? console.log('Create Project Success') : console.log('Create Project Failed');
+            (result.status === 200)
+                ? setSuccessMessage(`Success! Issue "${projectData.projectName}" created.`)
+                : setSuccessMessage('');
         });
     }
 
@@ -31,10 +34,11 @@ const CreateProject = () => {
 
                 <label htmlFor="projectName">
                     Name:
-                    <input id="projectName" name="projectName" type="text" onChange={handleSetProjectData} />
+                    <input id="projectName" name="projectName" type="text" onChange={handleSetProjectData} data-cy="project-name" />
                 </label>
 
-                <button name="submit" onClick={handleCreateProject}>Submit</button>
+                <button name="submit" onClick={handleCreateProject} data-cy="submit">Submit</button>
+                <p data-cy="success-message">{successMessage}</p>
 
             </form>
 

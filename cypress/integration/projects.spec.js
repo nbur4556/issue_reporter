@@ -26,25 +26,29 @@ describe("Create project", () => {
         cy.logout();
     });
 
-    // Successfully create projet with all information
+    // Successfully create project with all information
     it('create project with name', () => {
-        cy.get('input[name="projectName"]').type(projectName);
-        cy.get('button[name="submit"]')
+        cy.get('input[data-cy="project-name"]').type(projectName);
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@projectData')
             .then((xhr) => {
                 testId = xhr.response.body._id
             });
+
+        cy.get('p[data-cy="success-message"]').contains(successMsg).should('exist');
     });
 
     // Attempt create project without a project name
     it('attempt create project without name', () => {
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@projectData')
             .then((xhr) => {
                 testId = xhr.response.body._id
             });
+
+        cy.get('p[data-cy="success-message"]').contains(successMsg).should('not.exist');
     });
 });
 

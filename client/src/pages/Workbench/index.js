@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './style.css';
 
+import Render from './Render.js';
 import loadData from './loadData.js';
 import { deleteIssue, setIssueStatus } from './IssueInterface.js';
 import { editProject, deleteProject } from './ProjectInterface.js';
-
-// Components
-import WorkbenchDetailSection from '../../components/WorkbenchDetailSection';
-import TabBar from '../../components/TabBar';
-import ProjectManager from '../../components/ProjectManager';
-import IssueBar from '../../components/IssueBar';
-import IssueDetails from '../../components/IssueDetails';
 
 const Workbench = () => {
     const [userData, setUserData] = useState({
@@ -118,64 +111,20 @@ const Workbench = () => {
     }
 
     return (
-        <main>
-
-            {/* Issue Section */}
-
-            <section>
-
-                {/* Toolbar Section */}
-
-                <section>
-                    <label htmlFor="toggleClosedIssues">
-                        Show Closed Issues:
-                        <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleDisplayClosedIssue} />
-                    </label>
-                    <Link to="/create-issue">Create Issue</Link>
-                    <Link to="/create-project">Create Project</Link>
-
-                    <button onClick={handleToggleProjectManager}>Toggle Project Manager</button>
-                </section>
-
-                <TabBar onClick={handleSelectProject}
-                    removeTab={handleRemoveProjectTab}
-                    tabData={userInterface.projectTabs.map(project => {
-                        return { tabId: project._id, tabName: project.projectName }
-                    })}
-                />
-
-                {/* Issue List Section */}
-
-                <section className="issueListSection">
-                    {userData.issueList.map((issue, index) => {
-                        return (issue.isOpen === false && userInterface.displayClosedIssue === false)
-                            ? null
-                            : <IssueBar onClick={handleSelectIssue} key={index} index={index} title={issue.name} />;
-                    })}
-                </section>
-
-            </section>
-
-            {/* Workbench Details Section */}
-
-            {(userInterface.displayProjectManager === true)
-                ? <WorkbenchDetailSection component={ProjectManager}
-                    projects={userData.projectList}
-                    addTab={handleAddProjectTab}
-                    editProject={handleEditProject}
-                    deleteProject={handleDeleteProject}
-                />
-                : null}
-
-            {(userInterface.selectIssue !== null)
-                ? <WorkbenchDetailSection component={IssueDetails}
-                    issue={userData.issueList[userInterface.selectIssue]}
-                    toggleStatus={handleSetIssueStatus}
-                    deleteIssue={handleDeleteIssue} />
-                : null
-            }
-
-        </main>
+        <Render
+            ui={userInterface}
+            userData={userData}
+            displayClosedIssue={handleDisplayClosedIssue}
+            toggleProjectManager={handleToggleProjectManager}
+            selectProject={handleSelectProject}
+            removeProjectTab={handleRemoveProjectTab}
+            selectIssue={handleSelectIssue}
+            addProjectTab={handleAddProjectTab}
+            editProject={handleEditProject}
+            deleteProject={handleDeleteProject}
+            setIssueStatus={handleSetIssueStatus}
+            deleteIssue={handleDeleteIssue}
+        />
     );
 }
 

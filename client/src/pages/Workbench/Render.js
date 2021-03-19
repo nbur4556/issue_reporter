@@ -1,51 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 // Components
 import WorkbenchDetailSection from '../../components/WorkbenchDetailSection';
 import TabBar from '../../components/TabBar';
 import ProjectManager from '../../components/ProjectManager';
-import IssueBar from '../../components/IssueBar';
 import IssueDetails from '../../components/IssueDetails';
+import IssueList from '../../components/IssueList';
+import Toolbar from '../../components/Toolbar';
 
 const Render = (props) => {
 
     return (
         <main>
 
-            {/* Issue Section */}
-
             <section>
 
-                {/* TOOLBAR COMPONENT */}
+                <Toolbar displayClosedIssue={props.displayClosedIssue} toggleProjectManager={props.toggleProjectManager} />
 
-                <section>
-                    <label htmlFor="toggleClosedIssues">
-                        Show Closed Issues:
-                        <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={props.displayClosedIssue} />
-                    </label>
-                    <Link to="/create-issue">Create Issue</Link>
-                    <Link to="/create-project">Create Project</Link>
+                <TabBar onClick={props.selectProject} removeTab={props.removeProjectTab} tabData={props.ui.projectTabs.map(project => {
+                    return { tabId: project._id, tabName: project.projectName }
+                })} />
 
-                    <button onClick={props.toggleProjectManager}>Toggle Project Manager</button>
-                </section>
-
-                <TabBar onClick={props.selectProject}
-                    removeTab={props.removeProjectTab}
-                    tabData={props.ui.projectTabs.map(project => {
-                        return { tabId: project._id, tabName: project.projectName }
-                    })}
-                />
-
-                {/* ISSUE LIST COMPONENT */}
-
-                <section className="issueListSection">
-                    {props.userData.issueList.map((issue, index) => {
-                        return (issue.isOpen === false && props.ui.displayClosedIssue === false)
-                            ? null
-                            : <IssueBar onClick={props.selectIssue} key={index} index={index} title={issue.name} />;
-                    })}
-                </section>
+                <IssueList userData={props.userData} ui={props.ui} selectIssue={props.selectIssue} />
 
             </section>
 

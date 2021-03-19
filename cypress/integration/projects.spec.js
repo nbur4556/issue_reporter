@@ -52,3 +52,52 @@ describe("Create project", () => {
             });
     });
 });
+
+describe('Delete Project', () => {
+    let testId;
+
+    beforeEach(() => {
+        // Login with cypress test credentials
+        cy.request('POST', `/api/user/${Cypress.env('cyUsername')}`, {
+            username: Cypress.env('cyUsername'),
+            password: Cypress.env('cyPassword')
+        }).then(({ body }) => {
+            localStorage.setItem('authToken', body.authToken);
+
+            cy.request({
+                method: 'POST',
+                url: '/api/project',
+                headers: {
+                    Authorization: 'Bearer ' + body.authToken
+                },
+                body: {
+                    projectName: projectName
+                }
+            }).then(({ body }) => {
+                testId = body._id;
+            });
+        });
+
+        cy.visit('/workbench');
+
+        cy.get('button').contains('Toggle Project Manager').click();
+    });
+
+    afterEach(() => {
+        if (testId) {
+            cy.request({
+                method: 'DELETE',
+                url: `/api/project/${testId}`,
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('authToken')
+                }
+            });
+        }
+        localStorage.removeItem('authToken');
+    });
+
+    // Project should no longer exist
+    it("successfully delete a project", () => {
+        console.log('delete a project');
+    });
+})

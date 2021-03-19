@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 
+import loadData from './loadData.js';
+import { deleteIssue, setIssueStatus } from './IssueInterface.js';
+import { editProject, deleteProject } from './ProjectInterface.js';
+
 // Components
 import WorkbenchDetailSection from '../../components/WorkbenchDetailSection';
 import TabBar from '../../components/TabBar';
 import ProjectManager from '../../components/ProjectManager';
 import IssueBar from '../../components/IssueBar';
 import IssueDetails from '../../components/IssueDetails';
-
-// Utilities
-import ApiConnection from '../../utils/ApiConnection.js';
-const projectConnection = new ApiConnection('/api/project');
-const issueConnection = new ApiConnection('/api/issue');
 
 const Workbench = () => {
     const [userData, setUserData] = useState({
@@ -27,19 +26,25 @@ const Workbench = () => {
         displayClosedIssue: false
     });
 
-    useEffect(() => {
-        loadUserData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    useEffect(() => handleLoadData(), []);
 
-    async function loadUserData() {
-        // Load all user projects
-        const [projects, issues] = await Promise.all([
-            projectConnection.getQuery(),
-            issueConnection.getQuery()
-        ]);
+    const handleLoadData = () => {
+        loadData().then(([projectResponse, issueResponse]) => {
+            setUserData({
+                projectList: projectResponse.data,
+                issueList: issueResponse.data
+            });
+        });
+    }
 
-        setUserData({ ...userData, projectList: projects.data, issueList: issues.data });
+    const handleEditProject = (e, projectId, projectData) => {
+        e.preventDefault();
+        editProject({ projectId, projectData }).then(() => handleLoadData());
+    }
+
+    const handleDeleteProject = (e) => {
+        deleteProject({ projectId: e.currentTarget.parentElement.getAttribute('data-projectid') })
+            .then(() => handleLoadData());
     }
 
     // Set status of selected issue
@@ -51,37 +56,16 @@ const Workbench = () => {
             setUserInterface({ ...userInterface, selectIssue: null });
         }
 
-        // Send put request to change issue status, and reload issues
-        issueConnection.putQuery({
-            urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}`,
-            body: { isOpen: setStatus }
-        }).then(() => { loadUserData() });
-    }
-
-    const editProject = (e, projectId, projectData) => {
-        e.preventDefault();
-        projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData }).then(() => {
-            loadUserData();
-        });
-    }
-
-    const deleteProject = e => {
-        projectConnection.deleteQuery({
-            urlExtension: `/${e.currentTarget.parentElement.getAttribute('data-projectid')}`,
-            authorization: localStorage.getItem('authToken')
-        })
-            .then(() => {
-                loadUserData();
-            });
+        setIssueStatus({ issueId: userData.issueList[userInterface.selectIssue]._id, status: setStatus })
+            .then(() => handleLoadData());
     }
 
     // Remove Issue from API
-    const deleteIssue = () => {
-        issueConnection.deleteQuery({ urlExtension: `/${userData.issueList[userInterface.selectIssue]._id}` })
-            .then(() => {
-                setUserInterface({ ...userInterface, selectIssue: null });
-                loadUserData();
-            });
+    const handleDeleteIssue = () => {
+        deleteIssue({ issueId: userData.issueList[userInterface.selectIssue]._id }).then(() => {
+            setUserInterface({ ...userInterface, selectIssue: null });
+            handleLoadData();
+        })
     }
 
     // USER INTERFACE
@@ -178,8 +162,8 @@ const Workbench = () => {
                 ? <WorkbenchDetailSection component={ProjectManager}
                     projects={userData.projectList}
                     addTab={handleAddProjectTab}
-                    editProject={editProject}
-                    deleteProject={deleteProject}
+                    editProject={handleEditProject}
+                    deleteProject={handleDeleteProject}
                 />
                 : null}
 
@@ -187,7 +171,7 @@ const Workbench = () => {
                 ? <WorkbenchDetailSection component={IssueDetails}
                     issue={userData.issueList[userInterface.selectIssue]}
                     toggleStatus={handleSetIssueStatus}
-                    deleteIssue={deleteIssue} />
+                    deleteIssue={handleDeleteIssue} />
                 : null
             }
 

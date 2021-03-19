@@ -1,9 +1,23 @@
 import React from 'react';
 
-const WorkbenchDetailSection = ({ component: Component, ...rest }) => {
+// Components
+import ProjectManager from '../ProjectManager';
+import IssueDetails from '../IssueDetails';
+
+const WorkbenchDetailSection = (props) => {
+    const { showProjectManager, showIssueDetails, ...rest } = props;
+
     return (
         <section className="detail-section">
-            <Component {...rest} />
+
+            {(showProjectManager)
+                ? <ProjectManager {...rest} />
+                : null}
+
+            {(showIssueDetails)
+                ? <IssueDetails {...rest} />
+                : null}
+
         </section>
     )
 }

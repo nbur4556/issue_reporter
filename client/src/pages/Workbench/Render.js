@@ -3,8 +3,6 @@ import React from 'react';
 // Components
 import WorkbenchDetailSection from '../../components/WorkbenchDetailSection';
 import TabBar from '../../components/TabBar';
-import ProjectManager from '../../components/ProjectManager';
-import IssueDetails from '../../components/IssueDetails';
 import IssueList from '../../components/IssueList';
 import Toolbar from '../../components/Toolbar';
 
@@ -27,22 +25,19 @@ const Render = (props) => {
 
             {/* Workbench Details Section */}
 
-            {(props.ui.displayProjectManager === true)
-                ? <WorkbenchDetailSection component={ProjectManager}
-                    projects={props.userData.projectList}
-                    addTab={props.addProjectTab}
-                    editProject={props.editProject}
-                    deleteProject={props.deleteProject}
-                />
-                : null}
+            <WorkbenchDetailSection
+                showProjectManager={props.ui.displayProjectManager}
+                showIssueDetails={props.ui.selectIssue}
 
-            {(props.ui.selectIssue !== null)
-                ? <WorkbenchDetailSection component={IssueDetails}
-                    issue={props.userData.issueList[props.ui.selectIssue]}
-                    toggleStatus={props.setIssueStatus}
-                    deleteIssue={props.deleteIssue} />
-                : null
-            }
+                projects={props.userData.projectList}
+                addTab={props.addProjectTab}
+                editProject={props.editProject}
+                deleteProject={props.deleteProject}
+
+                issue={props.userData.issueList[props.ui.selectIssue]}
+                toggleStatus={props.setIssueStatus}
+                deleteIssue={props.deleteIssue}
+            />
 
         </main>
     );

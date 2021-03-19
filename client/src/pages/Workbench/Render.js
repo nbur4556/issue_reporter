@@ -23,8 +23,6 @@ const Render = (props) => {
 
             </section>
 
-            {/* Workbench Details Section */}
-
             <WorkbenchDetailSection
                 showProjectManager={props.ui.displayProjectManager}
                 showIssueDetails={props.ui.selectIssue}

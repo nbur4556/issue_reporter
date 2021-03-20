@@ -9,6 +9,9 @@ const UI = (props) => {
 
     const handleAddProjectTab = e => {
         const projectId = e.currentTarget.parentElement.getAttribute('data-projectid');
+        const selectProjectId = (userInterface.projectTabs.length === 0)
+            ? projectId
+            : userInterface.selectProject;
 
         // Check if tab exists
         for (const tab of userInterface.projectTabs) {
@@ -18,11 +21,17 @@ const UI = (props) => {
         // Find project in project list
         userData.projectList.forEach((project) => {
             if (project._id === projectId)
-                setUserInterface({ ...userInterface, projectTabs: [...userInterface.projectTabs, project] });
+                setUserInterface({
+                    ...userInterface,
+                    projectTabs: [...userInterface.projectTabs, project],
+                    selectProject: selectProjectId
+                });
         });
     }
 
     const handleRemoveProjectTab = e => {
+        e.stopPropagation();
+
         const tabIndex = e.currentTarget.parentElement.getAttribute('data-index');
         const splicedProjectTabs = [...userInterface.projectTabs]
 
@@ -32,7 +41,7 @@ const UI = (props) => {
 
     const handleSelectProject = e => {
         const projectId = e.currentTarget.getAttribute('data-id');
-        console.log(projectId);
+        setUserInterface({ ...userInterface, selectProject: projectId })
     }
 
     const handleToggleCreateIssue = () => {

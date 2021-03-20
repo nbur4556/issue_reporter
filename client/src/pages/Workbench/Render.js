@@ -31,11 +31,15 @@ const Render = (props) => {
                 showCreateIssue={props.ui.displayCreateIssue}
                 showIssueDetails={props.ui.selectIssue}
 
+                // Project Manager Props
                 projects={props.userData.projectList}
                 addTab={props.addProjectTab}
                 editProject={props.editProject}
                 deleteProject={props.deleteProject}
 
+                // Create Issue Props
+
+                // Select Issue Props
                 issue={props.userData.issueList[props.ui.selectIssue]}
                 toggleStatus={props.setIssueStatus}
                 deleteIssue={props.deleteIssue}

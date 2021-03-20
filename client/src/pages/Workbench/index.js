@@ -15,11 +15,12 @@ const Workbench = () => {
     });
 
     const [userInterface, setUserInterface] = useState({
-        projectTabs: [],
-        selectIssue: null,
         displayProjectManager: false,
         displayCreateIssue: false,
-        displayClosedIssue: false
+        displayClosedIssue: false,
+        projectTabs: [],
+        selectProject: null,
+        selectIssue: null
     });
 
     useEffect(() => handleLoadData(), []);

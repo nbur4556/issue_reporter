@@ -5,21 +5,19 @@ import ProjectManager from '../ProjectManager';
 import CreateIssue from '../CreateIssue';
 import IssueDetails from '../IssueDetails';
 
-const WorkbenchDetailSection = (props) => {
-    const { showProjectManager, showCreateIssue, showIssueDetails, ...rest } = props;
-
+const WorkbenchDetailSection = ({ ui, ...rest }) => {
     return (
         <section className="detail-section">
 
-            {(showProjectManager)
+            {(ui.displayProjectManager)
                 ? <ProjectManager {...rest} />
                 : null}
 
-            {(showCreateIssue)
+            {(ui.displayCreateIssue)
                 ? <CreateIssue {...rest} />
                 : null}
 
-            {(showIssueDetails)
+            {(ui.selectIssue)
                 ? <IssueDetails {...rest} />
                 : null}
 

@@ -9,6 +9,7 @@ const Toolbar = (props) => {
                         <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={props.displayClosedIssue} />
             </label>
             <Link to="/create-issue">Create Issue</Link>
+            <button onClick={props.toggleCreateIssue}>Toggle Create Issue</button>
             <Link to="/create-project">Create Project</Link>
 
             <button onClick={props.toggleProjectManager}>Toggle Project Manager</button>

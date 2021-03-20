@@ -12,7 +12,11 @@ const Render = (props) => {
 
             <section>
 
-                <Toolbar displayClosedIssue={props.displayClosedIssue} toggleProjectManager={props.toggleProjectManager} />
+                <Toolbar
+                    toggleProjectManager={props.toggleProjectManager}
+                    toggleCreateIssue={props.toggleCreateIssue}
+                    displayClosedIssue={props.displayClosedIssue}
+                />
 
                 <TabBar onClick={props.selectProject} removeTab={props.removeProjectTab} tabData={props.ui.projectTabs.map(project => {
                     return { tabId: project._id, tabName: project.projectName }
@@ -24,6 +28,7 @@ const Render = (props) => {
 
             <WorkbenchDetailSection
                 showProjectManager={props.ui.displayProjectManager}
+                showCreateIssue={props.ui.displayCreateIssue}
                 showIssueDetails={props.ui.selectIssue}
 
                 projects={props.userData.projectList}

@@ -4,7 +4,7 @@ const UI = (props) => {
     const handleToggleProjectManager = () => {
         (userInterface.displayProjectManager === true)
             ? setUserInterface({ ...userInterface, displayProjectManager: false })
-            : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
+            : setUserInterface({ ...userInterface, displayProjectManager: true, displayCreateIssue: false, selectIssue: null });
     }
 
     const handleAddProjectTab = e => {
@@ -35,11 +35,17 @@ const UI = (props) => {
         console.log(projectId);
     }
 
+    const handleToggleCreateIssue = () => {
+        (userInterface.displayCreateIssue === true)
+            ? setUserInterface({ ...userInterface, displayCreateIssue: false })
+            : setUserInterface({ ...userInterface, displayCreateIssue: true, displayProjectManager: false, selectIssue: null });
+    }
+
     const handleSelectIssue = e => {
         const selectIndex = e.currentTarget.getAttribute('data-index');
         (selectIndex === userInterface.selectIssue)
             ? setUserInterface({ ...userInterface, selectIssue: null })
-            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false });
+            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false, displayCreateIssue: false });
     }
 
     const handleDisplayClosedIssue = () => {
@@ -53,6 +59,7 @@ const UI = (props) => {
         handleAddProjectTab,
         handleRemoveProjectTab,
         handleSelectProject,
+        handleToggleCreateIssue,
         handleSelectIssue,
         handleDisplayClosedIssue
     }

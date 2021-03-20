@@ -2,16 +2,21 @@ import React from 'react';
 
 // Components
 import ProjectManager from '../ProjectManager';
+import CreateIssue from '../CreateIssue';
 import IssueDetails from '../IssueDetails';
 
 const WorkbenchDetailSection = (props) => {
-    const { showProjectManager, showIssueDetails, ...rest } = props;
+    const { showProjectManager, showCreateIssue, showIssueDetails, ...rest } = props;
 
     return (
         <section className="detail-section">
 
             {(showProjectManager)
                 ? <ProjectManager {...rest} />
+                : null}
+
+            {(showCreateIssue)
+                ? <CreateIssue {...rest} />
                 : null}
 
             {(showIssueDetails)

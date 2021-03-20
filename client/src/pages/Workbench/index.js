@@ -18,6 +18,7 @@ const Workbench = () => {
         projectTabs: [],
         selectIssue: null,
         displayProjectManager: false,
+        displayCreateIssue: false,
         displayClosedIssue: false
     });
 
@@ -37,9 +38,13 @@ const Workbench = () => {
     const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface({ userData, userInterface, setUserInterface, handleLoadData });
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
     const {
-        handleToggleProjectManager, handleAddProjectTab,
-        handleRemoveProjectTab, handleSelectProject,
-        handleSelectIssue, handleDisplayClosedIssue
+        handleToggleProjectManager,
+        handleAddProjectTab,
+        handleRemoveProjectTab,
+        handleSelectProject,
+        handleToggleCreateIssue,
+        handleSelectIssue,
+        handleDisplayClosedIssue
     } = UI({ userInterface, setUserInterface, userData });
 
     return (
@@ -49,6 +54,7 @@ const Workbench = () => {
             addProjectTab={handleAddProjectTab}
             removeProjectTab={handleRemoveProjectTab}
             selectProject={handleSelectProject}
+            toggleCreateIssue={handleToggleCreateIssue}
             selectIssue={handleSelectIssue}
             displayClosedIssue={handleDisplayClosedIssue}
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 
 import Render from './Render';
-import UI from './UI';
+import HandleUi from './HandleUi';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
@@ -38,26 +38,11 @@ const Workbench = () => {
     // Logical Component Destructuring
     const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface({ userData, userInterface, setUserInterface, handleLoadData });
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
-    const {
-        handleToggleProjectManager,
-        handleAddProjectTab,
-        handleRemoveProjectTab,
-        handleSelectProject,
-        handleToggleCreateIssue,
-        handleSelectIssue,
-        handleDisplayClosedIssue
-    } = UI({ userInterface, setUserInterface, userData });
 
     return (
         <Render
             ui={userInterface}
-            toggleProjectManager={handleToggleProjectManager}
-            addProjectTab={handleAddProjectTab}
-            removeProjectTab={handleRemoveProjectTab}
-            selectProject={handleSelectProject}
-            toggleCreateIssue={handleToggleCreateIssue}
-            selectIssue={handleSelectIssue}
-            displayClosedIssue={handleDisplayClosedIssue}
+            handleUi={HandleUi({ userInterface, setUserInterface, userData })}
 
             userData={userData}
             editProject={handleEditProject}

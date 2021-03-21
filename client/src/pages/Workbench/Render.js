@@ -7,38 +7,44 @@ import IssueList from '../../components/IssueList';
 import Toolbar from '../../components/Toolbar';
 
 const Render = (props) => {
+    const { handleUi, ui, userData } = props;
+
     return (
         <main>
 
             <section>
 
                 <Toolbar
-                    toggleProjectManager={props.toggleProjectManager}
-                    toggleCreateIssue={props.toggleCreateIssue}
-                    displayClosedIssue={props.displayClosedIssue}
+                    toggleProjectManager={handleUi.handleToggleProjectManager}
+                    toggleCreateIssue={handleUi.handleToggleCreateIssue}
+                    displayClosedIssue={handleUi.handleDisplayClosedIssue}
                 />
 
-                <TabBar onClick={props.selectProject} removeTab={props.removeProjectTab} tabData={props.ui.projectTabs.map(project => {
-                    return { tabId: project._id, tabName: project.projectName }
-                })} />
+                <TabBar
+                    onClick={handleUi.handleSelectProject}
+                    removeTab={handleUi.handleRemoveProjectTab}
+                    tabData={ui.projectTabs.map(project => {
+                        return { tabId: project._id, tabName: project.projectName }
+                    })}
+                />
 
-                <IssueList userData={props.userData} ui={props.ui} selectIssue={props.selectIssue} />
+                <IssueList userData={userData} ui={ui} selectIssue={handleUi.handleSelectIssue} />
 
             </section>
 
             <WorkbenchDetailSection
-                ui={props.ui}
+                ui={ui}
 
                 // Project Manager Props
-                projects={props.userData.projectList}
-                addTab={props.addProjectTab}
+                projects={userData.projectList}
+                addTab={handleUi.handleAddProjectTab}
                 editProject={props.editProject}
                 deleteProject={props.deleteProject}
 
                 // Create Issue Props
 
                 // Select Issue Props
-                issue={props.userData.issueList[props.ui.selectIssue]}
+                issue={userData.issueList[props.ui.selectIssue]}
                 toggleStatus={props.setIssueStatus}
                 deleteIssue={props.deleteIssue}
             />

@@ -1,8 +1,13 @@
 import React from 'react';
 
+// Components
+import FormContainer from '../Forms/FormContainer';
+
 const CreateIssue = () => {
     return (
-        <p>Create Issue</p>
+        <FormContainer>
+            <input type="text" />
+        </FormContainer>
     );
 }
 

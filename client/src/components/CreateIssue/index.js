@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import FormContainer from '../Forms/FormContainer';
-import TextInput from '../Forms/TextInput';
+import LabeledInput from '../Forms/LabeledInput';
 import SubmitButton from '../Forms/SubmitButton';
 
 const CreateIssue = () => {
@@ -17,7 +17,7 @@ const CreateIssue = () => {
 
     return (
         <FormContainer>
-            <TextInput label="Test" name="test" placeholder="test" onChange={handleUpdateInput} />
+            <LabeledInput label="Test" name="test" placeholder="test" onChange={handleUpdateInput} />
             <SubmitButton onClick={handleSubmitForm} />
         </FormContainer>
     );

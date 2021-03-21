@@ -7,7 +7,7 @@ const SubmitButton = (props) => {
     }
 
     return (
-        <button onClick={handleOnClick}>
+        <button onClick={handleOnClick} data-cy={props.cy || "submit"}>
             {props.label || "Submit"}
         </button>
     )

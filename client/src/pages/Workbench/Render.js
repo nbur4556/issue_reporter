@@ -14,15 +14,9 @@ const Render = (props) => {
 
             <section>
 
-                <Toolbar
-                    toggleProjectManager={handleUi.handleToggleProjectManager}
-                    toggleCreateIssue={handleUi.handleToggleCreateIssue}
-                    displayClosedIssue={handleUi.handleDisplayClosedIssue}
-                />
+                <Toolbar ui={handleUi} />
 
-                <TabBar
-                    onClick={handleUi.handleSelectProject}
-                    removeTab={handleUi.handleRemoveProjectTab}
+                <TabBar ui={handleUi}
                     tabData={ui.projectTabs.map(project => {
                         return { tabId: project._id, tabName: project.projectName }
                     })}

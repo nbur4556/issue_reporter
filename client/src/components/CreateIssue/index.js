@@ -17,7 +17,7 @@ const CreateIssue = () => {
 
     return (
         <FormContainer>
-            {/* <TextInput label="Test" name="test" placeholder="test" onChange={handleUpdateInput} /> */}
+            <TextInput label="Test" name="test" placeholder="test" onChange={handleUpdateInput} />
             <SubmitButton onClick={handleSubmitForm} />
         </FormContainer>
     );

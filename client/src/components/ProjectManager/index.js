@@ -23,6 +23,11 @@ const ProjectManager = (props) => {
         setEditData({ ...editData, [input.name]: input.value });
     }
 
+    const handleSubmitEditProject = (e) => {
+        toggleEditState(e);
+        props.editProject(e, editProjectId, editData);
+    }
+
     const renderProjects = (projectsList) => {
         const projectListItems = projectsList.map((project, index) => {
             return (
@@ -42,7 +47,7 @@ const ProjectManager = (props) => {
         return (
             <FormContainer>
                 <LabeledInput name="projectName" label="Name:" onChange={handleEditData} cy="edit-field" />
-                <SubmitButton onClick={(e) => props.editProject(e, editProjectId, editData)} />
+                <SubmitButton onClick={handleSubmitEditProject} />
             </FormContainer>
         );
     }

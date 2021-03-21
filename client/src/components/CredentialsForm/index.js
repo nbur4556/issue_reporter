@@ -1,26 +1,22 @@
 import React from 'react';
 
+// Components
+import FormContainer from '../Forms/FormContainer';
+import LabeledInput from '../Forms/LabeledInput';
+import SubmitButton from '../Forms/SubmitButton';
+
 const CredentialsForm = props => {
     return (
-        <form>
-            <label>
-                Username:
-                <input name="username" type="text" onChange={props.handleOnChange} />
-            </label>
-            <label>
-                Password:
-                <input name="password" type="password" onChange={props.handleOnChange} />
-            </label>
+        <FormContainer>
+            <LabeledInput name="username" label="Username:" onChange={props.handleOnChange} />
+            <LabeledInput name="password" label="Password:" type="password" onChange={props.handleOnChange} />
 
             {(props.requireConfirm)
-                ? <label>
-                    Confirm Password:
-                <input name="confirmPassword" type="password" onChange={props.handleOnChange} />
-                </label>
+                ? <LabeledInput name="confirmPassword" label="Confirm Password:" type="password" onChange={props.handleOnChange} />
                 : null}
 
-            <button name="submit" onClick={props.handleSubmit}>Submit</button>
-        </form>
+            <SubmitButton onClick={props.handleSubmit} />
+        </FormContainer>
     );
 }
 

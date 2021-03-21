@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+// Components
+import FormContainer from '../Forms/FormContainer';
+import LabeledInput from '../Forms/LabeledInput';
+import SubmitButton from '../Forms/SubmitButton';
+
 const ProjectManager = (props) => {
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
@@ -35,16 +40,10 @@ const ProjectManager = (props) => {
 
     const renderEditForm = () => {
         return (
-            <form>
-                <label htmlFor="projectName">
-                    Name:
-                    <input id="projectName" name="projectName" type="text" onChange={handleEditData} data-cy="edit-field" />
-                </label>
-                <button name="submit" data-cy="submit-edit" onClick={(e) => {
-                    toggleEditState(e);
-                    props.editProject(e, editProjectId, editData);
-                }}>Submit</button>
-            </form>
+            <FormContainer>
+                <LabeledInput name="projectName" label="Name:" onChange={handleEditData} cy="edit-field" />
+                <SubmitButton onClick={(e) => props.editProject(e, editProjectId, editData)} />
+            </FormContainer>
         );
     }
 

@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 
+// Components
+import FormContainer from '../../components/Forms/FormContainer';
+import LabeledInput from '../../components/Forms/LabeledInput';
+import LabeledSelect from '../../components/Forms/LabeledSelect';
+import SubmitButton from '../../components/Forms/SubmitButton';
+
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
@@ -25,7 +31,7 @@ const CreateIssue = () => {
 
     // Create an issue on submit
     const handleCreateIssue = e => {
-        e.preventDefault();
+        // e.preventDefault();
 
         clearFormData(e.currentTarget.parentElement);
 
@@ -56,50 +62,22 @@ const CreateIssue = () => {
 
             <Link to="/workbench">Back To Workbench</Link>
 
-            <br />
-
-            {/* Input Form */}
-
-            <form>
-
-                <label htmlFor="name">
-                    Name:
-                    <input id="name" name="name" type="text" onChange={handleSetIssueData} />
-                </label>
-
-                <label htmlFor="body">
-                    Body:
-                    <textarea id="body" name="body" type="text" onChange={handleSetIssueData} />
-                </label>
-
-                <label htmlFor="category">
-                    Category:
-                    <select id="category" name="category" onChange={handleSetIssueData}>
-                        <option></option>
-                        <option value="Feature">Feature</option>
-                        <option value="Bug">Bug</option>
-                    </select>
-                </label>
-
-                {/* <label htmlFor="assigned">
-                    Assigned:
-                    <input id="assigned" name="assigned" type="text" onChange={handleSetIssueData} />
-                </label> */}
-
-                <label htmlFor="dueDate">
-                    Due Date:
-                    <input id="dueDate" name="dueDate" type="date" onChange={handleSetIssueData} />
-                </label>
-
-                <button name="submit" onClick={handleCreateIssue}>Submit</button>
-
-            </form>
-
-            <br />
+            <FormContainer>
+                <LabeledInput name="name" label="Name:" onChange={handleSetIssueData} />
+                <LabeledInput name="body" label="Body:" onChange={handleSetIssueData} />
+                <LabeledSelect name="category" label="Category:" onChange={handleSetIssueData}>
+                    <option></option>
+                    <option value="Feature">Feature</option>
+                    <option value="Bug">Bug</option>
+                </LabeledSelect>
+                {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleSetIssueData} /> */}
+                <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleSetIssueData} />
+                <SubmitButton onClick={handleCreateIssue} />
+            </FormContainer>
 
             {(successMessage) ? <p>{successMessage}</p> : null}
 
-        </main>
+        </main >
     );
 }
 

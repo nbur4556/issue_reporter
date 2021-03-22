@@ -15,10 +15,10 @@ describe('Register User', () => {
     // Register User Successful
     it('register new user', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.password);
-            cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]')
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.password);
+            cy.get('input[data-cy="confirmPassword"]').type(data.password);
+            cy.get('button[data-cy="submit"]')
                 .click()
                 .wait('@userData')
                 .then((xhr) => {
@@ -36,10 +36,10 @@ describe('Register User', () => {
     // Password requirements not met
     it('attempt register with short password', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.shortPassword);
-            cy.get('input[name="confirmPassword"]').type(data.shortPassword);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.shortPassword);
+            cy.get('input[data-cy="confirmPassword"]').type(data.shortPassword);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -47,10 +47,10 @@ describe('Register User', () => {
 
     it('attempt register with no caps', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.passwordNoCaps);
-            cy.get('input[name="confirmPassword"]').type(data.passwordNoCaps);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.passwordNoCaps);
+            cy.get('input[data-cy="confirmPassword"]').type(data.passwordNoCaps);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -58,10 +58,10 @@ describe('Register User', () => {
 
     it('attempt register with no lower case letter', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.passwordNoLower);
-            cy.get('input[name="confirmPassword"]').type(data.passwordNoLower);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.passwordNoLower);
+            cy.get('input[data-cy="confirmPassword"]').type(data.passwordNoLower);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -69,10 +69,10 @@ describe('Register User', () => {
 
     it('attempt register with no number', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.passwordNoNum);
-            cy.get('input[name="confirmPassword"]').type(data.passwordNoNum);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.passwordNoNum);
+            cy.get('input[data-cy="confirmPassword"]').type(data.passwordNoNum);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -81,9 +81,9 @@ describe('Register User', () => {
     // Do not include username
     it('attempt register without username', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="password"]').type(data.password);
-            cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="password"]').type(data.password);
+            cy.get('input[data-cy="confirmPassword"]').type(data.password);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -92,9 +92,9 @@ describe('Register User', () => {
     // Do not include password
     it('attempt register without password', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="confirmPassword"]').type(data.password);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -103,9 +103,9 @@ describe('Register User', () => {
     // Do not include confirm password
     it('attempt register without confirm password', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.password);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.password);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -114,10 +114,10 @@ describe('Register User', () => {
     // Password and confirm password do not match
     it('attempt register with non matching password and confirm password', () => {
         cy.fixture('userData.json').then((data) => {
-            cy.get('input[name="username"]').type(data.username);
-            cy.get('input[name="password"]').type(data.passwordMisspelled);
-            cy.get('input[name="confirmPassword"]').type(data.password);
-            cy.get('button[name="submit"]').click();
+            cy.get('input[data-cy="username"]').type(data.username);
+            cy.get('input[data-cy="password"]').type(data.passwordMisspelled);
+            cy.get('input[data-cy="confirmPassword"]').type(data.password);
+            cy.get('button[data-cy="submit"]').click();
 
             cy.contains(errorMsg).should('exist');
         });
@@ -136,40 +136,40 @@ describe('Authenticate User', () => {
 
     // Login Successful
     it('login with correct credentials', () => {
-        cy.get('input[name="username"]').type(Cypress.env('cyUsername'));
-        cy.get('input[name="password"]').type(Cypress.env('cyPassword'));
-        cy.get('button[name="submit"]').click();
+        cy.get('input[data-cy="username"]').type(Cypress.env('cyUsername'));
+        cy.get('input[data-cy="password"]').type(Cypress.env('cyPassword'));
+        cy.get('button[data-cy="submit"]').click();
 
         cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
     });
 
     // Login Failed
     it('attempt login with incorrect password', () => {
-        cy.get('input[name="username"]').type(Cypress.env('cyUsername'));
-        cy.get('input[name="password"]').type(Cypress.env('cypPassword') + 'misspelled');
-        cy.get('button[name="submit"]').click();
+        cy.get('input[data-cy="username"]').type(Cypress.env('cyUsername'));
+        cy.get('input[data-cy="password"]').type(Cypress.env('cypPassword') + 'misspelled');
+        cy.get('button[data-cy="submit"]').click();
 
         cy.contains(errorMsg).should('exist');
     });
 
     it('attempt login with incorrect username', () => {
-        cy.get('input[name="username"]').type(Cypress.env('cyUsername') + 'misspelled');
-        cy.get('input[name="password"]').type(Cypress.env('cyPassword'));
-        cy.get('button[name="submit"]').click();
+        cy.get('input[data-cy="username"]').type(Cypress.env('cyUsername') + 'misspelled');
+        cy.get('input[data-cy="password"]').type(Cypress.env('cyPassword'));
+        cy.get('button[data-cy="submit"]').click();
 
         cy.contains(errorMsg).should('exist');
     });
 
     it('attempt login without a username', () => {
-        cy.get('input[name="username"]').type(Cypress.env('cyUsername'));
-        cy.get('button[name="submit"]').click();
+        cy.get('input[data-cy="username"]').type(Cypress.env('cyUsername'));
+        cy.get('button[data-cy="submit"]').click();
 
         cy.contains(errorMsg).should('exist');
     });
 
     it('attempt login without a password', () => {
-        cy.get('input[name="password"]').type(Cypress.env('cyPassword'));
-        cy.get('button[name="submit"]').click();
+        cy.get('input[data-cy="password"]').type(Cypress.env('cyPassword'));
+        cy.get('button[data-cy="submit"]').click();
 
         cy.contains(errorMsg).should('exist');
     });

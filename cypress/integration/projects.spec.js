@@ -28,7 +28,7 @@ describe("Create project", () => {
 
     // Successfully create project with all information
     it('create project with name', () => {
-        cy.get('input[data-cy="project-name"]').type(projectName);
+        cy.get('input[data-cy="projectName"]').type(projectName);
         cy.get('button[data-cy="submit"]')
             .click()
             .wait('@projectData')

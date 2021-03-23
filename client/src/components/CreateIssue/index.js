@@ -16,8 +16,6 @@ const CreateIssue = (props) => {
 
     // Set issue data state for form inputs
     const handleUpdateInput = (e) => {
-        console.log(props);
-
         const input = e.currentTarget;
         setIssueData({ ...issueData, [input.name]: input.value });
     }

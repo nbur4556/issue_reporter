@@ -5,14 +5,14 @@ const dueDate = '2021-02-27';
 
 // Create Issue Tests
 describe('Create issue', () => {
-    const successMessage = `Success! Issue "${issueName}" created.`;
     let testId;
 
     beforeEach(() => {
         // Login with cypress test credentials
         cy.login();
 
-        cy.visit('/create-issue');
+        cy.visit('/workbench');
+        cy.get('button[data-cy="create-issue"]').click();
         cy.intercept('/api/issue').as('issueData');
     });
 
@@ -37,7 +37,7 @@ describe('Create issue', () => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     // Check that form with required information creates success message
@@ -53,7 +53,7 @@ describe('Create issue', () => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     it('create issue without category', () => {
@@ -68,7 +68,7 @@ describe('Create issue', () => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     it('create issue without due date', () => {
@@ -83,7 +83,7 @@ describe('Create issue', () => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     // Check that form without name does not create success message
@@ -99,7 +99,7 @@ describe('Create issue', () => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('not.exist');
+        cy.get('.issueListSection').contains(issueName).should('not.exist');
     });
 
     // Check that empty form does not create success message
@@ -111,7 +111,7 @@ describe('Create issue', () => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('not.exist');
+        cy.get('.issueListSection').contains(issueName).should('not.exist');
     });
 });
 

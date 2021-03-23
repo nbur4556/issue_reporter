@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Components
+import FormContainer from '../../components/Forms/FormContainer';
+import LabeledInput from '../../components/Forms/LabeledInput';
+import SubmitButton from '../../components/Forms/SubmitButton';
+
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project')
@@ -30,17 +35,12 @@ const CreateProject = () => {
 
             <Link to="/workbench">Back To Workbench</Link>
 
-            <form>
+            <FormContainer>
+                <LabeledInput name="projectName" label="Name:" onChange={handleSetProjectData} />
+                <SubmitButton onClick={handleCreateProject} />
+            </FormContainer>
 
-                <label htmlFor="projectName">
-                    Name:
-                    <input id="projectName" name="projectName" type="text" onChange={handleSetProjectData} data-cy="project-name" />
-                </label>
-
-                <button name="submit" onClick={handleCreateProject} data-cy="submit">Submit</button>
-                <p data-cy="success-message">{successMessage}</p>
-
-            </form>
+            <p data-cy="success-message">{successMessage}</p>
 
         </main>
     );

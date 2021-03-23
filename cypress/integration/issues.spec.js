@@ -5,14 +5,14 @@ const dueDate = '2021-02-27';
 
 // Create Issue Tests
 describe('Create issue', () => {
-    const successMessage = `Success! Issue "${issueName}" created.`;
     let testId;
 
     beforeEach(() => {
         // Login with cypress test credentials
         cy.login();
 
-        cy.visit('/create-issue');
+        cy.visit('/workbench');
+        cy.get('button[data-cy="create-issue"]').click();
         cy.intercept('/api/issue').as('issueData');
     });
 
@@ -26,18 +26,18 @@ describe('Create issue', () => {
     // Check that form with all information creates success message
     it('create issue with all information', () => {
         cy.get('input[name="name"]').type(issueName);
-        cy.get('textarea[name="body"]').type(description);
+        cy.get('input[name="body"]').type(description);
         cy.get('select[name="category"]').select(category);
         cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@issueData')
             .then((xhr) => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     // Check that form with required information creates success message
@@ -46,72 +46,72 @@ describe('Create issue', () => {
         cy.get('select[name="category"]').select(category);
         cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@issueData')
             .then((xhr) => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     it('create issue without category', () => {
         cy.get('input[name="name"]').type(issueName);
-        cy.get('textarea[name="body"]').type(description);
+        cy.get('input[name="body"]').type(description);
         cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@issueData')
             .then((xhr) => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     it('create issue without due date', () => {
         cy.get('input[name="name"]').type(issueName);
-        cy.get('textarea[name="body"]').type(description);
+        cy.get('input[name="body"]').type(description);
         cy.get('select[name="category"]').select(category);
 
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@issueData')
             .then((xhr) => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('exist');
+        cy.get('.issueListSection').contains(issueName).should('exist');
     });
 
     // Check that form without name does not create success message
     it('submit form without name does not create issue', () => {
-        cy.get('textarea[name="body"]').type(description);
+        cy.get('input[name="body"]').type(description);
         cy.get('select[name="category"]').select(category);
         cy.get('input[name="dueDate"]').type(dueDate);
 
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@issueData')
             .then((xhr) => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('not.exist');
+        cy.get('.issueListSection').contains(issueName).should('not.exist');
     });
 
     // Check that empty form does not create success message
     it('submit empty form does not create issue', () => {
-        cy.get('button[name="submit"]')
+        cy.get('button[data-cy="submit"]')
             .click()
             .wait('@issueData')
             .then((xhr) => {
                 testId = xhr.response.body._id;
             });
 
-        cy.contains(successMessage).should('not.exist');
+        cy.get('.issueListSection').contains(issueName).should('not.exist');
     });
 });
 

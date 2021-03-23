@@ -7,33 +7,42 @@ import IssueList from '../../components/IssueList';
 import Toolbar from '../../components/Toolbar';
 
 const Render = (props) => {
+    const { handleUi, ui, userData } = props;
+
     return (
         <main>
 
             <section>
 
-                <Toolbar displayClosedIssue={props.displayClosedIssue} toggleProjectManager={props.toggleProjectManager} />
+                <Toolbar ui={handleUi} />
 
-                <TabBar onClick={props.selectProject} removeTab={props.removeProjectTab} tabData={props.ui.projectTabs.map(project => {
-                    return { tabId: project._id, tabName: project.projectName }
-                })} />
+                <TabBar ui={handleUi}
+                    tabData={ui.projectTabs.map(project => {
+                        return { tabId: project._id, tabName: project.projectName }
+                    })}
+                />
 
-                <IssueList userData={props.userData} ui={props.ui} selectIssue={props.selectIssue} />
+                <IssueList userData={userData} ui={ui} selectIssue={handleUi.handleSelectIssue} />
 
             </section>
 
             <WorkbenchDetailSection
-                showProjectManager={props.ui.displayProjectManager}
-                showIssueDetails={props.ui.selectIssue}
+                ui={ui}
 
-                projects={props.userData.projectList}
-                addTab={props.addProjectTab}
+                // Project Manager Props
+                projects={userData.projectList}
+                addTab={handleUi.handleAddProjectTab}
                 editProject={props.editProject}
                 deleteProject={props.deleteProject}
 
-                issue={props.userData.issueList[props.ui.selectIssue]}
+                // Create Issue Props
+
+                // Select Issue Props
+                issue={userData.issueList[props.ui.selectIssue]}
                 toggleStatus={props.setIssueStatus}
                 deleteIssue={props.deleteIssue}
+
+                loadData={props.loadData}
             />
 
         </main>

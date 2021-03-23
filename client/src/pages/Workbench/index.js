@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 
 import Render from './Render';
-import UI from './UI';
+import HandleUi from './HandleUi';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
@@ -15,10 +15,12 @@ const Workbench = () => {
     });
 
     const [userInterface, setUserInterface] = useState({
-        projectTabs: [],
-        selectIssue: null,
         displayProjectManager: false,
-        displayClosedIssue: false
+        displayCreateIssue: false,
+        displayClosedIssue: false,
+        projectTabs: [],
+        selectProject: null,
+        selectIssue: null
     });
 
     useEffect(() => handleLoadData(), []);
@@ -36,27 +38,18 @@ const Workbench = () => {
     // Logical Component Destructuring
     const { handleDeleteIssue, handleSetIssueStatus } = IssueInterface({ userData, userInterface, setUserInterface, handleLoadData });
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
-    const {
-        handleToggleProjectManager, handleAddProjectTab,
-        handleRemoveProjectTab, handleSelectProject,
-        handleSelectIssue, handleDisplayClosedIssue
-    } = UI({ userInterface, setUserInterface, userData });
 
     return (
         <Render
             ui={userInterface}
-            toggleProjectManager={handleToggleProjectManager}
-            addProjectTab={handleAddProjectTab}
-            removeProjectTab={handleRemoveProjectTab}
-            selectProject={handleSelectProject}
-            selectIssue={handleSelectIssue}
-            displayClosedIssue={handleDisplayClosedIssue}
+            handleUi={HandleUi({ userInterface, setUserInterface, userData })}
 
             userData={userData}
             editProject={handleEditProject}
             deleteProject={handleDeleteProject}
             setIssueStatus={handleSetIssueStatus}
             deleteIssue={handleDeleteIssue}
+            loadData={handleLoadData}
         />
     );
 }

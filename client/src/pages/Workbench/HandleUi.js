@@ -4,11 +4,14 @@ const UI = (props) => {
     const handleToggleProjectManager = () => {
         (userInterface.displayProjectManager === true)
             ? setUserInterface({ ...userInterface, displayProjectManager: false })
-            : setUserInterface({ ...userInterface, displayProjectManager: true, selectIssue: null });
+            : setUserInterface({ ...userInterface, displayProjectManager: true, displayCreateIssue: false, selectIssue: null });
     }
 
     const handleAddProjectTab = e => {
         const projectId = e.currentTarget.parentElement.getAttribute('data-projectid');
+        const selectProjectId = (userInterface.projectTabs.length === 0)
+            ? projectId
+            : userInterface.selectProject;
 
         // Check if tab exists
         for (const tab of userInterface.projectTabs) {
@@ -18,11 +21,17 @@ const UI = (props) => {
         // Find project in project list
         userData.projectList.forEach((project) => {
             if (project._id === projectId)
-                setUserInterface({ ...userInterface, projectTabs: [...userInterface.projectTabs, project] });
+                setUserInterface({
+                    ...userInterface,
+                    projectTabs: [...userInterface.projectTabs, project],
+                    selectProject: selectProjectId
+                });
         });
     }
 
     const handleRemoveProjectTab = e => {
+        e.stopPropagation();
+
         const tabIndex = e.currentTarget.parentElement.getAttribute('data-index');
         const splicedProjectTabs = [...userInterface.projectTabs]
 
@@ -32,14 +41,20 @@ const UI = (props) => {
 
     const handleSelectProject = e => {
         const projectId = e.currentTarget.getAttribute('data-id');
-        console.log(projectId);
+        setUserInterface({ ...userInterface, selectProject: projectId })
+    }
+
+    const handleToggleCreateIssue = () => {
+        (userInterface.displayCreateIssue === true)
+            ? setUserInterface({ ...userInterface, displayCreateIssue: false })
+            : setUserInterface({ ...userInterface, displayCreateIssue: true, displayProjectManager: false, selectIssue: null });
     }
 
     const handleSelectIssue = e => {
         const selectIndex = e.currentTarget.getAttribute('data-index');
         (selectIndex === userInterface.selectIssue)
             ? setUserInterface({ ...userInterface, selectIssue: null })
-            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false });
+            : setUserInterface({ ...userInterface, selectIssue: selectIndex, displayProjectManager: false, displayCreateIssue: false });
     }
 
     const handleDisplayClosedIssue = () => {
@@ -53,6 +68,7 @@ const UI = (props) => {
         handleAddProjectTab,
         handleRemoveProjectTab,
         handleSelectProject,
+        handleToggleCreateIssue,
         handleSelectIssue,
         handleDisplayClosedIssue
     }

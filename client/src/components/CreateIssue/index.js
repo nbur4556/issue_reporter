@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import FormContainer from '../Forms/FormContainer';
@@ -7,9 +7,18 @@ import LabeledSelect from '../Forms/LabeledSelect';
 import SubmitButton from '../Forms/SubmitButton';
 
 const CreateIssue = () => {
+    const [issueData, setIssueData] = useState({
+        name: '',
+        body: '',
+        category: '',
+        // assigned: '',
+        dueDate: ''
+    });
 
+    // Set issue data state for form inputs
     const handleUpdateInput = (e) => {
-        console.log(e.currentTarget);
+        const input = e.currentTarget;
+        setIssueData({ ...issueData, [input.name]: input.value });
     }
 
     const handleSubmitForm = (e) => {

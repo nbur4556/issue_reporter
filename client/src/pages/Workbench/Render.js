@@ -41,6 +41,8 @@ const Render = (props) => {
                 issue={userData.issueList[props.ui.selectIssue]}
                 toggleStatus={props.setIssueStatus}
                 deleteIssue={props.deleteIssue}
+
+                loadData={props.loadData}
             />
 
         </main>

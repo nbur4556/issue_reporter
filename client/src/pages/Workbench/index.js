@@ -49,6 +49,7 @@ const Workbench = () => {
             deleteProject={handleDeleteProject}
             setIssueStatus={handleSetIssueStatus}
             deleteIssue={handleDeleteIssue}
+            loadData={handleLoadData}
         />
     );
 }

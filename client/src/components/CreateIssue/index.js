@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import CreateIssueForm from '../CreateIssueForm';
 
+// Utilities
+import ApiConnection from '../../utils/ApiConnection.js';
+const issueConnection = new ApiConnection('/api/issue');
+
 const CreateIssue = () => {
     const [issueData, setIssueData] = useState({
         name: '',
@@ -16,8 +20,14 @@ const CreateIssue = () => {
         setIssueData({ ...issueData, [input.name]: input.value });
     }
 
-    const handleSubmitForm = (e) => {
-        console.log('submit form');
+    const handleSubmitForm = () => {
+        setIssueData({ name: '', body: '', category: '', dueDate: '', });
+
+        issueConnection.postQuery({ body: issueData }).then(result => {
+            (result.status === 200)
+                ? console.log(`Success! Issue "${issueData.name}" created.`)
+                : console.log('Create issue failed');
+        });
     }
 
     return <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} />;

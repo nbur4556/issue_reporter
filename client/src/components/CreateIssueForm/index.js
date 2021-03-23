@@ -8,6 +8,18 @@ import SubmitButton from '../Forms/SubmitButton';
 
 const CreateIssueForm = (props) => {
     const { handleUpdateInput, handleSubmitForm } = props;
+
+    // Clear all inputs and submit
+    const submitForm = (e) => {
+        const formContainer = e.currentTarget.parentElement;
+
+        for (let formChild of formContainer.children) {
+            if (formChild.nodeName === 'LABEL') { formChild.children[0].value = null }
+        };
+
+        handleSubmitForm();
+    }
+
     return (
         <FormContainer>
             <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} />
@@ -19,7 +31,7 @@ const CreateIssueForm = (props) => {
             </LabeledSelect>
             {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleUpdateInput} /> */}
             <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
-            <SubmitButton onClick={handleSubmitForm} />
+            <SubmitButton onClick={submitForm} />
         </FormContainer>
     );
 }

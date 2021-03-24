@@ -23,7 +23,7 @@ const CreateIssue = (props) => {
     const handleSubmitForm = () => {
         setIssueData({ name: '', body: '', category: '', dueDate: '', });
 
-        issueConnection.postQuery({ body: issueData }).then(result => {
+        issueConnection.postQuery({ body: { selectProject: props.ui.selectProject, ...issueData } }).then(result => {
             if (result.status === 200)
                 props.loadData();
         });

@@ -129,10 +129,15 @@ module.exports = function (app) {
     });
 
     app.post('/api/issue', async (req, res) => {
-        const result = await controllers.issueController.create(req.body).catch(err => {
-            res.status(400).json(err);
-        });
-        res.status(200).json(result);
+        if (req.body.selectProject) {
+            const result = await controllers.issueController.create(req.body).catch(err => {
+                res.status(400).json(err);
+            });
+            res.status(200).json(result);
+        }
+        else {
+            res.status(400).json({ msg: 'no project selected' });
+        }
     });
 
     app.put('/api/issue/:searchId', async (req, res) => {

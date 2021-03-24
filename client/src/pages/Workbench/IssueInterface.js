@@ -19,10 +19,13 @@ const IssueInterface = (props) => {
     const handleDeleteIssue = () => {
         const { _id: issueId } = userData.issueList[userInterface.selectIssue];
 
-        issueConnection.deleteQuery({ urlExtension: `/${issueId}` }).then(() => {
-            setUserInterface({ ...userInterface, selectIssue: null });
-            handleLoadData();
-        });
+        console.log(userInterface.selectProject);
+
+        issueConnection.deleteQuery({ urlExtension: `/${issueId}`, body: { selectProject: userInterface.selectProject } })
+            .then(() => {
+                setUserInterface({ ...userInterface, selectIssue: null });
+                handleLoadData();
+            });
     }
 
     return { handleSetIssueStatus, handleDeleteIssue }

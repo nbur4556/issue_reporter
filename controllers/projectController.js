@@ -27,6 +27,10 @@ module.exports = {
         return db.Project.updateOne({ _id: searchId }, { $push: { issues: issueId } });
     },
 
+    removeIssueById: function (searchId, issueId) {
+        return db.Project.updateOne({ _id: searchId }, { $pull: { issues: issueId } });
+    },
+
     // Delete Project
     deleteById: function (searchId) {
         return db.Project.deleteOne({ _id: searchId });

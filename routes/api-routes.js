@@ -154,6 +154,11 @@ module.exports = function (app) {
     });
 
     app.delete('/api/issue/:searchId', async (req, res) => {
+        // Remove Issue from project
+        await controllers.projectController.removeIssueById(req.body.selectProject, req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        })
+
         const result = await controllers.issueController.deleteById(req.params.searchId).catch(err => {
             res.status(400).json(err);
         });

@@ -1,4 +1,4 @@
-const UI = (props) => {
+const HandleUi = (props) => {
     const { userInterface, setUserInterface, userData } = props;
 
     const handleToggleProjectManager = () => {
@@ -74,4 +74,4 @@ const UI = (props) => {
     }
 }
 
-export default UI;
+export default HandleUi;

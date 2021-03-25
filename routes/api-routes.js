@@ -146,27 +146,28 @@ module.exports = function (app) {
     app.post('/api/issue', async (req, res) => {
         // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-        console.log(authorization);
         if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
             return;
         }
 
-        if (req.body.selectProject) {
-            const result = await issueController.create(req.body).catch(err => {
-                res.status(400).json(err);
-            });
-
-            // Add issue to project
-            projectController.addIssueById(req.body.selectProject, result._id).catch(err => {
-                res.status(400).json(err);
-            });
-
-            res.status(200).json(result);
-        }
-        else {
+        // Return if no project selected
+        if (!req.body.selectProject) {
             res.status(400).json({ msg: 'no project selected' });
+            return;
         }
+
+        // Create Issue
+        const result = await issueController.create(req.body).catch(err => {
+            res.status(400).json(err);
+        });
+
+        // Add issue to project
+        projectController.addIssueById(req.body.selectProject, result._id).catch(err => {
+            res.status(400).json(err);
+        });
+
+        res.status(200).json(result);
     });
 
     app.put('/api/issue/:searchId', async (req, res) => {

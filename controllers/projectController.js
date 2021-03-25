@@ -7,7 +7,7 @@ module.exports = {
     },
 
     findByIdPopulated: function (searchId) {
-        return db.Project.findOne({ _id: searchId }).populate('Issues');
+        return db.Project.findOne({ _id: searchId }).populate('issues');
     },
 
     // Create Project

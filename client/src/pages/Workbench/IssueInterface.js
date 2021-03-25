@@ -3,7 +3,16 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
 const IssueInterface = (props) => {
-    const { userData, userInterface, setUserInterface, handleLoadData } = props;
+    const { userData, setUserData, userInterface, setUserInterface, handleLoadData } = props;
+
+    const handleLoadIssues = (projectId) => {
+        if (!projectId) { return }
+
+        issueConnection.getQuery({ urlExtension: `/byProject/${projectId}` }).then(({ data }) => {
+            console.log(data.issues)
+            setUserData({ ...userData, issueList: data.issues })
+        });
+    }
 
     const handleSetIssueStatus = () => {
         const { isOpen, _id: issueId } = userData.issueList[userInterface.selectIssue];
@@ -28,7 +37,7 @@ const IssueInterface = (props) => {
             });
     }
 
-    return { handleSetIssueStatus, handleDeleteIssue }
+    return { handleLoadIssues, handleSetIssueStatus, handleDeleteIssue }
 }
 
 export default IssueInterface;

@@ -13,6 +13,11 @@ const TabBar = ({ ui, tabData }) => {
         setActiveTab(tabIndex);
     }
 
+    const handleSelectTab = (e) => {
+        handleActiveTab(e);
+        ui.handleSelectProject(e);
+    }
+
     return (
         <section className='tab-bar'>
             {tabData.map((tab, index) => {
@@ -23,10 +28,7 @@ const TabBar = ({ ui, tabData }) => {
                     tab={tab}
                     activeClass={activeClassName}
 
-                    selectTab={(e) => {
-                        handleActiveTab(e);
-                        ui.handleSelectProject(e);
-                    }}
+                    selectTab={handleSelectTab}
                     removeTab={ui.handleRemoveProjectTab} />
             })}
         </section>

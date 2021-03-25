@@ -115,7 +115,7 @@ module.exports = function (app) {
     });
 
     // Issue Routes
-    app.get('/api/issue', async (req, res) => {
+    app.get('/api/issue/byProject/:projectId', async (req, res) => {
         // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
         if (authorization.msg === 'failed') {
@@ -123,7 +123,13 @@ module.exports = function (app) {
             return;
         }
 
-        const result = await issueController.find().catch(err => {
+        // Return if no project selected
+        if (!req.params.projectId) {
+            res.status(400).json({ msg: 'no project selected' });
+            return;
+        }
+
+        const result = await projectController.findByIdPopulated(req.params.projectId).catch(err => {
             res.status(400).json(err);
         });
         res.status(200).json(result);

@@ -6,6 +6,10 @@ module.exports = {
         return db.Project.findOne({ _id: searchId }).exec();
     },
 
+    findByIdPopulated: function (searchId) {
+        return db.Project.findOne({ _id: searchId }).populate('Issues');
+    },
+
     // Create Project
     create: function (projectParams) {
         return db.Project.create({ ...projectParams });

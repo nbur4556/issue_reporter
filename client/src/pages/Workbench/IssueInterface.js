@@ -3,12 +3,15 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
 const IssueInterface = (props) => {
-    const { userData, setUserData, userInterface, setUserInterface, handleLoadData } = props;
+    const { userData, setUserData, userInterface, setUserInterface } = props;
 
-    const handleLoadIssues = (projectId) => {
-        if (!projectId) { return }
+    const handleLoadIssues = () => {
 
-        issueConnection.getQuery({ urlExtension: `/byProject/${projectId}` }).then(({ data }) => {
+        console.log('projectId');
+
+        if (!userInterface.selectProject) { return }
+
+        issueConnection.getQuery({ urlExtension: `/byProject/${userInterface.selectProject}` }).then(({ data }) => {
             console.log(data.issues)
             setUserData({ ...userData, issueList: data.issues })
         });
@@ -21,7 +24,9 @@ const IssueInterface = (props) => {
         if (isOpen === true && userInterface.displayClosedIssue === false) setUserInterface({ ...userInterface, selectIssue: null });
 
         issueConnection.putQuery({ urlExtension: `/${issueId}`, body: { isOpen: !isOpen } }).then(() => {
-            handleLoadData();
+            console.log('test');
+
+            handleLoadIssues();
         });
     }
 
@@ -33,7 +38,7 @@ const IssueInterface = (props) => {
         issueConnection.deleteQuery({ urlExtension: `/${issueId}`, body: { selectProject: userInterface.selectProject } })
             .then(() => {
                 setUserInterface({ ...userInterface, selectIssue: null });
-                handleLoadData();
+                handleLoadIssues();
             });
     }
 

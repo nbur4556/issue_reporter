@@ -24,7 +24,7 @@ const Workbench = () => {
     });
 
     useEffect(() => handleLoadData(), []);
-    useEffect(() => { handleLoadIssues(userInterface.selectProject) }, [userInterface.selectProject])
+    useEffect(() => { handleLoadIssues() }, [userInterface.selectProject])
 
     // Get projects and issues for authorized users
     const handleLoadData = () => {
@@ -35,7 +35,7 @@ const Workbench = () => {
 
     // Logical Component Destructuring
     const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, setUserData, userInterface, setUserInterface, handleLoadData }
+        { userData, setUserData, userInterface, setUserInterface }
     );
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
 

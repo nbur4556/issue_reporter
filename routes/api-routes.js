@@ -116,6 +116,12 @@ module.exports = function (app) {
 
     // Issue Routes
     app.get('/api/issue', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+        if (!authorization._id) {
+            res.status(400).json(authorization);
+            return;
+        }
+
         const result = await issueController.find().catch(err => {
             res.status(400).json(err);
         });
@@ -123,6 +129,12 @@ module.exports = function (app) {
     });
 
     app.get('/api/issue/:searchId', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+        if (!authorization._id) {
+            res.status(400).json(authorization);
+            return;
+        }
+
         const result = await issueController.findById(req.params.searchId).catch(err => {
             res.status(400).json(err);
         });
@@ -130,6 +142,15 @@ module.exports = function (app) {
     });
 
     app.post('/api/issue', async (req, res) => {
+
+        console.log(req.headers);
+
+        const authorization = await authenticateRequest(req.headers.authorization);
+        if (!authorization._id) {
+            res.status(400).json(authorization);
+            return;
+        }
+
         if (req.body.selectProject) {
             const result = await issueController.create(req.body).catch(err => {
                 res.status(400).json(err);
@@ -148,6 +169,12 @@ module.exports = function (app) {
     });
 
     app.put('/api/issue/:searchId', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+        if (!authorization._id) {
+            res.status(400).json(authorization);
+            return;
+        }
+
         const result = await issueController.updateById(req.params.searchId, req.body).catch(err => {
             res.status(400).json(err);
         });
@@ -155,6 +182,12 @@ module.exports = function (app) {
     });
 
     app.delete('/api/issue/:searchId', async (req, res) => {
+        const authorization = await authenticateRequest(req.headers.authorization);
+        if (!authorization._id) {
+            res.status(400).json(authorization);
+            return;
+        }
+
         // Remove Issue from project
         await projectController.removeIssueById(req.body.selectProject, req.params.searchId).catch(err => {
             res.status(400).json(err);

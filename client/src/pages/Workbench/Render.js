@@ -36,6 +36,7 @@ const Render = (props) => {
                 deleteProject={props.deleteProject}
 
                 // Create Issue Props
+                loadIssues={props.loadIssues}
 
                 // Select Issue Props
                 issue={userData.issueList[props.ui.selectIssue]}

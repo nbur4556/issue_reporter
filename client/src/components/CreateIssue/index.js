@@ -25,7 +25,7 @@ const CreateIssue = (props) => {
 
         issueConnection.postQuery({ body: { selectProject: props.ui.selectProject, ...issueData } }).then(result => {
             if (result.status === 200)
-                props.loadData();
+                props.loadIssues();
         });
     }
 

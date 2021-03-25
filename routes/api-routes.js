@@ -45,79 +45,80 @@ module.exports = function (app) {
 
     // Project Routes
     app.get('/api/project', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-
-        if (authorization._id) {
-            const user = await userController.getByIdIncludeProjects(authorization._id).catch(err => {
-                res.status(400).json(err);
-            });
-            res.status(200).json(user.projects);
-        }
-        else {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
+            return;
         }
+
+        const user = await userController.getByIdIncludeProjects(authorization._id).catch(err => {
+            res.status(400).json(err);
+        });
+        res.status(200).json(user.projects);
     });
 
     app.post('/api/project', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-
-        if (authorization._id) {
-            // Create project
-            const projectResult = await projectController.create(req.body).catch(err => {
-                res.status(400).json(err);
-            });
-
-            // Add project to user
-            userController.addProjectById(authorization._id, projectResult._id).catch(err => {
-                res.status(400).json(err);
-            });
-
-            res.status(200).json(projectResult);
-        }
-        else {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
+            return;
         }
+
+        // Create project
+        const projectResult = await projectController.create(req.body).catch(err => {
+            res.status(400).json(err);
+        });
+
+        // Add project to user
+        userController.addProjectById(authorization._id, projectResult._id).catch(err => {
+            res.status(400).json(err);
+        });
+
+        res.status(200).json(projectResult);
     });
 
     app.put('/api/project/:searchId', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-
-        if (authorization._id) {
-            const projectResult = await projectController.updateById(req.params.searchId, req.body).catch(err => {
-                res.status(400).json(err);
-            });
-            res.status(200).json(projectResult);
-        }
-        else {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
+            return;
         }
+
+        const projectResult = await projectController.updateById(req.params.searchId, req.body).catch(err => {
+            res.status(400).json(err);
+        });
+        res.status(200).json(projectResult);
     });
 
     app.delete('/api/project/:searchId', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-
-        if (authorization._id) {
-            // Remove project from user
-            await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
-                res.status(400).json(err);
-            });
-
-            // Delete project
-            const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
-                res.status(400).json(err);
-            });
-
-            res.status(200).json(projectResult);
-        }
-        else {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
+            return;
         }
+
+        // Remove project from user
+        await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
+
+        // Delete project
+        const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
+
+        res.status(200).json(projectResult);
     });
 
     // Issue Routes
     app.get('/api/issue', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-        if (!authorization._id) {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
             return;
         }
@@ -129,8 +130,9 @@ module.exports = function (app) {
     });
 
     app.get('/api/issue/:searchId', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-        if (!authorization._id) {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
             return;
         }
@@ -142,11 +144,10 @@ module.exports = function (app) {
     });
 
     app.post('/api/issue', async (req, res) => {
-
-        console.log(req.headers);
-
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-        if (!authorization._id) {
+        console.log(authorization);
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
             return;
         }
@@ -169,8 +170,9 @@ module.exports = function (app) {
     });
 
     app.put('/api/issue/:searchId', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-        if (!authorization._id) {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
             return;
         }
@@ -182,8 +184,9 @@ module.exports = function (app) {
     });
 
     app.delete('/api/issue/:searchId', async (req, res) => {
+        // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
-        if (!authorization._id) {
+        if (authorization.msg === 'failed') {
             res.status(400).json(authorization);
             return;
         }

@@ -47,7 +47,7 @@ const ProjectManager = (props) => {
         return (
             <FormContainer>
                 <LabeledInput name="projectName" label="Name:" onChange={handleEditData} cy="edit-field" />
-                <SubmitButton onClick={handleSubmitEditProject} />
+                <SubmitButton onClick={handleSubmitEditProject} cy="submit-edit" />
             </FormContainer>
         );
     }

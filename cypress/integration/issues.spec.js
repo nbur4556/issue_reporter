@@ -6,10 +6,10 @@ const issueData = {
     dueDate: '2021-02-27'
 }
 
+let projectId
+
 // Create Issue Test
 describe('Create Issue', () => {
-    let projectId;
-
     beforeEach(() => {
         cy.intercept('api/issue').as('issueData');
         cy.login().then((data) => {
@@ -84,8 +84,6 @@ describe('Create Issue', () => {
 
 // Delete Issue Tests
 describe('Delete Issue', () => {
-    let projectId;
-
     beforeEach(() => {
         cy.intercept('api/issue').as('issueData');
 

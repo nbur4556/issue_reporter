@@ -1,28 +1,19 @@
 const projectName = "Project Name";
 const projectNameEdited = "Edited Name";
+let projectId;
 
 describe("Create project", () => {
     const successMsg = `Success! Issue "${projectName}" created.`;
-    let testId;
 
     beforeEach(() => {
-        // Login with cypress test credentials
-        cy.login();
-        cy.visit('/create-project');
         cy.intercept('/api/project').as('projectData');
+        cy.login().then(() => {
+            cy.visit('/create-project');
+        });
     });
 
     afterEach(() => {
-        if (testId) {
-            cy.request({
-                method: 'DELETE',
-                url: `/api/project/${testId}`,
-                auth: {
-                    bearer: localStorage.getItem('authToken')
-                }
-            });
-        }
-
+        if (projectId) cy.deleteProject(localStorage.getItem('authToken'), projectId);
         cy.logout();
     });
 
@@ -33,7 +24,7 @@ describe("Create project", () => {
             .click()
             .wait('@projectData')
             .then((xhr) => {
-                testId = xhr.response.body._id
+                projectId = xhr.response.body._id
             });
 
         cy.get('p[data-cy="success-message"]').contains(successMsg).should('exist');
@@ -45,7 +36,7 @@ describe("Create project", () => {
             .click()
             .wait('@projectData')
             .then((xhr) => {
-                testId = xhr.response.body._id
+                projectId = xhr.response.body._id
             });
 
         cy.get('p[data-cy="success-message"]').contains(successMsg).should('not.exist');
@@ -53,38 +44,18 @@ describe("Create project", () => {
 });
 
 describe('Update Project', () => {
-    let testId;
-
     beforeEach(() => {
-        // Login with cypress test credentials
-        cy.login().then(({ body }) => {
-            // Create project on login
-            cy.request({
-                method: 'POST',
-                url: '/api/project',
-                headers: {
-                    Authorization: 'Bearer ' + body.authToken
-                },
-                body: {
-                    projectName: projectName
-                }
-            }).then(({ body }) => {
-                testId = body._id;
-            });
+        cy.login().then((data) => {
+            return cy.createProject(data.body.authToken, { name: projectName });
+        }).then((data) => {
+            projectId = data.body._id
+            cy.visit('/workbench');
+            cy.get('button').contains('Toggle Project Manager').click();
         });
-
-        cy.visit('/workbench');
-        cy.get('button').contains('Toggle Project Manager').click();
     });
 
     afterEach(() => {
-        cy.request({
-            method: 'DELETE',
-            url: `/api/project/${testId}`,
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('authToken')
-            }
-        });
+        cy.deleteProject(localStorage.getItem('authToken'), projectId);
         cy.logout();
     });
 
@@ -105,41 +76,18 @@ describe('Update Project', () => {
 });
 
 describe('Delete Project', () => {
-    let testId;
-
     beforeEach(() => {
-        // Login with cypress test credentials
-        cy.login().then(({ body }) => {
-            // Create project on login
-            cy.request({
-                method: 'POST',
-                url: '/api/project',
-                headers: {
-                    Authorization: 'Bearer ' + body.authToken
-                },
-                body: {
-                    projectName: projectName
-                }
-            }).then(({ body }) => {
-                testId = body._id;
-            });
+        cy.login().then((data) => {
+            return cy.createProject(data.body.authToken, { name: projectName });
+        }).then((data) => {
+            projectId = data.body._id
+            cy.visit('/workbench');
+            cy.get('button').contains('Toggle Project Manager').click();
         });
-
-        cy.visit('/workbench');
-
-        cy.get('button').contains('Toggle Project Manager').click();
     });
 
     afterEach(() => {
-        if (testId) {
-            cy.request({
-                method: 'DELETE',
-                url: `/api/project/${testId}`,
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('authToken')
-                }
-            });
-        }
+        if (projectId) cy.deleteProject(localStorage.getItem('authToken'), projectId);
         cy.logout();
     });
 

@@ -22,16 +22,16 @@ const CreateIssueForm = (props) => {
 
     return (
         <FormContainer>
-            <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} />
-            <LabeledInput name="body" label="Body:" onChange={handleUpdateInput} />
-            <LabeledSelect name="category" label="Category:" onChange={handleUpdateInput}>
+            <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} data-cy="name" />
+            <LabeledInput name="body" label="Body:" onChange={handleUpdateInput} data-cy="body" />
+            <LabeledSelect name="category" label="Category:" onChange={handleUpdateInput} data-cy="category">
                 <option></option>
                 <option value="Feature">Feature</option>
                 <option value="Bug">Bug</option>
             </LabeledSelect>
-            {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleUpdateInput} /> */}
+            {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleUpdateInput} data-cy="name" /> */}
             <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
-            <SubmitButton onClick={submitForm} />
+            <SubmitButton onClick={submitForm} data-cy="submit" />
         </FormContainer>
     );
 }

@@ -10,15 +10,15 @@ const WorkbenchDetailSection = ({ ui, ...rest }) => {
         <section className="detail-section">
 
             {(ui.displayProjectManager)
-                ? <ProjectManager {...rest} />
+                ? <ProjectManager ui={ui} {...rest} />
                 : null}
 
             {(ui.displayCreateIssue)
-                ? <CreateIssue {...rest} />
+                ? <CreateIssue ui={ui} {...rest} />
                 : null}
 
             {(ui.selectIssue)
-                ? <IssueDetails {...rest} />
+                ? <IssueDetails ui={ui} {...rest} />
                 : null}
 
         </section>

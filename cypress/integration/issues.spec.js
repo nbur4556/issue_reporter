@@ -1,147 +1,109 @@
-const issueName = 'Issue Name';
-const description = 'Issue Description';
-const category = 'Feature';
-const dueDate = '2021-02-27';
+const projectName = 'projectName';
+const issueData = {
+    name: 'issueName',
+    body: 'issueDescription',
+    category: 'Feature',
+    dueDate: '2021-02-27'
+}
 
-// Create Issue Tests
-describe('Create issue', () => {
-    let testId;
+let projectId
 
+// Create Issue Test
+describe('Create Issue', () => {
     beforeEach(() => {
-        // Login with cypress test credentials
-        cy.login();
+        cy.intercept('api/issue').as('issueData');
+        cy.login().then((data) => {
+            return cy.createProject(data.body.authToken, { name: projectName });
+        }).then(data => {
+            projectId = data.body._id;
+            cy.visit('/workbench');
 
-        cy.visit('/workbench');
-        cy.get('button[data-cy="create-issue"]').click();
-        cy.intercept('/api/issue').as('issueData');
+            cy.get('button[data-cy="project-manager"]').click();
+            cy.get('button[data-cy="add-tab"]').click();
+            cy.get('button[data-cy="create-issue"]').click();
+        });
     });
 
     afterEach(() => {
-        if (testId) {
-            cy.request('DELETE', `/api/issue/${testId}`);
-        }
+        cy.deleteIssue(localStorage.getItem('authToken'), projectId);
+        cy.deleteProject(localStorage.getItem('authToken'), projectId);
         cy.logout();
     });
 
-    // Check that form with all information creates success message
     it('create issue with all information', () => {
-        cy.get('input[name="name"]').type(issueName);
-        cy.get('input[name="body"]').type(description);
-        cy.get('select[name="category"]').select(category);
-        cy.get('input[name="dueDate"]').type(dueDate);
+        cy.get('input[name="name"]').type(issueData.name);
+        cy.get('input[name="body"]').type(issueData.body);
+        cy.get('select[name="category"]').select(issueData.category);
+        cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
-        cy.get('button[data-cy="submit"]')
-            .click()
-            .wait('@issueData')
-            .then((xhr) => {
-                testId = xhr.response.body._id;
-            });
-
-        cy.get('.issueListSection').contains(issueName).should('exist');
+        cy.get('button[data-cy="submit"]').click();
+        cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
-    // Check that form with required information creates success message
     it('create issue without body', () => {
-        cy.get('input[name="name"]').type(issueName);
-        cy.get('select[name="category"]').select(category);
-        cy.get('input[name="dueDate"]').type(dueDate);
+        cy.get('input[name="name"]').type(issueData.name);
+        cy.get('select[name="category"]').select(issueData.category);
+        cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
-        cy.get('button[data-cy="submit"]')
-            .click()
-            .wait('@issueData')
-            .then((xhr) => {
-                testId = xhr.response.body._id;
-            });
-
-        cy.get('.issueListSection').contains(issueName).should('exist');
+        cy.get('button[data-cy="submit"]').click();
+        cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
     it('create issue without category', () => {
-        cy.get('input[name="name"]').type(issueName);
-        cy.get('input[name="body"]').type(description);
-        cy.get('input[name="dueDate"]').type(dueDate);
+        cy.get('input[name="name"]').type(issueData.name);
+        cy.get('input[name="body"]').type(issueData.body);
+        cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
-        cy.get('button[data-cy="submit"]')
-            .click()
-            .wait('@issueData')
-            .then((xhr) => {
-                testId = xhr.response.body._id;
-            });
-
-        cy.get('.issueListSection').contains(issueName).should('exist');
+        cy.get('button[data-cy="submit"]').click();
+        cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
     it('create issue without due date', () => {
-        cy.get('input[name="name"]').type(issueName);
-        cy.get('input[name="body"]').type(description);
-        cy.get('select[name="category"]').select(category);
+        cy.get('input[name="name"]').type(issueData.name);
+        cy.get('input[name="body"]').type(issueData.body);
+        cy.get('select[name="category"]').select(issueData.category);
 
-        cy.get('button[data-cy="submit"]')
-            .click()
-            .wait('@issueData')
-            .then((xhr) => {
-                testId = xhr.response.body._id;
-            });
-
-        cy.get('.issueListSection').contains(issueName).should('exist');
+        cy.get('button[data-cy="submit"]').click();
+        cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
-    // Check that form without name does not create success message
     it('submit form without name does not create issue', () => {
-        cy.get('input[name="body"]').type(description);
-        cy.get('select[name="category"]').select(category);
-        cy.get('input[name="dueDate"]').type(dueDate);
+        cy.get('input[name="body"]').type(issueData.body);
+        cy.get('select[name="category"]').select(issueData.category);
+        cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
-        cy.get('button[data-cy="submit"]')
-            .click()
-            .wait('@issueData')
-            .then((xhr) => {
-                testId = xhr.response.body._id;
-            });
-
-        cy.get('.issueListSection').contains(issueName).should('not.exist');
+        cy.get('button[data-cy="submit"]').click();
+        cy.get('.issueListSection').contains(issueData.name).should('not.exist');
     });
 
-    // Check that empty form does not create success message
     it('submit empty form does not create issue', () => {
-        cy.get('button[data-cy="submit"]')
-            .click()
-            .wait('@issueData')
-            .then((xhr) => {
-                testId = xhr.response.body._id;
-            });
-
-        cy.get('.issueListSection').contains(issueName).should('not.exist');
+        cy.get('button[data-cy="submit"]').click();
+        cy.get('.issueListSection').contains(issueData.name).should('not.exist');
     });
 });
 
-// Update Issue Tests
-// describe('Update Issue', () => {
-
-// });
-
 // Delete Issue Tests
 describe('Delete Issue', () => {
-    const deleteConfirmationMsg = "Are you sure you want to delete this issue? This can not be undone."
-    let testId;
-
     beforeEach(() => {
-        // Login with cypress test credentials
-        cy.login();
+        cy.intercept('api/issue').as('issueData');
 
-        cy.visit('/workbench');
-        cy.request('POST', '/api/issue', { name: issueName }).then(({ body }) => {
-            testId = body._id;
+        cy.login().then((data) => {
+            return cy.createProject(data.body.authToken, { name: projectName });
+        }).then(data => {
+            projectId = data.body._id;
+            return cy.createIssue(localStorage.getItem('authToken'), { ...issueData, projectId: data.body._id });
+        }).then(() => {
+            cy.visit('/workbench');
+            cy.get('button[data-cy="project-manager"]').click();
+            cy.get('button[data-cy="add-tab"]').click();
+            cy.get('li').contains(issueData.name).click();
+            cy.get('button[name="deleteIssue"]').click();
         });
-
-        cy.get('.issueListSection').contains(issueName).click();
-        cy.get('button[name="deleteIssue"]').click();
     });
 
     afterEach(() => {
-        if (testId) {
-            cy.request('DELETE', `/api/issue/${testId}`);
-        }
+        cy.deleteIssue(localStorage.getItem('authToken'), projectId);
+        cy.deleteProject(localStorage.getItem('authToken'), projectId);
         cy.logout();
     });
 
@@ -149,21 +111,19 @@ describe('Delete Issue', () => {
     it('click no on delete confirmation does not delete issue', () => {
         cy.get('button[name="cancelDelete"]').click();
 
-        cy.contains(deleteConfirmationMsg).should('not.exist');
         cy.get('button[name="confirmDelete"]').should('not.exist');
         cy.get('button[name="cancelDelete"]').should('not.exist');
 
-        cy.get('.issueListSection').contains(issueName).should('exist');
+        cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
     // Check that issue is removed when clicked yes
     it('click yes on delete confirmation deletes issue', () => {
         cy.get('button[name="confirmDelete"]').click();
 
-        cy.contains(deleteConfirmationMsg).should('not.exist');
         cy.get('button[name="confirmDelete"]').should('not.exist');
         cy.get('button[name="cancelDelete"]').should('not.exist');
 
-        cy.get('.issueListSection').contains(issueName).should('not.exist');
+        cy.get('.issueListSection').contains(issueData.name).should('not.exist');
     });
 });

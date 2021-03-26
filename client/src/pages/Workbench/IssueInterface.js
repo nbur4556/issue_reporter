@@ -6,13 +6,9 @@ const IssueInterface = (props) => {
     const { userData, setUserData, userInterface, setUserInterface } = props;
 
     const handleLoadIssues = () => {
-
-        console.log('projectId');
-
         if (!userInterface.selectProject) { return }
 
         issueConnection.getQuery({ urlExtension: `/byProject/${userInterface.selectProject}` }).then(({ data }) => {
-            console.log(data.issues)
             setUserData({ ...userData, issueList: data.issues })
         });
     }
@@ -24,16 +20,12 @@ const IssueInterface = (props) => {
         if (isOpen === true && userInterface.displayClosedIssue === false) setUserInterface({ ...userInterface, selectIssue: null });
 
         issueConnection.putQuery({ urlExtension: `/${issueId}`, body: { isOpen: !isOpen } }).then(() => {
-            console.log('test');
-
             handleLoadIssues();
         });
     }
 
     const handleDeleteIssue = () => {
         const { _id: issueId } = userData.issueList[userInterface.selectIssue];
-
-        console.log(userInterface.selectProject);
 
         issueConnection.deleteQuery({ urlExtension: `/${issueId}`, body: { selectProject: userInterface.selectProject } })
             .then(() => {

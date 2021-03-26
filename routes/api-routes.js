@@ -191,9 +191,6 @@ module.exports = function (app) {
     });
 
     app.delete('/api/issue/:searchId', async (req, res) => {
-        console.log(req.body);
-        console.log(req.params);
-
         // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
         if (authorization.msg === 'failed') {

@@ -20,3 +20,12 @@ button{
     color: white;
     background-color: $mainAccentColor;
 }
+
+.link-button{
+    border:none;
+
+    background: none;
+    color: $mainAccentColor;
+
+    font-weight: bold;
+}

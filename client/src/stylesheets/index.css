@@ -16,4 +16,11 @@ button {
   color: white;
   background-color: #1E7A8E;
 }
+
+.link-button {
+  border: none;
+  background: none;
+  color: #1E7A8E;
+  font-weight: bold;
+}
 /*# sourceMappingURL=index.css.map */

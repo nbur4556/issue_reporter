@@ -47,6 +47,7 @@ const LoginSignup = (props) => {
     // Get input from form
     const handleCredentialsInput = e => {
         setCredentialsInput({ ...credentialsInput, [e.currentTarget.name]: e.currentTarget.value })
+        setSigninState({ ...signinState, msg: null });
     }
 
     // Create a new user
@@ -104,8 +105,8 @@ const LoginSignup = (props) => {
         <main>
 
             <section className="toggle-section">
-                <button name="loginActive" onClick={handleSetActive}>Log In</button>
-                <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
+                {(signinState.signupActive) ? <button className="link-button" name="loginActive" onClick={handleSetActive}>Log In</button> : null}
+                {(signinState.loginActive) ? <button className="link-button" name="signupActive" onClick={handleSetActive}>Sign Up</button> : null}
             </section>
 
             {/* Input Forms */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './stylesheets/reset.css';
-import './stylesheets/main.css';
+import './stylesheets/index.css';
 
 // Pages
 import LoginSignup from './pages/LoginSignup';

@@ -129,7 +129,6 @@ describe('Authenticate User', () => {
 
     beforeEach(() => {
         cy.visit('/');
-        cy.get('button[name="loginActive"]').click();
     });
 
     afterEach(() => cy.logout());

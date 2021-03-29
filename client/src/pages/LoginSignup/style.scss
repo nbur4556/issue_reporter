@@ -19,12 +19,28 @@ section{
     margin: $sectionGap;
 }
 
+button{
+    margin: $componentMargin;
+    min-width: 15rem;
+}
+
 .toggle-section{
     order: 2;
 }
 
 .input-section{
     order: 1;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .labeled-input{
+        margin: $componentMargin;
+        min-width: 25rem;
+    }
 }
 
 .message-section{

@@ -1,4 +1,4 @@
-@import './_variables.scss';
+@import './_variables';
 
 body{
     background-color: $backgroundColor;
@@ -8,6 +8,8 @@ input{
     padding: 1rem;
     border: $mainAccentBorder;
     border-radius: $mainBorderRadius;
+
+    background-color: $backgroundColor;
 }
 
 button{

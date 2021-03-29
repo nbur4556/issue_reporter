@@ -1,0 +1,13 @@
+@import '../../stylesheets/variables';
+body{
+    display: flex;
+    justify-content: center;
+}
+
+main{
+    margin: 5rem;
+    padding: 5rem;
+    
+    background-color: $forwardSectionColor;
+    width: 60rem;
+}

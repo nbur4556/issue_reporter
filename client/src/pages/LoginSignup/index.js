@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import './style.css'
 
 // Components
 import CredentialsForm from '../../components/CredentialsForm';
@@ -11,7 +12,7 @@ const userConnection = new ApiConnection('/api/user');
 const LoginSignup = (props) => {
 
     const [signinState, setSigninState] = useState({
-        loginActive: false,
+        loginActive: true,
         signupActive: false,
         msg: ''
     });
@@ -101,6 +102,7 @@ const LoginSignup = (props) => {
 
     return (
         <main>
+
             <section>
                 <button name="loginActive" onClick={handleSetActive}>Log In</button>
                 <button name="signupActive" onClick={handleSetActive}>Sign Up</button>

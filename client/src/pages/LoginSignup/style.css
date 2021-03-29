@@ -1,0 +1,16 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main {
+  margin: 5rem;
+  padding: 5rem;
+  background-color: rgba(94, 214, 240, 0.13);
+  width: 60rem;
+}
+/*# sourceMappingURL=style.css.map */

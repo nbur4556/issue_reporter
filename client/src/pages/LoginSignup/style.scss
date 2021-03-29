@@ -1,4 +1,5 @@
 @import '../../stylesheets/variables';
+
 body{
     display: flex;
     justify-content: center;
@@ -8,20 +9,16 @@ main{
     display: flex;
     flex-direction: column;
 
-    margin: $sectionMargin;
     padding: $sectionPadding;
 
     background-color: $forwardSectionColor;
-    width: 50rem;
-}
-
-section{
-    margin: $sectionGap;
+    width: 70rem;
+    height: calc(100vh - 6rem);
 }
 
 button{
     margin: $componentMargin;
-    min-width: 15rem;
+    min-width: 20rem;
 }
 
 .toggle-section{
@@ -38,11 +35,13 @@ button{
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        margin-top: 4.5rem;
     }
 
     .labeled-input{
         margin: $componentMargin;
-        min-width: 25rem;
+        min-width: 35rem;
     }
 }
 

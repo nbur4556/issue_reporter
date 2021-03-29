@@ -15,19 +15,15 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 5rem;
   padding: 3rem;
   background-color: rgba(94, 214, 240, 0.13);
-  width: 50rem;
-}
-
-section {
-  margin: 2rem;
+  width: 70rem;
+  height: calc(100vh - 6rem);
 }
 
 button {
   margin: 1rem;
-  min-width: 15rem;
+  min-width: 20rem;
 }
 
 .toggle-section {
@@ -59,11 +55,12 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 4.5rem;
 }
 
 .input-section .labeled-input {
   margin: 1rem;
-  min-width: 25rem;
+  min-width: 35rem;
 }
 
 .message-section {

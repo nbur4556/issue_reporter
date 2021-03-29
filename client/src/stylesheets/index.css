@@ -1,4 +1,18 @@
 body {
   background-color: #F4FAFB;
 }
+
+input {
+  padding: 1rem;
+  border: 2px solid #1E7A8E;
+  border-radius: 10px;
+}
+
+button {
+  padding: 1rem;
+  border: 2px solid #1E7A8E;
+  border-radius: 10px;
+  color: white;
+  background-color: #1E7A8E;
+}
 /*# sourceMappingURL=index.css.map */

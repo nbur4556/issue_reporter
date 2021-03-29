@@ -3,3 +3,18 @@
 body{
     background-color: $backgroundColor;
 }
+
+input{
+    padding: 1rem;
+    border: $mainAccentBorder;
+    border-radius: $mainBorderRadius;
+}
+
+button{
+    padding: 1rem;
+    border: $mainAccentBorder;
+    border-radius: $mainBorderRadius;
+
+    color: white;
+    background-color: $mainAccentColor;
+}

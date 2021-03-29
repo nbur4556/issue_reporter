@@ -103,17 +103,21 @@ const LoginSignup = (props) => {
     return (
         <main>
 
-            <section>
+            <section className="toggle-section">
                 <button name="loginActive" onClick={handleSetActive}>Log In</button>
                 <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
             </section>
 
             {/* Input Forms */}
-            {(signinState.loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
-            {(signinState.signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            <section className="input-section">
+                {(signinState.loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
+                {(signinState.signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            </section>
 
             {/* Messages */}
-            {(signinState.msg) ? <p>{signinState.msg}</p> : null}
+            <section className="message-section">
+                {(signinState.msg) ? <p>{signinState.msg}</p> : null}
+            </section>
 
             {/* Redirects */}
             {(redirect) ? <Redirect to='/workbench' /> : null}

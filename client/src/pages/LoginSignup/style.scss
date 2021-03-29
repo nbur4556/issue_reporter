@@ -5,9 +5,28 @@ body{
 }
 
 main{
-    margin: 5rem;
-    padding: 5rem;
-    
+    display: flex;
+    flex-direction: column;
+
+    margin: $sectionMargin;
+    padding: $sectionPadding;
+
     background-color: $forwardSectionColor;
     width: 60rem;
+}
+
+section{
+    margin: $sectionGap;
+}
+
+.toggle-section{
+    order: 2;
+}
+
+.input-section{
+    order: 1;
+}
+
+.message-section{
+    order: 3;
 }

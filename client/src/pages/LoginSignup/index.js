@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import './style.css'
 
 // Components
 import CredentialsForm from '../../components/CredentialsForm';
@@ -11,7 +12,7 @@ const userConnection = new ApiConnection('/api/user');
 const LoginSignup = (props) => {
 
     const [signinState, setSigninState] = useState({
-        loginActive: false,
+        loginActive: true,
         signupActive: false,
         msg: ''
     });
@@ -46,6 +47,7 @@ const LoginSignup = (props) => {
     // Get input from form
     const handleCredentialsInput = e => {
         setCredentialsInput({ ...credentialsInput, [e.currentTarget.name]: e.currentTarget.value })
+        setSigninState({ ...signinState, msg: null });
     }
 
     // Create a new user
@@ -101,17 +103,22 @@ const LoginSignup = (props) => {
 
     return (
         <main>
-            <section>
-                <button name="loginActive" onClick={handleSetActive}>Log In</button>
-                <button name="signupActive" onClick={handleSetActive}>Sign Up</button>
+
+            <section className="toggle-section">
+                {(signinState.signupActive) ? <button className="link-button" name="loginActive" onClick={handleSetActive}>Log In</button> : null}
+                {(signinState.loginActive) ? <button className="link-button" name="signupActive" onClick={handleSetActive}>Sign Up</button> : null}
             </section>
 
             {/* Input Forms */}
-            {(signinState.loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
-            {(signinState.signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            <section className="input-section">
+                {(signinState.loginActive) ? <CredentialsForm requireConfirm={false} handleOnChange={handleCredentialsInput} handleSubmit={handleLogin} /> : null}
+                {(signinState.signupActive) ? <CredentialsForm requireConfirm={true} handleOnChange={handleCredentialsInput} handleSubmit={handleSignup} /> : null}
+            </section>
 
             {/* Messages */}
-            {(signinState.msg) ? <p>{signinState.msg}</p> : null}
+            <section className="message-section">
+                {(signinState.msg) ? <p>{signinState.msg}</p> : null}
+            </section>
 
             {/* Redirects */}
             {(redirect) ? <Redirect to='/workbench' /> : null}

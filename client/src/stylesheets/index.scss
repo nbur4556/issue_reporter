@@ -1,0 +1,47 @@
+@import './_variables';
+
+body{
+    background-color: $backgroundColor;
+}
+
+p{
+    font-family: $mainSansSerif;
+}
+
+label{
+    font-family: $mainSansSerif;
+}
+
+input{
+    margin-top: 0.2rem;
+    padding: 1rem;
+    
+    border: $mainAccentBorder;
+    border-radius: $mainBorderRadius;
+
+    background-color: $backgroundColor;
+
+    font-family: $mainSansSerif;
+}
+
+button{
+    padding: 1rem;
+    border: $mainAccentBorder;
+    border-radius: $mainBorderRadius;
+
+    color: white;
+    background-color: $mainAccentColor;
+
+    font-family: $mainSansSerif;
+    font-size: $componentFontSize;
+    font-weight: bold; 
+}
+
+.link-button{
+    border:none;
+
+    background: none;
+    color: $mainAccentColor;
+
+    font-weight: bold;
+}

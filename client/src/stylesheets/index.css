@@ -1,0 +1,39 @@
+body {
+  background-color: #F4FAFB;
+}
+
+p {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+label {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+input {
+  margin-top: 0.2rem;
+  padding: 1rem;
+  border: 2px solid #1E7A8E;
+  border-radius: 10px;
+  background-color: #F4FAFB;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+button {
+  padding: 1rem;
+  border: 2px solid #1E7A8E;
+  border-radius: 10px;
+  color: white;
+  background-color: #1E7A8E;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.link-button {
+  border: none;
+  background: none;
+  color: #1E7A8E;
+  font-weight: bold;
+}
+/*# sourceMappingURL=index.css.map */

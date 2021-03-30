@@ -1,12 +1,12 @@
 const projectName = 'projectName';
 const issueData = {
-    name: 'issueName',
-    body: 'issueDescription',
+    name: 'Test Issue Data Name',
+    body: 'Issue Description',
     category: 'Feature',
     dueDate: '2021-02-27'
 }
 
-let projectId
+let projectId;
 
 // Create Issue Test
 describe('Create Issue', () => {

@@ -1,3 +1,5 @@
+@import '../../stylesheets/variables';
+
 .workbench-page{
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -9,10 +11,12 @@
 
     height: 100vh;
     width: 100vw;
+    background-color: $backgroundColor;
 }
 
 .tab-bar{
     grid-area: tabs;
+    background-color: $mainAccentColor;
 }
 
 .tool-bar{

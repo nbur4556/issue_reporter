@@ -22,7 +22,7 @@
 .tool-bar{
     grid-area: project;
 
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -32,6 +32,10 @@
 
 .issueListSection{
     grid-area: issues;
+    justify-self: center;
+
+    padding: $sectionPadding;
+    width: 90%;
 }
 
 .detail-section{

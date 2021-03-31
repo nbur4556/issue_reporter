@@ -1,0 +1,18 @@
+@import '../../stylesheets/variables';
+
+.issue-bar {
+    margin: $componentMargin;
+    padding: $componentMargin 3rem;
+    border-radius: $mainBorderRadius;
+
+    ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.active-issue{
+    color: $backgroundColor;
+    background-color: $mainAccentColor;
+}

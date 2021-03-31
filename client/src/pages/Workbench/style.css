@@ -43,6 +43,10 @@
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: issues;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  padding: 3rem;
+  width: 90%;
 }
 
 .detail-section {

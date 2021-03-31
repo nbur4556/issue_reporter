@@ -1,15 +1,26 @@
 import React from 'react';
+import './style.css';
 
 // Components
 import IssueBar from '../IssueBar';
 
-const IssueList = (props) => {
+const IssueList = ({ userData, ui, selectIssue }) => {
     return (
         <section className="issueListSection">
-            {props.userData.issueList.map((issue, index) => {
-                return (issue.isOpen === false && props.ui.displayClosedIssue === false)
+            {userData.issueList.map((issue, index) => {
+                const activeClassName = (index === Number(ui.selectIssue))
+                    ? "active-issue"
+                    : "inactive-issue";
+
+                return (issue.isOpen === false && ui.displayClosedIssue === false)
                     ? null
-                    : <IssueBar onClick={props.selectIssue} key={index} index={index} title={issue.name} />;
+                    : <IssueBar
+                        onClick={selectIssue}
+                        key={index}
+                        index={index}
+                        issueData={issue}
+                        activeClassName={activeClassName}
+                    />;
             })}
         </section>
     );

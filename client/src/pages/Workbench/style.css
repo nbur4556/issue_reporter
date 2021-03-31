@@ -3,8 +3,8 @@
   display: grid;
   -ms-grid-columns: 2fr 1fr;
       grid-template-columns: 2fr 1fr;
-  -ms-grid-rows: 3.5rem 5rem 1fr;
-      grid-template-rows: 3.5rem 5rem 1fr;
+  -ms-grid-rows: 3.5rem auto 1fr;
+      grid-template-rows: 3.5rem auto 1fr;
       grid-template-areas: "tabs tabs" "project details" "issues details";
   height: 100vh;
   width: 100vw;
@@ -23,6 +23,20 @@
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: project;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3rem;
 }
 
 .issueListSection {

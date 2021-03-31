@@ -6,6 +6,11 @@ div {
   font-family: "Noto Sans JP", sans-serif;
 }
 
+h1 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 2.5rem;
+}
+
 p {
   font-family: "Noto Sans JP", sans-serif;
 }

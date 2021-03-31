@@ -17,14 +17,16 @@ const Toolbar = ({ ui, handleUi }) => {
 
             {getProjectName(ui)}
 
-            <label htmlFor="toggleClosedIssues">
-                Show Closed Issues:
-                        <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleUi.handleDisplayClosedIssue} />
-            </label>
-            <button onClick={handleUi.handleToggleCreateIssue} data-cy="create-issue">Toggle Create Issue</button>
-            <Link to="/create-project">Create Project</Link>
+            <section className="tool-bar-controls">
+                <label htmlFor="toggleClosedIssues">
+                    Show Closed Issues:
+                            <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={handleUi.handleDisplayClosedIssue} />
+                </label>
+                <button onClick={handleUi.handleToggleCreateIssue} data-cy="create-issue">Toggle Create Issue</button>
+                <Link to="/create-project">Create Project</Link>
 
-            <button onClick={handleUi.handleToggleProjectManager} data-cy="project-manager">Toggle Project Manager</button>
+                <button onClick={handleUi.handleToggleProjectManager} data-cy="project-manager">Toggle Project Manager</button>
+            </section>
         </section>
     )
 }

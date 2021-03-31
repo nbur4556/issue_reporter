@@ -17,7 +17,7 @@ const Render = (props) => {
                 })}
             />
 
-            <Toolbar ui={handleUi} />
+            <Toolbar ui={ui} handleUi={handleUi} />
 
             <IssueList userData={userData} ui={ui} selectIssue={handleUi.handleSelectIssue} />
 

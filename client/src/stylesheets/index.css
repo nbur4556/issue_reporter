@@ -2,6 +2,10 @@ body {
   background-color: #F4FAFB;
 }
 
+div {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
 p {
   font-family: "Noto Sans JP", sans-serif;
 }
@@ -20,6 +24,7 @@ input {
 }
 
 button {
+  margin: 1rem;
   padding: 1rem;
   border: 2px solid #1E7A8E;
   border-radius: 10px;

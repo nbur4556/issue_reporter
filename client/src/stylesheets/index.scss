@@ -4,6 +4,10 @@ body{
     background-color: $backgroundColor;
 }
 
+div{
+    font-family: $mainSansSerif;
+}
+
 p{
     font-family: $mainSansSerif;
 }
@@ -25,6 +29,7 @@ input{
 }
 
 button{
+    margin: $componentMargin;
     padding: 1rem;
     border: $mainAccentBorder;
     border-radius: $mainBorderRadius;

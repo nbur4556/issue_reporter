@@ -3,8 +3,8 @@
   display: grid;
   -ms-grid-columns: 2fr 1fr;
       grid-template-columns: 2fr 1fr;
-  -ms-grid-rows: 5rem 5rem 1fr;
-      grid-template-rows: 5rem 5rem 1fr;
+  -ms-grid-rows: 3.5rem 5rem 1fr;
+      grid-template-rows: 3.5rem 5rem 1fr;
       grid-template-areas: "tabs tabs" "project details" "issues details";
   height: 100vh;
   width: 100vw;

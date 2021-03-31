@@ -1,11 +1,60 @@
-article {
+.workbench-page {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto;
-      grid-template-columns: auto auto;
+  -ms-grid-columns: 2fr 1fr;
+      grid-template-columns: 2fr 1fr;
+  -ms-grid-rows: 3.5rem auto 1fr;
+      grid-template-rows: 3.5rem auto 1fr;
+      grid-template-areas: "tabs tabs" "project details" "issues details";
+  height: 100vh;
+  width: 100vw;
+  background-color: #F4FAFB;
+}
+
+.tab-bar {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: tabs;
+  background-color: #1E7A8E;
+}
+
+.tool-bar {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: project;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3rem;
+}
+
+.issueListSection {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: issues;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  padding: 3rem;
+  width: 90%;
 }
 
 .detail-section {
-  background-color: cyan;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  grid-area: details;
+  padding: 3rem;
+  background-color: rgba(94, 214, 240, 0.13);
 }
 /*# sourceMappingURL=style.css.map */

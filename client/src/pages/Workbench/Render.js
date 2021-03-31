@@ -10,21 +10,16 @@ const Render = (props) => {
     const { handleUi, ui, userData } = props;
 
     return (
-        <main>
+        <main className="workbench-page">
+            <TabBar ui={handleUi}
+                tabData={ui.projectTabs.map(project => {
+                    return { tabId: project._id, tabName: project.projectName }
+                })}
+            />
 
-            <section>
+            <Toolbar ui={ui} handleUi={handleUi} />
 
-                <Toolbar ui={handleUi} />
-
-                <TabBar ui={handleUi}
-                    tabData={ui.projectTabs.map(project => {
-                        return { tabId: project._id, tabName: project.projectName }
-                    })}
-                />
-
-                <IssueList userData={userData} ui={ui} selectIssue={handleUi.handleSelectIssue} />
-
-            </section>
+            <IssueList userData={userData} ui={ui} selectIssue={handleUi.handleSelectIssue} />
 
             <WorkbenchDetailSection
                 ui={ui}
@@ -45,7 +40,6 @@ const Render = (props) => {
 
                 loadData={props.loadData}
             />
-
         </main>
     );
 }

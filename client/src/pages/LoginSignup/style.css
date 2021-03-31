@@ -7,7 +7,7 @@ body {
           justify-content: center;
 }
 
-main {
+.login-signup-page {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,8 +21,7 @@ main {
   height: calc(100vh - 6rem);
 }
 
-button {
-  margin: 1rem;
+.login-signup-page button {
   min-width: 20rem;
 }
 

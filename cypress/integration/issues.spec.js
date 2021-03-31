@@ -1,6 +1,6 @@
 const projectName = 'projectName';
 const issueData = {
-    name: 'Test Issue Data Name',
+    name: 'Test Issue',
     body: 'Issue Description',
     category: 'Feature',
     dueDate: '2021-02-27'

@@ -5,8 +5,8 @@ const Tab = (props) => {
 
     return (
         <div className={`tab ${activeClass}`} data-index={tabIndex} data-id={tab.tabId} onClick={selectTab}>
-            {tab.tabName}
-            <button onClick={removeTab}>X</button>
+            <p>{tab.tabName}</p>
+            <button onClick={removeTab}></button>
         </div>
     )
 }

@@ -1,3 +1,9 @@
+.issue-bar {
+  margin: 1rem;
+  padding: 1rem 3rem;
+  border-radius: 10px;
+}
+
 .issue-bar ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -9,5 +15,10 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.active-issue {
+  color: #F4FAFB;
+  background-color: #1E7A8E;
 }
 /*# sourceMappingURL=style.css.map */

@@ -5,7 +5,12 @@ body{
     justify-content: center;
 }
 
-main{
+button{
+    margin: $componentMargin;
+    min-width: 20rem;
+}
+
+.login-signup-page{
     display: flex;
     flex-direction: column;
 
@@ -14,11 +19,6 @@ main{
     background-color: $forwardSectionColor;
     width: 70rem;
     height: calc(100vh - 6rem);
-}
-
-button{
-    margin: $componentMargin;
-    min-width: 20rem;
 }
 
 .toggle-section{

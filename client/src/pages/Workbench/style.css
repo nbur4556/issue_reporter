@@ -1,4 +1,4 @@
-article {
+.workbench-page {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto auto;

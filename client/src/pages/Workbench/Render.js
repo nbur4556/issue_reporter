@@ -10,7 +10,7 @@ const Render = (props) => {
     const { handleUi, ui, userData } = props;
 
     return (
-        <main>
+        <main className="workbench-page">
 
             <section>
 

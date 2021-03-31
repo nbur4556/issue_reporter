@@ -29,4 +29,7 @@
 
 .detail-section{
     grid-area: details;
+    padding: $sectionPadding;
+
+    background-color: $forwardSectionColor;
 }

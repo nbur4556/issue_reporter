@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Toolbar = ({ ui }) => {
     return (
-        <section>
+        <section className="tool-bar">
             <label htmlFor="toggleClosedIssues">
                 Show Closed Issues:
                         <input id="toggleClosedIssues" name="toggleClosedIssues" type="checkbox" onChange={ui.handleDisplayClosedIssue} />

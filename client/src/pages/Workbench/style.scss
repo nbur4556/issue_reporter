@@ -1,8 +1,28 @@
 .workbench-page{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 5rem 5rem 1fr;
+    grid-template-areas:
+        "tabs tabs"
+        "project details"
+        "issues details";
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.tab-bar{
+    grid-area: tabs;
+}
+
+.tool-bar{
+    grid-area: project;
+}
+
+.issueListSection{
+    grid-area: issues;
 }
 
 .detail-section{
-    background-color: cyan;
+    grid-area: details;
 }

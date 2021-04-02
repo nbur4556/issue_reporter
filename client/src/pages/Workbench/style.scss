@@ -14,8 +14,13 @@
     background-color: $backgroundColor;
 }
 
-.tab-bar{
+.navigation-bar{
     grid-area: tabs;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
     background-color: $mainAccentColor;
 }
 

@@ -12,7 +12,7 @@ const LogoutButton = ({ buttonText = "Log Out" }) => {
     return (
         <button onClick={logout}>
             {buttonText}
-            {(loggedOut) ? <Redirect to='/' /> : null}}
+            {(loggedOut) ? <Redirect to='/' /> : null}
         </button>
     );
 }

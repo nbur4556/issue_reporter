@@ -40,9 +40,14 @@ describe('Link Navigation', () => {
     beforeEach(() => cy.login());
     afterEach(() => cy.logout());
 
-    // Should equal create project url
+    it('dashboard logout link', () => {
+        cy.visit('/workbench');
+        cy.get('button[data-cy="logoutButton"]').click();
+        cy.url().should('eq', Cypress.config().baseUrl + '/');
+    });
+
     it('dashboard to create project link', () => {
-        cy.visit('workbench');
+        cy.visit('/workbench');
         cy.contains('Create Project').click();
         cy.url().should('eq', Cypress.config().baseUrl + '/create-project');
     });

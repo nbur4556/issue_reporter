@@ -10,9 +10,9 @@ const LogoutButton = ({ buttonText = "Log Out" }) => {
     }
 
     return (
-        <button onClick={logout} >
+        <button onClick={logout} data-cy="logoutButton" >
             { buttonText}
-            { (loggedOut) ? <Redirect to='/' /> : null}
+            { (loggedOut) ? <Redirect to="/" /> : null}
         </button >
     );
 }

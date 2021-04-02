@@ -1,12 +1,12 @@
 import React from 'react';
 
-const LogoutButton = () => {
+const LogoutButton = ({ buttonText = "Log Out" }) => {
     const logout = () => {
         console.log('logout');
     }
 
     return (
-        <button onClick={logout}>Logout</button>
+        <button onClick={logout}>{buttonText}</button>
     );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Components
+import WorkbenchNavigation from '../../components/WorkbenchNavigation';
 import WorkbenchDetailSection from '../../components/WorkbenchDetailSection';
 import TabBar from '../../components/TabBar';
 import IssueList from '../../components/IssueList';
@@ -12,13 +13,17 @@ const Render = (props) => {
 
     return (
         <main className="workbench-page">
-            <TabBar ui={handleUi}
-                tabData={ui.projectTabs.map(project => {
-                    return { tabId: project._id, tabName: project.projectName }
-                })}
-            />
+            <WorkbenchNavigation>
 
-            <LogoutButton buttonText="Sign Out"></LogoutButton>
+                <TabBar ui={handleUi}
+                    tabData={ui.projectTabs.map(project => {
+                        return { tabId: project._id, tabName: project.projectName }
+                    })}
+                />
+
+                <LogoutButton buttonText="Sign Out"></LogoutButton>
+
+            </WorkbenchNavigation>
 
             <Toolbar ui={ui} handleUi={handleUi} />
 

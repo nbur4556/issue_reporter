@@ -19,7 +19,7 @@ const TabBar = ({ ui, tabData }) => {
     }
 
     return (
-        <nav className='tab-bar'>
+        <section className='tab-bar'>
             {tabData.map((tab, index) => {
                 const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive'
 
@@ -31,7 +31,7 @@ const TabBar = ({ ui, tabData }) => {
                     selectTab={handleSelectTab}
                     removeTab={ui.handleRemoveProjectTab} />
             })}
-        </nav>
+        </section>
     );
 }
 

@@ -17,6 +17,21 @@
           justify-content: space-between;
 }
 
+.issue-bar ul .name-col {
+  -ms-flex-preferred-size: 40%;
+      flex-basis: 40%;
+}
+
+.issue-bar ul .category-col {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+}
+
+.issue-bar ul .due-date-col {
+  -ms-flex-preferred-size: 40%;
+      flex-basis: 40%;
+}
+
 .active-issue {
   color: #F4FAFB;
   background-color: #1E7A8E;

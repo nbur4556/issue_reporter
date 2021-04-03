@@ -8,9 +8,9 @@ const IssueBar = props => {
             data-index={props.index}>
 
             <ul>
-                <li>{props.issueData.name}</li>
-                <li>{props.issueData.category}</li>
-                <li>{props.issueData.dueDate}</li>
+                <li className="name-col">{props.issueData.name}</li>
+                <li className="category-col">{props.issueData.category}</li>
+                <li className="due-date-col">{props.issueData.dueDate}</li>
                 {(props.assigned) ? <li>{props.assigned}</li> : null}
             </ul>
 

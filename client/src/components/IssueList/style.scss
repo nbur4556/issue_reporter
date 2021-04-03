@@ -9,6 +9,16 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        .name-col {
+            flex-basis: 40%;
+        }
+         .category-col {
+            flex-basis: 20%;
+        }
+         .due-date-col {
+            flex-basis: 40%;
+        }
     }
 }
 

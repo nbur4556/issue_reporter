@@ -1,5 +1,4 @@
 import React from 'react';
-import { format } from 'date-fns';
 
 const IssueBar = props => {
     const { issueData } = props;

@@ -12,9 +12,21 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+}
+
+.issue-bar ul .name-col {
+  -ms-flex-preferred-size: 60%;
+      flex-basis: 60%;
+}
+
+.issue-bar ul .category-col {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+}
+
+.issue-bar ul .due-date-col {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
 }
 
 .active-issue {

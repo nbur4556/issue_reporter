@@ -13,19 +13,16 @@ const IssueBar = props => {
     }
 
     return (
-        <div
+        <ul
             className={`issue-bar ${props.activeClassName}`}
             onClick={props.onClick}
-            data-index={props.index}>
-
-            <ul>
-                <li className="name-col">{issueData.name}</li>
-                <li className="category-col">{issueData.category}</li>
-                <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
-                {(props.assigned) ? <li>{props.assigned}</li> : null}
-            </ul>
-
-        </div>
+            data-index={props.index}
+        >
+            <li className="name-col">{issueData.name}</li>
+            <li className="category-col">{issueData.category}</li>
+            <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
+            {(props.assigned) ? <li>{props.assigned}</li> : null}
+        </ul>
     );
 }
 

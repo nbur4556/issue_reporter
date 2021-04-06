@@ -1,10 +1,4 @@
 .issue-bar {
-  margin: 1rem;
-  padding: 1rem 3rem;
-  border-radius: 10px;
-}
-
-.issue-bar ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,19 +6,22 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin: 1rem;
+  padding: 1rem 3rem;
+  border-radius: 10px;
 }
 
-.issue-bar ul .name-col {
+.issue-bar .name-col {
   -ms-flex-preferred-size: 60%;
       flex-basis: 60%;
 }
 
-.issue-bar ul .category-col {
+.issue-bar .category-col {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
 }
 
-.issue-bar ul .due-date-col {
+.issue-bar .due-date-col {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
 }

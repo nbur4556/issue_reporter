@@ -2,11 +2,14 @@ import React from 'react';
 import './style.css';
 
 // Components
+import IssueListHeader from '../IssueListHeader';
 import IssueBar from '../IssueBar';
 
 const IssueList = ({ userData, ui, selectIssue }) => {
     return (
         <section className="issueListSection">
+            <IssueListHeader />
+
             {userData.issueList.map((issue, index) => {
                 const activeClassName = (index === Number(ui.selectIssue))
                     ? "active-issue"

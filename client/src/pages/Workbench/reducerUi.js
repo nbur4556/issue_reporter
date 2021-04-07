@@ -11,7 +11,9 @@ const ACTIONS = {
 const reducerUi = (state, action) => {
     switch (action.type) {
         case ACTIONS.TOGGLE_PROJECT_MANAGER:
-            return state;
+            return (state.displayProjectManager === true)
+                ? { ...state, displayProjectManager: false }
+                : { ...state, displayProjectManager: true, displayCreateIssue: false, selectIssue: null };
         case ACTIONS.TOGGLE_CREATE_ISSUE:
             return state;
         case ACTIONS.ADD_PROJECT_TAB:

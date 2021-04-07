@@ -5,7 +5,7 @@ const Tab = (props) => {
     const { dispatch, ACTIONS } = uiDispatcher;
 
     return (
-        <div className={`tab ${activeClass}`} data-index={tabIndex} data-id={tab.tabId} onClick={selectTab}>
+        <div className={`tab ${activeClass}`} data-id={tab.tabId} onClick={selectTab}>
             <p>{tab.tabName}</p>
             <button onClick={
                 dispatch({ type: ACTIONS.REMOVE_PROJECT_TAB, payload: { tabIndex: tabIndex } })

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Tab from '../Tab';
 
 const TabBar = ({ tabData, uiDispatcher }) => {
+    const { dispatch, ACTIONS } = uiDispatcher;
     const [activeTab, setActiveTab] = useState(0);
 
     // Set index of active tab
@@ -13,8 +14,9 @@ const TabBar = ({ tabData, uiDispatcher }) => {
     }
 
     const handleSelectTab = (e) => {
+        const projectId = e.currentTarget.getAttribute('data-id');
         handleActiveTab(e);
-        ui.handleSelectProject(e);
+        dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
     }
 
     return (

@@ -54,7 +54,7 @@ const reducerUi = (state, action) => {
                 : { ...state, selectIssue: action.payload.selectIndex, displayProjectManager: false, displayCreateIssue: false };
 
         case ACTIONS.DISPLAY_CLOSED_ISSUES:
-            return state;
+            return (state.displayClosedIssue === true) ? { ...state, displayClosedIssue: false } : { ...state, displayClosedIssue: true };
 
         default:
             return state;

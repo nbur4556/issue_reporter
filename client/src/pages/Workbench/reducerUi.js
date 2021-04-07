@@ -31,22 +31,31 @@ const reducerUi = (state, action) => {
             return (state.displayProjectManager === true)
                 ? { ...state, displayProjectManager: false }
                 : { ...state, displayProjectManager: true, displayCreateIssue: false, selectIssue: null };
+
         case ACTIONS.TOGGLE_CREATE_ISSUE:
             return (state.displayCreateIssue === true)
                 ? { ...state, displayCreateIssue: false }
                 : { ...state, displayCreateIssue: true, displayProjectManager: false, selectIssue: null };
+
         case ACTIONS.ADD_PROJECT_TAB:
             return addProjectTab(state, action.payload);;
+
         case ACTIONS.REMOVE_PROJECT_TAB:
-            return state;
+            const projectTabsRemoved = [...state.projectTabs];
+            projectTabsRemoved.splice(action.payload.tabIndex, 1);
+            return { ...state, projectTabs: projectTabsRemoved };
+
         case ACTIONS.SELECT_PROJECT:
             return state;
+
         case ACTIONS.SELECT_ISSUE:
             return (state.selectIssue)
                 ? { ...state, selectIssue: null }
                 : { ...state, selectIssue: action.payload.selectIndex, displayProjectManager: false, displayCreateIssue: false };
+
         case ACTIONS.DISPLAY_CLOSED_ISSUES:
             return state;
+
         default:
             return state;
     }

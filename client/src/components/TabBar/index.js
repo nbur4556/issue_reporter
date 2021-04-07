@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Components
 import Tab from '../Tab';
 
-const TabBar = ({ ui, tabData }) => {
+const TabBar = ({ tabData, uiDispatcher }) => {
     const [activeTab, setActiveTab] = useState(0);
 
     // Set index of active tab
@@ -28,7 +28,7 @@ const TabBar = ({ ui, tabData }) => {
                     activeClass={activeClassName}
 
                     selectTab={handleSelectTab}
-                    removeTab={ui.handleRemoveProjectTab} />
+                    uiDispatcher={uiDispatcher} />
             })}
         </section>
     );

@@ -15,7 +15,9 @@ const reducerUi = (state, action) => {
                 ? { ...state, displayProjectManager: false }
                 : { ...state, displayProjectManager: true, displayCreateIssue: false, selectIssue: null };
         case ACTIONS.TOGGLE_CREATE_ISSUE:
-            return state;
+            return (state.displayCreateIssue === true)
+                ? { ...state, displayCreateIssue: false }
+                : { ...state, displayCreateIssue: true, displayProjectManager: false, selectIssue: null };
         case ACTIONS.ADD_PROJECT_TAB:
             return state;
         case ACTIONS.REMOVE_PROJECT_TAB:

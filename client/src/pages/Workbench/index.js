@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import './style.css';
 
 import Render from './Render';
-import HandleUi from './HandleUi';
+// import HandleUi from './HandleUi';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
 import loadData from './loadData';
+import reducerUi, { ACTIONS } from './reducerUi';
 
 const Workbench = () => {
     const [userData, setUserData] = useState({
@@ -15,14 +16,23 @@ const Workbench = () => {
         issueList: []
     });
 
-    const [userInterface, setUserInterface] = useState({
+    const [userInterface, dispatchUi] = useReducer(reducerUi, {
         displayProjectManager: false,
         displayCreateIssue: false,
         displayClosedIssue: false,
         projectTabs: [],
         selectProject: null,
         selectIssue: null
-    });
+    })
+
+    // const [userInterface, setUserInterface] = useState({
+    //     displayProjectManager: false,
+    //     displayCreateIssue: false,
+    //     displayClosedIssue: false,
+    //     projectTabs: [],
+    //     selectProject: null,
+    //     selectIssue: null
+    // });
 
     useEffect(() => handleLoadData(), []);
     useEffect(() => { handleLoadIssues() }, [userInterface.selectProject])
@@ -43,7 +53,8 @@ const Workbench = () => {
     return (
         <Render
             ui={userInterface}
-            handleUi={HandleUi({ userInterface, setUserInterface, userData })}
+            // handleUi={HandleUi({ userInterface, setUserInterface, userData })}
+            uiDispatcher={{ dispatch: dispatchUi, ACTIONS: ACTIONS }}
 
             userData={userData}
             editProject={handleEditProject}

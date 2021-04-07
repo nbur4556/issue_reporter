@@ -46,7 +46,7 @@ const reducerUi = (state, action) => {
             return { ...state, projectTabs: projectTabsRemoved };
 
         case ACTIONS.SELECT_PROJECT:
-            return state;
+            return { ...state, selectProject: action.payload.projectId };
 
         case ACTIONS.SELECT_ISSUE:
             return (state.selectIssue)

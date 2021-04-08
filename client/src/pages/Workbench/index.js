@@ -15,7 +15,7 @@ const Workbench = () => {
         issueList: []
     });
 
-    const [userInterface, dispatchUi] = useReducer(reducerUi, {
+    const [ui, dispatchUi] = useReducer(reducerUi, {
         displayProjectManager: false,
         displayCreateIssue: false,
         displayClosedIssue: false,
@@ -25,7 +25,7 @@ const Workbench = () => {
     })
 
     useEffect(() => handleLoadData(), []);
-    useEffect(() => { handleLoadIssues() }, [userInterface.selectProject])
+    useEffect(() => { handleLoadIssues() }, [ui.selectProject])
 
     const uiDispatcher = { dispatch: dispatchUi, ACTIONS: ACTIONS };
 
@@ -38,14 +38,13 @@ const Workbench = () => {
 
     // Logical Component Destructuring
     const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, setUserData, userInterface, uiDispatcher }
+        { userData, setUserData, userInterface: ui, uiDispatcher }
     );
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
 
     return (
         <Render
-            ui={userInterface}
-            // handleUi={HandleUi({ userInterface, setUserInterface, userData })}
+            ui={ui}
             uiDispatcher={{ dispatch: dispatchUi, ACTIONS: ACTIONS }}
 
             userData={userData}

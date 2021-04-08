@@ -24,6 +24,7 @@ const Toolbar = ({ ui, uiDispatcher }) => {
             {getProjectName(ui)}
 
             <section className="tool-bar-controls">
+
                 <label htmlFor="toggleClosedIssues">
                     Show Closed Issues:
                     <input
@@ -33,6 +34,7 @@ const Toolbar = ({ ui, uiDispatcher }) => {
                         onChange={displayClosedIssues}
                     />
                 </label>
+
                 <button onClick={toggleCreateIssue} data-cy="create-issue">Toggle Create Issue</button>
                 <Link to="/create-project">Create Project</Link>
 

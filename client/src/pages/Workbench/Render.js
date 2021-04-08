@@ -9,13 +9,13 @@ import Toolbar from '../../components/Toolbar';
 import LogoutButton from '../../components/LogoutButton';
 
 const Render = (props) => {
-    const { ui, userData } = props;
+    const { ui, userData, uiDispatcher } = props;
 
     return (
         <main className="workbench-page">
             <WorkbenchNavigation>
 
-                <TabBar uiDispatcher={props.uiDispatcher}
+                <TabBar uiDispatcher={uiDispatcher}
                     tabData={ui.projectTabs.map(project => {
                         return { tabId: project._id, tabName: project.projectName }
                     })}
@@ -25,9 +25,9 @@ const Render = (props) => {
 
             </WorkbenchNavigation>
 
-            <Toolbar ui={ui} handleUi={handleUi} />
+            <Toolbar ui={ui} uiDispatcher={uiDispatcher} />
 
-            <IssueList userData={userData} ui={ui} selectIssue={handleUi.handleSelectIssue} />
+            <IssueList userData={userData} ui={ui} uiDispatcher={uiDispatcher} />
 
             <WorkbenchDetailSection
                 ui={ui}

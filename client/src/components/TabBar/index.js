@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 // Components
 import Tab from '../Tab';
 
-const TabBar = ({ ui, tabData }) => {
+const TabBar = ({ tabData, uiDispatcher }) => {
+    const { dispatch, ACTIONS } = uiDispatcher;
     const [activeTab, setActiveTab] = useState(0);
 
     // Set index of active tab
@@ -13,22 +14,25 @@ const TabBar = ({ ui, tabData }) => {
     }
 
     const handleSelectTab = (e) => {
+        const projectId = e.currentTarget.getAttribute('data-id');
+
         handleActiveTab(e);
-        ui.handleSelectProject(e);
+        dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
     }
 
     return (
         <section className='tab-bar'>
+
             {tabData.map((tab, index) => {
-                const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive'
+                const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive';
 
                 return <Tab key={index}
-                    tabIndex={index}
+                    uiDispatcher={uiDispatcher}
                     tab={tab}
-                    activeClass={activeClassName}
 
+                    activeClass={activeClassName}
                     selectTab={handleSelectTab}
-                    removeTab={ui.handleRemoveProjectTab} />
+                />
             })}
         </section>
     );

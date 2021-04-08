@@ -17,7 +17,7 @@ const WorkbenchDetailSection = ({ ui, ...rest }) => {
                 ? <CreateIssue ui={ui} {...rest} />
                 : null}
 
-            {(ui.selectIssue)
+            {(typeof ui.selectIssue === 'number')
                 ? <IssueDetails ui={ui} {...rest} />
                 : null}
 

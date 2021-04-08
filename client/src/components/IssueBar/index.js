@@ -1,7 +1,10 @@
 import React from 'react';
 
 const IssueBar = props => {
-    const { issueData } = props;
+    const { issueData, uiDispatcher } = props;
+    const { dispatch, ACTIONS } = uiDispatcher;
+
+    const selectIssue = () => dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { selectIndex: props.index } });
 
     const formatDueDate = (dueDate) => {
         if (!dueDate) {
@@ -15,8 +18,7 @@ const IssueBar = props => {
     return (
         <ul
             className={`issue-bar ${props.activeClassName}`}
-            onClick={props.onClick}
-            data-index={props.index}
+            onClick={selectIssue}
         >
             <li className="name-col">{issueData.name}</li>
             <li className="category-col">{issueData.category}</li>

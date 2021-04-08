@@ -5,7 +5,7 @@ import './style.css';
 import IssueListHeader from '../IssueListHeader';
 import IssueBar from '../IssueBar';
 
-const IssueList = ({ userData, ui, selectIssue }) => {
+const IssueList = ({ userData, ui, uiDispatcher }) => {
     return (
         <section className="issueListSection">
             <IssueListHeader />
@@ -18,7 +18,7 @@ const IssueList = ({ userData, ui, selectIssue }) => {
                 return (issue.isOpen === false && ui.displayClosedIssue === false)
                     ? null
                     : <IssueBar
-                        onClick={selectIssue}
+                        uiDispatcher={uiDispatcher}
                         key={index}
                         index={index}
                         issueData={issue}

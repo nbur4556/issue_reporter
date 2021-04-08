@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import './style.css';
 
 import Render from './Render';
-import HandleUi from './HandleUi';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
 import loadData from './loadData';
+import reducerUi, { ACTIONS } from './reducerUi';
 
 const Workbench = () => {
     const [userData, setUserData] = useState({
@@ -15,17 +15,19 @@ const Workbench = () => {
         issueList: []
     });
 
-    const [userInterface, setUserInterface] = useState({
+    const [userInterface, dispatchUi] = useReducer(reducerUi, {
         displayProjectManager: false,
         displayCreateIssue: false,
         displayClosedIssue: false,
         projectTabs: [],
         selectProject: null,
         selectIssue: null
-    });
+    })
 
     useEffect(() => handleLoadData(), []);
     useEffect(() => { handleLoadIssues() }, [userInterface.selectProject])
+
+    const uiDispatcher = { dispatch: dispatchUi, ACTIONS: ACTIONS };
 
     // Get projects and issues for authorized users
     const handleLoadData = () => {
@@ -36,14 +38,15 @@ const Workbench = () => {
 
     // Logical Component Destructuring
     const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, setUserData, userInterface, setUserInterface }
+        { userData, setUserData, userInterface, uiDispatcher }
     );
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
 
     return (
         <Render
             ui={userInterface}
-            handleUi={HandleUi({ userInterface, setUserInterface, userData })}
+            // handleUi={HandleUi({ userInterface, setUserInterface, userData })}
+            uiDispatcher={{ dispatch: dispatchUi, ACTIONS: ACTIONS }}
 
             userData={userData}
             editProject={handleEditProject}

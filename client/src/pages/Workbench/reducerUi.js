@@ -5,6 +5,7 @@ const ACTIONS = {
     REMOVE_PROJECT_TAB: 'remove_project_tab',
     SELECT_PROJECT: 'select_project',
     SELECT_ISSUE: 'select_issue',
+    DESELECT_ISSUE: 'deselect_issue',
     DISPLAY_CLOSED_ISSUES: 'display_closed_issues'
 }
 
@@ -52,6 +53,9 @@ const reducerUi = (state, action) => {
             return (state.selectIssue)
                 ? { ...state, selectIssue: null }
                 : { ...state, selectIssue: action.payload.selectIndex, displayProjectManager: false, displayCreateIssue: false };
+
+        case ACTIONS.DESELECT_ISSUE:
+            return { ...state, selectIssue: null };
 
         case ACTIONS.DISPLAY_CLOSED_ISSUES:
             return (state.displayClosedIssue === true) ? { ...state, displayClosedIssue: false } : { ...state, displayClosedIssue: true };

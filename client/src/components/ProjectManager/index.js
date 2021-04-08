@@ -6,7 +6,7 @@ import LabeledInput from '../Forms/LabeledInput';
 import SubmitButton from '../Forms/SubmitButton';
 
 const ProjectManager = (props) => {
-    const [dispatch, ACTIONS] = props.uiDispatcher;
+    const { dispatch, ACTIONS } = props.uiDispatcher;
 
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();

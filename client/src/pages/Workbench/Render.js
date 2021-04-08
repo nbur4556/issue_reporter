@@ -31,10 +31,10 @@ const Render = (props) => {
 
             <WorkbenchDetailSection
                 ui={ui}
+                uiDispatcher={uiDispatcher}
 
                 // Project Manager Props
                 projects={userData.projectList}
-                addTab={handleUi.handleAddProjectTab}
                 editProject={props.editProject}
                 deleteProject={props.deleteProject}
 

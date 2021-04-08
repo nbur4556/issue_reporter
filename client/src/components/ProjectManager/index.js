@@ -6,11 +6,22 @@ import LabeledInput from '../Forms/LabeledInput';
 import SubmitButton from '../Forms/SubmitButton';
 
 const ProjectManager = (props) => {
+    const [dispatch, ACTIONS] = props.uiDispatcher;
+
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
     const [editData, setEditData] = useState({
         projectName: null
     });
+
+    const addProjectTab = (e) => dispatch(
+        {
+            type: ACTIONS.ADD_PROJECT_TAB, payload: {
+                projectId: e.currentTarget.parentElement?.getAttribute('data-projectId'),
+                projectList: props.projects
+            }
+        }
+    );
 
     const toggleEditState = (e) => {
         const projectId = e.currentTarget.parentElement?.getAttribute('data-projectId');
@@ -33,7 +44,7 @@ const ProjectManager = (props) => {
             return (
                 <li key={index} data-projectid={project._id}>
                     {project.projectName}
-                    <button onClick={props.addTab} data-cy='add-tab'>Add Tab</button>
+                    <button onClick={addProjectTab} data-cy='add-tab'>Add Tab</button>
                     <button onClick={toggleEditState} data-cy="edit-project">Edit Project</button>
                     <button onClick={props.deleteProject} data-cy="delete-project">Delete Project</button>
                 </li>

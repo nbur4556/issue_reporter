@@ -21,7 +21,19 @@ const TabBar = ({ tabData, uiDispatcher }) => {
 
     return (
         <section className='tab-bar'>
+
+            {console.log(tabData)}
+
             {tabData.map((tab, index) => {
+                const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive';
+
+                return <Tab key={index}
+                    uiDispatcher={uiDispatcher}
+                    tab={tab}
+                />
+            })}
+
+            {/* {tabData.map((tab, index) => {
                 const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive'
 
                 return <Tab key={index}
@@ -31,7 +43,7 @@ const TabBar = ({ tabData, uiDispatcher }) => {
 
                     selectTab={handleSelectTab}
                     uiDispatcher={uiDispatcher} />
-            })}
+            })} */}
         </section>
     );
 }

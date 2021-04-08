@@ -15,7 +15,6 @@ const TabBar = ({ tabData, uiDispatcher }) => {
 
     const handleSelectTab = (e) => {
         const projectId = e.currentTarget.getAttribute('data-id');
-        console.log(projectId);
 
         handleActiveTab(e);
         dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
@@ -23,8 +22,6 @@ const TabBar = ({ tabData, uiDispatcher }) => {
 
     return (
         <section className='tab-bar'>
-
-            {console.log(tabData)}
 
             {tabData.map((tab, index) => {
                 const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive';
@@ -37,18 +34,6 @@ const TabBar = ({ tabData, uiDispatcher }) => {
                     selectTab={handleSelectTab}
                 />
             })}
-
-            {/* {tabData.map((tab, index) => {
-                const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive'
-
-                return <Tab key={index}
-                    tabIndex={index}
-                    tab={tab}
-                    activeClass={activeClassName}
-
-                    selectTab={handleSelectTab}
-                    uiDispatcher={uiDispatcher} />
-            })} */}
         </section>
     );
 }

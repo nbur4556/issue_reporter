@@ -14,7 +14,7 @@ const Tab = (props) => {
         //     } />
         // </div>
 
-        <div className={`tab ${activeClass}`} data-id={tab.tabId}>
+        <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId}>
             <p>{tab.tabName}</p>
             <button onClick={removeProjectTab}>X</button>
         </div>

@@ -15,6 +15,8 @@ const TabBar = ({ tabData, uiDispatcher }) => {
 
     const handleSelectTab = (e) => {
         const projectId = e.currentTarget.getAttribute('data-id');
+        console.log(projectId);
+
         handleActiveTab(e);
         dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
     }
@@ -30,6 +32,9 @@ const TabBar = ({ tabData, uiDispatcher }) => {
                 return <Tab key={index}
                     uiDispatcher={uiDispatcher}
                     tab={tab}
+
+                    activeClass={activeClassName}
+                    selectTab={handleSelectTab}
                 />
             })}
 

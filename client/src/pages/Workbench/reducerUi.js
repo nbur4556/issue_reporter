@@ -14,16 +14,17 @@ const addProjectTab = (state, { projectId, projectList }) => {
 
     // Check if tab exists
     for (const tab of state.projectTabs) {
-        if (tab._id === projectId) return;
+        if (tab._id === projectId)
+            return { ...state };
     }
 
     // Find project in project list
     for (const project of projectList) {
         if (project._id === projectId)
             return { ...state, projectTabs: [...state.projectTabs, project], selectProject: selectProjectId }
-
-        return state;
     }
+
+    return { ...state }
 }
 
 const reducerUi = (state, action) => {

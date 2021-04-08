@@ -3,7 +3,6 @@ import React, { useState, useReducer, useEffect } from 'react';
 import './style.css';
 
 import Render from './Render';
-// import HandleUi from './HandleUi';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
@@ -24,15 +23,6 @@ const Workbench = () => {
         selectProject: null,
         selectIssue: null
     })
-
-    // const [userInterface, setUserInterface] = useState({
-    //     displayProjectManager: false,
-    //     displayCreateIssue: false,
-    //     displayClosedIssue: false,
-    //     projectTabs: [],
-    //     selectProject: null,
-    //     selectIssue: null
-    // });
 
     useEffect(() => handleLoadData(), []);
     useEffect(() => { handleLoadIssues() }, [userInterface.selectProject])

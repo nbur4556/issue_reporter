@@ -12,18 +12,20 @@ const ACTIONS = {
 const addProjectTab = (state, { projectId, projectList }) => {
     const selectProjectId = (state.projectTabs.length === 0) ? projectId : state.selectProject;
 
+    console.log(selectProjectId);
+
     // Check if tab exists
     for (const tab of state.projectTabs) {
         if (tab._id === projectId) return;
     }
 
     // Find project in project list
-    projectList.forEach((project) => {
+    for (const project of projectList) {
         if (project._id === projectId)
             return { ...state, projectTabs: [...state.projectTabs, project], selectProject: selectProjectId }
-        else
-            return state;
-    });
+
+        return state;
+    }
 }
 
 const reducerUi = (state, action) => {

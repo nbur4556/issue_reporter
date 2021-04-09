@@ -12,7 +12,12 @@ import loadData from './loadData';
 import reducerUi, { ACTIONS as uiActions } from './reducerUi';
 import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
 
+// Contexts
+export const UserDataContext = React.createContext();
+export const UiContext = React.createContext();
+
 const Workbench = () => {
+    //State
     const [userData, dispatchUserData] = useReducer(reducerUserData, {
         projectList: [],
         issueList: []
@@ -30,6 +35,7 @@ const Workbench = () => {
     const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };
     const userDataDispatcher = { dispatch: dispatchUserData, ACTIONS: userDataActions };
 
+    // Use Effects
     useEffect(() => handleLoadData(), []);
     useEffect(() => { issueInterface.handleLoadIssues() }, [ui.selectProject])
 
@@ -40,19 +46,21 @@ const Workbench = () => {
         );
     }
 
+    // Issue and Project functions
     const issueInterface = IssueInterface({ userData, userDataDispatcher, ui, uiDispatcher });
     const projectInterface = ProjectInterface({ handleLoadData });
 
     return (
-        <Render
-            ui={ui}
-            userData={userData}
-            uiDispatcher={uiDispatcher}
-
-            issueInterface={issueInterface}
-            projectInterface={projectInterface}
-            handleLoadData={handleLoadData}
-        />
+        <UserDataContext.Provider value={userData}>
+            <UiContext.Provider value={ui}>
+                <Render
+                    uiDispatcher={uiDispatcher}
+                    issueInterface={issueInterface}
+                    projectInterface={projectInterface}
+                    handleLoadData={handleLoadData}
+                />
+            </UiContext.Provider>
+        </UserDataContext.Provider>
     );
 }
 

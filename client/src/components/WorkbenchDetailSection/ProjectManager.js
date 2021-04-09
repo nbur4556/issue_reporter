@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // Components
 import FormContainer from '../Forms/FormContainer';
 import LabeledInput from '../Forms/LabeledInput';
 import SubmitButton from '../Forms/SubmitButton';
 
+// Contexts
+import { UserDataContext } from '../../pages/Workbench';
+
 const ProjectManager = (props) => {
+    const userData = useContext(UserDataContext);
+
     const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
@@ -19,7 +24,7 @@ const ProjectManager = (props) => {
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
                 projectId: e.currentTarget.parentElement?.getAttribute('data-projectId'),
-                projectList: props.userData.projectList
+                projectList: userData.projectList
             }
         }
     );
@@ -66,7 +71,7 @@ const ProjectManager = (props) => {
 
     return (
         <ul data-cy="project-manager-list">
-            {(editState) ? renderEditForm() : renderProjects(props.userData.projectList)}
+            {(editState) ? renderEditForm() : renderProjects(userData.projectList)}
         </ul>
     )
 }

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-const Toolbar = ({ ui, uiDispatcher }) => {
+// Contexts
+import { UiContext } from '../../pages/Workbench';
+
+const Toolbar = ({ uiDispatcher }) => {
+    const ui = useContext(UiContext);
     const { dispatch, ACTIONS } = uiDispatcher;
 
     const getProjectName = ({ projectTabs, selectProject }) => {

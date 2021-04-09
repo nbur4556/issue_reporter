@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Components
 import WorkbenchNavigation from '../../components/WorkbenchNavigation';
@@ -8,8 +8,7 @@ import IssueList from '../../components/IssueList';
 import Toolbar from '../../components/Toolbar';
 import LogoutButton from '../../components/LogoutButton';
 
-const Render = (props) => {
-    const { ui, uiDispatcher } = props;
+const Render = ({ uiDispatcher }) => {
 
     return (
         <main className="workbench-page">

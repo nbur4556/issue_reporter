@@ -14,6 +14,7 @@ import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
 
 // Contexts
 export const UserDataContext = React.createContext();
+export const UiContext = React.createContext();
 
 const Workbench = () => {
     //State
@@ -51,15 +52,14 @@ const Workbench = () => {
 
     return (
         <UserDataContext.Provider value={userData}>
-            <Render
-                ui={ui}
-                userData={userData}
-                uiDispatcher={uiDispatcher}
-
-                issueInterface={issueInterface}
-                projectInterface={projectInterface}
-                handleLoadData={handleLoadData}
-            />
+            <UiContext.Provider value={ui}>
+                <Render
+                    uiDispatcher={uiDispatcher}
+                    issueInterface={issueInterface}
+                    projectInterface={projectInterface}
+                    handleLoadData={handleLoadData}
+                />
+            </UiContext.Provider>
         </UserDataContext.Provider>
     );
 }

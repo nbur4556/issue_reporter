@@ -30,7 +30,7 @@ const ProjectManager = (props) => {
     );
 
     const toggleEditState = (e) => {
-        const projectId = e.currentTarget.parentElement?.getAttribute('data-projectId');
+        const projectId = e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
         (editState) ? setEditState(false) : setEditState(true);
     }

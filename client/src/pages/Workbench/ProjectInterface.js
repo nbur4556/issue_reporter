@@ -4,7 +4,12 @@ const projectConnection = new ApiConnection('/api/project');
 
 const ProjectInterface = (props) => {
     const handleEditProject = (e, projectId, projectData) => {
+
         e.preventDefault();
+
+        console.log(projectId);
+        console.log(projectData);
+
         projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData })
             .then(() => {
                 props.handleLoadData();

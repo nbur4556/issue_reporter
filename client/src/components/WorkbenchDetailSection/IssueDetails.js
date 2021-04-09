@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 // Contexts
-import { UserDataContext } from '../../pages/Workbench';
+import { UserDataContext, UiContext } from '../../pages/Workbench';
 
 const IssueDetails = props => {
     const userData = useContext(UserDataContext);
+    const ui = useContext(UiContext);
     const { toggleStatus, handleDeleteIssue } = props.issueInterface;
-    const issue = userData.issueList[props.ui.selectIssue];
+    const issue = userData.issueList[ui.selectIssue];
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 

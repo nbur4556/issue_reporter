@@ -8,7 +8,8 @@ import IssueList from '../../components/IssueList';
 import Toolbar from '../../components/Toolbar';
 import LogoutButton from '../../components/LogoutButton';
 
-const Render = ({ uiDispatcher }) => {
+const Render = (props) => {
+    const { uiDispatcher } = props;
 
     return (
         <main className="workbench-page">
@@ -27,10 +28,9 @@ const Render = ({ uiDispatcher }) => {
 
             <Toolbar uiDispatcher={uiDispatcher} />
 
-            <IssueList ui={ui} uiDispatcher={uiDispatcher} />
+            <IssueList uiDispatcher={uiDispatcher} />
 
             <WorkbenchDetailSection
-                ui={ui}
                 uiDispatcher={uiDispatcher}
                 issueInterface={props.issueInterface}
                 projectInterface={props.projectInterface}

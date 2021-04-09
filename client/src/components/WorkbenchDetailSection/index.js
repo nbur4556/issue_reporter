@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Components
 import ProjectManager from './ProjectManager.js';
 import CreateIssue from './CreateIssue.js';
 import IssueDetails from './IssueDetails.js';
 
-const WorkbenchDetailSection = ({ ui, ...rest }) => {
+// Contexts
+import { UiContext } from '../../pages/Workbench';
+
+const WorkbenchDetailSection = (props) => {
+    const ui = useContext(UiContext);
+
     return (
         <section className="detail-section">
 
             {(ui.displayProjectManager)
-                ? <ProjectManager ui={ui} {...rest} />
+                ? <ProjectManager {...props} />
                 : null}
 
             {(ui.displayCreateIssue)
-                ? <CreateIssue ui={ui} {...rest} />
+                ? <CreateIssue {...props} />
                 : null}
 
             {(typeof ui.selectIssue === 'number')
-                ? <IssueDetails ui={ui} {...rest} />
+                ? <IssueDetails {...props} />
                 : null}
 
         </section>

@@ -6,10 +6,11 @@ import IssueListHeader from '../IssueListHeader';
 import IssueBar from '../IssueBar';
 
 // Contexts
-import { UserDataContext } from '../../pages/Workbench';
+import { UserDataContext, UiContext } from '../../pages/Workbench';
 
-const IssueList = ({ ui, uiDispatcher }) => {
-    const userData = useContext(UserDataContext)
+const IssueList = ({ uiDispatcher }) => {
+    const userData = useContext(UserDataContext);
+    const ui = useContext(UiContext);
 
     return (
         <section className="issueListSection">

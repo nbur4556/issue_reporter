@@ -25,7 +25,7 @@ const Render = ({ uiDispatcher }) => {
 
             </WorkbenchNavigation>
 
-            <Toolbar ui={ui} uiDispatcher={uiDispatcher} />
+            <Toolbar uiDispatcher={uiDispatcher} />
 
             <IssueList ui={ui} uiDispatcher={uiDispatcher} />
 

@@ -7,6 +7,7 @@ import SubmitButton from '../Forms/SubmitButton';
 
 const ProjectManager = (props) => {
     const { dispatch, ACTIONS } = props.uiDispatcher;
+    const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
@@ -18,7 +19,7 @@ const ProjectManager = (props) => {
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
                 projectId: e.currentTarget.parentElement?.getAttribute('data-projectId'),
-                projectList: props.projects
+                projectList: props.userData.projectList
             }
         }
     );
@@ -36,7 +37,7 @@ const ProjectManager = (props) => {
 
     const handleSubmitEditProject = (e) => {
         toggleEditState(e);
-        props.editProject(e, editProjectId, editData);
+        handleEditProject(e, editProjectId, editData);
     }
 
     const renderProjects = (projectsList) => {
@@ -46,7 +47,7 @@ const ProjectManager = (props) => {
                     {project.projectName}
                     <button onClick={addProjectTab} data-cy='add-tab'>Add Tab</button>
                     <button onClick={toggleEditState} data-cy="edit-project">Edit Project</button>
-                    <button onClick={props.deleteProject} data-cy="delete-project">Delete Project</button>
+                    <button onClick={handleDeleteProject} data-cy="delete-project">Delete Project</button>
                 </li>
             );
         });
@@ -65,7 +66,7 @@ const ProjectManager = (props) => {
 
     return (
         <ul data-cy="project-manager-list">
-            {(editState) ? renderEditForm() : renderProjects(props.projects)}
+            {(editState) ? renderEditForm() : renderProjects(props.userData.projectList)}
         </ul>
     )
 }

@@ -1,21 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import './style.css';
 
+// Components
 import Render from './Render';
 import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
+// Utilities
 import loadData from './loadData';
-import reducerUi, { ACTIONS } from './reducerUi';
+import reducerUi, { ACTIONS as uiActions } from './reducerUi';
+import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
 
 const Workbench = () => {
-    const [userData, setUserData] = useState({
+    const [userData, dispatchUserData] = useReducer(reducerUserData, {
         projectList: [],
         issueList: []
     });
 
-    const [userInterface, dispatchUi] = useReducer(reducerUi, {
+    const [ui, dispatchUi] = useReducer(reducerUi, {
         displayProjectManager: false,
         displayCreateIssue: false,
         displayClosedIssue: false,
@@ -24,37 +27,31 @@ const Workbench = () => {
         selectIssue: null
     })
 
-    useEffect(() => handleLoadData(), []);
-    useEffect(() => { handleLoadIssues() }, [userInterface.selectProject])
+    const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };
+    const userDataDispatcher = { dispatch: dispatchUserData, ACTIONS: userDataActions };
 
-    const uiDispatcher = { dispatch: dispatchUi, ACTIONS: ACTIONS };
+    useEffect(() => handleLoadData(), []);
+    useEffect(() => { issueInterface.handleLoadIssues() }, [ui.selectProject])
 
     // Get projects and issues for authorized users
     const handleLoadData = () => {
-        loadData().then(projectResponse => {
-            setUserData({ ...userData, projectList: projectResponse.data });
-        });
+        loadData().then(({ data }) =>
+            userDataDispatcher.dispatch({ type: userDataDispatcher.ACTIONS.LOAD_PROJECT_LIST, payload: { data: data } })
+        );
     }
 
-    // Logical Component Destructuring
-    const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, setUserData, userInterface, uiDispatcher }
-    );
-    const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
+    const issueInterface = IssueInterface({ userData, userDataDispatcher, ui, uiDispatcher });
+    const projectInterface = ProjectInterface({ handleLoadData });
 
     return (
         <Render
-            ui={userInterface}
-            // handleUi={HandleUi({ userInterface, setUserInterface, userData })}
-            uiDispatcher={{ dispatch: dispatchUi, ACTIONS: ACTIONS }}
-
+            ui={ui}
             userData={userData}
-            editProject={handleEditProject}
-            deleteProject={handleDeleteProject}
-            loadIssues={handleLoadIssues}
-            setIssueStatus={handleSetIssueStatus}
-            deleteIssue={handleDeleteIssue}
-            loadData={handleLoadData}
+            uiDispatcher={uiDispatcher}
+
+            issueInterface={issueInterface}
+            projectInterface={projectInterface}
+            handleLoadData={handleLoadData}
         />
     );
 }

@@ -6,6 +6,8 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
 const CreateIssue = (props) => {
+    const { handleLoadIssues } = props.issueInterface;
+
     const [issueData, setIssueData] = useState({
         name: '',
         body: '',
@@ -25,7 +27,7 @@ const CreateIssue = (props) => {
 
         issueConnection.postQuery({ body: { selectProject: props.ui.selectProject, ...issueData } }).then(result => {
             if (result.status === 200)
-                props.loadIssues();
+                handleLoadIssues();
         });
     }
 

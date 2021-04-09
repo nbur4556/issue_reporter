@@ -11,8 +11,6 @@ import reducerUi, { ACTIONS as uiActions } from './reducerUi';
 import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
 
 const Workbench = () => {
-    const issueInterface = IssueInterface({ userData, userDataDispatcher, ui, uiDispatcher });
-
     const [userData, dispatchUserData] = useReducer(reducerUserData, {
         projectList: [],
         issueList: []
@@ -39,6 +37,8 @@ const Workbench = () => {
             dispatchUserData({ type: 'load_project_list', payload: { data: data } })
         );
     }
+
+    const issueInterface = IssueInterface({ userData, userDataDispatcher, ui, uiDispatcher });
 
     return (
         <Render

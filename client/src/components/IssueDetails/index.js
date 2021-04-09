@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 // Contexts
-import { userDataContext } from '../../pages/Workbench';
+import { UserDataContext } from '../../pages/Workbench';
 
 const IssueDetails = props => {
-    const userData = useContext(userDataContext);
+    const userData = useContext(UserDataContext);
     const { toggleStatus, handleDeleteIssue } = props.issueInterface;
     const issue = userData.issueList[props.ui.selectIssue];
 

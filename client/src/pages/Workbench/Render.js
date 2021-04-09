@@ -32,7 +32,6 @@ const Render = (props) => {
 
             <WorkbenchDetailSection
                 ui={ui}
-                userData={userData}
                 uiDispatcher={uiDispatcher}
                 issueInterface={props.issueInterface}
                 projectInterface={props.projectInterface}

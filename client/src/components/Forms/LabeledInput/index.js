@@ -1,8 +1,9 @@
 import React from 'react';
+import '../labelStyle.css';
 
 const LabeledInput = (props) => {
     return (
-        <label className="labeled-input" htmlFor={props.name} style={labelStyle}>
+        <label className="labeled-input" htmlFor={props.name}>
             {props.label}
             <input name={props.name}
                 type={props.type || "text"}
@@ -11,12 +12,6 @@ const LabeledInput = (props) => {
                 data-cy={props.cy || props.name} />
         </label>
     );
-}
-
-// Component Layout
-const labelStyle = {
-    display: 'flex',
-    flexDirection: 'column'
 }
 
 export default LabeledInput;

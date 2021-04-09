@@ -6,7 +6,7 @@ import { UserDataContext, UiContext } from '../../pages/Workbench';
 const IssueDetails = props => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
-    const { toggleStatus, handleDeleteIssue } = props.issueInterface;
+    const { handleSetIssueStatus, handleDeleteIssue } = props.issueInterface;
     const issue = userData.issueList[ui.selectIssue];
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
@@ -34,7 +34,7 @@ const IssueDetails = props => {
                 {/* Buttons */}
 
                 {(issue.isOpen !== undefined)
-                    ? <button className="link-button" name="toggleStatus" onClick={toggleStatus}>Toggle Status</button>
+                    ? <button className="link-button" name="toggleStatus" onClick={handleSetIssueStatus}>Toggle Status</button>
                     : null}
 
                 {(issue.name)

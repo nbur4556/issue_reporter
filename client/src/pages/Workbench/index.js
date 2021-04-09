@@ -40,10 +40,10 @@ const Workbench = () => {
     }
 
     // Logical Component Destructuring
-    const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, userDataDispatcher, ui, uiDispatcher }
-    );
-    const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
+    // const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
+    //     { userData, userDataDispatcher, ui, uiDispatcher }
+    // );
+    // const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
 
     return (
         <Render
@@ -51,12 +51,15 @@ const Workbench = () => {
             userData={userData}
             uiDispatcher={uiDispatcher}
 
+            issueInterface={IssueInterface({ userData, userDataDispatcher, ui, uiDispatcher })}
+            projectInterface={ProjectInterface({ handleLoadData })}
+
             editProject={handleEditProject}
             deleteProject={handleDeleteProject}
             loadIssues={handleLoadIssues}
             setIssueStatus={handleSetIssueStatus}
             deleteIssue={handleDeleteIssue}
-            loadData={handleLoadData}
+            handleLoadData={handleLoadData}
         />
     );
 }

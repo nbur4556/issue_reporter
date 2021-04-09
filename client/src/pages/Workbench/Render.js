@@ -13,6 +13,7 @@ const Render = (props) => {
 
     return (
         <main className="workbench-page">
+
             <WorkbenchNavigation>
 
                 <TabBar uiDispatcher={uiDispatcher}
@@ -31,10 +32,13 @@ const Render = (props) => {
 
             <WorkbenchDetailSection
                 ui={ui}
+                userData={userData}
                 uiDispatcher={uiDispatcher}
+                issueInterface={props.issueInterface}
+                projectInterface={props.projectInterface}
 
                 // Project Manager Props
-                projects={userData.projectList}
+
                 editProject={props.editProject}
                 deleteProject={props.deleteProject}
 
@@ -46,7 +50,8 @@ const Render = (props) => {
                 toggleStatus={props.setIssueStatus}
                 deleteIssue={props.deleteIssue}
 
-                loadData={props.loadData}
+                handleLoadData={props.handleLoadData}
+                projects={userData.projectList}
             />
         </main>
     );

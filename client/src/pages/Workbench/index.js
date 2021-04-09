@@ -53,8 +53,7 @@ const Workbench = () => {
     return (
         <UserDataContext.Provider value={userData}>
             <UiContext.Provider value={ui}>
-                <Render
-                    uiDispatcher={uiDispatcher}
+                <Render uiDispatcher={uiDispatcher}
                     issueInterface={issueInterface}
                     projectInterface={projectInterface}
                     handleLoadData={handleLoadData}

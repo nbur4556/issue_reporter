@@ -1,0 +1,15 @@
+@import '../../stylesheets/variables';
+
+.detail-section{
+    ul{
+        padding: $sectionPadding;
+    }
+
+    form{
+        padding: $sectionPadding;
+
+        label{
+            margin: $componentMargin;
+        }
+    }
+}

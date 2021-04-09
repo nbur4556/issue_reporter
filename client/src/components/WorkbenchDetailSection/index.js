@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import './style.css';
 
 // Components
 import ProjectManager from './ProjectManager.js';

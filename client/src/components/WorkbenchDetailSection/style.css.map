@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AACI,eADW,CACX,EAAE,CAAA;EACE,OAAO,ECGE,IAAI;CDFhB;;AAHL,AAKI,eALW,CAKX,IAAI,CAAA;EACA,OAAO,ECDE,IAAI;CDMhB;;AAXL,AAQQ,eARO,CAKX,IAAI,CAGA,KAAK,CAAA;EACD,MAAM,ECFA,IAAI;CDGb",
+    "sources": [
+        "style.scss",
+        "../../stylesheets/_variables.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}

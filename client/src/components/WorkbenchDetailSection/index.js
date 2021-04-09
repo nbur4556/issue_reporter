@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Components
-import ProjectManager from '../ProjectManager';
-import CreateIssue from '../CreateIssue';
-import IssueDetails from '../IssueDetails';
+import ProjectManager from './ProjectManager.js';
+import CreateIssue from './CreateIssue.js';
+import IssueDetails from './IssueDetails.js';
 
 const WorkbenchDetailSection = ({ ui, ...rest }) => {
     return (

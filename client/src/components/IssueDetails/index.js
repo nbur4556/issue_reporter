@@ -4,32 +4,34 @@ const IssueDetails = props => {
     const { toggleStatus, handleDeleteIssue } = props.issueInterface;
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
+    const issue = props.userData.issueList[props.ui.selectIssue];
+
     useEffect(() => {
         setDisplayDeleteMsg(false);
-    }, [props.issue.name]);
+    }, [issue.name]);
 
     return (
         <ul>
 
             {/* Display details if details are available */}
 
-            {(props.issue.name) ? <li>{`Name: ${props.issue.name}`}</li> : null}
-            {(props.issue.body) ? <li>{`Body: ${props.issue.body}`}</li> : null}
-            {(props.issue.category) ? <li>{`Category: ${props.issue.category}`}</li> : null}
-            {(props.issue.assigned) ? <li>{`Assigned: ${props.issue.assigned}`}</li> : null}
-            {(props.issue.dueDate) ? <li>{`Due Date: ${props.issue.dueDate}`}</li> : null}
-            {(props.issue.comments) ? <li>{`Comments: ${props.issue.comments}`}</li> : null}
+            {(issue.name) ? <li>{`Name: ${issue.name}`}</li> : null}
+            {(issue.body) ? <li>{`Body: ${issue.body}`}</li> : null}
+            {(issue.category) ? <li>{`Category: ${issue.category}`}</li> : null}
+            {(issue.assigned) ? <li>{`Assigned: ${issue.assigned}`}</li> : null}
+            {(issue.dueDate) ? <li>{`Due Date: ${issue.dueDate}`}</li> : null}
+            {(issue.comments) ? <li>{`Comments: ${issue.comments}`}</li> : null}
 
-            {(props.issue.isOpen === true) ? <li>Open</li> : null}
-            {(props.issue.isOpen === false) ? <li>Closed</li> : null}
+            {(issue.isOpen === true) ? <li>Open</li> : null}
+            {(issue.isOpen === false) ? <li>Closed</li> : null}
 
             {/* Buttons */}
 
-            {(props.issue.isOpen !== undefined)
+            {(issue.isOpen !== undefined)
                 ? <button name="toggleStatus" onClick={toggleStatus}>Toggle Status</button>
                 : null}
 
-            {(props.issue.name)
+            {(issue.name)
                 ? <button name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
                 : null}
 

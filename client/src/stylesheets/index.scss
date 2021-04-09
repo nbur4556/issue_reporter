@@ -26,7 +26,7 @@ h4{
 }
 
 button{
-    // margin: $componentMargin;
+    margin: $componentMargin;
     padding: $componentPaddingSize;
     border: $mainAccentBorder;
     border-radius: $mainBorderRadius;
@@ -40,7 +40,7 @@ button{
 }
 
 a, .link-button{
-    // margin: 0 $componentMargin;
+    margin: 0 $componentMargin;
     padding: 0;
     border:none;
 

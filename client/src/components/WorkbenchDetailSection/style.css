@@ -23,10 +23,6 @@
           align-items: center;
 }
 
-.detail-section ul .link-button {
-  margin: 0 1.2rem;
-}
-
 .detail-section form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -46,6 +42,7 @@
 }
 
 .detail-section form button {
+  margin: 0;
   width: 10rem;
 }
 /*# sourceMappingURL=style.css.map */

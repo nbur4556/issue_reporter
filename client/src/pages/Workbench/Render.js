@@ -28,7 +28,7 @@ const Render = (props) => {
 
             <Toolbar ui={ui} uiDispatcher={uiDispatcher} />
 
-            <IssueList userData={userData} ui={ui} uiDispatcher={uiDispatcher} />
+            <IssueList ui={ui} userData={userData} uiDispatcher={uiDispatcher} />
 
             <WorkbenchDetailSection
                 ui={ui}
@@ -36,10 +36,7 @@ const Render = (props) => {
                 uiDispatcher={uiDispatcher}
                 issueInterface={props.issueInterface}
                 projectInterface={props.projectInterface}
-
                 handleLoadData={props.handleLoadData}
-                projects={userData.projectList}
-                issue={userData.issueList[props.ui.selectIssue]}
             />
         </main>
     );

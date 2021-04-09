@@ -32,12 +32,25 @@ label{
 input{
     margin-top: 0.2rem;
     padding: 1rem;
-    
     border: $mainAccentBorder;
     border-radius: $mainBorderRadius;
 
     background-color: $backgroundColor;
+    font-family: $mainSansSerif;
+}
 
+select{
+    margin-top: 0.2rem;
+    padding: 1rem;
+    border: $mainAccentBorder;
+    border-radius: $mainBorderRadius;
+
+    background-color: $backgroundColor;
+    font-family: $mainSansSerif;
+}
+
+option{
+    background-color: $backgroundColor;
     font-family: $mainSansSerif;
 }
 

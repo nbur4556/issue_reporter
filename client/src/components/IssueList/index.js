@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './style.css';
 
 // Components
 import IssueListHeader from '../IssueListHeader';
 import IssueBar from '../IssueBar';
 
-const IssueList = ({ userData, ui, uiDispatcher }) => {
+// Contexts
+import { UserDataContext } from '../../pages/Workbench';
+
+const IssueList = ({ ui, uiDispatcher }) => {
+    const userData = useContext(UserDataContext)
+
     return (
         <section className="issueListSection">
             <IssueListHeader />

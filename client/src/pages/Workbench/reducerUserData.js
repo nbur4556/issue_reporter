@@ -1,10 +1,10 @@
 const ACTIONS = {
-    LOAD_DATA: "load_data"
+    LOAD_PROJECT_LIST: "load_project_list"
 }
 
 const reducerUserData = (state, action) => {
     switch (action.type) {
-        case (ACTIONS.LOAD_DATA):
+        case (ACTIONS.LOAD_PROJECT_LIST):
             return ({ ...state, projectList: action.payload.data });
         default:
             return state;

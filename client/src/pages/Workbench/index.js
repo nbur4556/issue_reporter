@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import './style.css';
 
 import Render from './Render';
@@ -8,9 +8,11 @@ import ProjectInterface from './ProjectInterface';
 
 import loadData from './loadData';
 import reducerUi, { ACTIONS } from './reducerUi';
+import reducerUserData from './reducerUserData';
 
 const Workbench = () => {
-    const [userData, setUserData] = useState({
+
+    const [userData, dispatchUserData] = useReducer(reducerUserData, {
         projectList: [],
         issueList: []
     });
@@ -31,9 +33,9 @@ const Workbench = () => {
 
     // Get projects and issues for authorized users
     const handleLoadData = () => {
-        loadData().then(projectResponse => {
-            setUserData({ ...userData, projectList: projectResponse.data });
-        });
+        loadData().then(({ data }) =>
+            dispatchUserData({ type: 'load_project_list', payload: { data: data } })
+        );
     }
 
     // Logical Component Destructuring

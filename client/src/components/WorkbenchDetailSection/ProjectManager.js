@@ -82,9 +82,13 @@ const ProjectManager = (props) => {
     }
 
     return (
-        <ul data-cy="project-manager-list">
-            {(editState) ? renderEditForm() : renderProjects(userData.projectList)}
-        </ul>
+        <>
+            {(editState) ? renderEditForm() : null}
+
+            <ul data-cy="project-manager-list">
+                {(!editState) ? renderProjects(userData.projectList) : null}
+            </ul>
+        </>
     )
 }
 

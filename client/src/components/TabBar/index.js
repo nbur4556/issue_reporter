@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // Components
 import Tab from '../Tab';
 
-const TabBar = ({ tabData, uiDispatcher }) => {
+// Contexts
+import { UiContext } from '../../pages/Workbench';
+
+const TabBar = ({ uiDispatcher }) => {
+    const ui = useContext(UiContext);
     const { dispatch, ACTIONS } = uiDispatcher;
+
+    const tabData = ui.projectTabs.map(project => {
+        return { tabId: project._id, tabName: project.projectName }
+    });
+
     const [activeTab, setActiveTab] = useState(0);
 
     // Set index of active tab

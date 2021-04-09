@@ -15,15 +15,8 @@ const Render = (props) => {
         <main className="workbench-page">
 
             <WorkbenchNavigation>
-
-                <TabBar uiDispatcher={uiDispatcher}
-                    tabData={ui.projectTabs.map(project => {
-                        return { tabId: project._id, tabName: project.projectName }
-                    })}
-                />
-
+                <TabBar uiDispatcher={uiDispatcher} />
                 <LogoutButton buttonText="Sign Out"></LogoutButton>
-
             </WorkbenchNavigation>
 
             <Toolbar uiDispatcher={uiDispatcher} />

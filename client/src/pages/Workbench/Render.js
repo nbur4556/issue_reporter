@@ -37,14 +37,6 @@ const Render = (props) => {
                 issueInterface={props.issueInterface}
                 projectInterface={props.projectInterface}
 
-                // Project Manager Props
-
-                editProject={props.editProject}
-                deleteProject={props.deleteProject}
-
-                // Create Issue Props
-                loadIssues={props.loadIssues}
-
                 // Select Issue Props
                 issue={userData.issueList[props.ui.selectIssue]}
                 toggleStatus={props.setIssueStatus}

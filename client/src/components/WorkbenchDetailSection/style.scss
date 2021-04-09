@@ -2,7 +2,17 @@
 
 .detail-section{
     ul{
+        
         padding: $sectionPadding;
+
+        li{
+            margin: $componentMargin;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
 
     form{

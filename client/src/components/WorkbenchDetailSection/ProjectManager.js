@@ -23,7 +23,7 @@ const ProjectManager = (props) => {
     const addProjectTab = (e) => dispatch(
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
-                projectId: e.currentTarget.parentElement?.getAttribute('data-projectId'),
+                projectId: e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId'),
                 projectList: userData.projectList
             }
         }
@@ -50,21 +50,24 @@ const ProjectManager = (props) => {
             return (
                 <li key={index} data-projectid={project._id}>
                     {project.projectName}
-                    <button
-                        className="link-button"
-                        onClick={addProjectTab}
-                        data-cy='add-tab'
-                    >Add Tab</button>
-                    <button
-                        className="link-button"
-                        onClick={toggleEditState}
-                        data-cy="edit-project"
-                    >Edit Project</button>
-                    <button
-                        className="link-button"
-                        onClick={handleDeleteProject}
-                        data-cy="delete-project"
-                    >Delete Project</button>
+
+                    <span>
+                        <button
+                            className="link-button"
+                            onClick={addProjectTab}
+                            data-cy='add-tab'
+                        >Add Tab</button>
+                        <button
+                            className="link-button"
+                            onClick={toggleEditState}
+                            data-cy="edit-project"
+                        >Edit Project</button>
+                        <button
+                            className="link-button"
+                            onClick={handleDeleteProject}
+                            data-cy="delete-project"
+                        >Delete Project</button>
+                    </span>
                 </li>
             );
         });

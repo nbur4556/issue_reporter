@@ -7,7 +7,7 @@ import SubmitButton from '../Forms/SubmitButton';
 
 const ProjectManager = (props) => {
     const { dispatch, ACTIONS } = props.uiDispatcher;
-    const { editProject, deleteProject } = props.projectInterface;
+    const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
@@ -37,7 +37,7 @@ const ProjectManager = (props) => {
 
     const handleSubmitEditProject = (e) => {
         toggleEditState(e);
-        editProject(e, editProjectId, editData);
+        handleEditProject(e, editProjectId, editData);
     }
 
     const renderProjects = (projectsList) => {
@@ -47,7 +47,7 @@ const ProjectManager = (props) => {
                     {project.projectName}
                     <button onClick={addProjectTab} data-cy='add-tab'>Add Tab</button>
                     <button onClick={toggleEditState} data-cy="edit-project">Edit Project</button>
-                    <button onClick={deleteProject} data-cy="delete-project">Delete Project</button>
+                    <button onClick={handleDeleteProject} data-cy="delete-project">Delete Project</button>
                 </li>
             );
         });

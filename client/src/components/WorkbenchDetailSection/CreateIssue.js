@@ -35,7 +35,12 @@ const CreateIssue = (props) => {
         });
     }
 
-    return <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} />;
+    return (
+        <section>
+            <h4>Create Issue</h4>
+            <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} />
+        </section>
+    );
 }
 
 export default CreateIssue;

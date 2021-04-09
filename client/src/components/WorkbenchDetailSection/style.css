@@ -1,9 +1,13 @@
-.detail-section ul {
+.detail-section section {
   padding: 3rem;
 }
 
+.detail-section section h4 {
+  padding: 1.2rem 0;
+}
+
 .detail-section ul li {
-  margin: 1.2rem;
+  margin-bottom: 1.2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,11 +23,7 @@
           align-items: center;
 }
 
-.detail-section form {
-  padding: 3rem;
-}
-
 .detail-section form label {
-  margin: 1.2rem;
+  margin: 1.2rem 0;
 }
 /*# sourceMappingURL=style.css.map */

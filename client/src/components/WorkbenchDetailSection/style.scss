@@ -1,12 +1,18 @@
 @import '../../stylesheets/variables';
 
 .detail-section{
-    ul{
-        
+
+    section{
         padding: $sectionPadding;
 
+        h4{
+            padding: $componentMargin 0;
+        }
+    }
+
+    ul{
         li{
-            margin: $componentMargin;
+            margin-bottom: $componentMargin;
 
             display: flex;
             flex-direction: row;
@@ -16,10 +22,8 @@
     }
 
     form{
-        padding: $sectionPadding;
-
         label{
-            margin: $componentMargin;
+            margin: $componentMargin 0;
         }
     }
 }

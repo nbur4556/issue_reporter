@@ -10,7 +10,7 @@
 
 .labeled-input input, .labeled-input select {
   margin-top: 0.5rem;
-  padding: 1rem;
+  padding: 0.8rem;
   border: 2px solid #1E7A8E;
   border-radius: 10px;
   background-color: #F4FAFB;

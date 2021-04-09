@@ -6,7 +6,7 @@
 
     input, select{
         margin-top: $inputLabelGap;
-        padding: 1rem;
+        padding: $componentPaddingSize;
         border: $mainAccentBorder;
         border-radius: $mainBorderRadius;
 

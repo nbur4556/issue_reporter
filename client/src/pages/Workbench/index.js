@@ -41,16 +41,16 @@ const Workbench = () => {
 
     // Logical Component Destructuring
     const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, userDataDispatcher, userInterface: ui, uiDispatcher }
+        { userData, userDataDispatcher, ui, uiDispatcher }
     );
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
 
     return (
         <Render
             ui={ui}
+            userData={userData}
             uiDispatcher={uiDispatcher}
 
-            userData={userData}
             editProject={handleEditProject}
             deleteProject={handleDeleteProject}
             loadIssues={handleLoadIssues}

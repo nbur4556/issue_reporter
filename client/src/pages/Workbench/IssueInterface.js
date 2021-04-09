@@ -2,23 +2,25 @@
 import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
-const IssueInterface = (props) => {
-    const { userData, setUserData, userInterface, uiDispatcher } = props;
-    const { dispatch, ACTIONS } = uiDispatcher
-
+const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
     const handleLoadIssues = () => {
-        if (!userInterface.selectProject) { return }
+        if (!ui.selectProject) { return }
 
-        issueConnection.getQuery({ urlExtension: `/byProject/${userInterface.selectProject}` }).then(({ data }) => {
-            setUserData({ ...userData, issueList: data.issues })
-        });
+        issueConnection.getQuery({ urlExtension: `/byProject/${ui.selectProject}` })
+            .then(({ data }) => {
+                userDataDispatcher.dispatch({
+                    type: userDataDispatcher.ACTIONS.LOAD_ISSUES,
+                    payload: { issues: data.issues }
+                });
+            });
     }
 
     const handleSetIssueStatus = () => {
-        const { isOpen, _id: issueId } = userData.issueList[userInterface.selectIssue];
+        const { isOpen, _id: issueId } = userData.issueList[ui.selectIssue];
 
         // Deselect issue when closed and displaying closed issues is set to false
-        if (isOpen === true && userInterface.displayClosedIssue === false) dispatch({ type: ACTIONS.DESELECT_ISSUE });
+        if (isOpen === true && ui.displayClosedIssue === false)
+            uiDispatcher.dispatch({ type: uiDispatcher.ACTIONS.DESELECT_ISSUE });
 
         issueConnection.putQuery({ urlExtension: `/${issueId}`, body: { isOpen: !isOpen } }).then(() => {
             handleLoadIssues();
@@ -26,11 +28,11 @@ const IssueInterface = (props) => {
     }
 
     const handleDeleteIssue = () => {
-        const { _id: issueId } = userData.issueList[userInterface.selectIssue];
+        const { _id: issueId } = userData.issueList[ui.selectIssue];
 
-        issueConnection.deleteQuery({ urlExtension: `/${issueId}`, body: { selectProject: userInterface.selectProject } })
+        issueConnection.deleteQuery({ urlExtension: `/${issueId}`, body: { selectProject: ui.selectProject } })
             .then(() => {
-                dispatch({ type: ACTIONS.DESELECT_ISSUE });
+                uiDispatcher.dispatch({ type: uiDispatcher.ACTIONS.DESELECT_ISSUE });
                 handleLoadIssues();
             });
     }

@@ -37,13 +37,9 @@ const Render = (props) => {
                 issueInterface={props.issueInterface}
                 projectInterface={props.projectInterface}
 
-                // Select Issue Props
-                issue={userData.issueList[props.ui.selectIssue]}
-                toggleStatus={props.setIssueStatus}
-                deleteIssue={props.deleteIssue}
-
                 handleLoadData={props.handleLoadData}
                 projects={userData.projectList}
+                issue={userData.issueList[props.ui.selectIssue]}
             />
         </main>
     );

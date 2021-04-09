@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const IssueDetails = props => {
-
+    const { toggleStatus, deleteIssue } = props.issueInterface;
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const IssueDetails = props => {
             {/* Buttons */}
 
             {(props.issue.isOpen !== undefined)
-                ? <button name="toggleStatus" onClick={props.toggleStatus}>Toggle Status</button>
+                ? <button name="toggleStatus" onClick={toggleStatus}>Toggle Status</button>
                 : null}
 
             {(props.issue.name)
@@ -38,7 +38,7 @@ const IssueDetails = props => {
             {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
             {(displayDeleteMsg)
                 ? <div>
-                    <button name="confirmDelete" onClick={props.deleteIssue}>Yes</button>
+                    <button name="confirmDelete" onClick={deleteIssue}>Yes</button>
                     <button name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
                 </div>
                 : null}

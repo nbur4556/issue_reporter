@@ -1,0 +1,22 @@
+.labeled-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.labeled-input input, .labeled-input select {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #1E7A8E;
+  border-radius: 10px;
+  background-color: #F4FAFB;
+}
+
+.labeled-input option {
+  background-color: #F4FAFB;
+}
+/*# sourceMappingURL=labeledInputStyle.css.map */

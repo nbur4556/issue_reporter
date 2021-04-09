@@ -4,54 +4,19 @@ body{
     background-color: $backgroundColor;
 }
 
-div{
+div, p, label, input, select, button, option, h1, h4{
     font-family: $mainSansSerif;
 }
 
 h1{
-    font-family: $mainSansSerif;
     font-size: 2.5rem;
     font-weight: bold;
 }
 
 h4{
     color: $mainAccentColor;
-    font-family: $mainSansSerif;
     font-size: 1.2rem;
     font-weight: bold;
-}
-
-p{
-    font-family: $mainSansSerif;
-}
-
-label{
-    font-family: $mainSansSerif;
-}
-
-input{
-    margin-top: $inputLabelGap;
-    padding: 1rem;
-    border: $mainAccentBorder;
-    border-radius: $mainBorderRadius;
-
-    background-color: $backgroundColor;
-    font-family: $mainSansSerif;
-}
-
-select{
-    margin-top: $inputLabelGap;
-    padding: 1rem;
-    border: $mainAccentBorder;
-    border-radius: $mainBorderRadius;
-
-    background-color: $backgroundColor;
-    font-family: $mainSansSerif;
-}
-
-option{
-    background-color: $backgroundColor;
-    font-family: $mainSansSerif;
 }
 
 button{
@@ -63,7 +28,6 @@ button{
     color: white;
     background-color: $mainAccentColor;
 
-    font-family: $mainSansSerif;
     font-size: $componentFontSize;
     font-weight: bold; 
 }
@@ -73,6 +37,5 @@ button{
 
     background: none;
     color: $mainAccentColor;
-
     font-weight: bold;
 }

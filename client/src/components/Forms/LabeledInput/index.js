@@ -1,5 +1,5 @@
 import React from 'react';
-import '../labelStyle.css';
+import '../labeledInputStyle.css';
 
 const LabeledInput = (props) => {
     return (

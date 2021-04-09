@@ -37,7 +37,7 @@ const CreateIssue = (props) => {
 
     return (
         <section>
-            <h4>Create Issue</h4>
+            <h3>Create Issue</h3>
             <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} />
         </section>
     );

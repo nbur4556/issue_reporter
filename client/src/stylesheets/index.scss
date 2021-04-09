@@ -4,12 +4,18 @@ body{
     background-color: $backgroundColor;
 }
 
-div, p, label, input, select, button, option, h1, h4{
+div, p, label, input, select, button, option, h1, h3, h4{
     font-family: $mainSansSerif;
 }
 
 h1{
     font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h3{
+    color: $mainAccentColor;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 

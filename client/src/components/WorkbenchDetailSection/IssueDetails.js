@@ -17,7 +17,7 @@ const IssueDetails = props => {
 
     return (
         <section>
-            <h4>Issue Details</h4>
+            <h3>Issue Details</h3>
             <ul>
                 {/* Display details if details are available */}
 

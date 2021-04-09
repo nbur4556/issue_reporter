@@ -86,7 +86,7 @@ const ProjectManager = (props) => {
 
     return (
         <section>
-            <h4>Project Manager</h4>
+            <h3>Project Manager</h3>
 
             {(editState) ? renderEditForm() : null}
 

@@ -5,7 +5,7 @@
     section{
         padding: $sectionPadding;
 
-        h4{
+        h3{
             padding: $componentMargin 0;
         }
     }
@@ -23,7 +23,7 @@
 
     form{
         label{
-            margin: $componentMargin 0;
+            margin: 0 0 $componentMargin 0;
         }
     }
 }

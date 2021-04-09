@@ -2,12 +2,18 @@ body {
   background-color: #F4FAFB;
 }
 
-div, p, label, input, select, button, option, h1, h4 {
+div, p, label, input, select, button, option, h1, h3, h4 {
   font-family: "Noto Sans JP", sans-serif;
 }
 
 h1 {
   font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h3 {
+  color: #1E7A8E;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 

@@ -26,12 +26,16 @@ button {
   background-color: #1E7A8E;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
-.link-button {
+a, .link-button {
+  padding: 0;
   border: none;
   background: none;
   color: #1E7A8E;
+  font-size: 1rem;
   font-weight: bold;
+  text-decoration: underline;
 }
 /*# sourceMappingURL=index.css.map */

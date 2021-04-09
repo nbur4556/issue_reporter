@@ -30,12 +30,17 @@ button{
 
     font-size: $componentFontSize;
     font-weight: bold; 
+    cursor: pointer;
 }
 
-.link-button{
+a, .link-button{
+    padding: 0;
     border:none;
 
     background: none;
     color: $mainAccentColor;
+    font-size: 1rem;
     font-weight: bold;
+
+    text-decoration: underline;
 }

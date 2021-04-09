@@ -50,9 +50,21 @@ const ProjectManager = (props) => {
             return (
                 <li key={index} data-projectid={project._id}>
                     {project.projectName}
-                    <button onClick={addProjectTab} data-cy='add-tab'>Add Tab</button>
-                    <button onClick={toggleEditState} data-cy="edit-project">Edit Project</button>
-                    <button onClick={handleDeleteProject} data-cy="delete-project">Delete Project</button>
+                    <button
+                        className="link-button"
+                        onClick={addProjectTab}
+                        data-cy='add-tab'
+                    >Add Tab</button>
+                    <button
+                        className="link-button"
+                        onClick={toggleEditState}
+                        data-cy="edit-project"
+                    >Edit Project</button>
+                    <button
+                        className="link-button"
+                        onClick={handleDeleteProject}
+                        data-cy="delete-project"
+                    >Delete Project</button>
                 </li>
             );
         });

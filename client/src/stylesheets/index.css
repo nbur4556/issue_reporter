@@ -24,7 +24,6 @@ h4 {
 }
 
 button {
-  margin: 1.2rem;
   padding: 0.8rem;
   border: 2px solid #1E7A8E;
   border-radius: 10px;
@@ -36,7 +35,6 @@ button {
 }
 
 a, .link-button {
-  margin: 0 1.2rem;
   padding: 0;
   border: none;
   background: none;

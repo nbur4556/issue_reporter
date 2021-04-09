@@ -23,7 +23,29 @@
           align-items: center;
 }
 
+.detail-section ul .link-button {
+  margin: 0 1.2rem;
+}
+
+.detail-section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
 .detail-section form label {
   margin: 0 0 1.2rem 0;
+  width: 100%;
+}
+
+.detail-section form button {
+  width: 10rem;
 }
 /*# sourceMappingURL=style.css.map */

@@ -34,11 +34,11 @@ const IssueDetails = props => {
                 {/* Buttons */}
 
                 {(issue.isOpen !== undefined)
-                    ? <button name="toggleStatus" onClick={toggleStatus}>Toggle Status</button>
+                    ? <button className="link-button" name="toggleStatus" onClick={toggleStatus}>Toggle Status</button>
                     : null}
 
                 {(issue.name)
-                    ? <button name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
+                    ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
                     : null}
 
                 {/* Delete Confirmation */}
@@ -46,8 +46,8 @@ const IssueDetails = props => {
                 {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
                 {(displayDeleteMsg)
                     ? <div>
-                        <button name="confirmDelete" onClick={handleDeleteIssue}>Yes</button>
-                        <button name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
+                        <button className="link-button" name="confirmDelete" onClick={handleDeleteIssue}>Yes</button>
+                        <button className="link-button" name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
                     </div>
                     : null}
             </ul>

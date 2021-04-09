@@ -19,11 +19,24 @@
             justify-content: space-between;
             align-items: center;
         }
+
+        .link-button{
+            margin: 0 $componentMargin;
+        }
     }
 
     form{
+        display:flex;
+        flex-direction: column;
+        align-items: flex-end;
+
         label{
             margin: 0 0 $componentMargin 0;
+            width: 100%;
+        }
+
+        button{
+            width: 10rem;
         }
     }
 }

@@ -19,7 +19,7 @@ const ProjectManager = (props) => {
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
                 projectId: e.currentTarget.parentElement?.getAttribute('data-projectId'),
-                projectList: props.projects
+                projectList: props.userData.projectList
             }
         }
     );
@@ -66,7 +66,7 @@ const ProjectManager = (props) => {
 
     return (
         <ul data-cy="project-manager-list">
-            {(editState) ? renderEditForm() : renderProjects(props.projects)}
+            {(editState) ? renderEditForm() : renderProjects(props.userData.projectList)}
         </ul>
     )
 }

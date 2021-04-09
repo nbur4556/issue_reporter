@@ -7,8 +7,8 @@ import IssueInterface from './IssueInterface';
 import ProjectInterface from './ProjectInterface';
 
 import loadData from './loadData';
-import reducerUi, { ACTIONS } from './reducerUi';
-import reducerUserData from './reducerUserData';
+import reducerUi, { ACTIONS as uiActions } from './reducerUi';
+import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
 
 const Workbench = () => {
 
@@ -26,10 +26,11 @@ const Workbench = () => {
         selectIssue: null
     })
 
+    const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };
+    const userDataDispatcher = { dispatch: dispatchUserData, ACTIONS: userDataActions };
+
     useEffect(() => handleLoadData(), []);
     useEffect(() => { handleLoadIssues() }, [ui.selectProject])
-
-    const uiDispatcher = { dispatch: dispatchUi, ACTIONS: ACTIONS };
 
     // Get projects and issues for authorized users
     const handleLoadData = () => {
@@ -40,14 +41,14 @@ const Workbench = () => {
 
     // Logical Component Destructuring
     const { handleLoadIssues, handleDeleteIssue, handleSetIssueStatus } = IssueInterface(
-        { userData, setUserData, userInterface: ui, uiDispatcher }
+        { userData, userDataDispatcher, userInterface: ui, uiDispatcher }
     );
     const { handleEditProject, handleDeleteProject } = ProjectInterface({ handleLoadData });
 
     return (
         <Render
             ui={ui}
-            uiDispatcher={{ dispatch: dispatchUi, ACTIONS: ACTIONS }}
+            uiDispatcher={uiDispatcher}
 
             userData={userData}
             editProject={handleEditProject}

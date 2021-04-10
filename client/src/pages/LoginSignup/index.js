@@ -104,6 +104,10 @@ const LoginSignup = (props) => {
     return (
         <main className="login-signup-page">
 
+            <section className="title-section">
+                <h1>Issue Reporter</h1>
+            </section>
+
             <section className="toggle-section">
                 {(signinState.signupActive) ? <button className="link-button" name="loginActive" onClick={handleSetActive}>Log In</button> : null}
                 {(signinState.loginActive) ? <button className="link-button" name="signupActive" onClick={handleSetActive}>Sign Up</button> : null}

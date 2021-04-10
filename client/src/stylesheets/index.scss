@@ -4,62 +4,50 @@ body{
     background-color: $backgroundColor;
 }
 
-div{
+div, p, label, input, select, button, option, h1, h3, h4{
     font-family: $mainSansSerif;
 }
 
 h1{
-    font-family: $mainSansSerif;
     font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h3{
+    color: $mainAccentColor;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 h4{
     color: $mainAccentColor;
-    font-family: $mainSansSerif;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-p{
-    font-family: $mainSansSerif;
-}
-
-label{
-    font-family: $mainSansSerif;
-}
-
-input{
-    margin-top: 0.2rem;
-    padding: 1rem;
-    
-    border: $mainAccentBorder;
-    border-radius: $mainBorderRadius;
-
-    background-color: $backgroundColor;
-
-    font-family: $mainSansSerif;
-}
-
 button{
     margin: $componentMargin;
-    padding: 1rem;
+    padding: $componentPaddingSize;
     border: $mainAccentBorder;
     border-radius: $mainBorderRadius;
 
     color: white;
     background-color: $mainAccentColor;
 
-    font-family: $mainSansSerif;
     font-size: $componentFontSize;
     font-weight: bold; 
+    cursor: pointer;
 }
 
-.link-button{
+a, .link-button{
+    margin: 0 $componentMargin;
+    padding: 0;
     border:none;
 
     background: none;
     color: $mainAccentColor;
-
+    font-size: 1rem;
     font-weight: bold;
+
+    text-decoration: underline;
 }

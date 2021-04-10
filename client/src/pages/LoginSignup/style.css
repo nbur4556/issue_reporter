@@ -7,6 +7,15 @@ body {
           justify-content: center;
 }
 
+.title-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .login-signup-page {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -58,7 +67,7 @@ body {
 }
 
 .input-section .labeled-input {
-  margin: 1rem;
+  margin: 1.2rem;
   min-width: 35rem;
 }
 

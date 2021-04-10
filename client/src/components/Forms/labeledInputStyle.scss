@@ -1,0 +1,19 @@
+@import '../../stylesheets/variables';
+
+.labeled-input{
+    display: flex;
+    flex-direction: column;
+
+    input, select{
+        margin-top: $inputLabelGap;
+        padding: $componentPaddingSize;
+        border: $mainAccentBorder;
+        border-radius: $mainBorderRadius;
+
+        background-color: $backgroundColor;
+    }
+
+    option{
+        background-color: $backgroundColor;
+    }
+}

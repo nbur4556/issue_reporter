@@ -1,0 +1,39 @@
+@import '../../stylesheets/variables';
+
+.detail-section{
+
+    section{
+        padding: $sectionPadding;
+
+        h3{
+            padding: $componentMargin 0;
+        }
+    }
+
+    ul{
+        li{
+            margin-bottom: $componentMargin;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    form{
+        display:flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        label{
+            margin: 0 0 $componentMargin 0;
+            width: 100%;
+        }
+
+        button{
+            margin: 0;
+            width: 10rem;
+        }
+    }
+}

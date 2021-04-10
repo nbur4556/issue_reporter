@@ -2,56 +2,47 @@ body {
   background-color: #F4FAFB;
 }
 
-div {
+div, p, label, input, select, button, option, h1, h3, h4 {
   font-family: "Noto Sans JP", sans-serif;
 }
 
 h1 {
-  font-family: "Noto Sans JP", sans-serif;
   font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h3 {
+  color: #1E7A8E;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 h4 {
   color: #1E7A8E;
-  font-family: "Noto Sans JP", sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-p {
-  font-family: "Noto Sans JP", sans-serif;
-}
-
-label {
-  font-family: "Noto Sans JP", sans-serif;
-}
-
-input {
-  margin-top: 0.2rem;
-  padding: 1rem;
-  border: 2px solid #1E7A8E;
-  border-radius: 10px;
-  background-color: #F4FAFB;
-  font-family: "Noto Sans JP", sans-serif;
-}
-
 button {
-  margin: 1rem;
-  padding: 1rem;
+  margin: 1.2rem;
+  padding: 0.8rem;
   border: 2px solid #1E7A8E;
   border-radius: 10px;
   color: white;
   background-color: #1E7A8E;
-  font-family: "Noto Sans JP", sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
-.link-button {
+a, .link-button {
+  margin: 0 1.2rem;
+  padding: 0;
   border: none;
   background: none;
   color: #1E7A8E;
+  font-size: 1rem;
   font-weight: bold;
+  text-decoration: underline;
 }
 /*# sourceMappingURL=index.css.map */

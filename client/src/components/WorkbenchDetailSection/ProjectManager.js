@@ -23,14 +23,14 @@ const ProjectManager = (props) => {
     const addProjectTab = (e) => dispatch(
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
-                projectId: e.currentTarget.parentElement?.getAttribute('data-projectId'),
+                projectId: e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId'),
                 projectList: userData.projectList
             }
         }
     );
 
     const toggleEditState = (e) => {
-        const projectId = e.currentTarget.parentElement?.getAttribute('data-projectId');
+        const projectId = e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
         (editState) ? setEditState(false) : setEditState(true);
     }
@@ -50,9 +50,24 @@ const ProjectManager = (props) => {
             return (
                 <li key={index} data-projectid={project._id}>
                     {project.projectName}
-                    <button onClick={addProjectTab} data-cy='add-tab'>Add Tab</button>
-                    <button onClick={toggleEditState} data-cy="edit-project">Edit Project</button>
-                    <button onClick={handleDeleteProject} data-cy="delete-project">Delete Project</button>
+
+                    <span>
+                        <button
+                            className="link-button"
+                            onClick={addProjectTab}
+                            data-cy='add-tab'
+                        >Add Tab</button>
+                        <button
+                            className="link-button"
+                            onClick={toggleEditState}
+                            data-cy="edit-project"
+                        >Edit Project</button>
+                        <button
+                            className="link-button"
+                            onClick={handleDeleteProject}
+                            data-cy="delete-project"
+                        >Delete Project</button>
+                    </span>
                 </li>
             );
         });
@@ -70,9 +85,15 @@ const ProjectManager = (props) => {
     }
 
     return (
-        <ul data-cy="project-manager-list">
-            {(editState) ? renderEditForm() : renderProjects(userData.projectList)}
-        </ul>
+        <section>
+            <h3>Project Manager</h3>
+
+            {(editState) ? renderEditForm() : null}
+
+            <ul data-cy="project-manager-list">
+                {(!editState) ? renderProjects(userData.projectList) : null}
+            </ul>
+        </section>
     )
 }
 

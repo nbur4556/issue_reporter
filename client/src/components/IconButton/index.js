@@ -2,16 +2,16 @@ import React from 'react';
 import './style.css';
 
 // Icons
-import { ReactComponent as AddIcon } from '../../icons/add.svg';
-import { ReactComponent as ExitIcon } from '../../icons/exit.svg';
+import addIcon from '../../icons/add.svg';
+import exitIcon from '../../icons/exit.svg';
 
 const IconButton = ({ iconName, onClick, cy }) => {
-    const selectIcon = (iconName) => {
+    const selectIcon = () => {
         switch (iconName) {
             case 'add':
-                return (<AddIcon />);
+                return addIcon;
             case 'exit':
-                return (<ExitIcon />)
+                return exitIcon;
             default:
                 return null;
         }
@@ -19,7 +19,9 @@ const IconButton = ({ iconName, onClick, cy }) => {
 
     return (
         <button className="icon-button" onClick={onClick} data-cy={cy}>
-            {selectIcon(iconName)}
+            {/* {selectIcon(iconName)} */}
+
+            <img src={selectIcon()} alt="icon" />
         </button>
     );
 }

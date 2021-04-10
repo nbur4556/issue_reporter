@@ -12,7 +12,8 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "cypress": "cypress open"
+    "cy": "cypress open",
+    "cy:run": "npx cypress run --headless"
   },
   "repository": {
     "type": "git",

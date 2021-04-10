@@ -36,24 +36,11 @@
   width: 100%;
 }
 
-.navigation-bar .tab-bar .tab button {
-  width: 1rem;
-  height: 1rem;
-}
-
 .navigation-bar .tab-bar .tab-active {
   background-color: #F4FAFB;
 }
 
-.navigation-bar .tab-bar .tab-active button {
-  background-color: #1E7A8E;
-}
-
 .navigation-bar .tab-bar .tab-inactive {
   color: #F4FAFB;
-}
-
-.navigation-bar .tab-bar .tab-inactive button {
-  background-color: #F4FAFB;
 }
 /*# sourceMappingURL=style.css.map */

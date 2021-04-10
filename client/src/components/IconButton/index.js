@@ -5,7 +5,7 @@ import './style.css';
 import { ReactComponent as AddIcon } from '../../icons/add.svg';
 import { ReactComponent as ExitIcon } from '../../icons/exit.svg';
 
-const IconButton = ({ iconName, onClick, alt, cy }) => {
+const IconButton = ({ iconName, onClick, cy }) => {
     const selectIcon = (iconName) => {
         switch (iconName) {
             case 'add':

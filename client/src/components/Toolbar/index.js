@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+// Components
+import IconButton from '../IconButton';
+
 // Contexts
 import { UiContext } from '../../pages/Workbench';
 
@@ -39,12 +42,13 @@ const Toolbar = ({ uiDispatcher }) => {
                     />
                 </label>
 
-                <button onClick={toggleCreateIssue} data-cy="create-issue">Toggle Create Issue</button>
+
+                <IconButton iconName="add" onClick={toggleCreateIssue} alt="create issue button" cy="create-issue" />
                 <Link to="/create-project">Create Project</Link>
 
                 <button onClick={toggleProjectManager} data-cy="project-manager">Toggle Project Manager</button>
             </section>
-        </section>
+        </section >
     )
 }
 

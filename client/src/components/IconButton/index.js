@@ -5,7 +5,7 @@ import './style.css';
 import addIcon from '../../icons/add.svg';
 import exitIcon from '../../icons/exit.svg';
 
-const IconButton = ({ iconName, onClick, cy }) => {
+const IconButton = ({ iconName, onClick, alt, cy }) => {
     const selectIcon = () => {
         switch (iconName) {
             case 'add':
@@ -19,9 +19,7 @@ const IconButton = ({ iconName, onClick, cy }) => {
 
     return (
         <button className="icon-button" onClick={onClick} data-cy={cy}>
-            {/* {selectIcon(iconName)} */}
-
-            <img src={selectIcon()} alt="icon" />
+            <img src={selectIcon()} alt={alt || "icon"} />
         </button>
     );
 }

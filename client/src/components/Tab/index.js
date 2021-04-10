@@ -12,7 +12,7 @@ const Tab = (props) => {
     return (
         <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId}>
             <p>{tab.tabName}</p>
-            <IconButton iconName="exit" onClick={removeProjectTab} />
+            <IconButton iconName="exit" onClick={removeProjectTab} alt="exit button" />
         </div>
     )
 }

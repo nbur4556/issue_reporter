@@ -1,9 +1,14 @@
 import React from 'react';
 import './style.css';
 
-const IconButton = ({ onClick, cy }) => {
+// Icons
+import { ReactComponent as AddIcon } from '../../icons/add.svg';
+
+const IconButton = ({ onClick, alt, cy }) => {
     return (
-        <button className="icon-button" onClick={onClick} data-cy={cy}>Icon</button>
+        <button className="icon-button" onClick={onClick} data-cy={cy}>
+            <AddIcon />
+        </button>
     );
 }
 

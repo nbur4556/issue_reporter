@@ -53,12 +53,7 @@ const ProjectManager = (props) => {
                     {project.projectName}
 
                     <span>
-                        <IconButton onClick={addProjectTab} cy='add-tab' />
-                        {/* <button
-                            className="link-button"
-                            onClick={addProjectTab}
-                            data-cy='add-tab'
-                        >Add Tab</button> */}
+                        <IconButton onClick={addProjectTab} alt="add button" cy='add-tab' />
 
                         <button
                             className="link-button"

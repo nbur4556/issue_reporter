@@ -12,7 +12,11 @@ const Tab = (props) => {
     return (
         <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId}>
             <p>{tab.tabName}</p>
-            <IconButton iconName="exitLight" onClick={removeProjectTab} width={15} alt="exit button" />
+            <IconButton
+                iconName={(activeClass === 'tab-active') ? "exit" : "exitLight"}
+                onClick={removeProjectTab}
+                width={15} alt="exit button"
+            />
         </div>
     )
 }

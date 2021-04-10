@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react';
 import FormContainer from '../Forms/FormContainer';
 import LabeledInput from '../Forms/LabeledInput';
 import SubmitButton from '../Forms/SubmitButton';
+import IconButton from '../IconButton';
 
 // Contexts
 import { UserDataContext } from '../../pages/Workbench';
@@ -52,11 +53,8 @@ const ProjectManager = (props) => {
                     {project.projectName}
 
                     <span>
-                        <button
-                            className="link-button"
-                            onClick={addProjectTab}
-                            data-cy='add-tab'
-                        >Add Tab</button>
+                        <IconButton iconName="add" onClick={addProjectTab} alt="add tab button" cy="add-tab" />
+
                         <button
                             className="link-button"
                             onClick={toggleEditState}

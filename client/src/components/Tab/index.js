@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Components
+import IconButton from '../IconButton';
+
 const Tab = (props) => {
     const { tab, tabIndex, activeClass, selectTab } = props
     const { dispatch, ACTIONS } = props.uiDispatcher;
@@ -9,7 +12,11 @@ const Tab = (props) => {
     return (
         <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId}>
             <p>{tab.tabName}</p>
-            <button onClick={removeProjectTab} />
+            <IconButton
+                iconName={(activeClass === 'tab-active') ? "exit" : "exitLight"}
+                onClick={removeProjectTab}
+                width={15} alt="exit button"
+            />
         </div>
     )
 }

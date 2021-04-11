@@ -22,7 +22,7 @@ const WorkbenchDetailSection = (props) => {
                 ? <CreateIssue {...props} />
                 : null}
 
-            {(typeof ui.selectIssue === 'string')
+            {(ui.selectIssue)
                 ? <IssueDetails {...props} />
                 : null}
         </section>

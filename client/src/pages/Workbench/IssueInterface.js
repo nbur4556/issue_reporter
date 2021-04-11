@@ -2,6 +2,14 @@
 import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
+const getSelectIssue = (issueList, selectIssue) => {
+    for (const issue of issueList) {
+        if (issue._id === selectIssue) {
+            return issue;
+        }
+    }
+}
+
 const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
     const handleLoadIssues = () => {
         if (!ui.selectProject) { return }
@@ -16,7 +24,7 @@ const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
     }
 
     const handleSetIssueStatus = () => {
-        const { isOpen, _id: issueId } = userData.issueList[ui.selectIssue];
+        const { isOpen, _id: issueId } = getSelectIssue(userData.issueList, ui.selectIssue);
 
         // Deselect issue when closed and displaying closed issues is set to false
         if (isOpen === true && ui.displayClosedIssue === false)

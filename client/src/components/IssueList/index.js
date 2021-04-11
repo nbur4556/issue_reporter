@@ -17,7 +17,7 @@ const IssueList = ({ uiDispatcher }) => {
             <IssueListHeader />
 
             {userData.issueList.map((issue, index) => {
-                const activeClassName = (index === Number(ui.selectIssue))
+                const activeClassName = (issue._id === ui.selectIssue)
                     ? "active-issue"
                     : "inactive-issue";
 

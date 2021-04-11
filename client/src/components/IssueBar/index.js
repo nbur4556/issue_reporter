@@ -4,10 +4,10 @@ const IssueBar = props => {
     const { issueData, uiDispatcher } = props;
     const { dispatch, ACTIONS } = uiDispatcher;
 
-    const selectIssue = (e) => {
-        console.log(e.currentTarget)
-        dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { issueId: e.currentTarget.getAttribute('data-issueid') } });
-    }
+    const selectIssue = (e) => dispatch({
+        type: ACTIONS.SELECT_ISSUE,
+        payload: { issueId: e.currentTarget.getAttribute('data-issueid') }
+    });
 
     const formatDueDate = (dueDate) => {
         if (!dueDate) {

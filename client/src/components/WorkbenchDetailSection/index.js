@@ -14,7 +14,6 @@ const WorkbenchDetailSection = (props) => {
 
     return (
         <section className="detail-section">
-
             {(ui.displayProjectManager)
                 ? <ProjectManager {...props} />
                 : null}
@@ -23,10 +22,9 @@ const WorkbenchDetailSection = (props) => {
                 ? <CreateIssue {...props} />
                 : null}
 
-            {(typeof ui.selectIssue === 'number')
+            {(typeof ui.selectIssue === 'string')
                 ? <IssueDetails {...props} />
                 : null}
-
         </section>
     )
 }

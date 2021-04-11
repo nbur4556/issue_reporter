@@ -26,7 +26,6 @@ const IssueList = ({ uiDispatcher }) => {
                     : <IssueBar
                         uiDispatcher={uiDispatcher}
                         key={index}
-                        index={index}
                         issueData={issue}
                         activeClassName={activeClassName}
                     />;

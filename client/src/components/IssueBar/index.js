@@ -6,7 +6,7 @@ const IssueBar = props => {
 
     const selectIssue = (e) => {
         console.log(e.currentTarget)
-        dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { selectIndex: props.index } });
+        dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { issueId: e.currentTarget.getAttribute('data-issueid') } });
     }
 
     const formatDueDate = (dueDate) => {

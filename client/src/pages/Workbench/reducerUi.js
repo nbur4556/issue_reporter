@@ -51,9 +51,9 @@ const reducerUi = (state, action) => {
             return { ...state, selectProject: action.payload.projectId };
 
         case ACTIONS.SELECT_ISSUE:
-            return (state.selectIssue)
+            return (state.selectIssue === action.payload.issueId)
                 ? { ...state, selectIssue: null }
-                : { ...state, selectIssue: action.payload.selectIndex, displayProjectManager: false, displayCreateIssue: false };
+                : { ...state, selectIssue: action.payload.issueId, displayProjectManager: false, displayCreateIssue: false };
 
         case ACTIONS.DESELECT_ISSUE:
             return { ...state, selectIssue: null };

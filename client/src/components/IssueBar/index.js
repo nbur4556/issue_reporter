@@ -20,10 +20,14 @@ const IssueBar = props => {
             className={`issue-bar ${props.activeClassName}`}
             onClick={selectIssue}
         >
+            {/* {console.log(issueData)} */}
+
             <li className="name-col">{issueData.name}</li>
             <li className="category-col">{issueData.category}</li>
             <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
             {(props.assigned) ? <li>{props.assigned}</li> : null}
+
+            <li><input type="checkbox" /></li>
         </ul>
     );
 }

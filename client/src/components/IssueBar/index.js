@@ -4,7 +4,10 @@ const IssueBar = props => {
     const { issueData, uiDispatcher } = props;
     const { dispatch, ACTIONS } = uiDispatcher;
 
-    const selectIssue = () => dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { selectIndex: props.index } });
+    const selectIssue = (e) => {
+        console.log(e.currentTarget)
+        dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { selectIndex: props.index } });
+    }
 
     const formatDueDate = (dueDate) => {
         if (!dueDate) {
@@ -19,9 +22,8 @@ const IssueBar = props => {
         <ul
             className={`issue-bar ${props.activeClassName}`}
             onClick={selectIssue}
+            data-issueid={issueData._id}
         >
-            {/* {console.log(issueData)} */}
-
             <li className="name-col">{issueData.name}</li>
             <li className="category-col">{issueData.category}</li>
             <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>

@@ -36,7 +36,7 @@ const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
     }
 
     const handleDeleteIssue = () => {
-        const { _id: issueId } = userData.issueList[ui.selectIssue];
+        const { _id: issueId } = getSelectIssue(userData.issueList, ui.selectIssue);
 
         issueConnection.deleteQuery({ urlExtension: `/${issueId}`, body: { selectProject: ui.selectProject } })
             .then(() => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Components
 import { FormContainer, LabeledInput, LabeledSelect, SubmitButton, CancelButton } from '../Forms';
@@ -17,10 +17,6 @@ const CreateIssueForm = (props) => {
         handleSubmitForm();
     }
 
-    const cancelForm = () => {
-        console.log('Cancel Form');
-    }
-
     return (
         <FormContainer>
             <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} data-cy="name" />
@@ -34,7 +30,7 @@ const CreateIssueForm = (props) => {
             <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
             <div>
                 {/* Buttons */}
-                <CancelButton onClick={cancelForm} />
+                <CancelButton onClick={props.handleCancelForm} />
                 <SubmitButton onClick={submitForm} data-cy="submit" />
             </div>
         </FormContainer>

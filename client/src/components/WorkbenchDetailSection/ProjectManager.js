@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 // Components
 import { FormContainer, LabeledInput, SubmitButton, CancelButton } from '../Forms';
 import IconButton from '../IconButton';
+import DeleteConfirmation from '../DeleteConfirmation';
 
 // Contexts
 import { UserDataContext } from '../../pages/Workbench';
@@ -13,6 +14,7 @@ const ProjectManager = (props) => {
     const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
+    const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
     const [editData, setEditData] = useState({
@@ -50,24 +52,25 @@ const ProjectManager = (props) => {
     const renderProjects = (projectsList) => {
         const projectListItems = projectsList.map((project, index) => {
             return (
-                <li key={index} data-projectid={project._id}>
-                    {project.projectName}
+                <>
+                    <li key={index} data-projectid={project._id}>
+                        {project.projectName}
 
-                    <span>
-                        <IconButton iconName="add" onClick={addProjectTab} alt="add tab button" cy="add-tab" />
+                        <span>
+                            <IconButton iconName="add" onClick={addProjectTab} alt="add tab button" cy="add-tab" />
 
-                        <button
-                            className="link-button"
-                            onClick={toggleEditState}
-                            data-cy="edit-project"
-                        >Edit Project</button>
-                        <button
-                            className="link-button"
-                            onClick={handleDeleteProject}
-                            data-cy="delete-project"
-                        >Delete Project</button>
-                    </span>
-                </li>
+                            <button className="link-button" onClick={toggleEditState} data-cy="edit-project">
+                                Edit Project
+                                </button>
+                            <button className="link-button" onClick={() => setDisplayDeleteMsg(true)} data-cy="delete-project">
+                                Delete Project
+                                </button>
+                        </span>
+                    </li>
+                    {(displayDeleteMsg)
+                        ? <DeleteConfirmation type="project" />
+                        : null}
+                </>
             );
         });
 

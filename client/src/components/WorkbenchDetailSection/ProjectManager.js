@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react';
 import FormContainer from '../Forms/FormContainer';
 import LabeledInput from '../Forms/LabeledInput';
 import SubmitButton from '../Forms/SubmitButton';
+import CancelButton from '../Forms/CancelButton';
 import IconButton from '../IconButton';
 
 // Contexts
@@ -46,6 +47,11 @@ const ProjectManager = (props) => {
         handleEditProject(e, editProjectId, editData);
     }
 
+    const cancelEditProject = () => {
+        console.log('Cancel Edit Project');
+    }
+
+    // Projects Mode
     const renderProjects = (projectsList) => {
         const projectListItems = projectsList.map((project, index) => {
             return (
@@ -73,11 +79,16 @@ const ProjectManager = (props) => {
         return projectListItems;
     }
 
+    // Edit Mode
     const renderEditForm = () => {
         return (
             <FormContainer>
                 <LabeledInput name="projectName" label="Name:" onChange={handleEditData} cy="edit-field" />
-                <SubmitButton onClick={handleSubmitEditProject} cy="submit-edit" />
+                <div>
+                    {/* Buttons */}
+                    <CancelButton onClick={cancelEditProject} />
+                    <SubmitButton onClick={handleSubmitEditProject} cy="submit-edit" />
+                </div>
             </FormContainer>
         );
     }

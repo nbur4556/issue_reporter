@@ -5,6 +5,7 @@ import FormContainer from '../Forms/FormContainer';
 import LabeledInput from '../Forms/LabeledInput';
 import LabeledSelect from '../Forms/LabeledSelect';
 import SubmitButton from '../Forms/SubmitButton';
+import CancelButton from '../Forms/CancelButton';
 
 const CreateIssueForm = (props) => {
     const { handleUpdateInput, handleSubmitForm } = props;
@@ -20,6 +21,10 @@ const CreateIssueForm = (props) => {
         handleSubmitForm();
     }
 
+    const cancelForm = () => {
+        console.log('Cancel Form');
+    }
+
     return (
         <FormContainer>
             <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} data-cy="name" />
@@ -31,7 +36,11 @@ const CreateIssueForm = (props) => {
             </LabeledSelect>
             {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleUpdateInput} data-cy="name" /> */}
             <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
-            <SubmitButton onClick={submitForm} data-cy="submit" />
+            <div>
+                {/* Buttons */}
+                <CancelButton onClick={cancelForm} />
+                <SubmitButton onClick={submitForm} data-cy="submit" />
+            </div>
         </FormContainer>
     );
 }

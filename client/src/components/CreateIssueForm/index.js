@@ -1,11 +1,7 @@
 import React from 'react';
 
 // Components
-import FormContainer from '../Forms/FormContainer';
-import LabeledInput from '../Forms/LabeledInput';
-import LabeledSelect from '../Forms/LabeledSelect';
-import SubmitButton from '../Forms/SubmitButton';
-import CancelButton from '../Forms/CancelButton';
+import { FormContainer, LabeledInput, LabeledSelect, SubmitButton, CancelButton } from '../Forms';
 
 const CreateIssueForm = (props) => {
     const { handleUpdateInput, handleSubmitForm } = props;

@@ -1,10 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // Components
-import FormContainer from '../Forms/FormContainer';
-import LabeledInput from '../Forms/LabeledInput';
-import SubmitButton from '../Forms/SubmitButton';
-import CancelButton from '../Forms/CancelButton';
+import { FormContainer, LabeledInput, SubmitButton, CancelButton } from '../Forms';
 import IconButton from '../IconButton';
 
 // Contexts

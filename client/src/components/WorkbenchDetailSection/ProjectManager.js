@@ -70,7 +70,10 @@ const ProjectManager = (props) => {
 
 
                     {(index === displayDeleteMsg)
-                        ? <DeleteConfirmation type="project" />
+                        ? <DeleteConfirmation type="project"
+                            onConfirm={handleDeleteProject}
+                            onReject={() => setDisplayDeleteMsg(null)}
+                        />
                         : null}
                 </>
             );

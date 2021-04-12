@@ -25,6 +25,8 @@ const IssueDetails = props => {
         setDisplayDeleteMsg(false);
     }, [issue.name]);
 
+    const removeDeleteConfirmation = () => setDisplayDeleteMsg(false);
+
     return (
         <section>
             <h3>Issue Details</h3>
@@ -47,22 +49,8 @@ const IssueDetails = props => {
                     ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
                     : null}
 
-                {/* Delete Confirmation */}
-
-                {/* {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
                 {(displayDeleteMsg)
-                    ? <div>
-                        <button className="link-button" name="confirmDelete" onClick={handleDeleteIssue}>Yes</button>
-                        <button className="link-button" name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
-                    </div>
-                    : null} */}
-
-                {(displayDeleteMsg)
-                    ? <DeleteConfirmation
-                        type="issue"
-                        onConfirm={() => { console.log('confirm') }}
-                        onReject={() => { console.log('reject') }}
-                    />
+                    ? <DeleteConfirmation type="issue" onConfirm={handleDeleteIssue} onReject={removeDeleteConfirmation} />
                     : null}
             </ul>
         </section>

@@ -14,7 +14,7 @@ const ProjectManager = (props) => {
     const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
-    const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
+    const [displayDeleteMsg, setDisplayDeleteMsg] = useState(null);
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
     const [editData, setEditData] = useState({
@@ -62,12 +62,14 @@ const ProjectManager = (props) => {
                             <button className="link-button" onClick={toggleEditState} data-cy="edit-project">
                                 Edit Project
                                 </button>
-                            <button className="link-button" onClick={() => setDisplayDeleteMsg(true)} data-cy="delete-project">
+                            <button className="link-button" onClick={() => setDisplayDeleteMsg(index)} data-cy="delete-project">
                                 Delete Project
                                 </button>
                         </span>
                     </li>
-                    {(displayDeleteMsg)
+
+
+                    {(index === displayDeleteMsg)
                         ? <DeleteConfirmation type="project" />
                         : null}
                 </>

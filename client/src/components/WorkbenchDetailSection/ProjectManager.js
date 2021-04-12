@@ -44,9 +44,7 @@ const ProjectManager = (props) => {
         handleEditProject(e, editProjectId, editData);
     }
 
-    const cancelEditProject = () => {
-        console.log('Cancel Edit Project');
-    }
+    const cancelEditProject = () => setEditState(false);
 
     // Projects Mode
     const renderProjects = (projectsList) => {

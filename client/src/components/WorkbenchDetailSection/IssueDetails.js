@@ -49,15 +49,21 @@ const IssueDetails = props => {
 
                 {/* Delete Confirmation */}
 
-                {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
+                {/* {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
                 {(displayDeleteMsg)
                     ? <div>
                         <button className="link-button" name="confirmDelete" onClick={handleDeleteIssue}>Yes</button>
                         <button className="link-button" name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
                     </div>
-                    : null}
+                    : null} */}
 
-                {(displayDeleteMsg) ? <DeleteConfirmation /> : null}
+                {(displayDeleteMsg)
+                    ? <DeleteConfirmation
+                        type="issue"
+                        onConfirm={() => { console.log('confirm') }}
+                        onReject={() => { console.log('reject') }}
+                    />
+                    : null}
             </ul>
         </section>
     );

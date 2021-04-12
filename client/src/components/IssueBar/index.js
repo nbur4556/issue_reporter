@@ -29,7 +29,9 @@ const IssueBar = props => {
             <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
-            <li><input type="checkbox" /></li>
+            <li>
+                <input type="checkbox" checked={!issueData.isOpen} />
+            </li>
         </ul>
     );
 }

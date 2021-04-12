@@ -18,6 +18,11 @@ const IssueBar = props => {
         return `${dateArray[1]}/${dateArray[2].split('T')[0]}/${dateArray[0]}`;
     }
 
+    const toggleIsClosed = e => {
+        e.stopPropagation();
+        props.handleSetIssueStatus(issueData);
+    }
+
     return (
         <ul
             className={`issue-bar ${props.activeClassName}`}
@@ -29,7 +34,9 @@ const IssueBar = props => {
             <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
-            <li><input type="checkbox" /></li>
+            <li>
+                <input type="checkbox" checked={!issueData.isOpen} onClick={toggleIsClosed} />
+            </li>
         </ul>
     );
 }

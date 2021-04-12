@@ -21,7 +21,7 @@ const Render = (props) => {
 
             <Toolbar uiDispatcher={uiDispatcher} />
 
-            <IssueList uiDispatcher={uiDispatcher} />
+            <IssueList uiDispatcher={uiDispatcher} issueInterface={props.issueInterface} />
 
             <WorkbenchDetailSection
                 uiDispatcher={uiDispatcher}

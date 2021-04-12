@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
+import DeleteConfirmation from '../DeleteConfirmation';
 
 const IssueDetails = props => {
     const userData = useContext(UserDataContext);
@@ -55,6 +56,8 @@ const IssueDetails = props => {
                         <button className="link-button" name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
                     </div>
                     : null}
+
+                {(displayDeleteMsg) ? <DeleteConfirmation /> : null}
             </ul>
         </section>
     );

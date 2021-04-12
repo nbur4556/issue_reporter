@@ -7,9 +7,18 @@ const IssueDetails = props => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
     const { handleSetIssueStatus, handleDeleteIssue } = props.issueInterface;
-    const issue = userData.issueList[ui.selectIssue];
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
+
+    const getSelectIssue = (issueList, selectIssue) => {
+        for (const issue of issueList) {
+            if (issue._id === selectIssue) {
+                return issue;
+            }
+        }
+    }
+
+    const issue = getSelectIssue(userData.issueList, ui.selectIssue);
 
     useEffect(() => {
         setDisplayDeleteMsg(false);

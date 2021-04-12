@@ -4,7 +4,10 @@ const IssueBar = props => {
     const { issueData, uiDispatcher } = props;
     const { dispatch, ACTIONS } = uiDispatcher;
 
-    const selectIssue = () => dispatch({ type: ACTIONS.SELECT_ISSUE, payload: { selectIndex: props.index } });
+    const selectIssue = (e) => dispatch({
+        type: ACTIONS.SELECT_ISSUE,
+        payload: { issueId: e.currentTarget.getAttribute('data-issueid') }
+    });
 
     const formatDueDate = (dueDate) => {
         if (!dueDate) {
@@ -19,11 +22,14 @@ const IssueBar = props => {
         <ul
             className={`issue-bar ${props.activeClassName}`}
             onClick={selectIssue}
+            data-issueid={issueData._id}
         >
             <li className="name-col">{issueData.name}</li>
             <li className="category-col">{issueData.category}</li>
             <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
             {(props.assigned) ? <li>{props.assigned}</li> : null}
+
+            <li><input type="checkbox" /></li>
         </ul>
     );
 }

@@ -18,6 +18,11 @@ const IssueBar = props => {
         return `${dateArray[1]}/${dateArray[2].split('T')[0]}/${dateArray[0]}`;
     }
 
+    const toggleIsClosed = e => {
+        e.stopPropagation();
+        props.handleSetIssueStatus(issueData);
+    }
+
     return (
         <ul
             className={`issue-bar ${props.activeClassName}`}
@@ -30,7 +35,7 @@ const IssueBar = props => {
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
             <li>
-                <input type="checkbox" checked={!issueData.isOpen} />
+                <input type="checkbox" checked={!issueData.isOpen} onClick={toggleIsClosed} />
             </li>
         </ul>
     );

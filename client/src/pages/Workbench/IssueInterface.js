@@ -23,8 +23,8 @@ const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
             });
     }
 
-    const handleSetIssueStatus = () => {
-        const { isOpen, _id: issueId } = getSelectIssue(userData.issueList, ui.selectIssue);
+    const handleSetIssueStatus = (issue) => {
+        const { isOpen, _id: issueId } = issue || getSelectIssue(userData.issueList, ui.selectIssue);
 
         // Deselect issue when closed and displaying closed issues is set to false
         if (isOpen === true && ui.displayClosedIssue === false)

@@ -24,14 +24,14 @@ const ProjectManager = (props) => {
     const addProjectTab = (e) => dispatch(
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
-                projectId: e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId'),
+                projectId: e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId'),
                 projectList: userData.projectList
             }
         }
     );
 
     const toggleEditState = (e) => {
-        const projectId = e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId');
+        const projectId = e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
         (editState) ? setEditState(false) : setEditState(true);
     }
@@ -49,7 +49,7 @@ const ProjectManager = (props) => {
     const cancelEditProject = () => setEditState(false);
 
     const confirmDeleteProject = (currentTarget, index) => {
-        const itemElement = currentTarget.parentElement.parentElement.children[index];
+        const itemElement = currentTarget.parentElement.parentElement.parentElement.children[index];
         handleDeleteProject(itemElement.getAttribute('data-projectid'));
         setDisplayDeleteMsg(null);
     }
@@ -58,8 +58,8 @@ const ProjectManager = (props) => {
     const renderProjects = (projectsList) => {
         const projectListItems = projectsList.map((project, index) => {
             return (
-                <>
-                    <li key={index} data-projectid={project._id}>
+                <li key={index} data-projectid={project._id}>
+                    <div className="list-content">
                         {project.projectName}
 
                         <span>
@@ -67,13 +67,12 @@ const ProjectManager = (props) => {
 
                             <button className="link-button" onClick={toggleEditState} data-cy="edit-project">
                                 Edit Project
-                                </button>
+                            </button>
                             <button className="link-button" onClick={() => setDisplayDeleteMsg(index)} data-cy="delete-project">
                                 Delete Project
-                                </button>
+                            </button>
                         </span>
-                    </li>
-
+                    </div>
 
                     {(index === displayDeleteMsg)
                         ? <DeleteConfirmation type="project"
@@ -81,7 +80,7 @@ const ProjectManager = (props) => {
                             onReject={() => setDisplayDeleteMsg(null)}
                         />
                         : null}
-                </>
+                </li>
             );
         });
 

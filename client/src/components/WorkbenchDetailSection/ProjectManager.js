@@ -48,6 +48,12 @@ const ProjectManager = (props) => {
 
     const cancelEditProject = () => setEditState(false);
 
+    const confirmDeleteProject = (currentTarget, index) => {
+        const itemElement = currentTarget.parentElement.parentElement.children[index];
+        handleDeleteProject(itemElement.getAttribute('data-projectid'));
+        setDisplayDeleteMsg(null);
+    }
+
     // Projects Mode
     const renderProjects = (projectsList) => {
         const projectListItems = projectsList.map((project, index) => {
@@ -71,11 +77,7 @@ const ProjectManager = (props) => {
 
                     {(index === displayDeleteMsg)
                         ? <DeleteConfirmation type="project"
-                            onConfirm={({ currentTarget }) => {
-                                const itemElement = currentTarget.parentElement.parentElement.children[index];
-                                handleDeleteProject(itemElement.getAttribute('data-projectid'));
-                                setDisplayDeleteMsg(null);
-                            }}
+                            onConfirm={(e) => { confirmDeleteProject(e.currentTarget, index) }}
                             onReject={() => setDisplayDeleteMsg(null)}
                         />
                         : null}

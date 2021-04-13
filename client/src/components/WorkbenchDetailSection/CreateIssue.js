@@ -10,6 +10,8 @@ const issueConnection = new ApiConnection('/api/issue');
 
 const CreateIssue = (props) => {
     const ui = useContext(UiContext);
+
+    const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleLoadIssues } = props.issueInterface;
 
     const [issueData, setIssueData] = useState({
@@ -35,10 +37,12 @@ const CreateIssue = (props) => {
         });
     }
 
+    const handleCancelForm = () => dispatch({ type: ACTIONS.DESELECT_DETAIL_SECTION });
+
     return (
         <section>
             <h3>Create Issue</h3>
-            <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} />
+            <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} handleCancelForm={handleCancelForm} />
         </section>
     );
 }

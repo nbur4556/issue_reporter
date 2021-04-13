@@ -35,7 +35,7 @@ const IssueBar = props => {
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
             <li>
-                <input type="checkbox" checked={!issueData.isOpen} onClick={toggleIsClosed} />
+                <input type="checkbox" defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} />
             </li>
         </ul>
     );

@@ -71,7 +71,11 @@ const ProjectManager = (props) => {
 
                     {(index === displayDeleteMsg)
                         ? <DeleteConfirmation type="project"
-                            onConfirm={handleDeleteProject}
+                            onConfirm={({ currentTarget }) => {
+                                const itemElement = currentTarget.parentElement.parentElement.children[index];
+                                handleDeleteProject(itemElement.getAttribute('data-projectid'));
+                                setDisplayDeleteMsg(null);
+                            }}
                             onReject={() => setDisplayDeleteMsg(null)}
                         />
                         : null}

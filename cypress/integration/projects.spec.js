@@ -76,6 +76,8 @@ describe('Update Project', () => {
 });
 
 describe('Delete Project', () => {
+    const deleteMessage = "Are you sure you want to delete this project?";
+
     beforeEach(() => {
         cy.login().then((data) => {
             return cy.createProject(data.body.authToken, { name: projectName });
@@ -83,6 +85,7 @@ describe('Delete Project', () => {
             projectId = data.body._id
             cy.visit('/workbench');
             cy.get('button').contains('Toggle Project Manager').click();
+            cy.get('button[data-cy="delete-project"]').click();
         });
     });
 
@@ -92,8 +95,15 @@ describe('Delete Project', () => {
     });
 
     // Project should no longer exist
-    it("successfully delete a project", () => {
-        cy.get('button[data-cy="delete-project"]').click();
+    it("confirm delete project", () => {
+        cy.get('button[data-cy="confirmDelete"]').click();
         cy.get('ul[data-cy="project-manager-list"]').contains(projectName).should('not.exist');
+        cy.get('ul[data-cy="project-manager-list"]').contains(deleteMessage).should('not.exist');
+    });
+
+    it("reject delete project", () => {
+        cy.get('button[data-cy="cancelDelete"]').click();
+        cy.get('ul[data-cy="project-manager-list"]').contains(projectName).should('exist');
+        cy.get('ul[data-cy="project-manager-list"]').contains(deleteMessage).should('not.exist');
     });
 });

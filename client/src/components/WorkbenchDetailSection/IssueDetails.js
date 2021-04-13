@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
+import DeleteConfirmation from '../DeleteConfirmation';
 
 const IssueDetails = props => {
     const userData = useContext(UserDataContext);
@@ -23,6 +24,8 @@ const IssueDetails = props => {
     useEffect(() => {
         setDisplayDeleteMsg(false);
     }, [issue.name]);
+
+    const removeDeleteConfirmation = () => setDisplayDeleteMsg(false);
 
     return (
         <section>
@@ -46,14 +49,8 @@ const IssueDetails = props => {
                     ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
                     : null}
 
-                {/* Delete Confirmation */}
-
-                {(displayDeleteMsg) ? <p>Are you sure you want to delete this issue? This can not be undone.</p> : null}
                 {(displayDeleteMsg)
-                    ? <div>
-                        <button className="link-button" name="confirmDelete" onClick={handleDeleteIssue}>Yes</button>
-                        <button className="link-button" name="cancelDelete" onClick={() => setDisplayDeleteMsg(false)}>No</button>
-                    </div>
+                    ? <DeleteConfirmation type="issue" onConfirm={handleDeleteIssue} onReject={removeDeleteConfirmation} />
                     : null}
             </ul>
         </section>

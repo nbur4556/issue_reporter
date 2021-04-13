@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 // Components
 import { FormContainer, LabeledInput, SubmitButton, CancelButton } from '../Forms';
 import IconButton from '../IconButton';
+import DeleteConfirmation from '../DeleteConfirmation';
 
 // Contexts
 import { UserDataContext } from '../../pages/Workbench';
@@ -13,6 +14,7 @@ const ProjectManager = (props) => {
     const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
+    const [displayDeleteMsg, setDisplayDeleteMsg] = useState(null);
     const [editState, setEditState] = useState(false);
     const [editProjectId, setEditProjectId] = useState();
     const [editData, setEditData] = useState({
@@ -22,14 +24,14 @@ const ProjectManager = (props) => {
     const addProjectTab = (e) => dispatch(
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
-                projectId: e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId'),
+                projectId: e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId'),
                 projectList: userData.projectList
             }
         }
     );
 
     const toggleEditState = (e) => {
-        const projectId = e.currentTarget.parentElement.parentElement?.getAttribute('data-projectId');
+        const projectId = e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
         (editState) ? setEditState(false) : setEditState(true);
     }
@@ -46,27 +48,38 @@ const ProjectManager = (props) => {
 
     const cancelEditProject = () => setEditState(false);
 
+    const confirmDeleteProject = (currentTarget, index) => {
+        const itemElement = currentTarget.parentElement.parentElement.parentElement.children[index];
+        handleDeleteProject(itemElement.getAttribute('data-projectid'));
+        setDisplayDeleteMsg(null);
+    }
+
     // Projects Mode
     const renderProjects = (projectsList) => {
         const projectListItems = projectsList.map((project, index) => {
             return (
                 <li key={index} data-projectid={project._id}>
-                    {project.projectName}
+                    <div className="list-content">
+                        {project.projectName}
 
-                    <span>
-                        <IconButton iconName="add" onClick={addProjectTab} alt="add tab button" cy="add-tab" />
+                        <span>
+                            <IconButton iconName="add" onClick={addProjectTab} alt="add tab button" cy="add-tab" />
 
-                        <button
-                            className="link-button"
-                            onClick={toggleEditState}
-                            data-cy="edit-project"
-                        >Edit Project</button>
-                        <button
-                            className="link-button"
-                            onClick={handleDeleteProject}
-                            data-cy="delete-project"
-                        >Delete Project</button>
-                    </span>
+                            <button className="link-button" onClick={toggleEditState} data-cy="edit-project">
+                                Edit Project
+                            </button>
+                            <button className="link-button" onClick={() => setDisplayDeleteMsg(index)} data-cy="delete-project">
+                                Delete Project
+                            </button>
+                        </span>
+                    </div>
+
+                    {(index === displayDeleteMsg)
+                        ? <DeleteConfirmation type="project"
+                            onConfirm={(e) => { confirmDeleteProject(e.currentTarget, index) }}
+                            onReject={() => setDisplayDeleteMsg(null)}
+                        />
+                        : null}
                 </li>
             );
         });

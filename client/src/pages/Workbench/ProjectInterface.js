@@ -7,17 +7,12 @@ const ProjectInterface = (props) => {
         e.preventDefault();
 
         projectConnection.putQuery({ urlExtension: `/${projectId}`, body: projectData })
-            .then(() => {
-                props.handleLoadData();
-            });
+            .then(() => props.handleLoadData());
     }
 
-    const handleDeleteProject = (e) => {
-        projectConnection.deleteQuery({
-            urlExtension: `/${e.currentTarget.parentElement.parentElement.getAttribute('data-projectid')}`
-        }).then(() => {
-            props.handleLoadData();
-        });
+    const handleDeleteProject = (projectId) => {
+        projectConnection.deleteQuery({ urlExtension: `/${projectId}` })
+            .then(() => props.handleLoadData());
     }
 
     return { handleEditProject, handleDeleteProject };

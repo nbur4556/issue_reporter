@@ -6,8 +6,12 @@ const DeleteConfirmation = (props) => {
     return (
         <div>
             <p>{props.messageOverride || message}</p>
-            <button className="link-button" name="confirmDelete" onClick={props.onConfirm}>{props.confirmChoice || 'Yes'}</button>
-            <button className="link-button" name="cancelDelete" onClick={props.onReject}>{props.rejectChoice || 'No'}</button>
+            <button className="link-button" name="confirmDelete" onClick={props.onConfirm} data-cy="confirmDelete">
+                {props.confirmChoice || 'Yes'}
+            </button>
+            <button className="link-button" name="cancelDelete" onClick={props.onReject} data-cy="cancelDelete">
+                {props.rejectChoice || 'No'}
+            </button>
         </div>
     );
 }

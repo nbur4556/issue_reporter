@@ -3,11 +3,10 @@ import React from 'react';
 // Components
 import { FormContainer, LabeledInput, LabeledSelect, CancelButton, SubmitButton } from '../Forms';
 
-const IssueDetailsForm = () => {
-
+const IssueDetailsForm = (props) => {
     const handleUpdateInput = () => console.log('Update Input');
     const submitForm = () => console.log("Submit Form")
-    const cancelForm = () => console.log("Cancel Form");
+    const cancelForm = () => props.setIsEditing(false);
 
     return (
         <FormContainer>

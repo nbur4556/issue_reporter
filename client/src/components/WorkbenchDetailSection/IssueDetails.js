@@ -34,7 +34,7 @@ const IssueDetails = props => {
 
 
             {(isEditing)
-                ? <IssueDetailsForm />
+                ? <IssueDetailsForm setIsEditing={setIsEditing} />
                 : <IssueDetailsList
                     issue={issue}
                     issueInterface={props.issueInterface}

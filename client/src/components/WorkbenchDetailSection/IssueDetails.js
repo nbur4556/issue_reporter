@@ -11,7 +11,7 @@ const IssueDetails = props => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
 
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(true);
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     const getSelectIssue = (issueList, selectIssue) => {

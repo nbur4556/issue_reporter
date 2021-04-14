@@ -13,7 +13,7 @@ const Tab = (props) => {
     const removeProjectTab = () => dispatch({ type: ACTIONS.REMOVE_PROJECT_TAB, payload: { tabIndex: tabIndex } });
 
     return (
-        <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId}>
+        <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId} data-index={tabIndex}>
             <p>{tab.tabName}</p>
             <IconButton
                 iconName={(activeClass === 'tab-active') ? "exit" : "exitLight"}

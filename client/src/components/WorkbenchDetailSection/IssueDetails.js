@@ -35,10 +35,9 @@ const IssueDetails = props => {
     }, [issue.name]);
 
     const handleSubmitForm = (issueData) => {
-        console.log(issueData)
-
-        issueConnection.putQuery({ body: issueData, urlExtension: '/' + ui.selectProject })
+        issueConnection.putQuery({ body: issueData, urlExtension: '/' + ui.selectIssue })
             .then(result => {
+                console.log(result.data);
                 if (result.status === 200)
                     handleLoadIssues();
             });

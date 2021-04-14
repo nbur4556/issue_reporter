@@ -177,9 +177,6 @@ module.exports = function (app) {
     });
 
     app.put('/api/issue/:searchId', async (req, res) => {
-
-        console.log('running');
-
         // User authorization
         const authorization = await authenticateRequest(req.headers.authorization);
         if (authorization.msg === 'failed') {

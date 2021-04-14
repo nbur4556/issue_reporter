@@ -56,13 +56,11 @@ const Workbench = () => {
         <UserDataContext.Provider value={userData}>
             <UiContext.Provider value={ui}>
                 <UiDispatcherContext.Provider value={uiDispatcher}>
-                    <UserDataDispatcherContext value={userDataDispatcher}>
-                        <Render
-                            issueInterface={issueInterface}
-                            projectInterface={projectInterface}
-                            handleLoadData={handleLoadData}
-                        />
-                    </UserDataDispatcherContext>
+                    <Render
+                        issueInterface={issueInterface}
+                        projectInterface={projectInterface}
+                        handleLoadData={handleLoadData}
+                    />
                 </UiDispatcherContext.Provider>
             </UiContext.Provider>
         </UserDataContext.Provider>

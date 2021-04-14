@@ -10,7 +10,7 @@ const IssueDetailsForm = (props) => {
         ...editIssueData,
         [currentTarget.getAttribute("name")]: currentTarget.value
     });
-    const submitForm = () => console.log("Submit Form")
+    const submitForm = () => props.handleSubmitForm(editIssueData, setEditIssueData);
     const cancelForm = () => props.setIsEditing(false);
 
     return (

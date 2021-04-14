@@ -7,9 +7,15 @@ import IssueDetailsForm from '../IssueDetailsForm';
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
 
+// Utilities
+import ApiConnection from '../../utils/ApiConnection.js';
+const issueConnection = new ApiConnection('/api/issue');
+
 const IssueDetails = props => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
+
+    const { handleLoadIssues } = props.issueInterface;
 
     const [isEditing, setIsEditing] = useState(true);
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
@@ -28,13 +34,22 @@ const IssueDetails = props => {
         setDisplayDeleteMsg(false);
     }, [issue.name]);
 
+    const handleSubmitForm = (issueData) => {
+        issueConnection.putQuery({ body: { selectProject: ui.selectProject, ...issueData } }).then(result => {
+            if (result.status === 200)
+                handleLoadIssues();
+        });
+    }
+
     return (
         <section>
             <h3>Issue Details</h3>
 
 
             {(isEditing)
-                ? <IssueDetailsForm setIsEditing={setIsEditing} />
+                ? <IssueDetailsForm
+                    setIsEditing={setIsEditing}
+                    handleSubmitForm={handleSubmitForm} />
                 : <IssueDetailsList
                     issue={issue}
                     issueInterface={props.issueInterface}

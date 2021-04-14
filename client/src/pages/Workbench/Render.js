@@ -15,7 +15,7 @@ const Render = (props) => {
         <main className="workbench-page">
 
             <WorkbenchNavigation>
-                <TabBar uiDispatcher={uiDispatcher} />
+                <TabBar />
                 <LogoutButton buttonText="Sign Out"></LogoutButton>
             </WorkbenchNavigation>
 

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Components
 import IconButton from '../IconButton';
 
+// Contexts
+import { UiDispatcherContext } from '../../pages/Workbench';
+
 const Tab = (props) => {
     const { tab, tabIndex, activeClass, selectTab } = props
-    const { dispatch, ACTIONS } = props.uiDispatcher;
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
     const removeProjectTab = () => dispatch({ type: ACTIONS.REMOVE_PROJECT_TAB, payload: { tabIndex: tabIndex } });
 

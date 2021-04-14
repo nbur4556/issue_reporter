@@ -4,7 +4,10 @@ import React from 'react';
 import DeleteConfirmation from '../DeleteConfirmation';
 
 const IssueDetailsList = (props) => {
-    const { issue, handleDeleteIssue, removeDeleteConfirmation, displayDeleteMsg, setDisplayDeleteMsg } = props;
+    const { handleDeleteIssue } = props.issueInterface;
+    const { issue, displayDeleteMsg, setDisplayDeleteMsg } = props;
+
+    const removeDeleteConfirmation = () => setDisplayDeleteMsg(false);
 
     return (
         <ul>

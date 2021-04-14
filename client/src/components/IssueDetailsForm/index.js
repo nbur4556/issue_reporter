@@ -1,21 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
-import { FormContainer, LabeledInput, LabeledSelect, SubmitButton, CancelButton } from '../Forms';
+import { FormContainer, LabeledInput, LabeledSelect, CancelButton, SubmitButton } from '../Forms';
 
-const CreateIssueForm = (props) => {
-    const { handleUpdateInput, handleSubmitForm } = props;
+const IssueDetailsForm = (props) => {
+    const [editIssueData, setEditIssueData] = useState();
 
-    // Clear all inputs and submit
-    const submitForm = (e) => {
-        const formContainer = e.currentTarget.parentElement;
-
-        for (let formChild of formContainer.children) {
-            if (formChild.nodeName === 'LABEL') { formChild.children[0].value = null }
-        };
-
-        handleSubmitForm();
-    }
+    const handleUpdateInput = ({ currentTarget }) => setEditIssueData({
+        ...editIssueData,
+        [currentTarget.getAttribute("name")]: currentTarget.value
+    });
+    const submitForm = () => props.handleSubmitForm(editIssueData, setEditIssueData);
+    const cancelForm = () => props.setIsEditing(false);
 
     return (
         <FormContainer>
@@ -30,11 +26,11 @@ const CreateIssueForm = (props) => {
             <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
             <div>
                 {/* Buttons */}
-                <CancelButton onClick={props.handleCancelForm} />
+                <CancelButton onClick={cancelForm} />
                 <SubmitButton onClick={submitForm} data-cy="submit" />
             </div>
         </FormContainer>
     );
 }
 
-export default CreateIssueForm;
+export default IssueDetailsForm;

@@ -1,14 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
 
+// Components
+import IssueDetailsList from '../IssueDetailsList';
+import IssueDetailsForm from '../IssueDetailsForm';
+
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
-import DeleteConfirmation from '../DeleteConfirmation';
+
+// Utilities
+import ApiConnection from '../../utils/ApiConnection.js';
+const issueConnection = new ApiConnection('/api/issue');
 
 const IssueDetails = props => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
-    const { handleDeleteIssue } = props.issueInterface;
 
+    const { handleLoadIssues } = props.issueInterface;
+
+    const [isEditing, setIsEditing] = useState(false);
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     const getSelectIssue = (issueList, selectIssue) => {
@@ -25,34 +34,30 @@ const IssueDetails = props => {
         setDisplayDeleteMsg(false);
     }, [issue.name]);
 
-    const removeDeleteConfirmation = () => setDisplayDeleteMsg(false);
+    const handleSubmitForm = (issueData) => {
+        issueConnection.putQuery({ body: issueData, urlExtension: '/' + ui.selectIssue })
+            .then(result => {
+                console.log(result.data);
+                if (result.status === 200)
+                    handleLoadIssues();
+            });
+    }
 
     return (
         <section>
             <h3>Issue Details</h3>
-            <ul>
-                {/* Display details if details are available */}
 
-                {(issue.name) ? <li>{`Name: ${issue.name}`}</li> : null}
-                {(issue.body) ? <li>{`Body: ${issue.body}`}</li> : null}
-                {(issue.category) ? <li>{`Category: ${issue.category}`}</li> : null}
-                {(issue.assigned) ? <li>{`Assigned: ${issue.assigned}`}</li> : null}
-                {(issue.dueDate) ? <li>{`Due Date: ${issue.dueDate}`}</li> : null}
-                {(issue.comments) ? <li>{`Comments: ${issue.comments}`}</li> : null}
-
-                {(issue.isOpen === true) ? <li>Open</li> : null}
-                {(issue.isOpen === false) ? <li>Closed</li> : null}
-
-                {/* Buttons */}
-
-                {(issue.name)
-                    ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
-                    : null}
-
-                {(displayDeleteMsg)
-                    ? <DeleteConfirmation type="issue" onConfirm={handleDeleteIssue} onReject={removeDeleteConfirmation} />
-                    : null}
-            </ul>
+            {(isEditing)
+                ? <IssueDetailsForm
+                    setIsEditing={setIsEditing}
+                    handleSubmitForm={handleSubmitForm} />
+                : <IssueDetailsList
+                    issue={issue}
+                    issueInterface={props.issueInterface}
+                    setIsEditing={setIsEditing}
+                    displayDeleteMsg={displayDeleteMsg}
+                    setDisplayDeleteMsg={setDisplayDeleteMsg} />
+            }
         </section>
     );
 }

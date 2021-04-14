@@ -33,20 +33,38 @@ const IssueDetails = props => {
             <ul>
                 {/* Display details if details are available */}
 
-                {(issue.name) ? <li>{`Name: ${issue.name}`}</li> : null}
-                {(issue.body) ? <li>{`Body: ${issue.body}`}</li> : null}
-                {(issue.category) ? <li>{`Category: ${issue.category}`}</li> : null}
-                {(issue.assigned) ? <li>{`Assigned: ${issue.assigned}`}</li> : null}
-                {(issue.dueDate) ? <li>{`Due Date: ${issue.dueDate}`}</li> : null}
-                {(issue.comments) ? <li>{`Comments: ${issue.comments}`}</li> : null}
+                {(issue.name) ? <li className="list-content">
+                    {`Name: ${issue.name}`}
+                </li> : null}
+                {(issue.body) ? <li className="list-content">
+                    {`Body: ${issue.body}`}
+                </li> : null}
+                {(issue.category) ? <li className="list-content">
+                    {`Category: ${issue.category}`}
+                </li> : null}
+                {(issue.assigned) ? <li className="list-content">
+                    {`Assigned: ${issue.assigned}`}
+                </li> : null}
+                {(issue.dueDate) ? <li className="list-content">
+                    {`Due Date: ${issue.dueDate}`}
+                </li> : null}
+                {(issue.comments) ? <li className="list-content">
+                    {`Comments: ${issue.comments}`}
+                </li> : null}
 
-                {(issue.isOpen === true) ? <li>Open</li> : null}
-                {(issue.isOpen === false) ? <li>Closed</li> : null}
+                {(issue.isOpen === true) ? <li className="list-content">
+                    Open
+                </li> : null}
+                {(issue.isOpen === false) ? <li className="list-content">
+                    Closed
+                </li> : null}
 
                 {/* Buttons */}
 
                 {(issue.name)
-                    ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>Delete Issue</button>
+                    ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>
+                        Delete Issue
+                    </button>
                     : null}
 
                 {(displayDeleteMsg)

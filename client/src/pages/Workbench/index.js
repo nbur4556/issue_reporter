@@ -16,7 +16,6 @@ import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
 export const UserDataContext = React.createContext();
 export const UiContext = React.createContext();
 export const UiDispatcherContext = React.createContext();
-export const UserDataDispatcherContext = React.createContext();
 
 const Workbench = () => {
     //State

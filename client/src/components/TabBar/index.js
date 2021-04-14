@@ -16,16 +16,10 @@ const TabBar = () => {
 
     const [activeTab, setActiveTab] = useState(0);
 
-    // Set index of active tab
-    const handleActiveTab = (tab) => {
-        const tabIndex = Number(tab.getAttribute('data-index'));
-        setActiveTab(tabIndex);
-    }
-
     const handleSelectTab = (e) => {
         const projectId = e.currentTarget.getAttribute('data-id');
-
-        handleActiveTab(e.currentTarget);
+        const tabIndex = Number(e.currentTarget.getAttribute('data-index'));
+        setActiveTab(tabIndex);
         dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
     }
 

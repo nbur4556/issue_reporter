@@ -19,9 +19,9 @@ const Render = (props) => {
                 <LogoutButton buttonText="Sign Out"></LogoutButton>
             </WorkbenchNavigation>
 
-            <Toolbar uiDispatcher={uiDispatcher} />
+            <Toolbar />
 
-            <IssueList uiDispatcher={uiDispatcher} issueInterface={props.issueInterface} />
+            <IssueList issueInterface={props.issueInterface} />
 
             <WorkbenchDetailSection
                 uiDispatcher={uiDispatcher}

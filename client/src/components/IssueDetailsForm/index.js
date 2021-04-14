@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import { FormContainer, LabeledInput, LabeledSelect, CancelButton, SubmitButton } from '../Forms';
 
 const IssueDetailsForm = (props) => {
-    const handleUpdateInput = () => console.log('Update Input');
+    const [editIssueData, setEditIssueData] = useState();
+
+    const handleUpdateInput = ({ currentTarget }) => setEditIssueData({
+        ...editIssueData,
+        [currentTarget.getAttribute("name")]: currentTarget.value
+    });
     const submitForm = () => console.log("Submit Form")
     const cancelForm = () => props.setIsEditing(false);
 

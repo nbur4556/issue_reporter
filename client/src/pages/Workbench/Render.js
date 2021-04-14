@@ -9,22 +9,19 @@ import Toolbar from '../../components/Toolbar';
 import LogoutButton from '../../components/LogoutButton';
 
 const Render = (props) => {
-    const { uiDispatcher } = props;
-
     return (
         <main className="workbench-page">
 
             <WorkbenchNavigation>
-                <TabBar uiDispatcher={uiDispatcher} />
+                <TabBar />
                 <LogoutButton buttonText="Sign Out"></LogoutButton>
             </WorkbenchNavigation>
 
-            <Toolbar uiDispatcher={uiDispatcher} />
+            <Toolbar />
 
-            <IssueList uiDispatcher={uiDispatcher} issueInterface={props.issueInterface} />
+            <IssueList issueInterface={props.issueInterface} />
 
             <WorkbenchDetailSection
-                uiDispatcher={uiDispatcher}
                 issueInterface={props.issueInterface}
                 projectInterface={props.projectInterface}
                 handleLoadData={props.handleLoadData}

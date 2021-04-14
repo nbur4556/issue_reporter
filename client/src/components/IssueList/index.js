@@ -8,7 +8,7 @@ import IssueBar from '../IssueBar';
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
 
-const IssueList = ({ uiDispatcher, issueInterface }) => {
+const IssueList = ({ issueInterface }) => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
 
@@ -24,7 +24,6 @@ const IssueList = ({ uiDispatcher, issueInterface }) => {
                 return (issue.isOpen === false && ui.displayClosedIssue === false)
                     ? null
                     : <IssueBar
-                        uiDispatcher={uiDispatcher}
                         handleSetIssueStatus={issueInterface.handleSetIssueStatus}
                         key={index}
                         issueData={issue}

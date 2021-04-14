@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+// Contexts
+import { UiDispatcherContext } from '../../pages/Workbench';
 
 const IssueBar = props => {
-    const { issueData, uiDispatcher } = props;
-    const { dispatch, ACTIONS } = uiDispatcher;
+    const { issueData } = props;
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
     const selectIssue = (e) => dispatch({
         type: ACTIONS.SELECT_ISSUE,

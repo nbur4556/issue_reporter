@@ -4,11 +4,11 @@ import React, { useState, useContext } from 'react';
 import Tab from '../Tab';
 
 // Contexts
-import { UiContext } from '../../pages/Workbench';
+import { UiContext, UiDispatcherContext } from '../../pages/Workbench';
 
-const TabBar = ({ uiDispatcher }) => {
+const TabBar = () => {
     const ui = useContext(UiContext);
-    const { dispatch, ACTIONS } = uiDispatcher;
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
     const tabData = ui.projectTabs.map(project => {
         return { tabId: project._id, tabName: project.projectName }
@@ -36,9 +36,7 @@ const TabBar = ({ uiDispatcher }) => {
                 const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive';
 
                 return <Tab key={index}
-                    uiDispatcher={uiDispatcher}
                     tab={tab}
-
                     activeClass={activeClassName}
                     selectTab={handleSelectTab}
                 />

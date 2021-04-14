@@ -35,10 +35,13 @@ const IssueDetails = props => {
     }, [issue.name]);
 
     const handleSubmitForm = (issueData) => {
-        issueConnection.putQuery({ body: { selectProject: ui.selectProject, ...issueData } }).then(result => {
-            if (result.status === 200)
-                handleLoadIssues();
-        });
+        console.log(issueData)
+
+        issueConnection.putQuery({ body: issueData, urlExtension: '/' + ui.selectProject })
+            .then(result => {
+                if (result.status === 200)
+                    handleLoadIssues();
+            });
     }
 
     return (

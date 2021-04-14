@@ -34,6 +34,8 @@ class ApiConnection {
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
+        console.log(query);
+
         return axios.put(query.url, query.body, { headers: this.getAuthHeader() });
     }
 

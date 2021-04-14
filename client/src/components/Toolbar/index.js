@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import IconButton from '../IconButton';
 
 // Contexts
-import { UiContext } from '../../pages/Workbench';
+import { UiContext, UiDispatcherContext } from '../../pages/Workbench';
 
-const Toolbar = ({ uiDispatcher }) => {
+const Toolbar = () => {
     const ui = useContext(UiContext);
-    const { dispatch, ACTIONS } = uiDispatcher;
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
     const getProjectName = ({ projectTabs, selectProject }) => {
         for (const tab of projectTabs) {

@@ -6,12 +6,12 @@ import IconButton from '../IconButton';
 import DeleteConfirmation from '../DeleteConfirmation';
 
 // Contexts
-import { UserDataContext } from '../../pages/Workbench';
+import { UserDataContext, UiDispatcherContext } from '../../pages/Workbench';
 
 const ProjectManager = (props) => {
     const userData = useContext(UserDataContext);
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
-    const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(null);

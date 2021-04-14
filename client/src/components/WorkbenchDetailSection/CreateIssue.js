@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import CreateIssueForm from '../CreateIssueForm';
 
 // Contexts
-import { UiContext } from '../../pages/Workbench';
+import { UiContext, UiDispatcherContext } from '../../pages/Workbench';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
@@ -10,8 +10,8 @@ const issueConnection = new ApiConnection('/api/issue');
 
 const CreateIssue = (props) => {
     const ui = useContext(UiContext);
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
-    const { dispatch, ACTIONS } = props.uiDispatcher;
     const { handleLoadIssues } = props.issueInterface;
 
     const [issueData, setIssueData] = useState({

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 // Components
 import IssueDetailsList from '../IssueDetailsList';
+import IssueDetailsForm from '../IssueDetailsForm';
 
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
@@ -10,6 +11,7 @@ const IssueDetails = props => {
     const userData = useContext(UserDataContext);
     const ui = useContext(UiContext);
 
+    const [isEditing, setIsEditing] = useState(false);
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     const getSelectIssue = (issueList, selectIssue) => {
@@ -29,11 +31,16 @@ const IssueDetails = props => {
     return (
         <section>
             <h3>Issue Details</h3>
-            <IssueDetailsList issue={issue}
-                issueInterface={props.issueInterface}
-                displayDeleteMsg={displayDeleteMsg}
-                setDisplayDeleteMsg={setDisplayDeleteMsg}
-            />
+
+
+            {(isEditing)
+                ? <IssueDetailsForm />
+                : <IssueDetailsList
+                    issue={issue}
+                    issueInterface={props.issueInterface}
+                    displayDeleteMsg={displayDeleteMsg}
+                    setDisplayDeleteMsg={setDisplayDeleteMsg} />
+            }
         </section>
     );
 }

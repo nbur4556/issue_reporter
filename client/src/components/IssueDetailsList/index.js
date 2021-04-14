@@ -40,11 +40,16 @@ const IssueDetailsList = (props) => {
                 </li> : null}
 
             {/* Buttons */}
-
             {(issue.name)
-                ? <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>
-                    Delete Issue
+                ? <div>
+                    <button className="link-button" name="editIssue" onClick={() => props.setIsEditing(true)}>
+                        Edit Issue
                     </button>
+
+                    <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>
+                        Delete Issue
+                    </button>
+                </div>
                 : null}
 
             {(displayDeleteMsg)

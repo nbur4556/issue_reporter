@@ -17,7 +17,7 @@ const IssueDetails = props => {
 
     const { handleLoadIssues } = props.issueInterface;
 
-    const [isEditing, setIsEditing] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
     const getSelectIssue = (issueList, selectIssue) => {
@@ -47,7 +47,6 @@ const IssueDetails = props => {
         <section>
             <h3>Issue Details</h3>
 
-
             {(isEditing)
                 ? <IssueDetailsForm
                     setIsEditing={setIsEditing}
@@ -55,6 +54,7 @@ const IssueDetails = props => {
                 : <IssueDetailsList
                     issue={issue}
                     issueInterface={props.issueInterface}
+                    setIsEditing={setIsEditing}
                     displayDeleteMsg={displayDeleteMsg}
                     setDisplayDeleteMsg={setDisplayDeleteMsg} />
             }

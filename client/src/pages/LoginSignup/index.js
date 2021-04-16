@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
 import './style.css'
 
 // Components
@@ -22,8 +21,6 @@ const LoginSignup = (props) => {
         password: '',
         confirmPassword: ''
     });
-
-    const [redirect, setRedirect] = useState(false);
 
     // Clear credentials input state
     useEffect(() => {
@@ -80,23 +77,12 @@ const LoginSignup = (props) => {
     const signinSuccessful = (authToken) => {
         localStorage.setItem('authToken', authToken);
         props.updateAuthToken();
-
-        // Temporary race condition fix: Attempts to reroute before private routes are authorized...
-        // setTimeout(() => {
-        //     console.log('attempt redirect');
-        //     setRedirect(true);
-        // }, 100);
     }
 
     const signinFailed = message => {
         localStorage.removeItem('authToken');
+        setSigninState({ ...signinState, msg: message });
         props.updateAuthToken();
-
-        // Temporary race condition fix: Attempts to reroute before private routes are authorized...
-        // setTimeout(() => {
-        //     setSigninState({ ...signinState, msg: message });
-        //     setRedirect(false);
-        // }, 100);
     }
 
     return (
@@ -121,9 +107,6 @@ const LoginSignup = (props) => {
             <section className="message-section">
                 {(signinState.msg) ? <p>{signinState.msg}</p> : null}
             </section>
-
-            {/* Redirects */}
-            {/* {(redirect) ? <Redirect to='/workbench' /> : null} */}
         </main>
     );
 }

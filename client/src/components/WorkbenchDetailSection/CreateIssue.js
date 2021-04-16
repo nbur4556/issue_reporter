@@ -58,8 +58,8 @@ const CreateIssue = (props) => {
             />
 
             <ResultMessage result={issueCreated}
-                positiveMsg="Issue Created"
-                negativeMsg="Error: Unable to create issue."
+                successMsg="Issue Created."
+                errorMsg="Error: Unable to create issue."
             />
         </section>
     );

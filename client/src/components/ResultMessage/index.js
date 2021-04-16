@@ -2,9 +2,9 @@ import React from 'react';
 
 const ResultMessage = (props) => {
     return (
-        <p>
-            {(props.result === true) ? props.positiveMsg || "Success" : null}
-            {(props.result === false) ? props.negativeMsg ?? "Error" : null}
+        <p data-cy="result-msg">
+            {(props.result === true) ? props.successMsg || "Success" : null}
+            {(props.result === false) ? props.errorMsg ?? "Error" : null}
         </p>
     );
 }

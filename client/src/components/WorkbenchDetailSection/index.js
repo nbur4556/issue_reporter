@@ -15,19 +15,10 @@ const WorkbenchDetailSection = (props) => {
 
     return (
         <section className="detail-section">
-            {(ui.displayProjectManager)
-                ? <ProjectManager {...props} />
-                : null}
-
-            <CreateProject {...props} />
-
-            {(ui.displayCreateIssue)
-                ? <CreateIssue {...props} />
-                : null}
-
-            {(ui.selectIssue)
-                ? <IssueDetails {...props} />
-                : null}
+            {(ui.displayProjectManager) ? <ProjectManager {...props} /> : null}
+            {(ui.displayCreateProject) ? <CreateProject {...props} /> : null}
+            {(ui.displayCreateIssue) ? <CreateIssue {...props} /> : null}
+            {(ui.selectIssue) ? <IssueDetails {...props} /> : null}
         </section>
     )
 }

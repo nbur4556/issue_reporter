@@ -21,6 +21,7 @@ const Toolbar = () => {
         return <h1>Select A Project</h1>;
     }
 
+    const toggleCreateProject = () => dispatch({ type: ACTIONS.TOGGLE_CREATE_PROJECT });
     const toggleCreateIssue = () => dispatch({ type: ACTIONS.TOGGLE_CREATE_ISSUE });
     const toggleProjectManager = () => dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER });
     const displayClosedIssues = () => dispatch({ type: ACTIONS.DISPLAY_CLOSED_ISSUES })
@@ -44,9 +45,8 @@ const Toolbar = () => {
 
 
                 <IconButton iconName="add" onClick={toggleCreateIssue} alt="create issue button" cy="create-issue" />
-                <Link to="/create-project">Create Project</Link>
-
-                <button onClick={toggleProjectManager} data-cy="project-manager">Toggle Project Manager</button>
+                <button onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
+                <button onClick={toggleProjectManager} data-cy="project-manager">Project Manager</button>
             </section>
         </section >
     )

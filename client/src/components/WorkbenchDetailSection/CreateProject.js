@@ -6,7 +6,7 @@ import { FormContainer, LabeledInput, SubmitButton } from '../Forms';
 import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project')
 
-const CreateProject = () => {
+const CreateProject = (props) => {
     const [projectData, setProjectData] = useState();
 
     const handleSetProjectData = e => {
@@ -17,9 +17,9 @@ const CreateProject = () => {
     const handleCreateProject = e => {
         e.preventDefault();
         projectConnection.postQuery({ body: projectData }).then(result => {
-            // (result.status === 200)
-            //     ? setSuccessMessage(`Success! Issue "${projectData.projectName}" created.`)
-            //     : setSuccessMessage('');
+            if (result.status === 200) {
+                props.handleLoadData();
+            }
         });
     }
 

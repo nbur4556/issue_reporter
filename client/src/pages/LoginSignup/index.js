@@ -57,8 +57,6 @@ const LoginSignup = (props) => {
         userConnection.postQuery({
             body: credentialsInput
         }).then((result) => {
-            console.log(result);
-
             (result.data.authToken)
                 ? signinSuccessful(result.data.authToken)
                 : signinFailed('Error: User not created.');

@@ -11,14 +11,23 @@ import CreateProject from './pages/CreateProject';
 // Components
 import PrivateRoute from './components/PrivateRoute';
 
+// Utilities
+import ApiConnection from './utils/ApiConnection';
+const authConnection = new ApiConnection('/api/authenticate');
+
 function App() {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
   const [isAuthorized, setIsAuthorized] = useState(false)
 
   useEffect(() => {
-    if (authToken) {
-      setIsAuthorized(true);
+    if (!authToken) {
+      setIsAuthorized(false);
     }
+
+    authConnection.getQuery({ urlExtension: `/${authToken}` }).then(({ data }) => {
+      const authIdConfirmed = (data?._id) ? true : false;
+      setIsAuthorized(authIdConfirmed);
+    });
   }, [authToken])
 
   const handleUpdateAuthToken = () => {

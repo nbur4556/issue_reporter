@@ -14,6 +14,7 @@ const CreateProject = (props) => {
 
     const handleSetProjectData = e => {
         const input = e.currentTarget;
+        setProjectCreated(null);
         setProjectData({ ...projectData, [input.name]: input.value })
     }
 

@@ -33,12 +33,11 @@ const CreateIssue = (props) => {
     }
 
     const handleSubmitForm = () => {
-        setIssueData({ name: '', body: '', category: '', dueDate: '', });
-
         issueConnection.postQuery({ body: { selectProject: ui.selectProject, ...issueData } }).then(result => {
             if (result.status === 200) {
                 handleLoadIssues();
                 setIssueCreated(true);
+                setIssueData({ name: '', body: '', category: '', dueDate: '', });
             }
         }).catch((err) => {
             console.log(err);
@@ -51,7 +50,7 @@ const CreateIssue = (props) => {
     return (
         <section>
             <h3>Create Issue</h3>
-            <CreateIssueForm
+            <CreateIssueForm formData={issueData}
                 handleUpdateInput={handleUpdateInput}
                 handleSubmitForm={handleSubmitForm}
                 handleCancelForm={handleCancelForm}

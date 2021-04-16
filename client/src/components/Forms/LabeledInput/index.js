@@ -7,6 +7,7 @@ const LabeledInput = (props) => {
             {props.label}
             <input name={props.name}
                 type={props.type || "text"}
+                value={props.value}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 data-cy={props.cy || props.name} />

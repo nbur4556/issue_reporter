@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react';
 import CreateIssueForm from '../CreateIssueForm';
 
+// Components
+import ResultMessage from '../ResultMessage';
+
 // Contexts
 import { UiContext, UiDispatcherContext } from '../../pages/Workbench';
 
@@ -14,6 +17,7 @@ const CreateIssue = (props) => {
 
     const { handleLoadIssues } = props.issueInterface;
 
+    const [issueCreated, setIssueCreated] = useState(null);
     const [issueData, setIssueData] = useState({
         name: '',
         body: '',
@@ -32,8 +36,13 @@ const CreateIssue = (props) => {
         setIssueData({ name: '', body: '', category: '', dueDate: '', });
 
         issueConnection.postQuery({ body: { selectProject: ui.selectProject, ...issueData } }).then(result => {
-            if (result.status === 200)
+            if (result.status === 200) {
                 handleLoadIssues();
+                setIssueCreated(true);
+            }
+        }).catch((err) => {
+            console.log(err);
+            setIssueCreated(false);
         });
     }
 
@@ -42,7 +51,16 @@ const CreateIssue = (props) => {
     return (
         <section>
             <h3>Create Issue</h3>
-            <CreateIssueForm handleUpdateInput={handleUpdateInput} handleSubmitForm={handleSubmitForm} handleCancelForm={handleCancelForm} />
+            <CreateIssueForm
+                handleUpdateInput={handleUpdateInput}
+                handleSubmitForm={handleSubmitForm}
+                handleCancelForm={handleCancelForm}
+            />
+
+            <ResultMessage result={issueCreated}
+                positiveMsg="Issue Created"
+                negativeMsg="Error: Unable to create issue."
+            />
         </section>
     );
 }

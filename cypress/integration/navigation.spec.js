@@ -1,5 +1,4 @@
 describe('Url Navigation Authorized', () => {
-    beforeEach(() => cy.login());
     afterEach(() => cy.logout());
 
     // Should equal root url
@@ -10,8 +9,10 @@ describe('Url Navigation Authorized', () => {
 
     // Should equal workbench url
     it('visit workbench url', () => {
-        cy.visit('/workbench');
-        cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
+        cy.login().then(() => {
+            cy.visit('/workbench');
+            cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
+        })
     });
 });
 

@@ -21,9 +21,7 @@ function App() {
 
   // Check for authorization on auth token change
   useEffect(() => {
-    if (!authToken) {
-      setIsAuthorized(false);
-    }
+    setIsAuthorized(false);
 
     authConnection.getQuery({ urlExtension: `/${authToken}` }).then(({ data }) => {
       const authIdConfirmed = (data?._id) ? true : false;

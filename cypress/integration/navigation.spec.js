@@ -13,12 +13,6 @@ describe('Url Navigation Authorized', () => {
         cy.visit('/workbench');
         cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
     });
-
-    // Should equal create project page url
-    it('visit create project url', () => {
-        cy.visit('/create-project');
-        cy.url().should('eq', Cypress.config().baseUrl + '/create-project');
-    });
 });
 
 describe('Url Navigation Unauthorized', () => {
@@ -29,11 +23,6 @@ describe('Url Navigation Unauthorized', () => {
         cy.visit('/workbench');
         cy.url().should('eq', Cypress.config().baseUrl + '/');
     });
-
-    it('attempt visit create project url', () => {
-        cy.visit('create-project');
-        cy.url().should('eq', Cypress.config().baseUrl + '/');
-    })
 });
 
 describe('Link Navigation', () => {
@@ -44,17 +33,5 @@ describe('Link Navigation', () => {
         cy.visit('/workbench');
         cy.get('button[data-cy="logoutButton"]').click();
         cy.url().should('eq', Cypress.config().baseUrl + '/');
-    });
-
-    it('dashboard to create project link', () => {
-        cy.visit('/workbench');
-        cy.contains('Create Project').click();
-        cy.url().should('eq', Cypress.config().baseUrl + '/create-project');
-    });
-
-    it('create project to dashboard link', () => {
-        cy.visit('/create-project');
-        cy.contains('Back To Workbench').click();
-        cy.url().should('eq', Cypress.config().baseUrl + '/workbench');
     });
 });

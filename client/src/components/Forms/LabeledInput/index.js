@@ -2,16 +2,15 @@ import React from 'react';
 import '../labeledInputStyle.css';
 
 const LabeledInput = (props) => {
+    const { label, type, cy, ...rest } = props;
+
     return (
         <label className="labeled-input" htmlFor={props.name}>
             {props.label}
-            <input name={props.name}
-                type={props.type || "text"}
-                value={props.value}
-                placeholder={props.placeholder}
-                onChange={props.onChange}
-                data-cy={props.cy || props.name} />
+            <input type={type || "text"} data-cy={cy || props.name} {...rest} />
         </label>
+
+
     );
 }
 

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 
+// Components
 import { FormContainer, LabeledInput, SubmitButton } from '../Forms';
+import ResultMessage from '../ResultMessage';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project')
 
 const CreateProject = (props) => {
+    const [projectCreated, setProjectCreated] = useState(null);
     const [projectData, setProjectData] = useState({ projectName: '' });
 
     const handleSetProjectData = e => {
@@ -20,7 +23,10 @@ const CreateProject = (props) => {
             if (result.status === 200) {
                 props.handleLoadData();
                 setProjectData({ projectName: '' })
+                setProjectCreated(true);
             }
+        }).catch(() => {
+            setProjectCreated(false);
         });
     }
 
@@ -30,6 +36,8 @@ const CreateProject = (props) => {
                 <LabeledInput name="projectName" label="Name:" value={projectData.projectName} onChange={handleSetProjectData} />
                 <SubmitButton onClick={handleCreateProject} />
             </FormContainer>
+
+            <ResultMessage result={projectCreated} />
         </section>
     );
 }

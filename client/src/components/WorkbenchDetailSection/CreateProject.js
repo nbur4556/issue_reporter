@@ -7,7 +7,7 @@ import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project')
 
 const CreateProject = (props) => {
-    const [projectData, setProjectData] = useState();
+    const [projectData, setProjectData] = useState({ projectName: '' });
 
     const handleSetProjectData = e => {
         const input = e.currentTarget;
@@ -19,6 +19,7 @@ const CreateProject = (props) => {
         projectConnection.postQuery({ body: projectData }).then(result => {
             if (result.status === 200) {
                 props.handleLoadData();
+                setProjectData({ projectName: '' })
             }
         });
     }
@@ -26,7 +27,7 @@ const CreateProject = (props) => {
     return (
         <section>
             <FormContainer>
-                <LabeledInput name="projectName" label="Name:" onChange={handleSetProjectData} />
+                <LabeledInput name="projectName" label="Name:" value={projectData.projectName} onChange={handleSetProjectData} />
                 <SubmitButton onClick={handleCreateProject} />
             </FormContainer>
         </section>

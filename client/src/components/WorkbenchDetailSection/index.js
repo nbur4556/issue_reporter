@@ -3,6 +3,7 @@ import './style.css';
 
 // Components
 import ProjectManager from './ProjectManager.js';
+import CreateProject from './CreateProject.js';
 import CreateIssue from './CreateIssue.js';
 import IssueDetails from './IssueDetails.js';
 
@@ -17,6 +18,8 @@ const WorkbenchDetailSection = (props) => {
             {(ui.displayProjectManager)
                 ? <ProjectManager {...props} />
                 : null}
+
+            <CreateProject {...props} />
 
             {(ui.displayCreateIssue)
                 ? <CreateIssue {...props} />

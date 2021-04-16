@@ -2,10 +2,12 @@ import React from 'react';
 import '../labeledInputStyle.css';
 
 const LabeledSelect = (props) => {
+    const { label, ...rest } = props;
+
     return (
         <label className="labeled-input" htmlFor={props.name}>
             {props.label}
-            <select name={props.name} onChange={props.onChange} data-cy={props.cy || props.name}>
+            <select data-cy={props.cy || props.name} {...rest}>
                 {props.children}
             </select>
         </label>

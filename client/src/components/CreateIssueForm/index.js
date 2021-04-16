@@ -4,7 +4,7 @@ import React from 'react';
 import { FormContainer, LabeledInput, LabeledSelect, SubmitButton, CancelButton } from '../Forms';
 
 const CreateIssueForm = (props) => {
-    const { handleUpdateInput, handleSubmitForm } = props;
+    const { formData, handleUpdateInput, handleSubmitForm } = props;
 
     // Clear all inputs and submit
     const submitForm = (e) => {
@@ -19,15 +19,15 @@ const CreateIssueForm = (props) => {
 
     return (
         <FormContainer>
-            <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} data-cy="name" />
-            <LabeledInput name="body" label="Body:" onChange={handleUpdateInput} data-cy="body" />
-            <LabeledSelect name="category" label="Category:" onChange={handleUpdateInput} data-cy="category">
+            <LabeledInput name="name" label="Name:" value={formData.name} onChange={handleUpdateInput} />
+            <LabeledInput name="body" label="Body:" value={formData.body} onChange={handleUpdateInput} />
+            <LabeledSelect name="category" label="Category:" value={formData.category} onChange={handleUpdateInput}>
                 <option></option>
                 <option value="Feature">Feature</option>
                 <option value="Bug">Bug</option>
             </LabeledSelect>
             {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleUpdateInput} data-cy="name" /> */}
-            <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
+            <LabeledInput name="dueDate" label="Due Date:" value={formData.dueDate} type="date" onChange={handleUpdateInput} />
             <div>
                 {/* Buttons */}
                 <CancelButton onClick={props.handleCancelForm} />

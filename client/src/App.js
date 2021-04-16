@@ -6,7 +6,6 @@ import './stylesheets/index.css';
 // Pages
 import LoginSignup from './pages/LoginSignup';
 import Workbench from './pages/Workbench';
-import CreateProject from './pages/CreateProject';
 
 // Components
 import PrivateRoute from './components/PrivateRoute';
@@ -38,7 +37,6 @@ function App() {
 
       {/* Private Routes */}
       <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} isAuthorized={isAuthorized} />
-      <PrivateRoute path="/create-project" component={CreateProject} authToken={authToken} isAuthorized={isAuthorized} />
 
       {/* Public Routes */}
       <Route exact path="/">

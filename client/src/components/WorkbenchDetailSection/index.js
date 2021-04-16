@@ -3,6 +3,7 @@ import './style.css';
 
 // Components
 import ProjectManager from './ProjectManager.js';
+import CreateProject from './CreateProject.js';
 import CreateIssue from './CreateIssue.js';
 import IssueDetails from './IssueDetails.js';
 
@@ -14,17 +15,10 @@ const WorkbenchDetailSection = (props) => {
 
     return (
         <section className="detail-section">
-            {(ui.displayProjectManager)
-                ? <ProjectManager {...props} />
-                : null}
-
-            {(ui.displayCreateIssue)
-                ? <CreateIssue {...props} />
-                : null}
-
-            {(ui.selectIssue)
-                ? <IssueDetails {...props} />
-                : null}
+            {(ui.displayProjectManager) ? <ProjectManager {...props} /> : null}
+            {(ui.displayCreateProject) ? <CreateProject {...props} /> : null}
+            {(ui.displayCreateIssue) ? <CreateIssue {...props} /> : null}
+            {(ui.selectIssue) ? <IssueDetails {...props} /> : null}
         </section>
     )
 }

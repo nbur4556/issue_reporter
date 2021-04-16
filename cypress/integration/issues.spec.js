@@ -10,6 +10,9 @@ let projectId;
 
 // Create Issue Test
 describe('Create Issue', () => {
+    const successMsg = "Issue Created.";
+    const errorMsg = "Error: Unable to create issue.";
+
     beforeEach(() => {
         cy.intercept('api/issue').as('issueData');
         cy.login().then((data) => {
@@ -37,6 +40,8 @@ describe('Create Issue', () => {
         cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
         cy.get('button[data-cy="submit"]').click();
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('not.exist');
         cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
@@ -46,6 +51,8 @@ describe('Create Issue', () => {
         cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
         cy.get('button[data-cy="submit"]').click();
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('not.exist');
         cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
@@ -55,6 +62,8 @@ describe('Create Issue', () => {
         cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
         cy.get('button[data-cy="submit"]').click();
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('not.exist');
         cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
@@ -64,6 +73,8 @@ describe('Create Issue', () => {
         cy.get('select[name="category"]').select(issueData.category);
 
         cy.get('button[data-cy="submit"]').click();
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('not.exist');
         cy.get('.issueListSection').contains(issueData.name).should('exist');
     });
 
@@ -73,11 +84,15 @@ describe('Create Issue', () => {
         cy.get('input[name="dueDate"]').type(issueData.dueDate);
 
         cy.get('button[data-cy="submit"]').click();
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('not.exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('exist');
         cy.get('.issueListSection').contains(issueData.name).should('not.exist');
     });
 
     it('submit empty form does not create issue', () => {
         cy.get('button[data-cy="submit"]').click();
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('not.exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('exist');
         cy.get('.issueListSection').contains(issueData.name).should('not.exist');
     });
 });

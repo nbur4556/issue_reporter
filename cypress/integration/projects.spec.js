@@ -3,7 +3,8 @@ const projectNameEdited = "Edited Name";
 let projectId;
 
 describe("Create project", () => {
-    const successMsg = `Success! Issue "${projectName}" created.`;
+    const successMsg = 'Success';
+    const errorMsg = 'Error';
 
     beforeEach(() => {
         cy.login().then(() => {
@@ -28,7 +29,8 @@ describe("Create project", () => {
                 projectId = xhr.response.body._id;
             });
 
-        cy.get('p[data-cy="success-message"]').contains(successMsg).should('exist');
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('not.exist');
     });
 
     // Attempt create project without a project name
@@ -40,7 +42,8 @@ describe("Create project", () => {
                 projectId = xhr.response.body._id
             });
 
-        cy.get('p[data-cy="success-message"]').contains(successMsg).should('not.exist');
+        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('not.exist');
+        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('exist');
     });
 });
 

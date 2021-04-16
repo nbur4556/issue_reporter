@@ -1,5 +1,6 @@
 const ACTIONS = {
     TOGGLE_PROJECT_MANAGER: 'toggle_project_manager',
+    TOGGLE_CREATE_PROJECT: 'toggle_create_project',
     TOGGLE_CREATE_ISSUE: 'toggle_create_issue',
     ADD_PROJECT_TAB: 'add_project_tab',
     REMOVE_PROJECT_TAB: 'remove_project_tab',
@@ -33,12 +34,35 @@ const reducerUi = (state, action) => {
         case ACTIONS.TOGGLE_PROJECT_MANAGER:
             return (state.displayProjectManager === true)
                 ? { ...state, displayProjectManager: false }
-                : { ...state, displayProjectManager: true, displayCreateIssue: false, selectIssue: null };
+                : {
+                    ...state,
+                    displayProjectManager: true,
+                    displayCreateProject: false,
+                    displayCreateIssue: false,
+                    selectIssue: null
+                };
+
+        case ACTIONS.TOGGLE_CREATE_PROJECT:
+            return (state.displayCreateProject === true)
+                ? { ...state, displayCreateProject: false }
+                : {
+                    ...state,
+                    displayCreateProject: true,
+                    displayProjectManager: false,
+                    displayCreateIssue: false,
+                    selectIssue: null
+                };
 
         case ACTIONS.TOGGLE_CREATE_ISSUE:
             return (state.displayCreateIssue === true)
                 ? { ...state, displayCreateIssue: false }
-                : { ...state, displayCreateIssue: true, displayProjectManager: false, selectIssue: null };
+                : {
+                    ...state,
+                    displayCreateIssue: true,
+                    displayProjectManager: false,
+                    displayCreateProject: false,
+                    selectIssue: null
+                };
 
         case ACTIONS.ADD_PROJECT_TAB:
             return addProjectTab(state, action.payload);;
@@ -54,7 +78,13 @@ const reducerUi = (state, action) => {
         case ACTIONS.SELECT_ISSUE:
             return (state.selectIssue === action.payload.issueId)
                 ? { ...state, selectIssue: null }
-                : { ...state, selectIssue: action.payload.issueId, displayProjectManager: false, displayCreateIssue: false };
+                : {
+                    ...state,
+                    selectIssue: action.payload.issueId,
+                    displayProjectManager: false,
+                    displayCreateProject: false,
+                    displayCreateIssue: false
+                };
 
         case ACTIONS.DESELECT_ISSUE:
             return { ...state, selectIssue: null };

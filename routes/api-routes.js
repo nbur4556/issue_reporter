@@ -76,6 +76,7 @@ module.exports = function (app) {
             res.status(400).json(err);
         });
 
+        console.log(projectResult);
         res.status(200).json(projectResult);
     });
 

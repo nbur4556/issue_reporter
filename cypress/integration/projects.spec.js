@@ -6,9 +6,10 @@ describe("Create project", () => {
     const successMsg = `Success! Issue "${projectName}" created.`;
 
     beforeEach(() => {
-        cy.intercept('/api/project').as('projectData');
         cy.login().then(() => {
-            cy.visit('/create-project');
+            cy.visit('/workbench');
+            cy.get('a').contains('Create Project').click();
+            cy.intercept('/api/project').as('projectData');
         });
     });
 
@@ -24,7 +25,7 @@ describe("Create project", () => {
             .click()
             .wait('@projectData')
             .then((xhr) => {
-                projectId = xhr.response.body._id
+                projectId = xhr.response.body._id;
             });
 
         cy.get('p[data-cy="success-message"]').contains(successMsg).should('exist');
@@ -50,7 +51,7 @@ describe('Update Project', () => {
         }).then((data) => {
             projectId = data.body._id
             cy.visit('/workbench');
-            cy.get('button').contains('Toggle Project Manager').click();
+            cy.get('button[data-cy="project-manager"]').click();
         });
     });
 
@@ -84,7 +85,7 @@ describe('Delete Project', () => {
         }).then((data) => {
             projectId = data.body._id
             cy.visit('/workbench');
-            cy.get('button').contains('Toggle Project Manager').click();
+            cy.get('button[data-cy="project-manager"]').click();
             cy.get('button[data-cy="delete-project"]').click();
         });
     });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './stylesheets/reset.css';
 import './stylesheets/index.css';
 
@@ -19,6 +19,7 @@ function App() {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
   const [isAuthorized, setIsAuthorized] = useState(false)
 
+  // Check for authorization on auth token change
   useEffect(() => {
     if (!authToken) {
       setIsAuthorized(false);
@@ -45,6 +46,9 @@ function App() {
       <Route exact path="/">
         <LoginSignup updateAuthToken={handleUpdateAuthToken} />
       </Route>
+
+      {/* Redirects */}
+      {(isAuthorized) ? <Redirect to='/workbench' /> : null}
 
     </BrowserRouter>
   );

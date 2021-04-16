@@ -82,10 +82,10 @@ const LoginSignup = (props) => {
         props.updateAuthToken();
 
         // Temporary race condition fix: Attempts to reroute before private routes are authorized...
-        setTimeout(() => {
-            console.log('attempt redirect');
-            setRedirect(true);
-        }, 100);
+        // setTimeout(() => {
+        //     console.log('attempt redirect');
+        //     setRedirect(true);
+        // }, 100);
     }
 
     const signinFailed = message => {
@@ -93,10 +93,10 @@ const LoginSignup = (props) => {
         props.updateAuthToken();
 
         // Temporary race condition fix: Attempts to reroute before private routes are authorized...
-        setTimeout(() => {
-            setSigninState({ ...signinState, msg: message });
-            setRedirect(false);
-        }, 100);
+        // setTimeout(() => {
+        //     setSigninState({ ...signinState, msg: message });
+        //     setRedirect(false);
+        // }, 100);
     }
 
     return (
@@ -123,7 +123,7 @@ const LoginSignup = (props) => {
             </section>
 
             {/* Redirects */}
-            {(redirect) ? <Redirect to='/workbench' /> : null}
+            {/* {(redirect) ? <Redirect to='/workbench' /> : null} */}
         </main>
     );
 }

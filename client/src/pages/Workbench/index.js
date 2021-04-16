@@ -26,6 +26,7 @@ const Workbench = () => {
 
     const [ui, dispatchUi] = useReducer(reducerUi, {
         displayProjectManager: false,
+        displayCreateProject: false,
         displayCreateIssue: false,
         displayClosedIssue: false,
         projectTabs: [],

@@ -24,10 +24,12 @@ const CreateProject = (props) => {
     }
 
     return (
-        <FormContainer>
-            <LabeledInput name="projectName" label="Name:" onChange={handleSetProjectData} />
-            <SubmitButton onClick={handleCreateProject} />
-        </FormContainer>
+        <section>
+            <FormContainer>
+                <LabeledInput name="projectName" label="Name:" onChange={handleSetProjectData} />
+                <SubmitButton onClick={handleCreateProject} />
+            </FormContainer>
+        </section>
     );
 }
 

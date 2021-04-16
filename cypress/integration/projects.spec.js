@@ -8,7 +8,7 @@ describe("Create project", () => {
     beforeEach(() => {
         cy.login().then(() => {
             cy.visit('/workbench');
-            cy.get('a').contains('Create Project').click();
+            cy.get('button[data-cy="create-project"]').click();
             cy.intercept('/api/project').as('projectData');
         });
     });

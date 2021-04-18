@@ -31,7 +31,8 @@ const Workbench = () => {
         displayClosedIssue: false,
         projectTabs: [],
         selectProject: null,
-        selectIssue: null
+        selectIssue: null,
+        sortBy: 'dueDate'
     })
 
     const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };
@@ -43,9 +44,9 @@ const Workbench = () => {
 
     // Get projects and issues for authorized users
     const handleLoadData = () => {
-        loadData().then(({ data }) =>
-            userDataDispatcher.dispatch({ type: userDataDispatcher.ACTIONS.LOAD_PROJECT_LIST, payload: { data: data } })
-        );
+        loadData().then(({ data }) => {
+            userDataDispatcher.dispatch({ type: userDataDispatcher.ACTIONS.LOAD_PROJECT_LIST, payload: { data: data } });
+        });
     }
 
     // Issue and Project functions

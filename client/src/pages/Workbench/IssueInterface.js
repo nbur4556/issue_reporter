@@ -1,4 +1,5 @@
 // Utilities
+import treeSortObjects from '../../utils/treeSortObjects';
 import ApiConnection from '../../utils/ApiConnection.js';
 const issueConnection = new ApiConnection('/api/issue');
 
@@ -16,6 +17,11 @@ const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
 
         issueConnection.getQuery({ urlExtension: `/byProject/${ui.selectProject}` })
             .then(({ data }) => {
+                // Sort Objects
+                if (data.issues[0]) {
+                    data.issues = treeSortObjects(data.issues, ui.sortBy)
+                }
+
                 userDataDispatcher.dispatch({
                     type: userDataDispatcher.ACTIONS.LOAD_ISSUES,
                     payload: { issues: data.issues }

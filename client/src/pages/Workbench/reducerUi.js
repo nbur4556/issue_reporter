@@ -99,9 +99,7 @@ const reducerUi = (state, action) => {
                 : { ...state, displayClosedIssue: true };
 
         case ACTIONS.SORT_ISSUES:
-            console.log('Reducer')
-            console.log(action.payload.sortBy);
-            return state;
+            return { ...state, sortBy: action.payload.sortBy };
 
         default:
             return state;

@@ -31,7 +31,8 @@ const Workbench = () => {
         displayClosedIssue: false,
         projectTabs: [],
         selectProject: null,
-        selectIssue: null
+        selectIssue: null,
+        sortBy: 'dueDate'
     })
 
     const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };

@@ -18,7 +18,7 @@ const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
         issueConnection.getQuery({ urlExtension: `/byProject/${ui.selectProject}` })
             .then(({ data }) => {
                 // Sort Objects
-                data.issues = treeSortObjects(data.issues, 'dueDate')
+                data.issues = treeSortObjects(data.issues, ui.sortBy)
 
                 userDataDispatcher.dispatch({
                     type: userDataDispatcher.ACTIONS.LOAD_ISSUES,

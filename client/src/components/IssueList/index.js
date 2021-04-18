@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './style.css';
 
 // Components
@@ -13,9 +13,11 @@ const IssueList = ({ issueInterface }) => {
     const ui = useContext(UiContext);
     const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
+    useEffect(() => issueInterface.handleLoadIssues(), [ui.sortBy]);
+
     const setSortBy = (e) => {
         const sortBy = e.currentTarget.getAttribute('data-sortby');
-        dispatch({ type: ACTIONS.SORT_ISSUES, payload: { sortBy: sortBy } })
+        dispatch({ type: ACTIONS.SORT_ISSUES, payload: { sortBy: sortBy } });
     }
 
     return (

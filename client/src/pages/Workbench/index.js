@@ -11,6 +11,7 @@ import ProjectInterface from './ProjectInterface';
 import loadData from './loadData';
 import reducerUi, { ACTIONS as uiActions } from './reducerUi';
 import reducerUserData, { ACTIONS as userDataActions } from './reducerUserData';
+import treeSortObject from '../../utils/treeSortObjects';
 
 // Contexts
 export const UserDataContext = React.createContext();

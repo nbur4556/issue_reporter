@@ -8,7 +8,8 @@ const ACTIONS = {
     SELECT_ISSUE: 'select_issue',
     DESELECT_ISSUE: 'deselect_issue',
     DESELECT_DETAIL_SECTION: 'deselect_detail_section',
-    DISPLAY_CLOSED_ISSUES: 'display_closed_issues'
+    DISPLAY_CLOSED_ISSUES: 'display_closed_issues',
+    SORT_ISSUES: 'sort_issues'
 }
 
 const addProjectTab = (state, { projectId, projectList }) => {
@@ -93,7 +94,14 @@ const reducerUi = (state, action) => {
             return { ...state, selectIssue: null, displayProjectManager: false, displayCreateIssue: false }
 
         case ACTIONS.DISPLAY_CLOSED_ISSUES:
-            return (state.displayClosedIssue === true) ? { ...state, displayClosedIssue: false } : { ...state, displayClosedIssue: true };
+            return (state.displayClosedIssue === true)
+                ? { ...state, displayClosedIssue: false }
+                : { ...state, displayClosedIssue: true };
+
+        case ACTIONS.SORT_ISSUES:
+            console.log('Reducer')
+            console.log(action.payload.sortBy);
+            return state;
 
         default:
             return state;

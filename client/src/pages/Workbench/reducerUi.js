@@ -99,7 +99,8 @@ const reducerUi = (state, action) => {
                 : { ...state, displayClosedIssue: true };
 
         case ACTIONS.SORT_ISSUES:
-            return { ...state, sortBy: action.payload.sortBy };
+            const sortByReversed = (state.sortBy === action.payload.sortBy) ? !state.sortByReversed : false;
+            return { ...state, sortBy: action.payload.sortBy, sortByReversed: sortByReversed };
 
         default:
             return state;

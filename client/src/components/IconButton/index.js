@@ -2,10 +2,10 @@ import React from 'react';
 import './style.css';
 
 // Icons
-import addIcon from '../../icons/add.svg';
-import addLightIcon from '../../icons/addLight.svg';
-import exitIcon from '../../icons/exit.svg';
-import exitLightIcon from '../../icons/exitLight.svg';
+import addIcon from '../../icons/plus.svg';
+import addLightIcon from '../../icons/plus.svg';
+import exitIcon from '../../icons/close.svg';
+import exitLightIcon from '../../icons/close.svg';
 
 const IconButton = ({ iconName, onClick, width, alt, cy }) => {
     const selectIcon = () => {

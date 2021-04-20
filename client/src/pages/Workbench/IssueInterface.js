@@ -19,7 +19,8 @@ const IssueInterface = ({ userData, userDataDispatcher, ui, uiDispatcher }) => {
             .then(({ data }) => {
                 // Sort Objects
                 if (data.issues[0]) {
-                    data.issues = treeSortObjects(data.issues, ui.sortBy)
+                    console.log(ui.sortByReversed);
+                    data.issues = treeSortObjects(data.issues, ui.sortBy, ui.sortByReversed);
                 }
 
                 userDataDispatcher.dispatch({

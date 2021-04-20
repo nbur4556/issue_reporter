@@ -14,7 +14,7 @@ const IssueList = ({ issueInterface }) => {
     const ui = useContext(UiContext);
     const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
-    useEffect(() => issueInterface.handleLoadIssues(), [ui.sortBy]);
+    useEffect(() => issueInterface.handleLoadIssues(), [ui.sortBy, ui.sortByReversed]);
 
     const setSortBy = (e) => {
         const sortBy = e.currentTarget.getAttribute('data-sortby');

@@ -32,8 +32,9 @@ const Workbench = () => {
         projectTabs: [],
         selectProject: null,
         selectIssue: null,
-        sortBy: 'dueDate'
-    })
+        sortBy: 'dueDate',
+        sortByReversed: false
+    });
 
     const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };
     const userDataDispatcher = { dispatch: dispatchUserData, ACTIONS: userDataActions };

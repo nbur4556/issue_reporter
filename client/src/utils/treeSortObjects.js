@@ -44,7 +44,7 @@ function BinaryTree(rootNode, sortParam) {
 }
 
 // Generate tree and return sorted array
-function treeSortObjects(data, sortParam) {
+function treeSortObjects(data, sortParam, reversed = false) {
     const rootNode = new Node(data[0]);
     const tree = new BinaryTree(rootNode, sortParam);
 
@@ -54,7 +54,9 @@ function treeSortObjects(data, sortParam) {
         tree.addTo(node);
     }
 
-    return tree.getSortedArray();
+    return (reversed === false)
+        ? tree.getSortedArray()
+        : tree.getSortedArray().reverse();
 }
 
 export default treeSortObjects;

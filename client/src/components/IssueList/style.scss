@@ -9,7 +9,13 @@
     border-radius: $mainBorderRadius;
 
     .icon-button{
+        display: flex;
+        align-items: baseline;
         margin: 0;
+
+        img{
+            padding: 0 10px;
+        }
     }
 
     .name-col {

@@ -12,7 +12,17 @@
 }
 
 .issue-bar .icon-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   margin: 0;
+}
+
+.issue-bar .icon-button img {
+  padding: 0 10px;
 }
 
 .issue-bar .name-col {

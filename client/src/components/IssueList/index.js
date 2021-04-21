@@ -23,7 +23,7 @@ const IssueList = ({ issueInterface }) => {
 
     return (
         <section className="issueListSection">
-            <IssueListHeader setSortBy={setSortBy} />
+            <IssueListHeader sortBy={ui.sortBy} setSortBy={setSortBy} isDescending={ui.sortByReversed} />
 
             {userData.issueList.map((issue, index) => {
                 const activeClassName = (issue._id === ui.selectIssue)

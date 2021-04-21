@@ -11,17 +11,8 @@
   border-radius: 10px;
 }
 
-.issue-bar li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.issue-bar li .icon-button {
-  margin: 0 10px;
+.issue-bar .icon-button {
+  margin: 0;
 }
 
 .issue-bar .name-col {

@@ -22,16 +22,13 @@ const IssueListHeader = ({ sortBy, setSortBy, isDescending }) => {
     return (
         <ul className="issue-bar">
             <li className="name-col" onClick={setSortBy} data-sortby="name">
-                <h4>Name</h4>
-                <IconButton iconName={selectIconButton('name')} />
+                <IconButton label="Name" iconName={selectIconButton('name')} />
             </li>
             <li className="category-col" onClick={setSortBy} data-sortby="category">
-                <h4>Category</h4>
-                <IconButton iconName={selectIconButton('category')} />
+                <IconButton label="Category" iconName={selectIconButton('category')} />
             </li>
             <li className="due-date-col" onClick={setSortBy} data-sortby="dueDate">
-                <h4>Due Date</h4>
-                <IconButton iconName={selectIconButton('dueDate')} />
+                <IconButton label="Due Date" iconName={selectIconButton('dueDate')} />
             </li>
         </ul>
     );

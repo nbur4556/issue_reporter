@@ -1,8 +1,18 @@
 .icon-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   padding: 0;
   background: none;
   border: none;
   color: black;
   font-weight: normal;
+}
+
+.icon-button img {
+  padding: 0 10px;
 }
 /*# sourceMappingURL=style.css.map */

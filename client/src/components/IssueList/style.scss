@@ -8,13 +8,8 @@
     padding: $componentMargin 3rem;
     border-radius: $mainBorderRadius;
 
-    li {
-        display: flex;
-        align-items: center;
-
-        .icon-button{
-            margin: 0 10px;
-        }
+    .icon-button{
+        margin: 0;
     }
 
     .name-col {

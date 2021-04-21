@@ -1,11 +1,35 @@
 import React from 'react';
 
-const IssueListHeader = ({ setSortBy }) => {
+// Components
+import IconButton from '../IconButton';
+
+const IssueListHeader = ({ sortBy, setSortBy, isDescending }) => {
+    console.log(sortBy);
+    console.log(isDescending);
+
+    const selectIconButton = (typeName) => {
+        if (sortBy === typeName && isDescending === false) {
+            return 'sortUp';
+        }
+        else if (sortBy === typeName && isDescending === true) {
+            return 'sortDown';
+        }
+        else {
+            return 'sort';
+        }
+    }
+
     return (
         <ul className="issue-bar">
-            <li className="name-col" onClick={setSortBy} data-sortby="name"><h4>Name</h4></li>
-            <li className="category-col" onClick={setSortBy} data-sortby="category"><h4>Category</h4></li>
-            <li className="due-date-col" onClick={setSortBy} data-sortby="dueDate"><h4>Due Date</h4></li>
+            <li className="name-col" onClick={setSortBy} data-sortby="name">
+                <IconButton label="Name" iconName={selectIconButton('name')} />
+            </li>
+            <li className="category-col" onClick={setSortBy} data-sortby="category">
+                <IconButton label="Category" iconName={selectIconButton('category')} />
+            </li>
+            <li className="due-date-col" onClick={setSortBy} data-sortby="dueDate">
+                <IconButton label="Due Date" iconName={selectIconButton('dueDate')} />
+            </li>
         </ul>
     );
 }

@@ -8,14 +8,26 @@
     padding: $componentMargin 3rem;
     border-radius: $mainBorderRadius;
 
+    li {
+        display: flex;
+        align-items: center;
+
+        .icon-button{
+            margin: 0 10px;
+        }
+    }
+
     .name-col {
-        flex-basis: 60%;
+        flex-basis: 50%;
     }
-        .category-col {
+    .category-col {
         flex-basis: 20%;
     }
-        .due-date-col {
+    .due-date-col {
         flex-basis: 20%;
+    }
+    .status-col{
+        flex-basis: 10%;
     }
 }
 

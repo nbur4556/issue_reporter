@@ -37,7 +37,7 @@ const IssueBar = props => {
             <li className="due-date-col">{formatDueDate(issueData.dueDate)}</li>
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
-            <li>
+            <li className="status-col">
                 <input type="checkbox" defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} />
             </li>
         </ul>

@@ -29,7 +29,7 @@ const compareEncryption = (input, hash, cb) => {
 
 // Return JWT token
 const generateAuthToken = ({ ...tokenData }) => {
-    return jwt.sign(tokenData, process.env.JWT_SECRET);
+    return jwt.sign(tokenData, process.env.JWT_SECRET, {expiresIn: '15m'});
 }
 
 // Return decrypted JWT token

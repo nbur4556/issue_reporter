@@ -11,8 +11,6 @@ module.exports = function (app) {
         const result = await userController.authenticate(req.params.authToken).catch(err => {
             res.status(400).json(err);
         });
-
-        res.setHeader('authentication', 'test');
         res.status(200).json(result);
     });
 
@@ -57,6 +55,10 @@ module.exports = function (app) {
         const user = await userController.getByIdIncludeProjects(authorization._id).catch(err => {
             res.status(400).json(err);
         });
+
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(user.projects);
     });
 

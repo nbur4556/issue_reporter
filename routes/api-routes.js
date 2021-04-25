@@ -57,7 +57,6 @@ module.exports = function (app) {
         });
 
         const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
-
         res.setHeader('authentication', refreshToken);
         res.status(200).json(user.projects);
     });
@@ -80,7 +79,8 @@ module.exports = function (app) {
             res.status(400).json(err);
         });
 
-        console.log(projectResult);
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(projectResult);
     });
 
@@ -95,6 +95,8 @@ module.exports = function (app) {
         const projectResult = await projectController.updateById(req.params.searchId, req.body).catch(err => {
             res.status(400).json(err);
         });
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(projectResult);
     });
 
@@ -115,7 +117,8 @@ module.exports = function (app) {
         const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
             res.status(400).json(err);
         });
-
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(projectResult);
     });
 
@@ -137,6 +140,10 @@ module.exports = function (app) {
         const result = await projectController.findByIdPopulated(req.params.projectId).catch(err => {
             res.status(400).json(err);
         });
+
+        // Set refresh token in header and send response
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(result);
     });
 
@@ -151,6 +158,10 @@ module.exports = function (app) {
         const result = await issueController.findById(req.params.searchId).catch(err => {
             res.status(400).json(err);
         });
+
+        // Set refresh token in header and send response
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(result);
     });
 
@@ -178,6 +189,9 @@ module.exports = function (app) {
             res.status(400).json(err);
         });
 
+        // Set refresh token in header and send response
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(result);
     });
 
@@ -192,6 +206,10 @@ module.exports = function (app) {
         const result = await issueController.updateById(req.params.searchId, req.body).catch(err => {
             res.status(400).json(err);
         });
+
+        // Set refresh token in header and send response
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(result);
     });
 
@@ -211,6 +229,10 @@ module.exports = function (app) {
         const result = await issueController.deleteById(req.params.searchId).catch(err => {
             res.status(400).json(err);
         });
+
+        // Set refresh token in header and send response
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+        res.setHeader('authentication', refreshToken);
         res.status(200).json(result);
     });
 }

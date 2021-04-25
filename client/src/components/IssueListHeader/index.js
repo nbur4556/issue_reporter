@@ -4,9 +4,6 @@ import React from 'react';
 import IconButton from '../IconButton';
 
 const IssueListHeader = ({ sortBy, setSortBy, isDescending }) => {
-    console.log(sortBy);
-    console.log(isDescending);
-
     const selectIconButton = (typeName) => {
         if (sortBy === typeName && isDescending === false) {
             return 'sortUp';

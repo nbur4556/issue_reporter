@@ -21,28 +21,50 @@ class ApiConnection {
         }
     }
 
+    updateAuthToken(request) {
+        request.then(result => {
+            console.log(result.headers);
+        })
+    }
+
     // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.get(query.url, { headers: this.getAuthHeader() });
+        const request = axios.get(query.url, { headers: this.getAuthHeader() });
+
+        this.updateAuthToken(request);
+
+        return request;
     }
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.post(query.url, query.body, { headers: this.getAuthHeader() });
+        const request = axios.post(query.url, query.body, { headers: this.getAuthHeader() });
+
+        this.updateAuthToken(request);
+
+        return request;
     }
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.put(query.url, query.body, { headers: this.getAuthHeader() });
+        const request = axios.put(query.url, query.body, { headers: this.getAuthHeader() });
+
+        this.updateAuthToken(request);
+
+        return request;
     }
 
     deleteQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.delete(query.url, {
+        const request = axios.delete(query.url, {
             headers: this.getAuthHeader(),
             data: query.body
         });
+
+        this.updateAuthToken(request);
+
+        return request;
     }
 }
 

@@ -11,6 +11,8 @@ module.exports = function (app) {
         const result = await userController.authenticate(req.params.authToken).catch(err => {
             res.status(400).json(err);
         });
+
+        res.setHeader('authentication', 'test');
         res.status(200).json(result);
     });
 

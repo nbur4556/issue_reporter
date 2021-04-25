@@ -28,8 +28,8 @@ const compareEncryption = (input, hash, cb) => {
 }
 
 // Return JWT token
-const generateAuthToken = ({ ...tokenData }) => {
-    return jwt.sign(tokenData, process.env.JWT_SECRET);
+const generateAuthToken = ({ ...tokenData }, expirationTime = '15m') => {
+    return jwt.sign(tokenData, process.env.JWT_SECRET, { expiresIn: expirationTime });
 }
 
 // Return decrypted JWT token
@@ -58,6 +58,13 @@ const checkMinimumRequirements = (password, confirmPassword) => {
 
 // Returned controller methods
 module.exports = {
+    getRefreshToken: function (authToken) {
+        console.log(authToken);
+        const tokenData = authenticateAuthToken(authToken);
+        return (tokenData !== null) ? generateAuthToken({ id: tokenData.id, username: tokenData.username }) : null;
+
+    },
+
     // Read User
     login: function (searchUsername, userParams) {
         return new Promise((resolve, reject) => {

@@ -21,28 +21,44 @@ class ApiConnection {
         }
     }
 
+    updateAuthToken(response) {
+        response.then(result => {
+            if (result.headers?.authentication) {
+                localStorage.setItem('authToken', result.headers.authentication);
+            }
+        });
+    }
+
     // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.get(query.url, { headers: this.getAuthHeader() });
+        const response = axios.get(query.url, { headers: this.getAuthHeader() });
+        this.updateAuthToken(response);
+        return response;
     }
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.post(query.url, query.body, { headers: this.getAuthHeader() });
+        const response = axios.post(query.url, query.body, { headers: this.getAuthHeader() });
+        this.updateAuthToken(response);
+        return response;
     }
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.put(query.url, query.body, { headers: this.getAuthHeader() });
+        const response = axios.put(query.url, query.body, { headers: this.getAuthHeader() });
+        this.updateAuthToken(response);
+        return response;
     }
 
     deleteQuery(options = {}) {
         let query = this.buildQuery(options);
-        return axios.delete(query.url, {
+        const response = axios.delete(query.url, {
             headers: this.getAuthHeader(),
             data: query.body
         });
+        this.updateAuthToken(response);
+        return response;
     }
 }
 

@@ -21,50 +21,44 @@ class ApiConnection {
         }
     }
 
-    updateAuthToken(request) {
-        request.then(result => {
-            console.log(result.headers);
-        })
+    updateAuthToken(response) {
+        response.then(result => {
+            if (result.headers?.authentication) {
+                localStorage.setItem('authToken', result.headers.authentication);
+            }
+        });
     }
 
     // API Calls
     getQuery(options = {}) {
         let query = this.buildQuery(options);
-        const request = axios.get(query.url, { headers: this.getAuthHeader() });
-
-        this.updateAuthToken(request);
-
-        return request;
+        const response = axios.get(query.url, { headers: this.getAuthHeader() });
+        this.updateAuthToken(response);
+        return response;
     }
 
     postQuery(options = {}) {
         let query = this.buildQuery(options);
-        const request = axios.post(query.url, query.body, { headers: this.getAuthHeader() });
-
-        this.updateAuthToken(request);
-
-        return request;
+        const response = axios.post(query.url, query.body, { headers: this.getAuthHeader() });
+        this.updateAuthToken(response);
+        return response;
     }
 
     putQuery(options = {}) {
         let query = this.buildQuery(options);
-        const request = axios.put(query.url, query.body, { headers: this.getAuthHeader() });
-
-        this.updateAuthToken(request);
-
-        return request;
+        const response = axios.put(query.url, query.body, { headers: this.getAuthHeader() });
+        this.updateAuthToken(response);
+        return response;
     }
 
     deleteQuery(options = {}) {
         let query = this.buildQuery(options);
-        const request = axios.delete(query.url, {
+        const response = axios.delete(query.url, {
             headers: this.getAuthHeader(),
             data: query.body
         });
-
-        this.updateAuthToken(request);
-
-        return request;
+        this.updateAuthToken(response);
+        return response;
     }
 }
 

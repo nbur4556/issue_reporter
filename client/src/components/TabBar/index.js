@@ -23,10 +23,17 @@ const TabBar = () => {
         dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
     }
 
+    console.log('active tab', ui.projectTabs[activeTab]?._id);
+    console.log('select project', ui.selectProject);
+
     return (
         <section className='tab-bar'>
 
             {tabData.map((tab, index) => {
+                if (ui.projectTabs[activeTab]?._id !== ui.selectProject) {
+                    setActiveTab(0);
+                }
+
                 const activeClassName = (index === activeTab) ? 'tab-active' : 'tab-inactive';
 
                 return <Tab key={index}

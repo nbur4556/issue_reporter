@@ -71,7 +71,12 @@ const reducerUi = (state, action) => {
         case ACTIONS.REMOVE_PROJECT_TAB:
             const projectTabsRemoved = [...state.projectTabs];
             projectTabsRemoved.splice(action.payload.tabIndex, 1);
-            return { ...state, projectTabs: projectTabsRemoved };
+
+            const selectProjectId = (state.projectTabs[action.payload.tabIndex]._id === state.selectProject)
+                ? projectTabsRemoved[0]?._id
+                : state.selectProject;
+
+            return { ...state, projectTabs: projectTabsRemoved, selectProject: selectProjectId || null };
 
         case ACTIONS.SELECT_PROJECT:
             return { ...state, selectProject: action.payload.projectId };

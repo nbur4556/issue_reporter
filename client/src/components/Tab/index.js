@@ -10,7 +10,10 @@ const Tab = (props) => {
     const { tab, tabIndex, activeClass, selectTab } = props
     const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
-    const removeProjectTab = () => dispatch({ type: ACTIONS.REMOVE_PROJECT_TAB, payload: { tabIndex: tabIndex } });
+    const removeProjectTab = e => {
+        e.stopPropagation();
+        dispatch({ type: ACTIONS.REMOVE_PROJECT_TAB, payload: { tabIndex: tabIndex } });
+    }
 
     return (
         <div className={`tab ${activeClass}`} onClick={selectTab} data-id={tab.tabId} data-index={tabIndex}>

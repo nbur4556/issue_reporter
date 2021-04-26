@@ -59,7 +59,6 @@ const checkMinimumRequirements = (password, confirmPassword) => {
 // Returned controller methods
 module.exports = {
     getRefreshToken: function (authToken) {
-        console.log(authToken);
         const tokenData = authenticateAuthToken(authToken);
         return (tokenData !== null) ? generateAuthToken({ id: tokenData.id, username: tokenData.username }) : null;
 

@@ -33,7 +33,7 @@ const Workbench = () => {
         selectProject: null,
         selectIssue: null,
         sortBy: 'dueDate',
-        sortByReversed: false
+        sortByReversed: true
     });
 
     const uiDispatcher = { dispatch: dispatchUi, ACTIONS: uiActions };

@@ -26,6 +26,10 @@ const IssueList = ({ issueInterface }) => {
             <IssueListHeader sortBy={ui.sortBy} setSortBy={setSortBy} isDescending={ui.sortByReversed} />
 
             {userData.issueList.map((issue, index) => {
+                if (!ui.selectProject) {
+                    return null;
+                }
+
                 const activeClassName = (issue._id === ui.selectIssue)
                     ? "active-issue"
                     : "inactive-issue";

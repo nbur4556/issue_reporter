@@ -112,7 +112,7 @@ module.exports = function (app) {
         const removeDataFrom = await Promise.all([
             projectController.findByIdPopulated(req.params.searchId),
             userController.removeProjectById(authorization._id, req.params.searchId)
-        ]);
+        ]).catch(err => res.status(400).json(err));
 
         if (removeDataFrom[0]?.issues) {
             removeDataFrom[0].issues.forEach(({ _id }) => {

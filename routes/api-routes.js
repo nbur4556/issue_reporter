@@ -1,3 +1,4 @@
+const { PromiseProvider } = require('mongoose');
 const controllers = require('../controllers');
 const { userController, projectController, issueController } = controllers;
 
@@ -108,25 +109,18 @@ module.exports = function (app) {
             return;
         }
 
-        console.log('authorized')
+        const removeDataFrom = await Promise.all([
+            projectController.findByIdPopulated(req.params.searchId),
+            userController.removeProjectById(authorization._id, req.params.searchId)
+        ]);
 
-        // Delete Issues in Project
-        const project = await projectController.findByIdPopulated(req.params.searchId).catch(err => {
-            res.status(400).json(err);
-        });
-
-        if (project?.issues) {
-            project.issues.forEach(({ _id }) => {
+        if (removeDataFrom[0]?.issues) {
+            removeDataFrom[0].issues.forEach(({ _id }) => {
                 issueController.deleteById(_id).catch(err => {
                     res.status(400).json(err);
                 });
             });
         }
-
-        // Remove project from user
-        await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
-            res.status(400).json(err);
-        });
 
         // Delete project
         const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {

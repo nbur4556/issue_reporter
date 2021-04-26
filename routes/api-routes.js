@@ -1,3 +1,4 @@
+const { PromiseProvider } = require('mongoose');
 const controllers = require('../controllers');
 const { userController, projectController, issueController } = controllers;
 
@@ -108,16 +109,25 @@ module.exports = function (app) {
             return;
         }
 
-        // Remove project from user
-        await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
-            res.status(400).json(err);
-        });
+        const removeDataFrom = await Promise.all([
+            projectController.findByIdPopulated(req.params.searchId),
+            userController.removeProjectById(authorization._id, req.params.searchId)
+        ]).catch(err => res.status(400).json(err));
+
+        if (removeDataFrom[0]?.issues) {
+            removeDataFrom[0].issues.forEach(({ _id }) => {
+                issueController.deleteById(_id).catch(err => {
+                    res.status(400).json(err);
+                });
+            });
+        }
 
         // Delete project
         const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
             res.status(400).json(err);
         });
         const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
+
         res.setHeader('authentication', refreshToken);
         res.status(200).json(projectResult);
     });

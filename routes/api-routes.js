@@ -111,7 +111,9 @@ module.exports = function (app) {
         console.log('authorized')
 
         // Delete Issues in Project
-        const project = await projectController.findByIdPopulated(req.params.searchId);
+        const project = await projectController.findByIdPopulated(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
 
         if (project?.issues) {
             project.issues.forEach(({ _id }) => {

@@ -108,16 +108,18 @@ module.exports = function (app) {
             return;
         }
 
-        // Delete Issues in Project
-        const { issues } = await projectController.findByIdPopulated(req.params.searchId).catch(err => {
-            res.status(400).json(err);
-        });
+        console.log('authorized')
 
-        issues.forEach(({ _id }) => {
-            issueController.deleteById(_id).catch(err => {
-                res.status(400).json(err);
+        // Delete Issues in Project
+        const project = await projectController.findByIdPopulated(req.params.searchId);
+
+        if (project?.issues) {
+            project.issues.forEach(({ _id }) => {
+                issueController.deleteById(_id).catch(err => {
+                    res.status(400).json(err);
+                });
             });
-        });
+        }
 
         // Remove project from user
         await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {

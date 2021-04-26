@@ -12,7 +12,12 @@ const ProjectInterface = (props) => {
 
     const handleDeleteProject = (projectId) => {
         projectConnection.deleteQuery({ urlExtension: `/${projectId}` })
-            .then(() => props.handleLoadData());
+            .then(() => {
+                for (const tab of props.ui.projectTabs) {
+                    console.log(tab._id);
+                }
+                props.handleLoadData()
+            });
     }
 
     return { handleEditProject, handleDeleteProject };

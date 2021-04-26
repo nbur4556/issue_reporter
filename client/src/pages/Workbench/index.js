@@ -52,7 +52,7 @@ const Workbench = () => {
 
     // Issue and Project functions
     const issueInterface = IssueInterface({ userData, userDataDispatcher, ui, uiDispatcher });
-    const projectInterface = ProjectInterface({ handleLoadData });
+    const projectInterface = ProjectInterface({ ui, uiDispatcher, handleLoadData });
 
     return (
         <UserDataContext.Provider value={userData}>

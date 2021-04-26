@@ -125,7 +125,7 @@ module.exports = {
     },
 
     // Delete User
-    deleteById: function (searchId, cb) {
+    deleteById: function (searchId) {
         return db.User.deleteOne({ _id: searchId });
     }
 }

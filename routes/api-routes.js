@@ -119,18 +119,16 @@ module.exports = function (app) {
             });
         });
 
-        // // Remove project from user
-        // await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
-        //     res.status(400).json(err);
-        // });
+        // Remove project from user
+        await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
 
-        // // Delete project
-        // const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
-        //     res.status(400).json(err);
-        // });
-        // const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
-
-        const projectResult = 'testing';
+        // Delete project
+        const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
+            res.status(400).json(err);
+        });
+        const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
 
         res.setHeader('authentication', refreshToken);
         res.status(200).json(projectResult);

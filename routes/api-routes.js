@@ -113,8 +113,11 @@ module.exports = function (app) {
             res.status(400).json(err);
         });
 
-        console.log('issues:');
-        console.log(issues);
+        issues.forEach(({ _id }) => {
+            issueController.deleteById(_id).catch(err => {
+                res.status(400).json(err);
+            });
+        });
 
         // // Remove project from user
         // await userController.removeProjectById(authorization._id, req.params.searchId).catch(err => {

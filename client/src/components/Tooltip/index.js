@@ -3,7 +3,7 @@ import './style.css';
 
 const Tooltip = (props) => {
     return (
-        <span className="bottom">{props.children}</span>
+        <span className="right">{props.children}</span>
     );
 }
 

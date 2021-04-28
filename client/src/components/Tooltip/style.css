@@ -9,7 +9,6 @@
   z-index: 1;
   padding: 0.3rem 0.5rem;
   font-size: 1rem;
-  border-radius: 10px;
   background-color: #1E7A8E;
   color: #F4FAFB;
 }
@@ -17,30 +16,23 @@
 .tooltip-parent .top {
   bottom: 105%;
   left: 35%;
+  border-radius: 10px 10px 10px 0;
 }
 
 .tooltip-parent .bottom {
   top: 105%;
   left: 35%;
-}
-
-.tooltip-parent .bottom::after {
-  content: ' ';
-  position: absolute;
-  bottom: 97%;
-  right: 67%;
-  margin-left: 50px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #1E7A8E transparent;
+  border-radius: 0 10px 10px 10px;
 }
 
 .tooltip-parent .right {
   left: 105%;
+  border-radius: 0 10px 10px 10px;
 }
 
 .tooltip-parent .left {
   right: 105%;
+  border-radius: 10px 0 10px 10px;
 }
 
 .tooltip-parent:hover span {

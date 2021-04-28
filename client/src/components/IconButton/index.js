@@ -16,7 +16,7 @@ import sortUpLightIcon from '../../icons/sortUpLight.svg';
 import sortDownIcon from '../../icons/sortDownMain.svg';
 import sortDownLightIcon from '../../icons/sortDownLight.svg';
 
-const IconButton = ({ label, iconName, onClick, width, alt, cy }) => {
+const IconButton = ({ label, iconName, onClick, width, alt, tooltip, cy }) => {
     const selectIcon = () => {
         switch (iconName) {
             case 'add':
@@ -48,7 +48,7 @@ const IconButton = ({ label, iconName, onClick, width, alt, cy }) => {
         <button className="icon-button tooltip-parent" onClick={onClick} data-cy={cy}>
             <h4>{label}</h4>
             <img src={selectIcon()} alt={alt || "icon"} width={width} />
-            <Tooltip>Icon</Tooltip>
+            {(tooltip) ? <Tooltip direction={tooltip.direction}>{tooltip.text}</Tooltip> : null}
         </button>
     );
 }

@@ -1,6 +1,9 @@
 @import '../../stylesheets/variables';
+$tooltipPosition: 105%;
 
 .tooltip-parent{
+    position: relative;
+
     span{
         display: inline-block;
         visibility: hidden;
@@ -14,6 +17,24 @@
         border-radius: $mainBorderRadius;
         background-color: $mainAccentColor;
         color: $backgroundColor;
+    }
+
+    .top{
+        bottom: $tooltipPosition;
+        left: 35%;
+    }
+
+    .bottom{
+        top: $tooltipPosition;
+        left: 35%;
+    }
+
+    .right{
+        left: $tooltipPosition;
+    }
+
+    .left{
+        right: $tooltipPosition;
     }
 
     &:hover span{

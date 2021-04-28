@@ -1,3 +1,7 @@
+.tooltip-parent {
+  position: relative;
+}
+
 .tooltip-parent span {
   display: inline-block;
   visibility: hidden;
@@ -8,6 +12,24 @@
   border-radius: 10px;
   background-color: #1E7A8E;
   color: #F4FAFB;
+}
+
+.tooltip-parent .top {
+  bottom: 105%;
+  left: 35%;
+}
+
+.tooltip-parent .bottom {
+  top: 105%;
+  left: 35%;
+}
+
+.tooltip-parent .right {
+  left: 105%;
+}
+
+.tooltip-parent .left {
+  right: 105%;
 }
 
 .tooltip-parent:hover span {

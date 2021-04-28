@@ -1,0 +1,8 @@
+.tooltip-parent span {
+  display: none;
+}
+
+.tooltip-parent:hover span {
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */

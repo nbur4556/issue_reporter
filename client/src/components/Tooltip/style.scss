@@ -1,0 +1,9 @@
+.tooltip-parent{
+    span{
+        display: none;
+    }
+
+    &:hover span{
+        display: block;
+    }
+}

@@ -1,6 +1,9 @@
 import React from 'react';
 import './style.css';
 
+// Components
+import Tooltip from '../Tooltip';
+
 // Icons
 import addIcon from '../../icons/addMain.svg';
 import addLightIcon from '../../icons/addLight.svg';
@@ -45,6 +48,7 @@ const IconButton = ({ label, iconName, onClick, width, alt, cy }) => {
         <button className="icon-button" onClick={onClick} data-cy={cy}>
             <h4>{label}</h4>
             <img src={selectIcon()} alt={alt || "icon"} width={width} />
+            <Tooltip>Icon</Tooltip>
         </button>
     );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Tooltip = (props) => {
     return (
-        <span>{props.tooltipText}</span>
+        <span>{props.children}</span>
     );
 }
 

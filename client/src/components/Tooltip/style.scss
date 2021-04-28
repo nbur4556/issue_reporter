@@ -27,6 +27,17 @@ $tooltipPosition: 105%;
     .bottom{
         top: $tooltipPosition;
         left: 35%;
+
+        &::after{
+            content: ' ';
+            position: absolute;
+            bottom: 97%;
+            right: 67%;
+            margin-left: 50px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent $mainAccentColor transparent;
+        }
     }
 
     .right{

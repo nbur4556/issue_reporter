@@ -1,8 +1,10 @@
 .tooltip-parent span {
-  display: none;
+  display: inline-block;
+  visibility: hidden;
+  position: absolute;
 }
 
 .tooltip-parent:hover span {
-  display: block;
+  visibility: visible;
 }
 /*# sourceMappingURL=style.css.map */

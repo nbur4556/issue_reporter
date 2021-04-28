@@ -43,7 +43,13 @@ const Toolbar = () => {
                 </label>
 
 
-                <IconButton iconName="add" onClick={toggleCreateIssue} alt="create issue button" cy="create-issue" />
+                <IconButton
+                    iconName="add"
+                    onClick={toggleCreateIssue}
+                    alt="create issue button"
+                    tooltip={{ text: 'Create new issue' }}
+                    cy="create-issue"
+                />
                 <button onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
                 <button onClick={toggleProjectManager} data-cy="project-manager">Project Manager</button>
             </section>

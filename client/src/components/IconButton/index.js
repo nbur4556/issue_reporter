@@ -48,7 +48,7 @@ const IconButton = ({ label, iconName, onClick, width, alt, tooltip, cy }) => {
         <button className="icon-button tooltip-parent" onClick={onClick} data-cy={cy}>
             <h4>{label}</h4>
             <img src={selectIcon()} alt={alt || "icon"} width={width} />
-            {(tooltip) ? <Tooltip direction={tooltip?.direction}>{tooltip.text}</Tooltip> : null}
+            {(tooltip) ? <Tooltip direction={tooltip?.direction} width={tooltip?.width}>{tooltip.text}</Tooltip> : null}
         </button>
     );
 }

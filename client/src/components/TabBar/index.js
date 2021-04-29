@@ -23,9 +23,6 @@ const TabBar = () => {
         dispatch({ type: ACTIONS.SELECT_PROJECT, payload: { projectId: projectId } });
     }
 
-    console.log('active tab', ui.projectTabs[activeTab]?._id);
-    console.log('select project', ui.selectProject);
-
     return (
         <section className='tab-bar'>
 

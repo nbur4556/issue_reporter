@@ -67,7 +67,7 @@ const ProjectManager = (props) => {
                                 iconName="add"
                                 onClick={addProjectTab}
                                 alt="add tab button"
-                                tooltip={{ text: 'Open new project tab' }}
+                                tooltip={{ text: 'Open new project tab', width: '12rem' }}
                                 cy="add-tab"
                             />
 

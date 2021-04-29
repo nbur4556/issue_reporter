@@ -11,6 +11,7 @@
   font-size: 1rem;
   background-color: #404f52;
   color: #F4FAFB;
+  opacity: 0.9;
 }
 
 .tooltip-parent .top {

@@ -1,0 +1,42 @@
+.tooltip-parent {
+  position: relative;
+}
+
+.tooltip-parent span {
+  display: inline-block;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  background-color: #404f52;
+  color: #F4FAFB;
+  opacity: 0.9;
+}
+
+.tooltip-parent .top {
+  bottom: 105%;
+  left: 35%;
+  border-radius: 10px 10px 10px 0;
+}
+
+.tooltip-parent .bottom {
+  top: 105%;
+  left: 35%;
+  border-radius: 0 10px 10px 10px;
+}
+
+.tooltip-parent .right {
+  left: 105%;
+  border-radius: 0 10px 10px 10px;
+}
+
+.tooltip-parent .left {
+  right: 105%;
+  border-radius: 10px 0 10px 10px;
+}
+
+.tooltip-parent:hover span {
+  visibility: visible;
+}
+/*# sourceMappingURL=style.css.map */

@@ -63,7 +63,13 @@ const ProjectManager = (props) => {
                         {project.projectName}
 
                         <span>
-                            <IconButton iconName="add" onClick={addProjectTab} alt="add tab button" cy="add-tab" />
+                            <IconButton
+                                iconName="add"
+                                onClick={addProjectTab}
+                                alt="add tab button"
+                                tooltip={{ text: 'Open new project tab', width: '12rem' }}
+                                cy="add-tab"
+                            />
 
                             <button className="link-button" onClick={toggleEditState} data-cy="edit-project">
                                 Edit Project

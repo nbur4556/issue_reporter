@@ -1,0 +1,46 @@
+@import '../../stylesheets/variables';
+$tooltipPosition: 105%;
+
+.tooltip-parent{
+    position: relative;
+
+    span{
+        display: inline-block;
+        visibility: hidden;
+        position: absolute;
+        z-index: 1;
+
+        padding: 0.3rem 0.5rem;
+        font-size: 1rem;
+
+        background-color: $darkAccentColor;
+        color: $backgroundColor;
+        opacity: 0.9;
+    }
+
+    .top{
+        bottom: $tooltipPosition;
+        left: 35%;
+        border-radius:  $mainBorderRadius $mainBorderRadius $mainBorderRadius 0;
+    }
+
+    .bottom{
+        top: $tooltipPosition;
+        left: 35%;
+        border-radius: 0 $mainBorderRadius $mainBorderRadius $mainBorderRadius;
+    }
+
+    .right{
+        left: $tooltipPosition;
+        border-radius:  0 $mainBorderRadius $mainBorderRadius $mainBorderRadius;
+    }
+
+    .left{
+        right: $tooltipPosition;
+        border-radius:  $mainBorderRadius 0 $mainBorderRadius $mainBorderRadius ;
+    }
+
+    &:hover span{
+        visibility: visible;
+    }
+}

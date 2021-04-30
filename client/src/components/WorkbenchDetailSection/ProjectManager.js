@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // Components
-import { FormContainer, LabeledInput, SubmitButton, CancelButton } from '../Forms';
+import EditIssue from './EditIssue';
 import IconButton from '../IconButton';
 import DeleteConfirmation from '../DeleteConfirmation';
 
@@ -94,26 +94,12 @@ const ProjectManager = (props) => {
         return projectListItems;
     }
 
-    // Edit Mode
-    const renderEditForm = () => {
-        return (
-            <FormContainer>
-                <LabeledInput name="projectName" label="Name:" onChange={handleEditData} cy="edit-field" />
-                <div>
-                    {/* Buttons */}
-                    <CancelButton onClick={cancelEditProject} />
-                    <SubmitButton onClick={handleSubmitEditProject} cy="submit-edit" />
-                </div>
-            </FormContainer>
-        );
-    }
-
     return (
         <section>
             <h3>Project Manager</h3>
             <button onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
 
-            {(editState) ? renderEditForm() : null}
+            {(editState) ? <EditIssue /> : null}
 
             <ul data-cy="project-manager-list">
                 {(!editState) ? renderProjects(userData.projectList) : null}

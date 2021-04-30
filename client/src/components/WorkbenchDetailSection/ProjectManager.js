@@ -41,7 +41,9 @@ const ProjectManager = (props) => {
     return (
         <section>
             <h3>Project Manager</h3>
-            <button onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
+            {(editProjectId === null)
+                ? <button className="link-button" onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
+                : null}
 
             {(editProjectId)
                 ? <EditIssue

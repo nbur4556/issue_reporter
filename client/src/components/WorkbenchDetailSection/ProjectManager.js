@@ -21,6 +21,7 @@ const ProjectManager = (props) => {
         projectName: null
     });
 
+    const toggleCreateProject = () => dispatch({ type: ACTIONS.TOGGLE_CREATE_PROJECT });
     const addProjectTab = (e) => dispatch(
         {
             type: ACTIONS.ADD_PROJECT_TAB, payload: {
@@ -110,6 +111,7 @@ const ProjectManager = (props) => {
     return (
         <section>
             <h3>Project Manager</h3>
+            <button onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
 
             {(editState) ? renderEditForm() : null}
 

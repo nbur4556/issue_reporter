@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // Components
-import EditIssue from './EditIssue';
+import EditProject from './EditProject';
 import IconButton from '../IconButton';
 import DeleteConfirmation from '../DeleteConfirmation';
 
@@ -46,7 +46,7 @@ const ProjectManager = (props) => {
                 : null}
 
             {(editProjectId)
-                ? <EditIssue
+                ? <EditProject
                     projectId={editProjectId}
                     setEditProjectId={setEditProjectId}
                     projectInterface={props.projectInterface} />

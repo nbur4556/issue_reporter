@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Components
 import { FormContainer, LabeledInput, CancelButton, SubmitButton } from '../Forms';
 
-const EditIssue = (props) => {
+const EditProject = (props) => {
     const [editData, setEditData] = useState({ projectName: null });
     const { handleEditProject } = props.projectInterface;
 
@@ -28,4 +28,4 @@ const EditIssue = (props) => {
     )
 }
 
-export default EditIssue;
+export default EditProject;

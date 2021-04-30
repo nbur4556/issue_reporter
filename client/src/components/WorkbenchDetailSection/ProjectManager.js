@@ -27,7 +27,7 @@ const ProjectManager = (props) => {
         }
     );
 
-    const toggleEditProject = ({ currentTarget }) => {
+    const getEditProject = ({ currentTarget }) => {
         const projectId = currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
     }
@@ -66,22 +66,24 @@ const ProjectManager = (props) => {
                                         cy="add-tab"
                                     />
 
-                                    <button className="link-button"
-                                        onClick={toggleEditProject}
+                                    <button className="link-button" onClick={getEditProject}
                                         data-cy="edit-project"
-                                    >Edit Project</button>
+                                    >
+                                        Edit Project
+                                    </button>
 
-                                    <button className="link-button"
-                                        onClick={() => setDisplayDeleteMsg(index)}
+                                    <button className="link-button" onClick={() => setDisplayDeleteMsg(index)}
                                         data-cy="delete-project"
-                                    >Delete Project</button>
+                                    >
+                                        Delete Project
+                                    </button>
                                 </span>
                             </div>
 
                             {/* Display Delete Message In List */}
                             {(index === displayDeleteMsg)
                                 ? <DeleteConfirmation type="project"
-                                    onConfirm={(e) => { confirmDeleteProject(e.currentTarget, index) }}
+                                    onConfirm={(e) => confirmDeleteProject(e.currentTarget, index)}
                                     onReject={() => setDisplayDeleteMsg(null)}
                                 />
                                 : null}

@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import { FormContainer, LabeledInput, CancelButton, SubmitButton } from '../Forms';
 
-const EditIssue = () => {
-    const handleEditData = () => console.log('Handle Edit Data');
-    const cancelEditProject = () => console.log('Cancel Edit Project');
-    const handleSubmitEditProject = () => console.log('Handle Submit Edit Project');
+const EditIssue = (props) => {
+    const [editData, setEditData] = useState({ projectName: null });
+
+    const handleEditData = ({ currentTarget }) => setEditData({ ...editData, [currentTarget.name]: currentTarget.value });
+
+    const cancelEditProject = () => props.setEditProjectId(null);
+
+    const handleSubmitEditProject = (e) => {
+        props.setEditProjectId(null);
+        props.handleEditProject(e, props.projectId, editData);
+    }
 
     return (
         <FormContainer>

@@ -15,11 +15,7 @@ const ProjectManager = (props) => {
     const { handleEditProject, handleDeleteProject } = props.projectInterface;
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(null);
-    const [editState, setEditState] = useState(false);
-    const [editProjectId, setEditProjectId] = useState();
-    const [editData, setEditData] = useState({
-        projectName: null
-    });
+    const [editProjectId, setEditProjectId] = useState(null);
 
     const toggleCreateProject = () => dispatch({ type: ACTIONS.TOGGLE_CREATE_PROJECT });
     const addProjectTab = (e) => dispatch(
@@ -31,23 +27,10 @@ const ProjectManager = (props) => {
         }
     );
 
-    const toggleEditState = (e) => {
+    const toggleEditProject = (e) => {
         const projectId = e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
-        (editState) ? setEditState(false) : setEditState(true);
     }
-
-    const handleEditData = (e) => {
-        const input = e.currentTarget;
-        setEditData({ ...editData, [input.name]: input.value });
-    }
-
-    const handleSubmitEditProject = (e) => {
-        toggleEditState(e);
-        handleEditProject(e, editProjectId, editData);
-    }
-
-    const cancelEditProject = () => setEditState(false);
 
     const confirmDeleteProject = (currentTarget, index) => {
         const itemElement = currentTarget.parentElement.parentElement.parentElement.children[index];
@@ -72,7 +55,7 @@ const ProjectManager = (props) => {
                                 cy="add-tab"
                             />
 
-                            <button className="link-button" onClick={toggleEditState} data-cy="edit-project">
+                            <button className="link-button" onClick={toggleEditProject} data-cy="edit-project">
                                 Edit Project
                             </button>
                             <button className="link-button" onClick={() => setDisplayDeleteMsg(index)} data-cy="delete-project">
@@ -99,10 +82,15 @@ const ProjectManager = (props) => {
             <h3>Project Manager</h3>
             <button onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
 
-            {(editState) ? <EditIssue /> : null}
+            {(editProjectId)
+                ? <EditIssue
+                    projectId={editProjectId}
+                    setEditProjectId={setEditProjectId}
+                    handleEditProject={handleEditProject} />
+                : null}
 
             <ul data-cy="project-manager-list">
-                {(!editState) ? renderProjects(userData.projectList) : null}
+                {(editProjectId === null) ? renderProjects(userData.projectList) : null}
             </ul>
         </section>
     )

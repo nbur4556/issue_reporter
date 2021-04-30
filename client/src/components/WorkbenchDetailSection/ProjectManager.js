@@ -18,14 +18,12 @@ const ProjectManager = (props) => {
     const [editProjectId, setEditProjectId] = useState(null);
 
     const toggleCreateProject = () => dispatch({ type: ACTIONS.TOGGLE_CREATE_PROJECT });
-    const addProjectTab = (e) => dispatch(
-        {
-            type: ACTIONS.ADD_PROJECT_TAB, payload: {
-                projectId: e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId'),
-                projectList: userData.projectList
-            }
+    const addProjectTab = (e) => dispatch({
+        type: ACTIONS.ADD_PROJECT_TAB, payload: {
+            projectId: e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId'),
+            projectList: userData.projectList
         }
-    );
+    });
 
     const getEditProject = ({ currentTarget }) => {
         const projectId = currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');

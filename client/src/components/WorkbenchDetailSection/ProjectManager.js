@@ -12,7 +12,7 @@ const ProjectManager = (props) => {
     const userData = useContext(UserDataContext);
     const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
 
-    const { handleEditProject, handleDeleteProject } = props.projectInterface;
+    const { handleDeleteProject } = props.projectInterface;
 
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(null);
     const [editProjectId, setEditProjectId] = useState(null);
@@ -27,8 +27,8 @@ const ProjectManager = (props) => {
         }
     );
 
-    const toggleEditProject = (e) => {
-        const projectId = e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');
+    const toggleEditProject = ({ currentTarget }) => {
+        const projectId = currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId');
         setEditProjectId(projectId);
     }
 
@@ -36,45 +36,6 @@ const ProjectManager = (props) => {
         const itemElement = currentTarget.parentElement.parentElement.parentElement.children[index];
         handleDeleteProject(itemElement.getAttribute('data-projectid'));
         setDisplayDeleteMsg(null);
-    }
-
-    // Projects Mode
-    const renderProjects = (projectsList) => {
-        const projectListItems = projectsList.map((project, index) => {
-            return (
-                <li key={index} data-projectid={project._id}>
-                    <div className="list-content">
-                        {project.projectName}
-
-                        <span>
-                            <IconButton
-                                iconName="add"
-                                onClick={addProjectTab}
-                                alt="add tab button"
-                                tooltip={{ text: 'Open new project tab', width: '12rem' }}
-                                cy="add-tab"
-                            />
-
-                            <button className="link-button" onClick={toggleEditProject} data-cy="edit-project">
-                                Edit Project
-                            </button>
-                            <button className="link-button" onClick={() => setDisplayDeleteMsg(index)} data-cy="delete-project">
-                                Delete Project
-                            </button>
-                        </span>
-                    </div>
-
-                    {(index === displayDeleteMsg)
-                        ? <DeleteConfirmation type="project"
-                            onConfirm={(e) => { confirmDeleteProject(e.currentTarget, index) }}
-                            onReject={() => setDisplayDeleteMsg(null)}
-                        />
-                        : null}
-                </li>
-            );
-        });
-
-        return projectListItems;
     }
 
     return (
@@ -86,11 +47,47 @@ const ProjectManager = (props) => {
                 ? <EditIssue
                     projectId={editProjectId}
                     setEditProjectId={setEditProjectId}
-                    handleEditProject={handleEditProject} />
+                    projectInterface={props.projectInterface} />
                 : null}
 
             <ul data-cy="project-manager-list">
-                {(editProjectId === null) ? renderProjects(userData.projectList) : null}
+                {(editProjectId === null) ? userData.projectList.map((project, index) => {
+                    return (
+                        <li key={index} data-projectid={project._id}>
+                            <div className="list-content">
+                                {project.projectName}
+
+                                <span>
+                                    <IconButton
+                                        iconName="add"
+                                        onClick={addProjectTab}
+                                        alt="add tab button"
+                                        tooltip={{ text: 'Open new project tab', width: '12rem' }}
+                                        cy="add-tab"
+                                    />
+
+                                    <button className="link-button"
+                                        onClick={toggleEditProject}
+                                        data-cy="edit-project"
+                                    >Edit Project</button>
+
+                                    <button className="link-button"
+                                        onClick={() => setDisplayDeleteMsg(index)}
+                                        data-cy="delete-project"
+                                    >Delete Project</button>
+                                </span>
+                            </div>
+
+                            {/* Display Delete Message In List */}
+                            {(index === displayDeleteMsg)
+                                ? <DeleteConfirmation type="project"
+                                    onConfirm={(e) => { confirmDeleteProject(e.currentTarget, index) }}
+                                    onReject={() => setDisplayDeleteMsg(null)}
+                                />
+                                : null}
+                        </li>
+                    );
+                }) : null}
             </ul>
         </section>
     )

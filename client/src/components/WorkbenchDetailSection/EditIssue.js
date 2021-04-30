@@ -5,6 +5,7 @@ import { FormContainer, LabeledInput, CancelButton, SubmitButton } from '../Form
 
 const EditIssue = (props) => {
     const [editData, setEditData] = useState({ projectName: null });
+    const { handleEditProject } = props.projectInterface;
 
     const handleEditData = ({ currentTarget }) => setEditData({ ...editData, [currentTarget.name]: currentTarget.value });
 
@@ -12,7 +13,7 @@ const EditIssue = (props) => {
 
     const handleSubmitEditProject = (e) => {
         props.setEditProjectId(null);
-        props.handleEditProject(e, props.projectId, editData);
+        handleEditProject(e, props.projectId, editData);
     }
 
     return (

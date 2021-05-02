@@ -69,13 +69,13 @@ const ProjectManager = (props) => {
                                     <button className="link-button" onClick={getEditProject}
                                         data-cy="edit-project"
                                     >
-                                        Edit Project
+                                        Edit
                                     </button>
 
                                     <button className="link-button" onClick={() => setDisplayDeleteMsg(index)}
                                         data-cy="delete-project"
                                     >
-                                        Delete Project
+                                        Delete
                                     </button>
                                 </span>
                             </div>

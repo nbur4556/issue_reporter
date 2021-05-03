@@ -1,0 +1,25 @@
+@import './variables';
+
+@media (max-width: $breakpoint-laptop){
+    section{
+        background-color: red;
+    }
+}
+
+@media (max-width: $breakpoint-tablet) {
+    section{
+        background-color: blue;
+    }
+}
+
+@media (max-width: $breakpoint-phone-wide){
+    section{
+        background-color: yellow;
+    }
+}
+
+@media (max-width: $breakpoint-phone-thin){
+    section{
+        background-color: green;
+    }
+}

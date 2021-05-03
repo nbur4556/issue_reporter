@@ -1,0 +1,15 @@
+@import '../../stylesheets/variables';
+
+// Phone wide to tablet size
+@media (max-width: $breakpoint-tablet){
+    .workbench-page{
+        display:flex;
+        flex-direction: column;
+
+        width: 100vw;
+    }
+
+    .navigation-bar {
+        flex-basis: 3.5rem;
+    }
+}

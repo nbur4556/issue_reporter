@@ -17,3 +17,25 @@
         }
     }
 }
+
+// Phone wide to tablet size
+@media (max-width: $breakpoint-tablet){
+    .issueListSection{
+        padding: $sectionPadding auto;
+    }
+
+    .issue-bar {    
+        .name-col {
+            flex-basis: 25%;
+        }
+        .category-col {
+            flex-basis: 25%;
+        }
+        .due-date-col {
+            flex-basis: 25%;
+        }
+        .status-col{
+            flex-basis: 25%;
+        }
+    }
+}

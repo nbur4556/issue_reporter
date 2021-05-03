@@ -52,12 +52,6 @@ a, .link-button {
   }
 }
 
-@media (max-width: 768px) {
-  section {
-    background-color: blue;
-  }
-}
-
 @media (max-width: 411px) {
   section {
     background-color: yellow;

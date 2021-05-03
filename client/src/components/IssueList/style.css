@@ -68,4 +68,26 @@
         flex-basis: 10%;
   }
 }
+
+@media (max-width: 768px) {
+  .issueListSection {
+    padding: 3rem auto;
+  }
+  .issue-bar .name-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .category-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .due-date-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .status-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+}
 /*# sourceMappingURL=style.css.map */

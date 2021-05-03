@@ -1,0 +1,8 @@
+@import '../../stylesheets/variables';
+
+// Phone wide to tablet size
+@media(max-width: $breakpoint-tablet){
+    .detail-section{
+        display: none;
+    }
+}

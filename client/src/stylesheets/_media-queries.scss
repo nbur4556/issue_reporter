@@ -1,23 +1,27 @@
 @import './variables';
 
+// Tablet to laptop size
 @media (max-width: $breakpoint-laptop){
     h4{
         font-size: 1rem;
     }
 }
 
+// Phone wide to tablet size
 @media (max-width: $breakpoint-tablet) {
     section{
         background-color: blue;
     }
 }
 
+// Phone thin to phone wide size
 @media (max-width: $breakpoint-phone-wide){
     section{
         background-color: yellow;
     }
 }
 
+// Under phone thin size
 @media (max-width: $breakpoint-phone-thin){
     section{
         background-color: green;

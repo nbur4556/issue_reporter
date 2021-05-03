@@ -1,5 +1,4 @@
 @import './_variables';
-@import './media-queries';
 
 body{
     background-color: $backgroundColor;
@@ -52,3 +51,5 @@ a, .link-button{
 
     text-decoration: underline;
 }
+
+@import './media-queries';

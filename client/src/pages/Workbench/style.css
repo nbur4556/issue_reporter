@@ -82,5 +82,10 @@
     -ms-flex-preferred-size: 3.5rem;
         flex-basis: 3.5rem;
   }
+  .issueListSection {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
 }
 /*# sourceMappingURL=style.css.map */

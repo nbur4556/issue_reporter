@@ -32,7 +32,6 @@ const Toolbar = () => {
             <section className="tool-bar-controls">
 
                 <label htmlFor="toggleClosedIssues">
-                    Show Closed Issues:
                     <input
                         id="toggleClosedIssues"
                         name="toggleClosedIssues"

@@ -12,8 +12,8 @@ $componentMargin: 1.2rem;
 $inputLabelGap: 0.5rem;
 
 // Sizing
-$componentFontSize: 1.2rem;
-$componentPaddingSize: .8rem;
+$componentFontSize: 1rem;
+$componentPaddingSize: .6rem;
 
 // Borders
 $mainAccentBorder: 2px solid $mainAccentColor;
@@ -21,3 +21,9 @@ $mainBorderRadius: 10px;
 
 // Fonts
 $mainSansSerif: 'Noto Sans JP', sans-serif;
+
+// Breakpoints
+$breakpoint-laptop: 1366px;
+$breakpoint-tablet: 768px;
+$breakpoint-phone-wide: 411px;
+$breakpoint-phone-thin: 360px;

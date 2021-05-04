@@ -12,12 +12,17 @@
 
     ul{
         .list-content{
-            margin-bottom: $componentMargin;
-
             display: flex;
-            flex-direction: row;
+            flex-flow: row nowrap;
             justify-content: space-between;
             align-items: center;
+
+            margin-bottom: $componentMargin;
+            
+            span{
+                display: flex;
+                flex-flow: row nowrap;
+            }
         }
     }
 

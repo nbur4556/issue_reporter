@@ -25,12 +25,12 @@ h4 {
 
 button {
   margin: 1.2rem;
-  padding: 0.8rem;
+  padding: 0.6rem;
   border: 2px solid #1E7A8E;
   border-radius: 10px;
   color: white;
   background-color: #1E7A8E;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -44,5 +44,32 @@ a, .link-button {
   font-size: 1rem;
   font-weight: bold;
   text-decoration: underline;
+}
+
+@media (max-width: 1366px) {
+  h4 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    visibility: hidden;
+  }
+  .show-on-mobile {
+    visibility: visible;
+  }
+}
+
+@media (max-width: 411px) {
+  section {
+    background-color: yellow;
+  }
+}
+
+@media (max-width: 360px) {
+  section {
+    background-color: green;
+  }
 }
 /*# sourceMappingURL=index.css.map */

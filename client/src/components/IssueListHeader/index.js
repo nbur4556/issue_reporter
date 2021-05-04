@@ -25,7 +25,7 @@ const IssueListHeader = ({ sortBy, setSortBy, isDescending }) => {
                 <IconButton label="Category" iconName={selectIconButton('category')} />
             </li>
             <li className="due-date-col" onClick={setSortBy} data-sortby="dueDate">
-                <IconButton label="Due Date" iconName={selectIconButton('dueDate')} />
+                <IconButton label="Due" iconName={selectIconButton('dueDate')} />
             </li>
         </ul>
     );

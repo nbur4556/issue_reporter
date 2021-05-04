@@ -49,4 +49,45 @@
   color: #F4FAFB;
   background-color: #1E7A8E;
 }
+
+@media (max-width: 1366px) {
+  .issue-bar .name-col {
+    -ms-flex-preferred-size: 35%;
+        flex-basis: 35%;
+  }
+  .issue-bar .category-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .due-date-col {
+    -ms-flex-preferred-size: 30%;
+        flex-basis: 30%;
+  }
+  .issue-bar .status-col {
+    -ms-flex-preferred-size: 10%;
+        flex-basis: 10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .issueListSection {
+    padding: 3rem auto;
+  }
+  .issue-bar .name-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .category-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .due-date-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+  .issue-bar .status-col {
+    -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+  }
+}
 /*# sourceMappingURL=style.css.map */

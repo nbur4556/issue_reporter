@@ -13,8 +13,13 @@ import { UiContext } from '../../pages/Workbench';
 const WorkbenchDetailSection = (props) => {
     const ui = useContext(UiContext);
 
+    const setMobileVisibility = () => {
+        return (ui.displayProjectManager || ui.displayCreateProject || ui.displayCreateIssue || ui.selectIssue)
+            ? 'show-on-mobile' : 'hide-on-mobile';
+    }
+
     return (
-        <section className="detail-section">
+        <section className={`detail-section ${setMobileVisibility()}`}>
             {(ui.displayProjectManager) ? <ProjectManager {...props} /> : null}
             {(ui.displayCreateProject) ? <CreateProject {...props} /> : null}
             {(ui.displayCreateIssue) ? <CreateIssue {...props} /> : null}

@@ -14,7 +14,7 @@ const WorkbenchDetailSection = (props) => {
     const ui = useContext(UiContext);
 
     return (
-        <section className="detail-section">
+        <section className="detail-section hide-on-mobile">
             {(ui.displayProjectManager) ? <ProjectManager {...props} /> : null}
             {(ui.displayCreateProject) ? <CreateProject {...props} /> : null}
             {(ui.displayCreateIssue) ? <CreateIssue {...props} /> : null}

@@ -55,10 +55,4 @@
   margin: 0;
   width: 10rem;
 }
-
-@media (max-width: 768px) {
-  .detail-section {
-    display: none;
-  }
-}
 /*# sourceMappingURL=style.css.map */

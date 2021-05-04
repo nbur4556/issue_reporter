@@ -9,7 +9,13 @@
 
 // Phone wide to tablet size
 @media (max-width: $breakpoint-tablet) {
+    .hide-on-mobile{
+        visibility: hidden;
+    }
     
+    .show-on-mobile{
+        visibility: visible;
+    }
 }
 
 // Phone thin to phone wide size

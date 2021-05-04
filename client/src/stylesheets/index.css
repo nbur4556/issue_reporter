@@ -52,6 +52,15 @@ a, .link-button {
   }
 }
 
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    visibility: hidden;
+  }
+  .show-on-mobile {
+    visibility: visible;
+  }
+}
+
 @media (max-width: 411px) {
   section {
     background-color: yellow;

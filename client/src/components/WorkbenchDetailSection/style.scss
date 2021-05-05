@@ -1,7 +1,6 @@
 @import '../../stylesheets/variables';
 
 .detail-section{
-
     section{
         padding: $sectionPadding;
 
@@ -41,4 +40,10 @@
             width: 10rem;
         }
     }
+
+    .close-detail{
+        display: none;
+    }
 }
+
+@import './media-queries';

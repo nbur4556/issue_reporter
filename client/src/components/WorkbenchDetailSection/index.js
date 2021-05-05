@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './style.css';
 
 // Components
+import IconButton from '../IconButton';
 import ProjectManager from './ProjectManager.js';
 import CreateProject from './CreateProject.js';
 import CreateIssue from './CreateIssue.js';
@@ -20,6 +21,8 @@ const WorkbenchDetailSection = (props) => {
 
     return (
         <section className={`detail-section ${setMobileVisibility()}`}>
+            <IconButton iconName="exit" className="close-detail" />
+
             {(ui.displayProjectManager) ? <ProjectManager {...props} /> : null}
             {(ui.displayCreateProject) ? <CreateProject {...props} /> : null}
             {(ui.displayCreateIssue) ? <CreateIssue {...props} /> : null}

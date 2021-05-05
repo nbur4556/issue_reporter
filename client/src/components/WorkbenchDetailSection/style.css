@@ -55,4 +55,16 @@
   margin: 0;
   width: 10rem;
 }
+
+.detail-section .close-detail {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .detail-section .close-detail {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+}
 /*# sourceMappingURL=style.css.map */

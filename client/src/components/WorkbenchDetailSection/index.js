@@ -21,7 +21,6 @@ const WorkbenchDetailSection = (props) => {
     }
 
     const closeDetailSection = () => {
-        console.log(props);
         if (ui.displayProjectManager) { dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER }) }
         if (ui.displayCreateProject) { dispatch({ type: ACTIONS.TOGGLE_CREATE_PROJECT }) }
         if (ui.displayCreateIssue) { dispatch({ type: ACTIONS.TOGGLE_CREATE_ISSUE }) }

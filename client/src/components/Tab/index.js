@@ -22,7 +22,6 @@ const Tab = (props) => {
                 iconName={(activeClass === 'tab-active') ? "exit" : "exitLight"}
                 onClick={removeProjectTab}
                 width={15} alt="exit button"
-                tooltip={{ text: 'close tab', direction: 'bottom' }}
             />
         </div>
     )

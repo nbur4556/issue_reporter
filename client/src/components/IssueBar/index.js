@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
 
+// Components
+import { LabeledCheckbox } from '../Forms';
+
 // Contexts
 import { UiDispatcherContext } from '../../pages/Workbench';
 
@@ -38,7 +41,7 @@ const IssueBar = props => {
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
             <li className="status-col">
-                <input type="checkbox" defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} />
+                <LabeledCheckbox defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} />
             </li>
         </ul>
     );

@@ -25,7 +25,8 @@
 
     input {
         appearance: none;
-        border: 3px solid $mainAccentColor;
+        border-width: 3px;
+        border-style: solid;
         border-radius: 7px;
 
         height: 1.5rem;
@@ -37,11 +38,30 @@
         position: absolute;
         content: '\2716';
 
-        color: $mainAccentColor;
         left: 0.53rem;
         top: 0.35rem;
         font-weight: bold;
 
         pointer-events: none;
+    }
+}
+
+.checkbox-main-color {
+    input {
+        border-color: $mainAccentColor;
+    }
+
+    input:checked + span:before{
+        color: $mainAccentColor;
+    }
+}
+
+.checkbox-light-color {
+    input {
+        border-color: $backgroundColor;
+    }
+
+    input:checked + span:before{
+        color: $backgroundColor;
     }
 }

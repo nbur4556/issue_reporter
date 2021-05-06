@@ -32,7 +32,8 @@
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  border: 3px solid #1E7A8E;
+  border-width: 3px;
+  border-style: solid;
   border-radius: 7px;
   height: 1.5rem;
   width: 1.5rem;
@@ -42,10 +43,25 @@
 .labeled-checkbox input:checked + span:before {
   position: absolute;
   content: '\2716';
-  color: #1E7A8E;
   left: 0.53rem;
   top: 0.35rem;
   font-weight: bold;
   pointer-events: none;
+}
+
+.checkbox-main-color input {
+  border-color: #1E7A8E;
+}
+
+.checkbox-main-color input:checked + span:before {
+  color: #1E7A8E;
+}
+
+.checkbox-light-color input {
+  border-color: #F4FAFB;
+}
+
+.checkbox-light-color input:checked + span:before {
+  color: #F4FAFB;
 }
 /*# sourceMappingURL=formStyles.css.map */

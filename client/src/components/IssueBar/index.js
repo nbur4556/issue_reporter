@@ -9,6 +9,7 @@ import { UiDispatcherContext } from '../../pages/Workbench';
 const IssueBar = props => {
     const { issueData } = props;
     const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
+    const checkboxColor = (props.activeClassName === 'active-issue') ? 'checkbox-light-color' : 'checkbox-main-color';
 
     const selectIssue = (e) => dispatch({
         type: ACTIONS.SELECT_ISSUE,
@@ -41,7 +42,7 @@ const IssueBar = props => {
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
             <li className="status-col">
-                <LabeledCheckbox defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} />
+                <LabeledCheckbox defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} colorClass={checkboxColor} />
             </li>
         </ul>
     );

@@ -1,0 +1,67 @@
+@import '../../stylesheets/variables';
+
+.labeled-input{
+    display: flex;
+    flex-direction: column;
+
+    input, select{
+        margin-top: $inputLabelGap;
+        padding: $componentPaddingSize;
+        border: $mainAccentBorder;
+        border-radius: $mainBorderRadius;
+
+        background-color: $backgroundColor;
+    }
+
+    option{
+        background-color: $backgroundColor;
+    }
+}
+
+.labeled-checkbox{
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+
+    input {
+        appearance: none;
+        border-width: 3px;
+        border-style: solid;
+        border-radius: 7px;
+
+        height: 1.5rem;
+        width: 1.5rem;
+        cursor: pointer;
+    }
+
+    input:checked + span:before{
+        position: absolute;
+        content: '\2716';
+
+        left: 0.53rem;
+        top: 0.35rem;
+        font-weight: bold;
+
+        pointer-events: none;
+    }
+}
+
+.checkbox-main-color {
+    input {
+        border-color: $mainAccentColor;
+    }
+
+    input:checked + span:before{
+        color: $mainAccentColor;
+    }
+}
+
+.checkbox-light-color {
+    input {
+        border-color: $backgroundColor;
+    }
+
+    input:checked + span:before{
+        color: $backgroundColor;
+    }
+}

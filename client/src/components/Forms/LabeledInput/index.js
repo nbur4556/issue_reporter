@@ -1,5 +1,5 @@
 import React from 'react';
-import '../labeledInputStyle.css';
+import '../formStyles.css';
 
 const LabeledInput = (props) => {
     const { label, type, cy, ...rest } = props;
@@ -9,8 +9,6 @@ const LabeledInput = (props) => {
             {props.label}
             <input type={type || "text"} data-cy={cy || props.name} {...rest} />
         </label>
-
-
     );
 }
 

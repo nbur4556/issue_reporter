@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 // Components
 import IconButton from '../IconButton';
+import { LabeledCheckbox } from '../Forms';
 
 // Contexts
 import { UiContext, UiDispatcherContext } from '../../pages/Workbench';
@@ -31,14 +32,7 @@ const Toolbar = () => {
 
             <section className="tool-bar-controls">
 
-                <label htmlFor="toggleClosedIssues">
-                    <input
-                        id="toggleClosedIssues"
-                        name="toggleClosedIssues"
-                        type="checkbox"
-                        onChange={displayClosedIssues}
-                    />
-                </label>
+                <LabeledCheckbox name="toggleClosedIssues" onChange={displayClosedIssues} />
 
                 {/* Buttons */}
                 <IconButton

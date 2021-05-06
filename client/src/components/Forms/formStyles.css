@@ -19,4 +19,33 @@
 .labeled-input option {
   background-color: #F4FAFB;
 }
+
+.labeled-checkbox {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.labeled-checkbox input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 3px solid #1E7A8E;
+  border-radius: 7px;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+}
+
+.labeled-checkbox input:checked + span:before {
+  position: absolute;
+  content: '\2716';
+  color: #1E7A8E;
+  left: 0.53rem;
+  top: 0.35rem;
+  font-weight: bold;
+  pointer-events: none;
+}
 /*# sourceMappingURL=formStyles.css.map */

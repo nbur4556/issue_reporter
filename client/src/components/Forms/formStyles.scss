@@ -17,3 +17,31 @@
         background-color: $backgroundColor;
     }
 }
+
+.labeled-checkbox{
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+
+    input {
+        appearance: none;
+        border: 3px solid $mainAccentColor;
+        border-radius: 7px;
+
+        height: 1.5rem;
+        width: 1.5rem;
+        cursor: pointer;
+    }
+
+    input:checked + span:before{
+        position: absolute;
+        content: '\2716';
+
+        color: $mainAccentColor;
+        left: 0.53rem;
+        top: 0.35rem;
+        font-weight: bold;
+
+        pointer-events: none;
+    }
+}

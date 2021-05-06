@@ -1,5 +1,5 @@
 import React from 'react';
-import '../labeledInputStyle.css';
+import '../formStyles.css';
 
 const LabeledSelect = (props) => {
     const { label, ...rest } = props;

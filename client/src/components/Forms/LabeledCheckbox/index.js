@@ -3,7 +3,7 @@ import '../formStyles.css';
 
 const LabeledCheckbox = ({ name, label, cy, ...rest }) => {
     return (
-        <label className="labeled-input" htmlFor={name}>
+        <label className="labeled-checkbox" htmlFor={name}>
             {label}
             <input type="checkbox" data-cy={cy || name} {...rest} />
         </label>

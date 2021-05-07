@@ -1,6 +1,10 @@
 // Phone wide to tablet size
 @media (max-width: $breakpoint-tablet) {
     .detail-section{
+        h3{
+            text-align: center;
+        }
+
         .close-detail{
             display: inline-block;
             position: absolute;

@@ -21,21 +21,23 @@
 // Phone wide to tablet size
 @media (max-width: $breakpoint-tablet){
     .issueListSection{
-        padding: $sectionPadding auto;
+        padding: 0;
+        width: 100vw;
     }
 
-    .issue-bar {    
+    .issue-bar { 
         .name-col {
-            flex-basis: 25%;
+            flex-basis: 29%;
         }
         .category-col {
-            flex-basis: 25%;
+            flex-basis: 29%;
         }
         .due-date-col {
-            flex-basis: 25%;
+            flex-basis: 29%;
         }
         .status-col{
-            flex-basis: 25%;
+            flex-basis: 13%;
+            text-align: center;
         }
     }
 }

@@ -45,6 +45,11 @@
       flex-basis: 10%;
 }
 
+.header-bar {
+  border-bottom: 2px solid #1E7A8E;
+  border-radius: 0;
+}
+
 .active-issue {
   color: #F4FAFB;
   background-color: #1E7A8E;
@@ -71,23 +76,25 @@
 
 @media (max-width: 768px) {
   .issueListSection {
-    padding: 3rem auto;
+    padding: 0;
+    width: 100vw;
   }
   .issue-bar .name-col {
-    -ms-flex-preferred-size: 25%;
-        flex-basis: 25%;
+    -ms-flex-preferred-size: 29%;
+        flex-basis: 29%;
   }
   .issue-bar .category-col {
-    -ms-flex-preferred-size: 25%;
-        flex-basis: 25%;
+    -ms-flex-preferred-size: 29%;
+        flex-basis: 29%;
   }
   .issue-bar .due-date-col {
-    -ms-flex-preferred-size: 25%;
-        flex-basis: 25%;
+    -ms-flex-preferred-size: 29%;
+        flex-basis: 29%;
   }
   .issue-bar .status-col {
-    -ms-flex-preferred-size: 25%;
-        flex-basis: 25%;
+    -ms-flex-preferred-size: 13%;
+        flex-basis: 13%;
+    text-align: center;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,10 +1,20 @@
 // Phone wide to tablet size
 @media (max-width: $breakpoint-tablet) {
     .detail-section{
+        section{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .close-detail{
             display: inline-block;
             position: absolute;
             right: 0;
+        }
+
+        h3{
+            text-align: center;
         }
     }
 }

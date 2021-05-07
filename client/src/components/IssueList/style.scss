@@ -32,6 +32,11 @@
     }
 }
 
+.header-bar{
+    border-bottom: 2px solid $mainAccentColor;
+    border-radius: 0;
+}
+
 .active-issue{
     color: $backgroundColor;
     background-color: $mainAccentColor;

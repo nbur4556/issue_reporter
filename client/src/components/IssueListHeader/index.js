@@ -17,7 +17,7 @@ const IssueListHeader = ({ sortBy, setSortBy, isDescending }) => {
     }
 
     return (
-        <ul className="issue-bar">
+        <ul className="issue-bar header-bar">
             <li className="name-col" onClick={setSortBy} data-sortby="name">
                 <IconButton label="Name" iconName={selectIconButton('name')} />
             </li>

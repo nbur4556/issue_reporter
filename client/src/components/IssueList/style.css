@@ -45,6 +45,11 @@
       flex-basis: 10%;
 }
 
+.header-bar {
+  border-bottom: 2px solid #1E7A8E;
+  border-radius: 0;
+}
+
 .active-issue {
   color: #F4FAFB;
   background-color: #1E7A8E;

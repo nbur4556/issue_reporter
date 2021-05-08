@@ -10,8 +10,6 @@ const LabeledCheckbox = ({ name, label, defaultChecked, colorClass = 'checkbox-m
             {label}
             {(tooltip) ? <Tooltip direction={tooltip?.direction} width={tooltip?.width}>{tooltip.text}</Tooltip> : null}
 
-            {console.log(defaultChecked)}
-
             <input type="checkbox" data-cy={cy || name} checked={defaultChecked} {...rest} readOnly />
             <span></span>
         </label>

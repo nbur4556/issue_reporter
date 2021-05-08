@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 // Components
 import { LabeledCheckbox } from '../Forms';
@@ -10,6 +10,11 @@ const IssueBar = props => {
     const { issueData } = props;
     const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
     const checkboxColor = (props.activeClassName === 'active-issue') ? 'checkbox-light-color' : 'checkbox-main-color';
+
+    // State
+    const [isChecked, setIsChecked] = useState(!issueData.isOpen);
+
+    useEffect(() => setIsChecked(!issueData.isOpen), [issueData.isOpen])
 
     const selectIssue = (e) => dispatch({
         type: ACTIONS.SELECT_ISSUE,
@@ -27,6 +32,7 @@ const IssueBar = props => {
 
     const toggleIsClosed = e => {
         e.stopPropagation();
+        setIsChecked(!isChecked);
         props.handleSetIssueStatus(issueData);
     }
 
@@ -42,7 +48,7 @@ const IssueBar = props => {
             {(props.assigned) ? <li>{props.assigned}</li> : null}
 
             <li className="status-col">
-                <LabeledCheckbox defaultChecked={!issueData.isOpen} onClick={toggleIsClosed} colorClass={checkboxColor} />
+                <LabeledCheckbox defaultChecked={isChecked} onClick={toggleIsClosed} colorClass={checkboxColor} />
             </li>
         </ul>
     );

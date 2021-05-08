@@ -35,15 +35,21 @@ const Toolbar = () => {
                 <LabeledCheckbox name="toggleClosedIssues" onChange={displayClosedIssues} />
 
                 {/* Buttons */}
-                <IconButton
-                    iconName="add"
-                    onClick={toggleCreateIssue}
-                    alt="create issue button"
-                    tooltip={{ text: 'Create new issue', width: '9rem' }}
-                    cy="create-issue"
-                />
+
+                {(ui.selectProject)
+                    ? <IconButton
+                        iconName="add"
+                        onClick={toggleCreateIssue}
+                        alt="create issue button"
+                        tooltip={{ text: 'Create new issue', width: '9rem' }}
+                        cy="create-issue"
+                    />
+                    : null}
+
                 <button onClick={toggleProjectManager} data-cy="project-manager">Project Manager</button>
+
             </section>
+
         </section >
     )
 }

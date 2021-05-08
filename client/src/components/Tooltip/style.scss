@@ -4,7 +4,7 @@ $tooltipPosition: 105%;
 .tooltip-parent{
     position: relative;
 
-    span{
+    .tooltip{
         display: inline-block;
         visibility: hidden;
         position: absolute;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 // Components
 import { LabeledCheckbox } from '../Forms';
@@ -13,6 +13,8 @@ const IssueBar = props => {
 
     // State
     const [isChecked, setIsChecked] = useState(!issueData.isOpen);
+
+    useEffect(() => setIsChecked(!issueData.isOpen), [issueData.isOpen])
 
     const selectIssue = (e) => dispatch({
         type: ACTIONS.SELECT_ISSUE,

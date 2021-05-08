@@ -32,9 +32,11 @@ const Toolbar = () => {
 
             <section className="tool-bar-controls">
 
-                <LabeledCheckbox name="toggleClosedIssues" onChange={displayClosedIssues} />
-
                 {/* Buttons */}
+
+                {(ui.selectProject)
+                    ? <LabeledCheckbox name="toggleClosedIssues" onChange={displayClosedIssues} />
+                    : null}
 
                 {(ui.selectProject)
                     ? <IconButton

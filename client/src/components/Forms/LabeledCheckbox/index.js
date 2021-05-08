@@ -12,9 +12,7 @@ const LabeledCheckbox = ({ name, label, defaultChecked, colorClass = 'checkbox-m
 
             {console.log(defaultChecked)}
 
-            {(defaultChecked === true)
-                ? <input type="checkbox" data-cy={cy || name} checked {...rest} readOnly />
-                : <input type="checkbox" data-cy={cy || name} checked={false} {...rest} readOnly />}
+            <input type="checkbox" data-cy={cy || name} checked={defaultChecked} {...rest} readOnly />
             <span></span>
         </label>
     )

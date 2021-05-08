@@ -17,17 +17,3 @@
         visibility: visible;
     }
 }
-
-// Phone thin to phone wide size
-@media (max-width: $breakpoint-phone-wide){
-    section{
-        background-color: yellow;
-    }
-}
-
-// Under phone thin size
-@media (max-width: $breakpoint-phone-thin){
-    section{
-        background-color: green;
-    }
-}

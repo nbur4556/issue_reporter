@@ -60,16 +60,4 @@ a, .link-button {
     visibility: visible;
   }
 }
-
-@media (max-width: 411px) {
-  section {
-    background-color: yellow;
-  }
-}
-
-@media (max-width: 360px) {
-  section {
-    background-color: green;
-  }
-}
 /*# sourceMappingURL=index.css.map */

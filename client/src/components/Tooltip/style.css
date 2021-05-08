@@ -2,13 +2,14 @@
   position: relative;
 }
 
-.tooltip-parent span {
+.tooltip-parent .tooltip {
   display: inline-block;
   visibility: hidden;
   position: absolute;
   z-index: 1;
   padding: 0.3rem 0.5rem;
   font-size: 1rem;
+  text-align: center;
   background-color: #404f52;
   color: #F4FAFB;
   opacity: 0.9;

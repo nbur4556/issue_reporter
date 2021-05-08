@@ -38,7 +38,7 @@ const Toolbar = () => {
                     ? <LabeledCheckbox
                         name="toggleClosedIssues"
                         onChange={displayClosedIssues}
-                        tooltip={{ text: 'Show closed issues', width: '9rem' }} />
+                        tooltip={{ text: 'Show closed issues', width: '11rem' }} />
                     : null}
 
                 {(ui.selectProject)

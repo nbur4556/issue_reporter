@@ -17,13 +17,15 @@ describe("Issue List", () => {
         }).then((data) => {
             projectId = data.body._id;
 
+            // Create Issues
             const issueList = [{ name: 'Issue 1', ...issueData }, { name: 'Issue 2', ...issueData }, { name: 'Issue 3', ...issueData }]
-
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[0], projectId: projectId });
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[1], projectId: projectId });
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[2], projectId: projectId });
 
             cy.visit('/workbench');
+            cy.get('button[data-cy="project-manager"]').click();
+            cy.get('button[data-cy="add-tab"]').click();
         });
     });
 
@@ -32,7 +34,13 @@ describe("Issue List", () => {
         cy.logout();
     });
 
-    it('Select Issue', () => {
-        console.log('select issue');
+    it('Select Issue 1', () => {
+        cy.get('li').contains("Issue 1").click();
+    });
+    it('Select Issue 2', () => {
+        cy.get('li').contains("Issue 2").click();
+    });
+    it('Select Issue 3', () => {
+        cy.get('li').contains("Issue 3").click();
     });
 });

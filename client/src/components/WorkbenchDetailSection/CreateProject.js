@@ -30,6 +30,7 @@ const CreateProject = (props) => {
                 props.handleLoadData();
                 setProjectData({ projectName: '' })
                 setProjectCreated(true);
+                dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER });
             }
         }).catch(() => {
             setProjectCreated(false);

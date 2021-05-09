@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // Components
-import { FormContainer, LabeledInput, SubmitButton } from '../Forms';
+import { FormContainer, LabeledInput, SubmitButton, CancelButton } from '../Forms';
 import ResultMessage from '../ResultMessage';
 
 // Utilities
@@ -31,11 +31,18 @@ const CreateProject = (props) => {
         });
     }
 
+    const cancelCreateProject = () => {
+        console.log('cancel');
+    }
+
     return (
         <section>
             <FormContainer>
                 <LabeledInput name="projectName" label="Name:" value={projectData.projectName} onChange={handleSetProjectData} />
-                <SubmitButton onClick={handleCreateProject} />
+                <p>
+                    <CancelButton onClick={cancelCreateProject} />
+                    <SubmitButton onClick={handleCreateProject} />
+                </p>
             </FormContainer>
 
             <ResultMessage result={projectCreated} />

@@ -30,8 +30,8 @@ describe("Create project", () => {
                 projectId = xhr.response.body._id;
             });
 
-        cy.get('p[data-cy="result-msg"]').contains(successMsg).should('exist');
-        cy.get('p[data-cy="result-msg"]').contains(errorMsg).should('not.exist');
+        cy.get('li').contains(projectName).should('exist');
+        cy.contains(errorMsg).should('not.exist');
     });
 
     // Attempt create project without a project name

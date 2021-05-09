@@ -18,6 +18,7 @@ const ProjectManager = (props) => {
     const [editProjectId, setEditProjectId] = useState(null);
 
     const toggleCreateProject = () => dispatch({ type: ACTIONS.TOGGLE_CREATE_PROJECT });
+    const closeProjectManager = () => dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER });
     const addProjectTab = (e) => dispatch({
         type: ACTIONS.ADD_PROJECT_TAB, payload: {
             projectId: e.currentTarget.parentElement.parentElement.parentElement?.getAttribute('data-projectId'),
@@ -41,6 +42,9 @@ const ProjectManager = (props) => {
             <h3>Project Manager</h3>
             {(editProjectId === null)
                 ? <button className="link-button" onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
+                : null}
+            {(editProjectId === null)
+                ? <button className="link-button hide-on-mobile" onClick={closeProjectManager}>Close</button>
                 : null}
 
             {(editProjectId)

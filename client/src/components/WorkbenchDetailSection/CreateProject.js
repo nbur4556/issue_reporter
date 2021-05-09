@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // Components
 import { FormContainer, LabeledInput, SubmitButton, CancelButton } from '../Forms';
 import ResultMessage from '../ResultMessage';
+
+// Contexts
+import { UiDispatcherContext } from '../../pages/Workbench';
 
 // Utilities
 import ApiConnection from '../../utils/ApiConnection.js';
 const projectConnection = new ApiConnection('/api/project')
 
 const CreateProject = (props) => {
+    const { dispatch, ACTIONS } = useContext(UiDispatcherContext);
+
     const [projectCreated, setProjectCreated] = useState(null);
     const [projectData, setProjectData] = useState({ projectName: '' });
 
@@ -33,6 +38,7 @@ const CreateProject = (props) => {
 
     const cancelCreateProject = () => {
         console.log('cancel');
+        dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER })
     }
 
     return (

@@ -36,13 +36,11 @@ const CreateProject = (props) => {
         });
     }
 
-    const cancelCreateProject = () => {
-        console.log('cancel');
-        dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER })
-    }
+    const cancelCreateProject = () => dispatch({ type: ACTIONS.TOGGLE_PROJECT_MANAGER });
 
     return (
         <section>
+            <h3>Create Project</h3>
             <FormContainer>
                 <LabeledInput name="projectName" label="Name:" value={projectData.projectName} onChange={handleSetProjectData} />
                 <p>

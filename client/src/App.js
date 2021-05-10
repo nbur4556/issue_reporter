@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './stylesheets/reset.css';
 import './stylesheets/index.css';
 
@@ -40,13 +40,14 @@ function App() {
       <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} isAuthorized={isAuthorized} />
 
       {/* Public Routes */}
-      <Route exact path="/">
-        <LoginSignup updateAuthToken={handleUpdateAuthToken} />
-      </Route>
-
-      <Route>
-        <NotFound />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <LoginSignup updateAuthToken={handleUpdateAuthToken} />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
 
       {/* Redirects */}
       {(isAuthorized) ? <Redirect to='/workbench' /> : null}

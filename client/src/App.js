@@ -35,23 +35,26 @@ function App() {
 
   return (
     <BrowserRouter>
-
-      {/* Private Routes */}
-      <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} isAuthorized={isAuthorized} />
-
-      {/* Public Routes */}
       <Switch>
+
+        {/* Private Routes */}
+
+        <PrivateRoute path="/workbench" component={Workbench} authToken={authToken} isAuthorized={isAuthorized} />
+
+        {/* Public Routes */}
+
         <Route exact path="/">
           <LoginSignup updateAuthToken={handleUpdateAuthToken} />
         </Route>
+
         <Route>
           <NotFound />
         </Route>
+
       </Switch>
 
       {/* Redirects */}
       {(isAuthorized) ? <Redirect to='/workbench' /> : null}
-
     </BrowserRouter>
   );
 }

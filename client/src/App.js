@@ -6,6 +6,7 @@ import './stylesheets/index.css';
 // Pages
 import LoginSignup from './pages/LoginSignup';
 import Workbench from './pages/Workbench';
+import NotFound from './pages/NotFound';
 
 // Components
 import PrivateRoute from './components/PrivateRoute';
@@ -41,6 +42,10 @@ function App() {
       {/* Public Routes */}
       <Route exact path="/">
         <LoginSignup updateAuthToken={handleUpdateAuthToken} />
+      </Route>
+
+      <Route>
+        <NotFound />
       </Route>
 
       {/* Redirects */}

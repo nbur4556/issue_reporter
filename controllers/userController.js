@@ -104,6 +104,8 @@ module.exports = {
                 encryption(userParams.password, resultHash => {
                     db.User.create({ ...userParams, passwordHash: resultHash }).then(data => {
                         resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
+                    }).catch(err => {
+                        resolve(err);
                     });
                 });
             }

@@ -50,7 +50,7 @@ const CreateProject = (props) => {
                 </p>
             </FormContainer>
 
-            <ResultMessage result={projectCreated} />
+            <ResultMessage result={projectCreated} errorMsg="Error: Unable to create project." />
         </section>
     );
 }

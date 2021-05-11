@@ -33,6 +33,7 @@ class ApiConnection {
     getQuery(options = {}) {
         let query = this.buildQuery(options);
         const response = axios.get(query.url, { headers: this.getAuthHeader() });
+
         this.updateAuthToken(response);
         return response;
     }
@@ -40,6 +41,7 @@ class ApiConnection {
     postQuery(options = {}) {
         let query = this.buildQuery(options);
         const response = axios.post(query.url, query.body, { headers: this.getAuthHeader() });
+
         this.updateAuthToken(response);
         return response;
     }
@@ -47,6 +49,7 @@ class ApiConnection {
     putQuery(options = {}) {
         let query = this.buildQuery(options);
         const response = axios.put(query.url, query.body, { headers: this.getAuthHeader() });
+
         this.updateAuthToken(response);
         return response;
     }
@@ -57,6 +60,7 @@ class ApiConnection {
             headers: this.getAuthHeader(),
             data: query.body
         });
+
         this.updateAuthToken(response);
         return response;
     }

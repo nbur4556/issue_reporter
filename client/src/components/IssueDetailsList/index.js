@@ -40,7 +40,7 @@ const IssueDetailsList = (props) => {
                 </li> : null}
 
             {/* Buttons */}
-            {(issue.name)
+            {(issue.name || issue.name === "")
                 ? <div>
                     <button className="link-button" name="editIssue" onClick={() => props.setIsEditing(true)}>
                         Edit Issue

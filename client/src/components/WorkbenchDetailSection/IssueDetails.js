@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 // Components
 import IssueDetailsList from '../IssueDetailsList';
 import IssueDetailsForm from '../IssueDetailsForm';
+import ResultMessage from '../ResultMessage';
 
 // Contexts
 import { UserDataContext, UiContext } from '../../pages/Workbench';
@@ -17,6 +18,7 @@ const IssueDetails = props => {
 
     const { handleLoadIssues } = props.issueInterface;
 
+    const [editSuccess, setEditSuccess] = useState();
     const [isEditing, setIsEditing] = useState(false);
     const [displayDeleteMsg, setDisplayDeleteMsg] = useState(false);
 
@@ -37,11 +39,13 @@ const IssueDetails = props => {
     const handleSubmitForm = (issueData) => {
         issueConnection.putQuery({ body: issueData, urlExtension: '/' + ui.selectIssue })
             .then(result => {
-                if (result.status === 200)
+                if (result.status === 200) {
                     handleLoadIssues();
+                    setIsEditing(false);
+                }
             })
             .catch(err => {
-                console.log('error');
+                setEditSuccess(false);
             });
     }
 
@@ -52,6 +56,7 @@ const IssueDetails = props => {
             {(isEditing)
                 ? <IssueDetailsForm
                     setIsEditing={setIsEditing}
+                    setEditSuccess={setEditSuccess}
                     handleSubmitForm={handleSubmitForm} />
                 : <IssueDetailsList
                     issue={issue}
@@ -60,6 +65,8 @@ const IssueDetails = props => {
                     displayDeleteMsg={displayDeleteMsg}
                     setDisplayDeleteMsg={setDisplayDeleteMsg} />
             }
+
+            {(isEditing) ? <ResultMessage result={editSuccess} errorMsg="Error: Can not edit issue." /> : null}
         </section>
     );
 }

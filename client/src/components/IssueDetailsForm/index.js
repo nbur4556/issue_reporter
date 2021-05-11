@@ -6,10 +6,14 @@ import { FormContainer, LabeledInput, LabeledSelect, CancelButton, SubmitButton 
 const IssueDetailsForm = (props) => {
     const [editIssueData, setEditIssueData] = useState();
 
-    const handleUpdateInput = ({ currentTarget }) => setEditIssueData({
-        ...editIssueData,
-        [currentTarget.getAttribute("name")]: currentTarget.value
-    });
+    const handleUpdateInput = ({ currentTarget }) => {
+        props.setEditSuccess(null);
+        setEditIssueData({
+            ...editIssueData,
+            [currentTarget.getAttribute("name")]: currentTarget.value
+        });
+    }
+
     const submitForm = () => props.handleSubmitForm(editIssueData, setEditIssueData);
     const cancelForm = () => props.setIsEditing(false);
 

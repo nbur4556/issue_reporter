@@ -110,7 +110,7 @@ const LoginSignup = (props) => {
                     ? <ul>
                         <h5>Minimum Password Requirements:</h5>
                         <li>At least 8 characters long</li>
-                        <li>At least one capitol letter</li>
+                        <li>At least one capital letter</li>
                         <li>At least one lower case letter</li>
                         <li>At least one number</li>
                     </ul>

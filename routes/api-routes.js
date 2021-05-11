@@ -10,7 +10,7 @@ const authenticateRequest = authHeader => {
 module.exports = function (app) {
     app.get('/api/authenticate/:authToken', async (req, res) => {
         const result = await userController.authenticate(req.params.authToken).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         res.status(200).json(result);
     });
@@ -18,28 +18,28 @@ module.exports = function (app) {
     // User Routes
     app.post('/api/user', async (req, res) => {
         const result = await userController.create(req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         res.status(200).json(result);
     });
 
     app.post('/api/user/:searchUsername', async (req, res) => {
         const result = await userController.login(req.params.searchUsername, req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         res.status(200).json(result);
     });
 
     app.put('/api/user/:searchId', async (req, res) => {
         const result = await userController.updateById(req.params.searchId, req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         res.status(200).json(result);
     });
 
     app.delete('/api/user/:searchId', async (req, res) => {
         const result = await userController.deleteById(req.params.searchId).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         res.status(200).json(result);
     });
@@ -54,7 +54,7 @@ module.exports = function (app) {
         }
 
         const user = await userController.getByIdIncludeProjects(authorization._id).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
@@ -72,12 +72,12 @@ module.exports = function (app) {
 
         // Create project
         const projectResult = await projectController.create(req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Add project to user
         userController.addProjectById(authorization._id, projectResult._id).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
@@ -94,7 +94,7 @@ module.exports = function (app) {
         }
 
         const projectResult = await projectController.updateById(req.params.searchId, req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
         res.setHeader('authentication', refreshToken);
@@ -117,14 +117,14 @@ module.exports = function (app) {
         if (removeDataFrom[0]?.issues) {
             removeDataFrom[0].issues.forEach(({ _id }) => {
                 issueController.deleteById(_id).catch(err => {
-                    res.status(400).json(err);
+                    res.status(400).send(err);
                 });
             });
         }
 
         // Delete project
         const projectResult = await projectController.deleteById(req.params.searchId).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         const refreshToken = userController.getRefreshToken(req.headers.authorization.split(' ')[1]);
 
@@ -148,7 +148,7 @@ module.exports = function (app) {
         }
 
         const result = await projectController.findByIdPopulated(req.params.projectId).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Set refresh token in header and send response
@@ -166,7 +166,7 @@ module.exports = function (app) {
         }
 
         const result = await issueController.findById(req.params.searchId).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Set refresh token in header and send response
@@ -191,12 +191,12 @@ module.exports = function (app) {
 
         // Create Issue
         const result = await issueController.create(req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Add issue to project
         projectController.addIssueById(req.body.selectProject, result._id).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Set refresh token in header and send response
@@ -214,7 +214,7 @@ module.exports = function (app) {
         }
 
         const result = await issueController.updateById(req.params.searchId, req.body).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Set refresh token in header and send response
@@ -233,11 +233,11 @@ module.exports = function (app) {
 
         // Remove Issue from project
         await projectController.removeIssueById(req.body.selectProject, req.params.searchId).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         })
 
         const result = await issueController.deleteById(req.params.searchId).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
 
         // Set refresh token in header and send response

@@ -40,10 +40,7 @@ const CreateIssue = (props) => {
                 setIssueCreated(true);
                 setIssueData({ name: '', body: '', category: '', dueDate: '', });
             }
-        }).catch((err) => {
-            console.log(err);
-            setIssueCreated(false);
-        });
+        }).catch(() => setIssueCreated(false));
     }
 
     const handleCancelForm = () => dispatch({ type: ACTIONS.DESELECT_DETAIL_SECTION });

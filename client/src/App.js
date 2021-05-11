@@ -26,7 +26,7 @@ function App() {
     authConnection.getQuery({ urlExtension: `/${authToken}` }).then(({ data }) => {
       const authIdConfirmed = (data?._id) ? true : false;
       setIsAuthorized(authIdConfirmed);
-    });
+    }).catch(() => setIsAuthorized(false));
   }, [authToken])
 
   const handleUpdateAuthToken = () => {

@@ -10,7 +10,7 @@ const authenticateRequest = authHeader => {
 module.exports = function (app) {
     app.get('/api/authenticate/:authToken', async (req, res) => {
         const result = await userController.authenticate(req.params.authToken).catch(err => {
-            res.status(400).json(err);
+            res.status(400).send(err);
         });
         res.status(200).json(result);
     });

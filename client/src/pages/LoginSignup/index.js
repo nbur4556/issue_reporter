@@ -57,10 +57,7 @@ const LoginSignup = (props) => {
             (result.data.authToken)
                 ? signinSuccessful(result.data.authToken)
                 : signinFailed('Error: User not created.');
-        }).catch(err => {
-            console.log(err.response.data);
-            signinFailed(err.response.data.message || 'Error: User not created.')
-        });
+        }).catch(err => signinFailed(err.response.data.message || 'Error: User not created.'));
     }
 
     // Log in as existing user

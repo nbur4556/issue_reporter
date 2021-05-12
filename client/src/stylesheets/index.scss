@@ -25,6 +25,11 @@ h4{
     font-weight: bold;
 }
 
+h5{
+    color: $mainAccentColor;
+    font-weight: bold;
+}
+
 button{
     margin: $componentMargin;
     padding: $componentPaddingSize;

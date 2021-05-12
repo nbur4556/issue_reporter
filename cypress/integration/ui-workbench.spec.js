@@ -62,4 +62,17 @@ describe("Issue List", () => {
         cy.contains('Issue 2').should('exist');
         cy.contains('Issue 3').should('exist');
     });
+
+    it('Show Closed Issues', () => {
+        cy.get('li').contains("Issue 1").parent().children('li[class="status-col"]').children('label').click();
+        cy.get('section[class="tool-bar-controls"]').children('label').click();
+        cy.contains('Issue 1').should('exist');
+        cy.get('li').contains("Issue 1").parent().children('li[class="status-col"]').children('label').children('input').should('be.checked');
+    });
+
+    it('Hide Closed Issues', () => {
+        cy.get('li').contains("Issue 1").parent().children('li[class="status-col"]').children('label').click();
+        cy.get('section[class="tool-bar-controls"]').children('label').click().click();
+        cy.contains('Issue 1').should('not.exist');
+    });
 });

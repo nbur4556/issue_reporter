@@ -57,7 +57,7 @@ const LoginSignup = (props) => {
             (result.data.authToken)
                 ? signinSuccessful(result.data.authToken)
                 : signinFailed('Error: User not created.');
-        }).catch(err => signinFailed('Error: User not created.'));
+        }).catch(err => signinFailed(err.response.data.message || 'Error: User not created.'));
     }
 
     // Log in as existing user
@@ -79,7 +79,9 @@ const LoginSignup = (props) => {
         props.updateAuthToken();
     }
 
-    const signinFailed = message => {
+    const signinFailed = (message) => {
+        console.log(message);
+
         localStorage.removeItem('authToken');
         setSigninState({ ...signinState, msg: message });
         props.updateAuthToken();
@@ -106,6 +108,15 @@ const LoginSignup = (props) => {
             {/* Messages */}
             <section className="message-section">
                 {(signinState.msg) ? <p>{signinState.msg}</p> : null}
+                {(signinState.signupActive)
+                    ? <ul>
+                        <h5>Minimum Password Requirements:</h5>
+                        <li>At least 8 characters long</li>
+                        <li>At least one capital letter</li>
+                        <li>At least one lower case letter</li>
+                        <li>At least one number</li>
+                    </ul>
+                    : null}
             </section>
         </main>
     );

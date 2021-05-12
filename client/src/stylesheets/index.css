@@ -23,6 +23,11 @@ h4 {
   font-weight: bold;
 }
 
+h5 {
+  color: #1E7A8E;
+  font-weight: bold;
+}
+
 button {
   margin: 1.2rem;
   padding: 0.6rem;

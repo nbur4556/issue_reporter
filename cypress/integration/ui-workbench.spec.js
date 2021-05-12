@@ -83,4 +83,39 @@ describe("Issue List", () => {
         cy.get('section[class="tool-bar-controls"]').children('label').click().click();
         cy.contains('Issue 1').should('not.exist');
     });
+
+    // Sort Issues
+    it('Sort By Name Ascending', () => {
+        cy.get('ul[class="issue-bar header-bar"]').children('li[class="name-col"]').click();
+        cy.get('section[class="issueListSection"]').then(listSection => {
+            const issueBars = listSection[0].children;
+            const orderedString = `${issueBars[1].children[0].innerHTML}, ${issueBars[2].children[0].innerHTML}, ${issueBars[3].children[0].innerHTML}`
+            cy.wrap(orderedString).should("equal", "Issue 1, Issue 2, Issue 3")
+        });
+    });
+
+    it('Sort By Name Descending', () => {
+        cy.get('ul[class="issue-bar header-bar"]').children('li[class="name-col"]').click().click();
+        cy.get('section[class="issueListSection"]').then(listSection => {
+            const issueBars = listSection[0].children;
+            const orderedString = `${issueBars[1].children[0].innerHTML}, ${issueBars[2].children[0].innerHTML}, ${issueBars[3].children[0].innerHTML}`
+            cy.wrap(orderedString).should("equal", "Issue 3, Issue 2, Issue 1")
+        });
+    });
+
+    it('Sort By Category Ascending', () => {
+        cy.get('ul[class="issue-bar header-bar"]').children('li[class="category-col"]').click();
+    });
+
+    it('Sort By Category Descending', () => {
+        cy.get('ul[class="issue-bar header-bar"]').children('li[class="category-col"]').click().click();
+    });
+
+    it('Sort By Due Date Ascending', () => {
+        cy.get('ul[class="issue-bar header-bar"]').children('li[class="due-date-col"]').click();
+    });
+
+    it('Sort By Due Date Descending', () => {
+        cy.get('ul[class="issue-bar header-bar"]').children('li[class="due-date-col"]').click().click();
+    });
 });

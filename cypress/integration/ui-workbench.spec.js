@@ -33,22 +33,33 @@ describe("Issue List", () => {
         cy.logout();
     });
 
+    // Issue Selection
     it('Select Issue 1', () => {
         cy.get('li').contains("Issue 1").click();
         cy.get('li').contains("Issue 1").parent().should('have.class', 'active-issue');
         cy.get('li').contains("Issue 2").parent().should('have.class', 'inactive-issue');
         cy.get('li').contains("Issue 3").parent().should('have.class', 'inactive-issue');
     });
+
     it('Select Issue 2', () => {
         cy.get('li').contains("Issue 2").click();
         cy.get('li').contains("Issue 1").parent().should('have.class', 'inactive-issue');
         cy.get('li').contains("Issue 2").parent().should('have.class', 'active-issue');
         cy.get('li').contains("Issue 3").parent().should('have.class', 'inactive-issue');
     });
+
     it('Select Issue 3', () => {
         cy.get('li').contains("Issue 3").click();
         cy.get('li').contains("Issue 1").parent().should('have.class', 'inactive-issue');
         cy.get('li').contains("Issue 2").parent().should('have.class', 'inactive-issue');
         cy.get('li').contains("Issue 3").parent().should('have.class', 'active-issue');
+    });
+
+    // Close Issue
+    it('Close Issue', () => {
+        cy.get('li').contains("Issue 1").parent().children('li[class="status-col"]').children('label').click();
+        cy.contains('Issue 1').should('not.exist');
+        cy.contains('Issue 2').should('exist');
+        cy.contains('Issue 3').should('exist');
     });
 });

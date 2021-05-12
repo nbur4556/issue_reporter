@@ -57,7 +57,10 @@ const LoginSignup = (props) => {
             (result.data.authToken)
                 ? signinSuccessful(result.data.authToken)
                 : signinFailed('Error: User not created.');
-        }).catch(err => signinFailed('Error: User not created.'));
+        }).catch(err => {
+            console.log(err.response.data);
+            signinFailed(err.response.data.message || 'Error: User not created.')
+        });
     }
 
     // Log in as existing user
@@ -79,7 +82,9 @@ const LoginSignup = (props) => {
         props.updateAuthToken();
     }
 
-    const signinFailed = message => {
+    const signinFailed = (message) => {
+        console.log(message);
+
         localStorage.removeItem('authToken');
         setSigninState({ ...signinState, msg: message });
         props.updateAuthToken();

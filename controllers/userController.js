@@ -102,11 +102,13 @@ module.exports = {
             }
             else {
                 encryption(userParams.password, resultHash => {
-                    db.User.create({ ...userParams, passwordHash: resultHash }).then(data => {
-                        resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
-                    }).catch(err => {
-                        resolve(err);
-                    });
+                    db.User.create({ ...userParams, passwordHash: resultHash })
+                        .then(data => {
+                            resolve({ authToken: generateAuthToken({ id: data._id, username: data.username }) });
+                        })
+                        .catch(() => {
+                            reject({ message: 'Error: Username already in use.' })
+                        });
                 });
             }
         })

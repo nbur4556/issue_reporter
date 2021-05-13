@@ -156,6 +156,7 @@ describe('Detail Section', () => {
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList, projectId: projectId });
 
             cy.visit('/workbench');
+            cy.get('button[data-cy="project-manager"]').click();
         });
     });
 
@@ -166,25 +167,37 @@ describe('Detail Section', () => {
 
     // Project Manager
     it('Open Project Manager', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
     });
 
     it('Close Project Manager', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="close-project-manager"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('not.exist');
     });
 
+    it('Open Tab', () => {
+        cy.get('button[data-cy="add-tab"]').click();
+        cy.get('section[class="tab-bar"]').contains('projectName').should('exist');
+    });
+
+    it('Close Tab', () => {
+        cy.get('button[data-cy="add-tab"]').click();
+        cy.get('button[data-cy="close-tab"]').click();
+        cy.get('section[class="tab-bar"]').contains('projectName').should('not.exist');
+    });
+
+    it('Delete Project Message', () => {
+        cy.get('button[data-cy="delete-project"]').click();
+        cy.contains('Are you sure you want to delete this project? This can not be undone.').should('exist');
+    });
+
     // Create Project
     it('Open Create Project', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="create-project"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Create Project').should('exist');
     });
 
     it('Close Create Project', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="create-project"]').click();
         cy.get('button[data-cy="cancel"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
@@ -192,14 +205,12 @@ describe('Detail Section', () => {
 
     // Edit Project
     it('Open Edit Project', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.contains('Edit').click();
         cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
         cy.get('input[data-cy="edit-field"]').should('exist');
     });
 
     it('Close Edit Project', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.contains('Edit').click();
         cy.get('button[data-cy="cancel"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
@@ -208,14 +219,12 @@ describe('Detail Section', () => {
 
     // Create Issue
     it('Open Create Issue', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('button[data-cy="create-issue"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Create Issue').should('exist');
     });
 
     it('Close Create Issue', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('button[data-cy="create-issue"]').click();
         cy.get('button[data-cy="cancel"]').click();
@@ -224,14 +233,12 @@ describe('Detail Section', () => {
 
     // Issue Details
     it('Open Issue Details', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('li').contains("Issue 1").click();
         cy.get('section[data-cy="detail-section"]').contains('Issue Details').should('exist');
     });
 
     it('Close Issue Details', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('li').contains("Issue 1").click().click();
         cy.get('section[data-cy="detail-section"]').contains('Issue Details').should('not.exist');
@@ -239,7 +246,6 @@ describe('Detail Section', () => {
 
     // Edit Issue
     it('Open Edit Issue', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('li').contains("Issue 1").click();
         cy.get('button[data-cy="edit-issue"]').click();
@@ -250,7 +256,6 @@ describe('Detail Section', () => {
     });
 
     it('Close Edit Issue', () => {
-        cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('li').contains("Issue 1").click();
         cy.get('button[data-cy="edit-issue"]').click();

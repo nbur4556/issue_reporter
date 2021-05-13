@@ -21,7 +21,7 @@ const Tab = (props) => {
             <IconButton
                 iconName={(activeClass === 'tab-active') ? "exit" : "exitLight"}
                 onClick={removeProjectTab}
-                width={15} alt="exit button"
+                width={15} alt="exit button" cy="close-tab"
             />
         </div>
     )

@@ -1,9 +1,4 @@
 const projectName = 'projectName';
-const issueData = {
-    body: 'Issue Description',
-    category: 'Feature',
-    dueDate: '2021-02-27'
-}
 
 describe("Issue List", () => {
     let authToken;
@@ -17,7 +12,12 @@ describe("Issue List", () => {
             projectId = data.body._id;
 
             // Create Issues
-            const issueList = [{ name: 'Issue 1', ...issueData }, { name: 'Issue 2', ...issueData }, { name: 'Issue 3', ...issueData }]
+            const issueList = [
+                { name: 'Issue 1', category: 'feature' },
+                { name: 'Issue 2', category: 'bug' },
+                { name: 'Issue 3', category: 'feature' }
+            ]
+
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[0], projectId: projectId });
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[1], projectId: projectId });
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[2], projectId: projectId });
@@ -105,10 +105,20 @@ describe("Issue List", () => {
 
     it('Sort By Category Ascending', () => {
         cy.get('ul[class="issue-bar header-bar"]').children('li[class="category-col"]').click();
+        cy.get('section[class="issueListSection"]').then(listSection => {
+            const issueBars = listSection[0].children;
+            const orderedString = `${issueBars[1].children[0].innerHTML}, ${issueBars[2].children[0].innerHTML}, ${issueBars[3].children[0].innerHTML}`
+            cy.wrap(orderedString).should("equal", "Issue 2, Issue 3, Issue 1")
+        });
     });
 
     it('Sort By Category Descending', () => {
         cy.get('ul[class="issue-bar header-bar"]').children('li[class="category-col"]').click().click();
+        cy.get('section[class="issueListSection"]').then(listSection => {
+            const issueBars = listSection[0].children;
+            const orderedString = `${issueBars[1].children[0].innerHTML}, ${issueBars[2].children[0].innerHTML}, ${issueBars[3].children[0].innerHTML}`
+            cy.wrap(orderedString).should("equal", "Issue 1, Issue 3, Issue 2")
+        });
     });
 
     it('Sort By Due Date Ascending', () => {

@@ -244,6 +244,13 @@ describe('Detail Section', () => {
         cy.get('section[data-cy="detail-section"]').contains('Issue Details').should('not.exist');
     });
 
+    it('Delete Issue Message', () => {
+        cy.get('button[data-cy="add-tab"]').click();
+        cy.get('li').contains("Issue 1").click();
+        cy.get('button[data-cy="delete-issue"]').click();
+        cy.contains('Are you sure you want to delete this issue? This can not be undone.').should('exist');
+    });
+
     // Edit Issue
     it('Open Edit Issue', () => {
         cy.get('button[data-cy="add-tab"]').click();

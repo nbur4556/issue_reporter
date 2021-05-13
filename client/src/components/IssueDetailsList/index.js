@@ -46,7 +46,7 @@ const IssueDetailsList = (props) => {
                         Edit Issue
                     </button>
 
-                    <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>
+                    <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)} data-cy="delete-issue">
                         Delete Issue
                     </button>
                 </div>

@@ -170,11 +170,24 @@ describe('Detail Section', () => {
         cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
     });
 
+    it('Close Project Manager', () => {
+        cy.get('button[data-cy="project-manager"]').click();
+        cy.get('button[data-cy="close-project-manager"]').click();
+        cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('not.exist');
+    });
+
     // Create Project
     it('Open Create Project', () => {
         cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="create-project"]').click();
         cy.get('section[data-cy="detail-section"]').contains('Create Project').should('exist');
+    });
+
+    it('Close Create Project', () => {
+        cy.get('button[data-cy="project-manager"]').click();
+        cy.get('button[data-cy="create-project"]').click();
+        cy.get('button[data-cy="cancel"]').click();
+        cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
     });
 
     // Edit Project
@@ -185,6 +198,14 @@ describe('Detail Section', () => {
         cy.get('input[data-cy="edit-field"]').should('exist');
     });
 
+    it('Close Edit Project', () => {
+        cy.get('button[data-cy="project-manager"]').click();
+        cy.contains('Edit').click();
+        cy.get('button[data-cy="cancel"]').click();
+        cy.get('section[data-cy="detail-section"]').contains('Project Manager').should('exist');
+        cy.get('input[data-cy="edit-field"]').should('not.exist');
+    });
+
     // Create Issue
     it('Open Create Issue', () => {
         cy.get('button[data-cy="project-manager"]').click();
@@ -193,12 +214,27 @@ describe('Detail Section', () => {
         cy.get('section[data-cy="detail-section"]').contains('Create Issue').should('exist');
     });
 
+    it('Close Create Issue', () => {
+        cy.get('button[data-cy="project-manager"]').click();
+        cy.get('button[data-cy="add-tab"]').click();
+        cy.get('button[data-cy="create-issue"]').click();
+        cy.get('button[data-cy="cancel"]').click();
+        cy.get('section[data-cy="detail-section"]').contains('Create Issue').should('not.exist');
+    });
+
     // Issue Details
     it('Open Issue Details', () => {
         cy.get('button[data-cy="project-manager"]').click();
         cy.get('button[data-cy="add-tab"]').click();
         cy.get('li').contains("Issue 1").click();
         cy.get('section[data-cy="detail-section"]').contains('Issue Details').should('exist');
+    });
+
+    it('Close Issue Details', () => {
+        cy.get('button[data-cy="project-manager"]').click();
+        cy.get('button[data-cy="add-tab"]').click();
+        cy.get('li').contains("Issue 1").click().click();
+        cy.get('section[data-cy="detail-section"]').contains('Issue Details').should('not.exist');
     });
 
     // Edit Issue
@@ -211,5 +247,17 @@ describe('Detail Section', () => {
         cy.get('input[data-cy="name"]').should('exist');
         cy.get('input[data-cy="body"]').should('exist');
         cy.get('select[data-cy="category"]').should('exist');
+    });
+
+    it('Close Edit Issue', () => {
+        cy.get('button[data-cy="project-manager"]').click();
+        cy.get('button[data-cy="add-tab"]').click();
+        cy.get('li').contains("Issue 1").click();
+        cy.get('button[data-cy="edit-issue"]').click();
+        cy.get('button[data-cy="cancel"]').click();
+        cy.get('section[data-cy="detail-section"]').contains('Issue Details').should('exist');
+        cy.get('input[data-cy="name"]').should('not.exist');
+        cy.get('input[data-cy="body"]').should('not.exist');
+        cy.get('select[data-cy="category"]').should('not.exist');
     });
 });

@@ -42,7 +42,7 @@ describe("Issue List", () => {
     });
 
     it('Deselect Issue 1', () => {
-        cy.get('li').contains("Issue 1").click();
+        cy.get('li').contains("Issue 1").click().click();
         cy.get('li').contains("Issue 1").parent().should('have.class', 'inactive-issue');
     });
 
@@ -54,7 +54,7 @@ describe("Issue List", () => {
     });
 
     it('Deselect Issue 2', () => {
-        cy.get('li').contains("Issue 2").click();
+        cy.get('li').contains("Issue 2").click().click();
         cy.get('li').contains("Issue 2").parent().should('have.class', 'inactive-issue');
     });
 
@@ -66,7 +66,7 @@ describe("Issue List", () => {
     });
 
     it('Deselect Issue 3', () => {
-        cy.get('li').contains("Issue 3").click();
+        cy.get('li').contains("Issue 3").click().click();
         cy.get('li').contains("Issue 3").parent().should('have.class', 'inactive-issue');
     });
 

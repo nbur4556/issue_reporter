@@ -42,11 +42,11 @@ const IssueDetailsList = (props) => {
             {/* Buttons */}
             {(issue.name || issue.name === "")
                 ? <div>
-                    <button className="link-button" name="editIssue" onClick={() => props.setIsEditing(true)}>
+                    <button className="link-button" name="editIssue" onClick={() => props.setIsEditing(true)} data-cy="edit-issue">
                         Edit Issue
                     </button>
 
-                    <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)}>
+                    <button className="link-button" name="deleteIssue" onClick={() => setDisplayDeleteMsg(true)} data-cy="delete-issue">
                         Delete Issue
                     </button>
                 </div>

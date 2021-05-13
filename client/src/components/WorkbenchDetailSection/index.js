@@ -28,7 +28,7 @@ const WorkbenchDetailSection = (props) => {
     }
 
     return (
-        <section className={`detail-section ${setMobileVisibility()}`}>
+        <section className={`detail-section ${setMobileVisibility()}`} data-cy="detail-section">
             <IconButton iconName="exit" className="close-detail" onClick={closeDetailSection} />
 
             {(ui.displayProjectManager) ? <ProjectManager {...props} /> : null}

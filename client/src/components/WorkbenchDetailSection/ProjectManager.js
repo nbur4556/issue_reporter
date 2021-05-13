@@ -44,7 +44,7 @@ const ProjectManager = (props) => {
                 ? <button className="link-button" onClick={toggleCreateProject} data-cy="create-project">Create Project</button>
                 : null}
             {(editProjectId === null)
-                ? <button className="link-button hide-on-mobile" onClick={closeProjectManager}>Close</button>
+                ? <button className="link-button hide-on-mobile" onClick={closeProjectManager} data-cy="close-project-manager">Close</button>
                 : null}
 
             {(editProjectId)

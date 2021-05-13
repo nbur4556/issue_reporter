@@ -41,6 +41,7 @@ Cypress.Commands.add("createIssue", (authToken, issueData) => {
         body: {
             name: issueData.name,
             category: issueData.category,
+            dueDate: issueData.dueDate,
             selectProject: issueData.projectId
         },
         headers: { authorization: `Bearer ${authToken}` }

@@ -13,9 +13,9 @@ describe("Issue List", () => {
 
             // Create Issues
             const issueList = [
-                { name: 'Issue 1', category: 'feature' },
-                { name: 'Issue 2', category: 'bug' },
-                { name: 'Issue 3', category: 'feature' }
+                { name: 'Issue 1', category: 'feature', dueDate: '01/02/2021' },
+                { name: 'Issue 2', category: 'bug', dueDate: '01/01/2021' },
+                { name: 'Issue 3', category: 'feature', dueDate: '01/03/2021' }
             ]
 
             cy.createIssue(localStorage.getItem('authToken'), { ...issueList[0], projectId: projectId });
@@ -123,9 +123,19 @@ describe("Issue List", () => {
 
     it('Sort By Due Date Ascending', () => {
         cy.get('ul[class="issue-bar header-bar"]').children('li[class="due-date-col"]').click();
+        cy.get('section[class="issueListSection"]').then(listSection => {
+            const issueBars = listSection[0].children;
+            const orderedString = `${issueBars[1].children[0].innerHTML}, ${issueBars[2].children[0].innerHTML}, ${issueBars[3].children[0].innerHTML}`
+            cy.wrap(orderedString).should("equal", "Issue 2, Issue 1, Issue 3")
+        });
     });
 
     it('Sort By Due Date Descending', () => {
         cy.get('ul[class="issue-bar header-bar"]').children('li[class="due-date-col"]').click().click();
+        cy.get('section[class="issueListSection"]').then(listSection => {
+            const issueBars = listSection[0].children;
+            const orderedString = `${issueBars[1].children[0].innerHTML}, ${issueBars[2].children[0].innerHTML}, ${issueBars[3].children[0].innerHTML}`
+            cy.wrap(orderedString).should("equal", "Issue 3, Issue 1, Issue 2")
+        });
     });
 });

@@ -33,8 +33,12 @@ const IssueDetailsForm = (props) => {
                 onChange={handleUpdateInput}
                 data-cy="body"
             />
-            <LabeledSelect name="category" label="Category:" onChange={handleUpdateInput} data-cy="category">
-                <option></option>
+            <LabeledSelect
+                name="category"
+                label="Category:"
+                onChange={handleUpdateInput}
+                placeholder={props.selectedIssue.category}
+                data-cy="category">
                 <option value="Feature">Feature</option>
                 <option value="Bug">Bug</option>
             </LabeledSelect>

@@ -19,15 +19,36 @@ const IssueDetailsForm = (props) => {
 
     return (
         <FormContainer>
-            <LabeledInput name="name" label="Name:" onChange={handleUpdateInput} data-cy="name" />
-            <LabeledInput name="body" label="Body:" onChange={handleUpdateInput} data-cy="body" />
-            <LabeledSelect name="category" label="Category:" onChange={handleUpdateInput} data-cy="category">
-                <option></option>
+            <LabeledInput
+                name="name"
+                label="Name:"
+                placeholder={props.selectedIssue.name}
+                onChange={handleUpdateInput}
+                data-cy="name"
+            />
+            <LabeledInput
+                name="body"
+                label="Body:"
+                placeholder={props.selectedIssue.body}
+                onChange={handleUpdateInput}
+                data-cy="body"
+            />
+            <LabeledSelect
+                name="category"
+                label="Category:"
+                onChange={handleUpdateInput}
+                placeholder={props.selectedIssue.category}
+                data-cy="category">
                 <option value="Feature">Feature</option>
                 <option value="Bug">Bug</option>
             </LabeledSelect>
             {/* <LabeledInput name="assigned" label="Assigned:" onChange={handleUpdateInput} data-cy="name" /> */}
-            <LabeledInput name="dueDate" label="Due Date:" type="date" onChange={handleUpdateInput} />
+            <LabeledInput
+                name="dueDate"
+                label="Due Date:"
+                type="date"
+                onChange={handleUpdateInput}
+            />
             <div>
                 {/* Buttons */}
                 <CancelButton onClick={cancelForm} />

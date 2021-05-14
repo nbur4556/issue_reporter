@@ -57,7 +57,9 @@ const IssueDetails = props => {
                 ? <IssueDetailsForm
                     setIsEditing={setIsEditing}
                     setEditSuccess={setEditSuccess}
-                    handleSubmitForm={handleSubmitForm} />
+                    handleSubmitForm={handleSubmitForm}
+                    selectedIssue={getSelectIssue(userData.issueList, ui.selectIssue)}/>
+
                 : <IssueDetailsList
                     issue={issue}
                     issueInterface={props.issueInterface}

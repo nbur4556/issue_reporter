@@ -1,7 +1,6 @@
 {
   "name": "issue_reporter",
   "version": "0.1.0",
-  "proxy": "http://localhost:3001",
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
@@ -33,5 +32,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

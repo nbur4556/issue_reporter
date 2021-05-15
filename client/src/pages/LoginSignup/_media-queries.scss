@@ -1,0 +1,6 @@
+// Phone wide to tablet size
+@media (max-width: $breakpoint-tablet){
+    .login-signup-page{
+        width: 100vw;
+    }
+}

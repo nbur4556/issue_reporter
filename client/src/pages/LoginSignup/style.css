@@ -31,7 +31,8 @@ body {
           flex-direction: column;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 70rem;
+  width: 100vw;
+  max-width: 70rem;
   min-height: 100%;
   height: 100%;
   padding: 3rem;
@@ -103,5 +104,11 @@ body {
 
 .message-section ul {
   list-style: inside;
+}
+
+@media (max-width: 768px) {
+  .login-signup-page {
+    width: 100vw;
+  }
 }
 /*# sourceMappingURL=style.css.map */

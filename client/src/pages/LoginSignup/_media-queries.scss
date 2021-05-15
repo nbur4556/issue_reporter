@@ -1,6 +1,16 @@
 // Phone wide to tablet size
 @media (max-width: $breakpoint-tablet){
     .login-signup-page{
-        width: 100vw;
+        overflow-y: auto;
+
+        button{
+            min-width: 15rem;
+        }
+    }
+
+    .input-section{
+        .labeled-input{
+            min-width: 15rem;
+        }
     }
 }

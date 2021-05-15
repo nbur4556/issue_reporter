@@ -108,14 +108,21 @@ body {
 }
 
 @media (max-width: 768px) {
+  .title-section {
+    text-align: center;
+  }
   .login-signup-page {
     overflow-y: auto;
   }
   .login-signup-page button {
     min-width: 15rem;
   }
+  .input-section form {
+    margin-top: 1.2rem;
+  }
   .input-section .labeled-input {
     min-width: 15rem;
+    margin: 0.6rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

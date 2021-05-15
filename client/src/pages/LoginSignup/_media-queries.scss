@@ -1,5 +1,11 @@
+@import '../../stylesheets/variables';
+
 // Phone wide to tablet size
 @media (max-width: $breakpoint-tablet){
+    .title-section{
+        text-align: center;
+    }
+
     .login-signup-page{
         overflow-y: auto;
 
@@ -9,8 +15,13 @@
     }
 
     .input-section{
+        form{
+            margin-top: $componentMargin;
+        }
+
         .labeled-input{
             min-width: 15rem;
+            margin: $componentMargin / 2;
         }
     }
 }

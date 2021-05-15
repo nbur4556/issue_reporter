@@ -1,5 +1,10 @@
 @import '../../stylesheets/variables';
 
+html, body{
+    margin: 0;
+    height: 100%;
+}
+
 body{
     display: flex;
     justify-content: center;
@@ -14,11 +19,14 @@ body{
     display: flex;
     flex-direction: column;
 
-    padding: $sectionPadding;
-
-    background-color: $forwardSectionColor;
+    box-sizing: border-box;
     width: 70rem;
-    height: calc(100vh - 6rem);
+    min-height: 100%;
+    height: 100%;
+    
+    padding: $sectionPadding;
+    background-color: $forwardSectionColor;
+    overflow-y: hidden;
 
     button{
         min-width: 20rem;

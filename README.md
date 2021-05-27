@@ -8,7 +8,7 @@
 
 Dev issue tracker is a resource for organizing bugs, issues, and features on development projects. Users can create multiple projects, and create bug and feature records with detailed descriptions, categories, and due dates.
 
-<!-- ![Portfolio Homepage](./docs/portfolio-homepage.png) -->
+![Portfolio Homepage](./docs/dev-issue-tracking.png)
 
 ## Table of Contents
 

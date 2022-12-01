@@ -2,8 +2,7 @@
 
 # Dev Issue Tracking
 
-<!-- //TODO: update deployment link -->
-<!-- [View Dev Issue Tracking]() -->
+[View Dev Issue Tracking](https://dev-issue-tracker.onrender.com)
 
 ## Description
 

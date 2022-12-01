@@ -2,7 +2,7 @@
 
 # Dev Issue Tracking
 
-[View Dev Issue Tracking](https://devissuetracking.herokuapp.com/)
+[View Dev Issue Tracking](https://dev-issue-tracker.onrender.com)
 
 ## Description
 
@@ -14,9 +14,10 @@ Dev issue tracker is a resource for organizing bugs, issues, and features on dev
 
 <!-- * [Installation](#Installation) -->
 <!-- * [Usage](#Usage) -->
-* [Technologies](#Technologies)
-* [License](#License)
-* [Contact](#Contact)
+
+- [Technologies](#Technologies)
+- [License](#License)
+- [Contact](#Contact)
 
 <!-- ## Installation -->
 
@@ -24,12 +25,12 @@ Dev issue tracker is a resource for organizing bugs, issues, and features on dev
 
 ## Technologies
 
-* React
-* Sass
-* NodeJS
-* Express
-* Mongoose
-* JWT
+- React
+- Sass
+- NodeJS
+- Express
+- Mongoose
+- JWT
 
 ## License
 
@@ -39,5 +40,5 @@ Dev Issue Tracking is licensed under the [MIT](https://opensource.org/licenses/M
 
 Contact me at:
 
-* Github: [https://github.com/nbur4556](https://github.com/nbur4556)
-* Email: nbur4556@gmail.com
+- Github: [https://github.com/nbur4556](https://github.com/nbur4556)
+- Email: nbur4556@gmail.com
